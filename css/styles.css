@@ -163,3 +163,61 @@ h1, h2, h3, h4, h5, h6, .font-heading, .font-serif-heading {
 .faq-content {
   transition: max-height 0.3s ease-out;
 }
+
+/* ===== ANIMATED SURFER LOGO ===== */
+
+/* Main surfer wave-ride animation: smooth bobbing + tilting like riding a wave */
+@keyframes surferRide {
+  0%   { transform: translateY(0px) rotate(0deg); }
+  15%  { transform: translateY(-6px) rotate(-4deg); }
+  30%  { transform: translateY(-2px) rotate(2deg); }
+  50%  { transform: translateY(-8px) rotate(-3deg) scale(1.05); }
+  70%  { transform: translateY(-3px) rotate(3deg); }
+  85%  { transform: translateY(-7px) rotate(-2deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* Gentle side-to-side glide */
+@keyframes surferGlide {
+  0%   { transform: translateX(0px) translateY(0px); }
+  25%  { transform: translateX(3px) translateY(-5px) rotate(-3deg); }
+  50%  { transform: translateX(-2px) translateY(-8px) rotate(2deg) scale(1.06); }
+  75%  { transform: translateX(4px) translateY(-4px) rotate(-2deg); }
+  100% { transform: translateX(0px) translateY(0px); }
+}
+
+/* Water splash / ripple pulse */
+@keyframes splashPulse {
+  0%   { text-shadow: 0 0 0 rgba(2, 132, 199, 0); }
+  50%  { text-shadow: 0 0 18px rgba(2, 132, 199, 0.35), 0 0 40px rgba(2, 132, 199, 0.15); }
+  100% { text-shadow: 0 0 0 rgba(2, 132, 199, 0); }
+}
+
+.surfer-animated {
+  display: inline-block;
+  animation: surferRide 3s ease-in-out infinite, splashPulse 3s ease-in-out infinite;
+  transform-origin: center bottom;
+  cursor: default;
+  transition: transform 0.3s ease;
+}
+
+.surfer-animated:hover {
+  animation: surferGlide 1.5s ease-in-out infinite, splashPulse 1.5s ease-in-out infinite;
+  transform: scale(1.15) rotate(-5deg);
+}
+
+/* Gentle floating animation for other activity icons (🐢🎣🚤🐋🌴🚕🤿) */
+@keyframes gentleFloat {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-4px); }
+  100% { transform: translateY(0px); }
+}
+
+.icon-float {
+  display: inline-block;
+  animation: gentleFloat 2.5s ease-in-out infinite;
+}
+
+.icon-float:nth-child(2) { animation-delay: 0.3s; }
+.icon-float:nth-child(3) { animation-delay: 0.6s; }
+.icon-float:nth-child(4) { animation-delay: 0.9s; }
