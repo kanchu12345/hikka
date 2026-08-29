@@ -10,9 +10,9 @@
       theme: {
         extend: {
           colors: {
-            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
-            ocean: { 900: '#164e63', 950: '#083344' },
-            sand: { 300: '#fde047', 500: '#eab308' }
+            surf: { 500: '#0084B4', 600: '#0284c7', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#0A2540', 950: '#12161A' },
+            sand: { 300: '#fde047', 500: '#F59E0B' }
           }
         }
       }
@@ -26,32 +26,42 @@
   <script src="js/data.js"></script>
   <script src="js/firebase-client.js"></script>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen">
+<body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen pb-20">
 
-  <!-- Top Admin Bar -->
-  <header class="bg-ocean-950 text-white py-4 px-6 border-b border-ocean-800 flex items-center justify-between sticky top-0 z-50">
-    <div class="flex items-center gap-3">
-      <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-9 w-auto" />
-      <span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-bold">
-        CMS Admin Dashboard
+  <!-- Top Admin Bar (Mobile Responsive) -->
+  <header class="bg-[#12161A] text-white py-3 sm:py-4 px-4 sm:px-6 border-b border-gray-800 flex items-center justify-between sticky top-0 z-50 shadow-lg">
+    <div class="flex items-center gap-2 sm:gap-3">
+      <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-8 sm:h-10 w-auto object-contain" />
+      <span class="text-[10px] sm:text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-bold">
+        Admin CMS
       </span>
     </div>
 
-    <div class="flex items-center gap-3">
-      <a href="index.html" target="_blank" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all">
-        View Live Website ↗
+    <div class="flex items-center gap-2 sm:gap-3">
+      <a href="index.html" target="_blank" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+        <span>Site</span> ↗
       </a>
-      <button onclick="saveAllSettings()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow-md transition-all">
-        💾 Save All Changes
+      <button onclick="saveAllSettings()" class="px-3.5 py-1.5 sm:px-5 sm:py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1 cursor-pointer">
+        <span>💾 Save</span>
       </button>
     </div>
   </header>
 
-  <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+  <!-- Mobile Horizontal Scrollable Tab Bar -->
+  <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2 px-3 sm:hidden flex items-center gap-2 no-scrollbar shadow-sm">
+    <button onclick="showTab('settings')" id="m-tab-settings" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">⚙️ Settings</button>
+    <button onclick="showTab('hero')" id="m-tab-hero" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🖼️ Slideshow</button>
+    <button onclick="showTab('activities')" id="m-tab-activities" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Activities</button>
+    <button onclick="showTab('reviews')" id="m-tab-reviews" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⭐ Reviews</button>
+    <button onclick="showTab('faqs')" id="m-tab-faqs" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">❓ FAQ</button>
+    <button onclick="showTab('firebase')" id="m-tab-firebase" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🔥 Cloud</button>
+  </div>
+
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
     
-    <!-- Sidebar Navigation -->
-    <aside class="md:col-span-3 space-y-2">
-      <button onclick="showTab('settings')" id="tab-btn-settings" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-ocean-950 text-white shadow-md flex items-center gap-2">
+    <!-- Desktop Sidebar Navigation -->
+    <aside class="hidden sm:block md:col-span-3 space-y-2">
+      <button onclick="showTab('settings')" id="tab-btn-settings" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2">
         <span>⚙️ General Settings</span>
       </button>
       <button onclick="showTab('hero')" id="tab-btn-hero" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
@@ -72,55 +82,64 @@
     </aside>
 
     <!-- Main Content Area -->
-    <main class="md:col-span-9 bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-6">
+    <main class="md:col-span-9 bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm space-y-6">
       
       <!-- 1. GENERAL SETTINGS TAB -->
       <section id="tab-settings" class="tab-content space-y-4">
-        <h2 class="text-xl font-bold text-gray-900 border-b pb-2">General Business & Contact Settings</h2>
+        <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">General Business & Contact Settings</h2>
+          <span class="text-[11px] text-gray-400">Instant Live Update</span>
+        </div>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Business Name</label>
-            <input type="text" id="set-name" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">Brand / Business Name</label>
+            <input type="text" id="set-name" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Tagline</label>
-            <input type="text" id="set-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+            <input type="text" id="set-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number (e.g. +94771234567)</label>
-            <input type="text" id="set-whatsapp" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+            <input type="text" id="set-whatsapp" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Contact Phone</label>
-            <input type="text" id="set-phone" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+            <input type="text" id="set-phone" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Beach Address / Meeting Point</label>
-          <input type="text" id="set-address" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+          <input type="text" id="set-address" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Official Google Maps Profile URL</label>
-          <input type="text" id="set-maps-url" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+          <input type="text" id="set-maps-url" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer">
+            Save General Settings
+          </button>
         </div>
       </section>
 
       <!-- 2. HERO SLIDESHOW TAB -->
       <section id="tab-hero" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b pb-2">
-          <h2 class="text-xl font-bold text-gray-900">Hero Auto-Swapping Slideshow</h2>
-          <button onclick="addHeroImage()" class="px-3 py-1.5 bg-surf-600 text-white rounded-xl text-xs font-bold">+ Add Slide</button>
+        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">Hero Auto-Swapping Slideshow</h2>
+          <button onclick="addHeroImage()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add Slide</button>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Slide Swap Interval (Milliseconds, e.g. 4500)</label>
-          <input type="number" id="set-hero-interval" class="w-48 p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+          <input type="number" id="set-hero-interval" class="w-full sm:w-48 p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
         </div>
 
         <div id="hero-slides-list" class="space-y-3 pt-2">
@@ -130,7 +149,10 @@
 
       <!-- 3. ACTIVITIES CMS TAB -->
       <section id="tab-activities" class="tab-content hidden space-y-4">
-        <h2 class="text-xl font-bold text-gray-900 border-b pb-2">Activities & Experience Packages</h2>
+        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">Activities & Rates CMS</h2>
+          <span class="text-xs text-gray-500">8 Core Categories</span>
+        </div>
         <div id="activities-list" class="space-y-4">
           <!-- Dynamic Activity Cards -->
         </div>
@@ -138,9 +160,9 @@
 
       <!-- 4. REVIEWS TAB -->
       <section id="tab-reviews" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b pb-2">
-          <h2 class="text-xl font-bold text-gray-900">Google Maps Reviews (5.0★)</h2>
-          <button onclick="addReviewItem()" class="px-3 py-1.5 bg-surf-600 text-white rounded-xl text-xs font-bold">+ Add Review</button>
+        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">Google Maps 5.0★ Reviews</h2>
+          <button onclick="addReviewItem()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add Review</button>
         </div>
         <div id="reviews-list" class="space-y-4">
           <!-- Dynamic Reviews -->
@@ -149,9 +171,9 @@
 
       <!-- 5. FAQ TAB -->
       <section id="tab-faqs" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b pb-2">
-          <h2 class="text-xl font-bold text-gray-900">Frequently Asked Questions</h2>
-          <button onclick="addFaqItem()" class="px-3 py-1.5 bg-surf-600 text-white rounded-xl text-xs font-bold">+ Add FAQ</button>
+        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">Frequently Asked Questions</h2>
+          <button onclick="addFaqItem()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add FAQ</button>
         </div>
         <div id="faqs-list" class="space-y-3">
           <!-- Dynamic FAQs -->
@@ -160,7 +182,7 @@
 
       <!-- 6. FIREBASE CLOUD SYNC TAB -->
       <section id="tab-firebase" class="tab-content hidden space-y-4">
-        <h2 class="text-xl font-bold text-gray-900 border-b pb-2">🔥 Firebase Firestore & Storage Configuration</h2>
+        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">🔥 Firebase Firestore & Storage Configuration</h2>
         <p class="text-xs text-gray-600 leading-relaxed">
           Link your Firebase project to enable instant live cloud sync for client visits across the world.
         </p>
@@ -170,17 +192,27 @@
           <textarea id="firebase-config-json" rows="6" placeholder='{ "apiKey": "...", "authDomain": "...", "projectId": "...", "storageBucket": "..." }' class="w-full p-3 font-mono text-xs bg-slate-900 text-emerald-400 rounded-xl border border-gray-700"></textarea>
         </div>
 
-        <div class="flex gap-3">
-          <button onclick="saveFirebaseConfig()" class="px-5 py-2.5 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+        <div class="flex flex-col sm:flex-row gap-3">
+          <button onclick="saveFirebaseConfig()" class="w-full sm:w-auto px-5 py-2.5 bg-[#0084B4] hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer">
             Connect Firebase Project
           </button>
-          <button onclick="pushToFirestore()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold">
+          <button onclick="pushToFirestore()" class="w-full sm:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer">
             Push All Local Data to Firestore ☁️
           </button>
         </div>
       </section>
 
     </main>
+  </div>
+
+  <!-- Persistent Mobile Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-2.5 flex items-center justify-between gap-2 sm:hidden z-50 shadow-2xl">
+    <a href="index.html" target="_blank" class="flex-1 py-2.5 bg-gray-100 text-gray-800 text-center rounded-xl text-xs font-bold">
+      Preview Website ↗
+    </a>
+    <button onclick="saveAllSettings()" class="flex-1 py-2.5 bg-[#25D366] text-white text-center rounded-xl text-xs font-black shadow-md">
+      💾 Save Changes
+    </button>
   </div>
 
   <script>
@@ -190,12 +222,22 @@
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
       document.getElementById('tab-' + tabId)?.classList.remove('hidden');
 
+      // Desktop buttons
       document.querySelectorAll('aside button').forEach(b => {
         b.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2";
       });
       const activeBtn = document.getElementById('tab-btn-' + tabId);
       if (activeBtn) {
-        activeBtn.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-ocean-950 text-white shadow-md flex items-center gap-2";
+        activeBtn.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2";
+      }
+
+      // Mobile buttons
+      document.querySelectorAll('[id^="m-tab-"]').forEach(b => {
+        b.className = "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700";
+      });
+      const activeMobileBtn = document.getElementById('m-tab-' + tabId);
+      if (activeMobileBtn) {
+        activeMobileBtn.className = "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white";
       }
     }
 
@@ -230,10 +272,10 @@
       const container = document.getElementById('hero-slides-list');
       const slides = siteData.settings.hero_images || [];
       container.innerHTML = slides.map((img, idx) => `
-        <div class="flex items-center gap-3 p-3 bg-gray-50 border rounded-2xl">
-          <img src="${img.url}" class="w-16 h-12 object-cover rounded-xl border" />
+        <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-50 border rounded-2xl">
+          <img src="${img.url}" class="w-14 sm:w-16 h-10 sm:h-12 object-cover rounded-xl border" />
           <input type="text" value="${img.url}" onchange="siteData.settings.hero_images[${idx}].url = this.value" class="flex-1 p-2 bg-white border rounded-xl text-xs" />
-          <button onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="p-2 text-red-600 font-bold hover:bg-red-50 rounded-xl">✕</button>
+          <button onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="p-2 text-red-600 font-bold hover:bg-red-50 rounded-xl cursor-pointer">✕</button>
         </div>
       `).join('');
     }
@@ -250,15 +292,15 @@
     function renderActivities() {
       const container = document.getElementById('activities-list');
       container.innerHTML = siteData.activities.map((act, idx) => `
-        <div class="p-4 bg-gray-50 border rounded-2xl space-y-3">
+        <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
-            <h4 class="font-bold text-sm text-gray-900">${act.title}</h4>
-            <span class="text-xs font-bold text-surf-700">From $${act.price_from} USD</span>
+            <h4 class="font-bold text-xs sm:text-sm text-gray-900">${act.title}</h4>
+            <span class="text-xs font-bold text-[#0084B4]">From $${act.price_from} USD</span>
           </div>
-          <div class="grid grid-cols-2 gap-3">
+          <div class="grid grid-cols-2 gap-2 sm:gap-3">
             <div>
               <label class="block text-[10px] uppercase font-bold text-gray-500">Price (USD)</label>
-              <input type="number" value="${act.price_from}" onchange="siteData.activities[${idx}].price_from = parseFloat(this.value)" class="w-full p-2 bg-white border rounded-xl text-xs" />
+              <input type="number" value="${act.price_from}" onchange="siteData.activities[${idx}].price_from = parseFloat(this.value)" class="w-full p-2 bg-white border rounded-xl text-xs font-semibold" />
             </div>
             <div>
               <label class="block text-[10px] uppercase font-bold text-gray-500">Duration</label>
@@ -276,10 +318,10 @@
     function renderReviews() {
       const container = document.getElementById('reviews-list');
       container.innerHTML = siteData.reviews.map((rev, idx) => `
-        <div class="p-4 bg-gray-50 border rounded-2xl space-y-2">
-          <div class="flex items-center justify-between">
-            <input type="text" value="${rev.authorName}" onchange="siteData.reviews[${idx}].authorName = this.value" class="font-bold text-xs p-1.5 bg-white border rounded-xl" />
-            <input type="text" value="${rev.authorLocation}" onchange="siteData.reviews[${idx}].authorLocation = this.value" class="text-xs p-1.5 bg-white border rounded-xl" />
+        <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <input type="text" value="${rev.authorName}" onchange="siteData.reviews[${idx}].authorName = this.value" class="font-bold text-xs p-1.5 bg-white border rounded-xl flex-1" />
+            <input type="text" value="${rev.authorLocation}" onchange="siteData.reviews[${idx}].authorLocation = this.value" class="text-xs p-1.5 bg-white border rounded-xl w-32" />
           </div>
           <textarea onchange="siteData.reviews[${idx}].text = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${rev.text}</textarea>
         </div>
@@ -327,7 +369,7 @@
       siteData.settings.autoSwapInterval = parseInt(document.getElementById('set-hero-interval').value) || 4500;
 
       saveActiveSiteData(siteData);
-      alert("✅ All changes saved successfully! Live website is updated.");
+      alert("✅ All changes saved successfully! Live website is updated instantly.");
     }
 
     function saveFirebaseConfig() {
