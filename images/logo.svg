@@ -1,65 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 160" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 160" width="100%" height="100%">
   <defs>
     <!-- Wave Gradients -->
-    <linearGradient id="waveOuter" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#38bdf8" />
-      <stop offset="50%" stop-color="#0284c7" />
-      <stop offset="100%" stop-color="#0369a1" />
+    <linearGradient id="waveCyanDark" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0284c7" />
+      <stop offset="60%" stop-color="#0369a1" />
+      <stop offset="100%" stop-color="#075985" />
     </linearGradient>
-    <linearGradient id="waveInner" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0ea5e9" />
+    
+    <linearGradient id="waveGlowDark" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#38bdf8" />
       <stop offset="100%" stop-color="#7dd3fc" />
     </linearGradient>
-    <linearGradient id="textGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0284c7" />
-      <stop offset="100%" stop-color="#0369a1" />
-    </linearGradient>
+
+    <style>
+      @keyframes logoWaveBobLight {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        50% { transform: translateY(-3px) rotate(-1.5deg); }
+      }
+      @keyframes logoSurferGlideLight {
+        0%, 100% { transform: translate(0, 0) rotate(0deg); }
+        25% { transform: translate(1px, -2px) rotate(-2deg); }
+        75% { transform: translate(-1px, 1px) rotate(1.5deg); }
+      }
+      @keyframes foamPulseLight {
+        0%, 100% { opacity: 0.9; }
+        50% { opacity: 1; filter: drop-shadow(0 0 3px rgba(2, 132, 199, 0.4)); }
+      }
+      .anim-wave {
+        animation: logoWaveBobLight 4s ease-in-out infinite;
+        transform-origin: 75px 80px;
+      }
+      .anim-surfer {
+        animation: logoSurferGlideLight 3s ease-in-out infinite;
+        transform-origin: 75px 85px;
+      }
+      .anim-foam {
+        animation: foamPulseLight 2.5s ease-in-out infinite;
+      }
+    </style>
   </defs>
 
-  <!-- Left Side: Circular Barrel Wave with Surfer -->
-  <g transform="translate(10, 5)">
-    <!-- Outer Wave Curl -->
-    <path d="M 80 145 C 30 145, 5 110, 5 75 C 5 35, 35 5, 80 5 C 115 5, 140 25, 145 55 C 145 70, 135 85, 120 85 C 110 85, 105 75, 110 65 C 115 55, 110 35, 85 30 C 60 25, 35 45, 35 75 C 35 105, 55 125, 85 125 C 110 125, 125 110, 130 95 C 132 115, 115 145, 80 145 Z" fill="url(#waveOuter)" />
-
-    <!-- Secondary Wave Layer -->
-    <path d="M 80 135 C 45 135, 20 110, 20 75 C 20 45, 45 20, 80 20 C 105 20, 125 35, 130 60 C 130 70, 122 75, 115 75 C 108 75, 102 68, 105 58 C 108 45, 95 35, 80 35 C 55 35, 42 55, 42 75 C 42 98, 58 115, 80 115 C 98 115, 112 102, 118 88 C 115 110, 100 135, 80 135 Z" fill="url(#waveInner)" />
-
-    <!-- Wave Crest Foam Highlight -->
-    <path d="M 85 10 C 120 10, 148 32, 148 60 C 148 72, 138 88, 120 88 C 108 88, 104 74, 112 62 C 118 52, 110 25, 85 20 C 78 18, 70 20, 65 24 C 70 15, 78 10, 85 10 Z" fill="#e0f2fe" opacity="0.9" />
-
-    <!-- Surfer Riding Wave -->
-    <!-- Board -->
-    <path d="M 45 106 C 55 100, 75 97, 95 98 C 100 98, 104 100, 102 103 C 98 106, 75 108, 55 112 C 48 113, 42 110, 45 106 Z" fill="#0369a1" />
+  <!-- Left: Circular Wave with Surfer (Exact Match to User's SVG Icon) -->
+  <g class="anim-wave" transform="translate(10, 8)">
     
-    <!-- Surfer Silhouette -->
-    <!-- Head -->
-    <circle cx="68" cy="65" r="4.5" fill="#0369a1" />
-    <!-- Torso & Arms in Surf Stance -->
-    <path d="M 68 70 L 65 80 L 58 88 L 62 89 L 69 82 L 74 88 L 78 86 L 72 78 L 72 70 Z" fill="#0369a1" />
-    <!-- Back Arm / Balance -->
-    <path d="M 65 72 L 54 70 L 53 72 L 64 76 Z" fill="#0369a1" />
-    <!-- Front Arm -->
-    <path d="M 70 73 L 82 72 L 83 75 L 71 77 Z" fill="#0369a1" />
-    <!-- Legs / Knees bent -->
-    <path d="M 65 80 L 56 94 L 52 104 L 57 105 L 62 96 L 68 82 Z" fill="#0369a1" />
-    <path d="M 72 78 L 78 92 L 85 101 L 90 100 L 82 90 L 74 80 Z" fill="#0369a1" />
+    <!-- Outer Cyan/Blue Wave Barrel Circle -->
+    <path d="M 75 142 C 38 142, 8 112, 8 75 C 8 38, 38 8, 75 8 C 108 8, 134 28, 142 58 C 144 68, 138 78, 126 78 C 116 78, 110 70, 114 60 C 118 48, 102 24, 75 24 C 47 24, 25 47, 25 75 C 25 103, 47 126, 75 126 C 98 126, 118 112, 122 96 C 124 116, 105 142, 75 142 Z" fill="url(#waveCyanDark)" />
+
+    <!-- Inner Ocean Swirl -->
+    <path d="M 75 130 C 44 130, 20 105, 20 75 C 20 48, 42 26, 70 26 C 92 26, 112 40, 118 60 C 114 42, 96 36, 78 36 C 54 36, 35 53, 35 75 C 35 97, 53 115, 75 115 C 92 115, 108 104, 114 90 C 108 112, 94 130, 75 130 Z" fill="url(#waveGlowDark)" opacity="0.9" />
+
+    <!-- Crashing White Wave Lip / Crest (Right Top Curve) -->
+    <path class="anim-foam" d="M 108 18 C 128 24, 145 42, 145 64 C 145 82, 132 94, 120 94 C 110 94, 108 84, 116 72 C 124 60, 122 36, 98 22 C 102 19, 105 18, 108 18 Z" fill="#0284c7" />
+    
+    <!-- White Water Droplet Accent -->
+    <circle cx="132" cy="30" r="3.5" fill="#38bdf8" />
+    <circle cx="140" cy="42" r="2.5" fill="#0284c7" />
+
+    <!-- Standing Surfer inside the Wave Tunnel -->
+    <g class="anim-surfer">
+      <!-- White Surfboard -->
+      <path d="M 44 112 C 54 106, 78 104, 104 106 C 109 106, 112 108, 110 111 C 106 114, 78 117, 54 120 C 46 121, 41 117, 44 112 Z" fill="#082f49" />
+
+      <!-- Surfer Head -->
+      <circle cx="75" cy="65" r="5" fill="#082f49" />
+
+      <!-- Surfer Body / Arms / Surf Stance -->
+      <!-- Arms spread for balance -->
+      <path d="M 58 74 L 75 75 L 92 73" stroke="#082f49" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      
+      <!-- Torso -->
+      <path d="M 75 70 L 75 88" stroke="#082f49" stroke-width="4.5" stroke-linecap="round" fill="none" />
+
+      <!-- Bent Knees / Wide Surfing Stance -->
+      <path d="M 75 88 L 62 100 L 58 111" stroke="#082f49" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+      <path d="M 75 88 L 88 100 L 96 108" stroke="#082f49" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" fill="none" />
+    </g>
   </g>
 
-  <!-- Right Side: Brand Text -->
-  <g transform="translate(170, 20)">
-    <!-- THE / HIKKA -->
-    <text x="0" y="45" font-family="'Playfair Display', 'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="44" fill="#0284c7" letter-spacing="3">
+  <!-- Right: Bold Typographic Identity (Exact Match to Image) -->
+  <g transform="translate(175, 18)">
+    
+    <!-- HIKKA (Bold Ocean Blue) -->
+    <text x="0" y="46" font-family="'Montserrat', 'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="46" fill="#0284c7" letter-spacing="3.5">
       HIKKA
     </text>
 
-    <!-- SURF -->
-    <text x="0" y="95" font-family="'Playfair Display', 'Impact', 'Arial Black', sans-serif" font-weight="900" font-size="52" fill="#082f49" letter-spacing="4">
+    <!-- SURF (Bold Deep Coastal Navy) -->
+    <text x="0" y="98" font-family="'Montserrat', 'Arial Black', 'Impact', sans-serif" font-weight="900" font-size="54" fill="#082f49" letter-spacing="4">
       SURF
     </text>
 
-    <!-- SURF SCHOOL • SRI LANKA Subtitle -->
-    <line x1="0" y1="110" x2="310" y2="110" stroke="#0284c7" stroke-width="2" opacity="0.6" />
-    <text x="2" y="128" font-family="'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13" fill="#d97706" letter-spacing="3.5">
+    <!-- Horizontal Divider Line -->
+    <line x1="0" y1="114" x2="330" y2="114" stroke="#0284c7" stroke-width="2.5" opacity="0.9" />
+
+    <!-- SURF SCHOOL • SRI LANKA (Golden Amber) -->
+    <text x="2" y="132" font-family="'Montserrat', 'Plus Jakarta Sans', sans-serif" font-weight="800" font-size="13.5" fill="#d97706" letter-spacing="4">
       SURF SCHOOL • SRI LANKA
     </text>
   </g>
