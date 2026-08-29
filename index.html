@@ -94,34 +94,34 @@
     </div>
   </div>
 
-  <!-- Header Navigation -->
-  <header id="main-navbar" class="sticky top-0 z-40 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-sm py-4 border-b border-gray-100">
+  <!-- Header Navigation (The Surfer Weligama Style) -->
+  <header id="main-navbar" class="fixed top-8 left-0 right-0 z-40 transition-all duration-300 bg-transparent py-4 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       
       <!-- Brand Logo -->
       <a href="index.html" class="flex items-center gap-3 group">
-        <div class="w-10 h-10 rounded-2xl bg-gradient-to-br from-surf-600 to-ocean-700 flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform">
+        <div class="w-10 h-10 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform">
           ❤️
         </div>
         <div>
-          <div class="font-serif-heading font-extrabold text-xl tracking-tight text-gray-900 leading-none">
+          <div class="font-serif-heading font-extrabold text-xl sm:text-2xl tracking-tight text-white leading-none drop-shadow">
             Hikka Surf School
           </div>
-          <p class="text-[10px] font-bold tracking-wider uppercase text-surf-600 mt-1">
+          <p class="text-[10px] sm:text-[11px] font-bold tracking-widest uppercase text-cyan-300 mt-1 drop-shadow">
             Hikkaduwa • Sri Lanka
           </p>
         </div>
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold text-gray-700">
-        <a href="index.html" class="px-3.5 py-2 rounded-xl text-surf-700 font-bold bg-surf-50">Home</a>
-        <a href="surf-lessons.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600 font-bold text-amber-700">🏄 Surf Lessons</a>
+      <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-semibold">
+        <a href="index.html" class="nav-link px-3.5 py-2 rounded-xl text-cyan-400 font-bold hover:text-cyan-300">HOME</a>
+        <a href="surf-lessons.html" class="nav-link px-3.5 py-2 rounded-xl text-sand-300 font-bold hover:text-sand-200">🏄 SURF LESSONS</a>
         
         <!-- Dropdown Activities -->
         <div class="relative group">
-          <button class="px-3.5 py-2 rounded-xl hover:text-surf-600 flex items-center gap-1">
-            <span>Activities</span>
+          <button class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white flex items-center gap-1">
+            <span>ACTIVITIES</span>
             <svg class="w-4 h-4 transition-transform group-hover:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
           </button>
           <div class="absolute top-full left-0 w-72 pt-2 opacity-0 translate-y-2 pointer-events-none group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto transition-all duration-200">
@@ -154,28 +154,27 @@
           </div>
         </div>
 
-        <a href="tours.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600">Sri Lanka Tours</a>
-        <a href="transfers.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600">Transfers</a>
-        <a href="gallery.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600">Gallery</a>
-        <a href="reviews.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600">⭐ Reviews</a>
-        <a href="about.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600">About</a>
-        <a href="contact.html" class="px-3.5 py-2 rounded-xl hover:text-surf-600">Contact</a>
+        <a href="tours.html" class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white">SRI LANKA TOURS</a>
+        <a href="transfers.html" class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white">TRANSFERS</a>
+        <a href="gallery.html" class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white">GALLERY</a>
+        <a href="reviews.html" class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white">⭐ REVIEWS</a>
+        <a href="about.html" class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white">ABOUT</a>
+        <a href="contact.html" class="nav-link px-3.5 py-2 rounded-xl text-white/90 hover:text-white">CONTACT</a>
       </nav>
 
-      <!-- Action CTAs -->
+      <!-- Action CTAs (Matching The Surfer Weligama Pill Button) -->
       <div class="hidden lg:flex items-center gap-3">
-        <button onclick="openBookingModal()" class="px-6 py-2.5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs tracking-wider uppercase shadow-md hover:shadow-lg transition-all transform active:scale-95 flex items-center gap-2 cursor-pointer">
-          <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.662.062-2.083-.527-1.782-.74-2.92-2.56-3.009-2.678-.088-.118-.722-.96-.722-1.831s.456-1.3.619-1.477c.162-.177.355-.221.474-.221.119 0 .238.001.341.006.109.006.255-.041.398.303.148.356.505 1.23.549 1.32.044.089.073.193.015.311-.059.119-.089.193-.177.297-.089.104-.187.232-.267.311-.089.09-.182.187-.078.365.104.178.462.763.992 1.235.684.609 1.261.798 1.439.887.178.089.282.074.386-.045.104-.118.444-.518.563-.696.119-.178.238-.148.398-.089.162.059 1.025.483 1.202.572.177.089.296.133.341.207.045.074.045.429-.099.834z"/></svg>
-          <span>BOOK NOW</span>
+        <button onclick="openBookingModal()" class="px-7 py-2.5 rounded-full border border-white text-white hover:bg-white hover:text-gray-900 font-bold text-xs uppercase tracking-wider transition-all duration-300 hover:scale-105 hover:shadow-lg transform cursor-pointer">
+          BOOK NOW
         </button>
       </div>
 
       <!-- Mobile Button -->
       <div class="flex lg:hidden items-center gap-2">
-        <button onclick="openBookingModal()" class="px-3.5 py-1.5 rounded-full bg-emerald-600 text-white text-xs font-bold shadow-md">
-          Book
+        <button onclick="openBookingModal()" class="px-4 py-1.5 rounded-full border border-white text-white hover:bg-white hover:text-gray-900 text-xs font-bold shadow-md">
+          BOOK NOW
         </button>
-        <button id="mobile-menu-btn" class="p-2 rounded-xl text-gray-700 hover:bg-gray-100" aria-label="Toggle menu">
+        <button id="mobile-menu-btn" class="p-2 rounded-xl text-white hover:bg-white/10" aria-label="Toggle menu">
           <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
         </button>
       </div>

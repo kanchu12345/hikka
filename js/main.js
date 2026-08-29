@@ -17,23 +17,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // 2. Sticky Navbar Glass Effect on Scroll
   const mainNavbar = document.getElementById('main-navbar');
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 30) {
-      mainNavbar?.classList.add('bg-white/95', 'shadow-md', 'text-gray-900', 'backdrop-blur-md');
-      mainNavbar?.classList.remove('bg-gradient-to-b', 'from-black/80', 'text-white');
-      
-      // Update nav links colors
-      document.querySelectorAll('.nav-link').forEach(el => {
-        el.classList.add('text-gray-700', 'hover:text-surf-600');
-        el.classList.remove('text-white/90', 'hover:text-white');
-      });
+    if (window.scrollY > 40) {
+      mainNavbar?.classList.add('bg-ocean-950/95', 'shadow-xl', 'backdrop-blur-md', 'border-b', 'border-ocean-800');
+      mainNavbar?.classList.remove('bg-transparent', 'top-8');
+      mainNavbar?.classList.add('top-0');
     } else {
-      mainNavbar?.classList.remove('bg-white/95', 'shadow-md', 'text-gray-900', 'backdrop-blur-md');
-      mainNavbar?.classList.add('bg-gradient-to-b', 'from-black/80', 'text-white');
-      
-      document.querySelectorAll('.nav-link').forEach(el => {
-        el.classList.remove('text-gray-700', 'hover:text-surf-600');
-        el.classList.add('text-white/90', 'hover:text-white');
-      });
+      mainNavbar?.classList.remove('bg-ocean-950/95', 'shadow-xl', 'backdrop-blur-md', 'border-b', 'border-ocean-800', 'top-0');
+      mainNavbar?.classList.add('bg-transparent', 'top-8');
     }
   });
 
