@@ -150,3 +150,5 @@ The Admin Panel allows you to edit **EVERYTHING** on the website live from your 
 ---
 
 © 2026 ❤️ **Hikkaduwa Hikka Surf School** — Galle Road, Narigama Beach, Hikkaduwa, Sri Lanka.
+
+Designed & Developed by [**Infinite Creative Web Design**](https://infiniteweb.dev/index.html).

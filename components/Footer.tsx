@@ -218,8 +218,19 @@ export default function Footer({ settings }: FooterProps) {
         {/* Bottom copyright & admin portal link */}
         <div className="pt-8 border-t border-ocean-900/80 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
           <p>© {new Date().getFullYear()} ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <span>Made with ❤️ in Hikkaduwa Beach, Sri Lanka</span>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <span className="flex items-center gap-1">
+              Design & Development by{' '}
+              <a
+                href="https://infiniteweb.dev/index.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-cyan-300 hover:text-white font-semibold underline underline-offset-2 transition-colors ml-1"
+              >
+                Infinite Creative Web Design
+              </a>
+            </span>
+            <span className="hidden sm:inline">•</span>
             <Link
               href="/admin/login"
               className="flex items-center gap-1 text-gray-500 hover:text-gray-300 transition-colors"
