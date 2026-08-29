@@ -188,18 +188,24 @@ function initApp() {
 // Multi-Language Translation Switcher
 function initLanguageSwitcher() {
   window.toggleLangMenu = function() {
-    const menu = document.getElementById('lang-menu-dropdown');
-    if (menu) menu.classList.toggle('hidden');
+    const menus = document.querySelectorAll('.lang-menu-dropdown');
+    menus.forEach(menu => menu.classList.toggle('hidden'));
   };
 
-  window.switchLanguage = function(langCode, flag, langName) {
+  window.switchLanguage = function(langCode, flagUrl, langName) {
     const flagEls = document.querySelectorAll('.current-lang-flag');
     const textEls = document.querySelectorAll('.current-lang-text');
-    flagEls.forEach(el => el.textContent = flag);
+    flagEls.forEach(el => {
+      if (el.tagName === 'IMG') {
+        el.src = flagUrl;
+      } else {
+        el.textContent = flagUrl;
+      }
+    });
     textEls.forEach(el => el.textContent = langName);
 
-    const menu = document.getElementById('lang-menu-dropdown');
-    if (menu) menu.classList.add('hidden');
+    const menus = document.querySelectorAll('.lang-menu-dropdown');
+    menus.forEach(m => m.classList.add('hidden'));
 
     if (langCode === 'en') {
       // Clear translation cookie / reset
@@ -235,10 +241,10 @@ function initLanguageSwitcher() {
 
   // Close dropdown on outside click
   document.addEventListener('click', (e) => {
-    const wrapper = document.getElementById('lang-dropdown-wrapper');
-    const menu = document.getElementById('lang-menu-dropdown');
-    if (wrapper && menu && !wrapper.contains(e.target)) {
-      menu.classList.add('hidden');
+    const wrapper = document.querySelector('.lang-dropdown-wrapper');
+    const menus = document.querySelectorAll('.lang-menu-dropdown');
+    if (wrapper && !wrapper.contains(e.target)) {
+      menus.forEach(m => m.classList.add('hidden'));
     }
   });
 }
