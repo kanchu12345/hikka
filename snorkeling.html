@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🤿 Snorkeling in Hikkaduwa Coral Reef | Marine Sanctuary Tours | Hikka Surf School</title>
+  <meta name="description" content="Snorkeling tours in Hikkaduwa National Marine Sanctuary. Explore live corals, tropical reef fish, and clear ocean waters with expert local guides and gear provided." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+  
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="text-xl">❤️</span>
+        <div>
+          <div class="font-heading font-extrabold text-lg text-white">Hikka Surf School</div>
+          <p class="text-[10px] text-cyan-300 font-semibold uppercase">Hikkaduwa • Sri Lanka</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">Surf Lessons</a>
+        <a href="snorkeling.html" class="text-sand-300 font-bold">Snorkeling</a>
+        <a href="turtle-experiences.html" class="text-white/80 hover:text-white">Turtles</a>
+        <a href="tours.html" class="text-white/80 hover:text-white">Day Trips</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+      </nav>
+      <button onclick="openBookingModal('Guided Coral Reef Snorkeling')" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
+        Book Snorkel
+      </button>
+    </div>
+  </header>
+
+  <section class="relative py-20 bg-ocean-950 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <span class="px-3.5 py-1.5 rounded-full bg-cyan-600 text-white text-xs font-bold uppercase tracking-wider mb-4 inline-block">Top Rated Marine Tour</span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold font-heading mb-4">Snorkeling in Hikkaduwa Coral Reef</h1>
+      <p class="text-lg sm:text-xl text-cyan-200 mb-8">Discover vibrant living coral gardens and schools of tropical fish inside the sheltered marine sanctuary.</p>
+      <button onclick="openBookingModal('Guided Coral Reef Snorkeling')" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-base shadow-xl inline-flex items-center gap-2 cursor-pointer">
+        <span>BOOK SNORKELING ON WHATSAPP</span> →
+      </button>
+    </div>
+  </section>
+
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+      <div class="lg:col-span-2 space-y-10">
+        <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-200">
+          <h2 class="text-2xl font-bold font-heading text-gray-900 mb-4">The Hikkaduwa Coral Sanctuary Experience</h2>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+            The Hikkaduwa Coral Reef is Sri Lanka's premier marine sanctuary, famous for its calm shallow lagoon shelter, rich biodiversity, and tropical waters. We provide sanitized masks, dry snorkels, fins, life jackets, and a local guide who knows where the clearest visibility and marine life gather.
+          </p>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Non-swimmers and kids can comfortably participate using our buoyant flotation vests while guides guide them safely around the reef.
+          </p>
+        </div>
+
+        <h2 class="text-2xl font-bold font-heading text-gray-900">Snorkeling Packages</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded-3xl border-2 border-cyan-500 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="px-2.5 py-0.5 bg-cyan-600 text-white rounded-full text-[11px] font-bold">Popular</span>
+              <h3 class="font-heading font-bold text-xl text-gray-900 mt-2">Guided Coral Reef Snorkeling</h3>
+              <div class="text-2xl font-extrabold text-cyan-700 my-2">$20 <span class="text-xs font-normal text-gray-500">USD (Rs. 6,500) • 1.5 Hours</span></div>
+              <p class="text-xs text-gray-600 mb-4">Guided snorkeling in the coral sanctuary with sanitized equipment and lifejackets.</p>
+            </div>
+            <button onclick="openBookingModal('Guided Coral Reef Snorkeling')" class="w-full py-2.5 bg-emerald-600 text-white font-bold rounded-xl text-xs cursor-pointer">
+              Book Coral Snorkeling
+            </button>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="px-2.5 py-0.5 bg-gray-900 text-white rounded-full text-[11px] font-bold">Private Tour</span>
+              <h3 class="font-heading font-bold text-xl text-gray-900 mt-2">Private Family Snorkeling</h3>
+              <div class="text-2xl font-extrabold text-gray-900 my-2">$35 <span class="text-xs font-normal text-gray-500">USD (Rs. 11,000) • 2 Hours</span></div>
+              <p class="text-xs text-gray-600 mb-4">Private guide for your family with child-sized gear and extra safety ring assistance.</p>
+            </div>
+            <button onclick="openBookingModal('Private Family Snorkeling')" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs cursor-pointer">
+              Book Family Tour
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="space-y-6">
+        <div class="bg-white p-6 rounded-3xl shadow-sm border border-gray-200 space-y-4">
+          <h3 class="font-heading font-bold text-lg text-gray-900">Inclusions</h3>
+          <ul class="space-y-2 text-xs text-gray-700">
+            <li>✓ Sanitized mask & dry snorkel</li>
+            <li>✓ Fins / flippers (all sizes)</li>
+            <li>✓ Flotation life vest</li>
+            <li>✓ In-water local ocean guide</li>
+            <li>✓ Reef conservation briefing</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
+      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 p-2 font-bold text-gray-500">✕</button>
+      <h3 class="text-xl font-bold font-heading mb-4 text-gray-900">Book Snorkeling</h3>
+      <form id="booking-form" class="space-y-3 text-xs sm:text-sm">
+        <input type="hidden" id="modal-activity-select" value="Guided Coral Reef Snorkeling" />
+        <div>
+          <label class="block font-bold mb-1">Date</label>
+          <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl" required />
+        </div>
+        <div>
+          <label class="block font-bold mb-1">Number of People</label>
+          <select id="modal-guests-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl">
+            <option value="1">1 Person</option>
+            <option value="2" selected>2 People</option>
+            <option value="3">3 People</option>
+            <option value="4+">4+ Group</option>
+          </select>
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow-md cursor-pointer">
+          Confirm on WhatsApp →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

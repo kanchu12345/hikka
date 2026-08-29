@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>📷 Photo & Video Gallery | Hikka Surf School Hikkaduwa</title>
+  <meta name="description" content="View action photos and videos from surf lessons, coral reef snorkeling, wild sea turtles, and happy traveler memories in Hikkaduwa, Sri Lanka." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="text-xl">❤️</span>
+        <div>
+          <div class="font-heading font-extrabold text-lg text-white">Hikka Surf School</div>
+          <p class="text-[10px] text-cyan-300 font-semibold uppercase">Hikkaduwa • Sri Lanka</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">Surf Lessons</a>
+        <a href="gallery.html" class="text-sand-300 font-bold">Gallery</a>
+        <a href="reviews.html" class="text-white/80 hover:text-white">Reviews</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+      </nav>
+      <button onclick="openBookingModal()" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
+        Book Now
+      </button>
+    </div>
+  </header>
+
+  <section class="py-16 bg-ocean-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <h1 class="text-3xl sm:text-5xl font-extrabold font-heading mb-3">Photo & Ocean Gallery</h1>
+      <p class="text-cyan-200 text-sm sm:text-base">Moments of surfing, wildlife, and happy ocean travelers in Hikkaduwa.</p>
+    </div>
+  </section>
+
+  <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80', 'Surfing in Hikkaduwa', 'Catching clean waves')">
+        <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80" alt="Surfing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1000&q=80', 'Wild Sea Turtle', 'Hikkaduwa shallow bay')">
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=800&q=80" alt="Turtle" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80', 'Coral Snorkeling', 'Sanctuary reef fish')">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Snorkeling" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1000&q=80', 'Happy Surf Students', 'First wave stoke!')">
+        <img src="https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Students" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80', 'Fishing Trip', 'Sunset coastal boat')">
+        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Fishing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=1000&q=80', 'Blue Whale Watching', 'Mirissa deep ocean')">
+        <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80" alt="Whale Watching" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1000&q=80', 'Galle Fort', 'UNESCO World Heritage')">
+        <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80" alt="Galle Fort" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+      <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=1000&q=80', 'Sunset Waves', 'Golden hour Hikkaduwa')">
+        <img src="https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=800&q=80" alt="Sunset" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
+      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <div id="lightbox-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/90 backdrop-blur-md" onclick="closeLightbox()">
+    <div class="relative max-w-4xl w-full bg-black rounded-3xl overflow-hidden" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 p-2 text-white font-bold text-lg">✕</button>
+      <img id="lightbox-img" src="" alt="Enlarged photo" class="w-full max-h-[75vh] object-contain" />
+      <div class="p-4 bg-black text-white">
+        <h4 id="lightbox-title" class="font-bold"></h4>
+        <p id="lightbox-caption" class="text-xs text-gray-400"></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

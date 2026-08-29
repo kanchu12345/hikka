@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ℹ️ About Our Story | Hikka Surf School Hikkaduwa</title>
+  <meta name="description" content="Learn about Hikka Surf School, founded by native local surfers on Narigama Beach, Hikkaduwa. Our mission is sharing Sri Lanka's ocean spirit safely." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="text-xl">❤️</span>
+        <div>
+          <div class="font-heading font-extrabold text-lg text-white">Hikka Surf School</div>
+          <p class="text-[10px] text-cyan-300 font-semibold uppercase">Hikkaduwa • Sri Lanka</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">Surf Lessons</a>
+        <a href="about.html" class="text-sand-300 font-bold">About</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+      </nav>
+      <button onclick="openDirectWhatsApp()" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
+        Contact Us
+      </button>
+    </div>
+  </header>
+
+  <section class="py-16 bg-ocean-950 text-white text-center">
+    <div class="max-w-4xl mx-auto px-4">
+      <span class="px-3.5 py-1.5 rounded-full bg-white/10 text-sand-300 text-xs font-bold uppercase tracking-wider mb-3 inline-block">Authentic Local Beach Culture</span>
+      <h1 class="text-3xl sm:text-5xl font-extrabold font-heading mb-3">Born on Hikkaduwa Beach</h1>
+      <p class="text-cyan-200 text-sm sm:text-base">Surfing and ocean adventures with passionate local hosts.</p>
+    </div>
+  </section>
+
+  <section class="py-16 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-sm border border-gray-200 space-y-8">
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-gray-900 mb-4">Our Local Story</h2>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+          Hikka Surf School is a local Hikkaduwa surf school founded by ocean lovers who grew up riding the legendary waves of Sri Lanka's southern coast. Our focus is simple: helping travelers enjoy the ocean safely, learn the genuine art of surfing, and discover our hometown through authentic local experiences.
+        </p>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+          Whether it is your very first time standing up on a surfboard in gentle white-water, improving your cutback on green waves, or snorkeling alongside gentle giant sea turtles on the Hikkaduwa reef, we treat every guest like family.
+        </p>
+        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+          We believe in honest, grounded hospitality. All gear, rash guards, and safety briefings are provided, and all tours outside our direct school are coordinated transparently with respected local community partners.
+        </p>
+      </div>
+
+      <div class="bg-ocean-50 p-6 rounded-2xl border-l-4 border-surf-600 italic text-sm text-ocean-900 font-medium">
+        "We don't just teach surfing; we share our deep connection to the ocean and the friendly warmth of Sri Lankan beach culture."
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-4 border-t border-gray-100 text-center">
+        <div class="p-4 bg-slate-50 rounded-2xl">
+          <div class="text-2xl sm:text-3xl font-extrabold text-surf-600">12+</div>
+          <div class="text-xs text-gray-500 font-semibold mt-1">Years Coaching</div>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-2xl">
+          <div class="text-2xl sm:text-3xl font-extrabold text-surf-600">3,500+</div>
+          <div class="text-xs text-gray-500 font-semibold mt-1">Students Stood Up</div>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-2xl">
+          <div class="text-2xl sm:text-3xl font-extrabold text-surf-600">5.0 ★</div>
+          <div class="text-xs text-gray-500 font-semibold mt-1">Google Rating</div>
+        </div>
+        <div class="p-4 bg-slate-50 rounded-2xl">
+          <div class="text-2xl sm:text-3xl font-extrabold text-surf-600">100%</div>
+          <div class="text-xs text-gray-500 font-semibold mt-1">Local Surfers</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
+      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

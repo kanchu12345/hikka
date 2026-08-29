@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🐋 Mirissa Whale Watching from Hikkaduwa | Blue Whales & Dolphins | Hikka Surf School</title>
+  <meta name="description" content="Day trip from Hikkaduwa to Mirissa for seasonal Blue Whale and Spinner Dolphin watching. Comfortable AC transport, boat tickets, and breakfast included." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="text-xl">❤️</span>
+        <div>
+          <div class="font-heading font-extrabold text-lg text-white">Hikka Surf School</div>
+          <p class="text-[10px] text-cyan-300 font-semibold uppercase">Hikkaduwa • Sri Lanka</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">Surf Lessons</a>
+        <a href="whale-watching.html" class="text-sand-300 font-bold">Whales</a>
+        <a href="tours.html" class="text-white/80 hover:text-white">Day Trips</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+      </nav>
+      <button onclick="openBookingModal('Mirissa Whale Watching Package')" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
+        Book Whale Trip
+      </button>
+    </div>
+  </header>
+
+  <section class="relative py-20 bg-ocean-950 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <span class="px-3.5 py-1.5 rounded-full bg-sky-700 text-white text-xs font-bold uppercase tracking-wider mb-4 inline-block">Seasonal Wildlife Excursion</span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold font-heading mb-4">Mirissa Whale Watching</h1>
+      <p class="text-lg sm:text-xl text-cyan-200 mb-8">Encounter giant Blue Whales, Sperm Whales, and acrobatic Spinner Dolphins in the deep Indian Ocean.</p>
+      <div class="p-3 bg-amber-500/20 backdrop-blur-md rounded-2xl border border-amber-400/30 text-amber-200 text-xs max-w-md mx-auto mb-8">
+        Available on request (Nov - April season) — arranged with certified coast-guard registered Mirissa boat partners.
+      </div>
+      <button onclick="openBookingModal('Mirissa Whale Watching Package')" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-base shadow-xl inline-flex items-center gap-2 cursor-pointer">
+        <span>BOOK WHALE WATCHING ON WHATSAPP</span> →
+      </button>
+    </div>
+  </section>
+
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="bg-white p-8 rounded-3xl shadow-sm border border-gray-200 max-w-3xl mx-auto space-y-6">
+      <h2 class="text-2xl font-bold font-heading text-gray-900">Mirissa Whale Watching Package ($65 USD)</h2>
+      <p class="text-sm text-gray-600 leading-relaxed">
+        Sri Lanka's southern coast is one of the world's premier locations for spotting Blue Whales. We arrange early morning hotel pickup from Hikkaduwa, comfortable AC drive to Mirissa Harbour, and return transport after the boat cruise.
+      </p>
+      <ul class="space-y-2 text-xs text-gray-700">
+        <li>✓ Hotel pickup & drop-off in Hikkaduwa (approx 5:30 AM)</li>
+        <li>✓ Coast Guard approved passenger vessel ticket</li>
+        <li>✓ Light breakfast snack & bottled water onboard</li>
+        <li>✓ High sighting probability during Nov - April peak season</li>
+      </ul>
+      <button onclick="openBookingModal('Mirissa Whale Watching Package')" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl text-sm shadow-md cursor-pointer">
+        Reserve Whale Watching on WhatsApp
+      </button>
+    </div>
+  </section>
+
+  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
+      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 p-2 font-bold text-gray-500">✕</button>
+      <h3 class="text-xl font-bold font-heading mb-4 text-gray-900">Book Whale Watching</h3>
+      <form id="booking-form" class="space-y-3 text-xs sm:text-sm">
+        <input type="hidden" id="modal-activity-select" value="Mirissa Whale Watching Package" />
+        <div>
+          <label class="block font-bold mb-1">Date</label>
+          <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl" required />
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow-md cursor-pointer">
+          Confirm on WhatsApp →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🎣 Hikkaduwa Fishing Tours | Deep Sea & Sunset Fishing | Hikka Surf School</title>
+  <meta name="description" content="Authentic Sri Lankan ocean fishing trips in Hikkaduwa. Traditional handline, coastal sunset trips, and deep-sea game fishing with veteran local captains." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="text-xl">❤️</span>
+        <div>
+          <div class="font-heading font-extrabold text-lg text-white">Hikka Surf School</div>
+          <p class="text-[10px] text-cyan-300 font-semibold uppercase">Hikkaduwa • Sri Lanka</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">Surf Lessons</a>
+        <a href="fishing-tours.html" class="text-sand-300 font-bold">Fishing</a>
+        <a href="boat-tours.html" class="text-white/80 hover:text-white">Boat Tours</a>
+        <a href="tours.html" class="text-white/80 hover:text-white">Day Trips</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+      </nav>
+      <button onclick="openBookingModal('Traditional Coastal Fishing')" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
+        Book Fishing
+      </button>
+    </div>
+  </header>
+
+  <section class="relative py-20 bg-ocean-950 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <span class="px-3.5 py-1.5 rounded-full bg-blue-600 text-white text-xs font-bold uppercase tracking-wider mb-4 inline-block">Authentic Ocean Adventure</span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold font-heading mb-4">Hikkaduwa Fishing Tours</h1>
+      <p class="text-lg sm:text-xl text-cyan-200 mb-8">Traditional coastal hand-line & deep-sea big game fishing arranged with trusted local boat captains.</p>
+      <div class="p-3 bg-amber-500/20 backdrop-blur-md rounded-2xl border border-amber-400/30 text-amber-200 text-xs max-w-md mx-auto mb-8">
+        Available on request — arranged with trusted local licensed fishing partners.
+      </div>
+      <button onclick="openBookingModal('Traditional Coastal Fishing')" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-base shadow-xl inline-flex items-center gap-2 cursor-pointer">
+        <span>BOOK FISHING TRIP ON WHATSAPP</span> →
+      </button>
+    </div>
+  </section>
+
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="px-3 py-1 bg-surf-600 text-white rounded-full text-xs font-bold">Sunset / Sunrise</span>
+          <h3 class="font-heading font-bold text-2xl text-gray-900 mt-3">Traditional Coastal Fishing</h3>
+          <div class="text-2xl font-extrabold text-surf-700 my-3">$50 <span class="text-xs font-normal text-gray-500">USD (Rs. 16,000) • 2.5 Hours</span></div>
+          <p class="text-sm text-gray-600 mb-6">Near-shore handline fishing with local fishermen during sunrise or sunset. All equipment, bait, and refreshments included.</p>
+          <ul class="space-y-2 text-xs text-gray-700 mb-6">
+            <li>✓ Up to 3 passengers included</li>
+            <li>✓ Fishing lines, hooks & fresh bait</li>
+            <li>✓ Incredible sunset coastal views</li>
+          </ul>
+        </div>
+        <button onclick="openBookingModal('Traditional Coastal Fishing')" class="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-xs cursor-pointer">
+          Book Coastal Fishing
+        </button>
+      </div>
+
+      <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="px-3 py-1 bg-blue-600 text-white rounded-full text-xs font-bold">Big Game Trolling</span>
+          <h3 class="font-heading font-bold text-2xl text-gray-900 mt-3">Deep-Sea Big Game Fishing</h3>
+          <div class="text-2xl font-extrabold text-blue-700 my-3">$130 <span class="text-xs font-normal text-gray-500">USD (Rs. 42,000) • 4 Hours</span></div>
+          <p class="text-sm text-gray-600 mb-6">Trolling 5-15 miles offshore for Tuna, Mahi-Mahi, Wahoo, and Barracuda with modern rods and experienced boat captain.</p>
+          <ul class="space-y-2 text-xs text-gray-700 mb-6">
+            <li>✓ Professional trolling rods & lures</li>
+            <li>✓ Private boat for up to 4 persons</li>
+            <li>✓ Cold drinks & snacks onboard</li>
+          </ul>
+        </div>
+        <button onclick="openBookingModal('Deep-Sea Big Game Fishing')" class="w-full py-3 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs cursor-pointer">
+          Book Deep-Sea Fishing
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
+      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 p-2 font-bold text-gray-500">✕</button>
+      <h3 class="text-xl font-bold font-heading mb-4 text-gray-900">Book Fishing Trip</h3>
+      <form id="booking-form" class="space-y-3 text-xs sm:text-sm">
+        <input type="hidden" id="modal-activity-select" value="Traditional Coastal Fishing" />
+        <div>
+          <label class="block font-bold mb-1">Date</label>
+          <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl" required />
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow-md cursor-pointer">
+          Confirm on WhatsApp →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

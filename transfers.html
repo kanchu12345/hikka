@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚕 Colombo Airport Transfers & Taxi in Hikkaduwa | Hikka Surf School</title>
+  <meta name="description" content="24/7 Colombo International Airport (CMB) pickup and drop-off to Hikkaduwa. Modern air-conditioned cars and vans with English-speaking drivers and surfboard space." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <span class="text-xl">❤️</span>
+        <div>
+          <div class="font-heading font-extrabold text-lg text-white">Hikka Surf School</div>
+          <p class="text-[10px] text-cyan-300 font-semibold uppercase">Hikkaduwa • Sri Lanka</p>
+        </div>
+      </a>
+      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">Surf Lessons</a>
+        <a href="tours.html" class="text-white/80 hover:text-white">Day Trips</a>
+        <a href="transfers.html" class="text-sand-300 font-bold">Transfers</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+      </nav>
+      <button onclick="openBookingModal('Colombo Airport (CMB) Transfer')" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
+        Book Airport Taxi
+      </button>
+    </div>
+  </header>
+
+  <section class="relative py-20 bg-ocean-950 text-white overflow-hidden">
+    <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
+      <span class="px-3.5 py-1.5 rounded-full bg-slate-700 text-white text-xs font-bold uppercase tracking-wider mb-4 inline-block">24/7 Reliable Transport</span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold font-heading mb-4">Airport Transfers & Taxi Service</h1>
+      <p class="text-lg sm:text-xl text-cyan-200 mb-8">Direct expressway highway pickup from Colombo Airport (CMB) to Hikkaduwa in ~1.5 hours.</p>
+      <button onclick="openBookingModal('Colombo Airport (CMB) Transfer')" class="px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-base shadow-xl inline-flex items-center gap-2 cursor-pointer">
+        <span>BOOK AIRPORT TRANSFER ON WHATSAPP</span> →
+      </button>
+    </div>
+  </section>
+
+  <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="px-3 py-1 bg-surf-600 text-white rounded-full text-xs font-bold">Most Popular</span>
+          <h3 class="font-heading font-bold text-2xl text-gray-900 mt-3">Colombo Airport (CMB) ↔ Hikkaduwa</h3>
+          <div class="text-2xl font-extrabold text-surf-700 my-3">$45 <span class="text-xs font-normal text-gray-500">USD (Rs. 14,500) • One-Way</span></div>
+          <p class="text-sm text-gray-600 mb-6">Direct door-to-door expressway transfer. Our friendly driver meets you inside the airport arrivals gate with a nameboard.</p>
+          <ul class="space-y-2 text-xs text-gray-700 mb-6">
+            <li>✓ Flight tracking & free waiting time</li>
+            <li>✓ Highway expressway tolls included</li>
+            <li>✓ Surfboard space & child seats available</li>
+          </ul>
+        </div>
+        <button onclick="openBookingModal('Colombo Airport (CMB) Transfer')" class="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-xs cursor-pointer">
+          Book Airport Pickup on WhatsApp
+        </button>
+      </div>
+
+      <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
+        <div>
+          <span class="px-3 py-1 bg-gray-900 text-white rounded-full text-xs font-bold">Islandwide Freedom</span>
+          <h3 class="font-heading font-bold text-2xl text-gray-900 mt-3">Private Driver Hire Across Sri Lanka</h3>
+          <div class="text-2xl font-extrabold text-gray-900 my-3">From $60 <span class="text-xs font-normal text-gray-500">USD / Day</span></div>
+          <p class="text-sm text-gray-600 mb-6">Hire a dedicated private air-conditioned vehicle with driver for multi-day surf trips (Hikkaduwa, Mirissa, Weligama, Arugam Bay, Kandy, Ella).</p>
+          <ul class="space-y-2 text-xs text-gray-700 mb-6">
+            <li>✓ English-speaking tourist chauffeur</li>
+            <li>✓ Total flexibility to stop anywhere</li>
+            <li>✓ Surfboard roof racks available</li>
+          </ul>
+        </div>
+        <button onclick="openDirectWhatsApp('Hi! I need a private driver quote for Sri Lanka.')" class="w-full py-3 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs cursor-pointer">
+          Inquire Driver Rates on WhatsApp
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
+      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
+      <button onclick="closeBookingModal()" class="absolute top-4 right-4 p-2 font-bold text-gray-500">✕</button>
+      <h3 class="text-xl font-bold font-heading mb-4 text-gray-900">Book Airport Taxi</h3>
+      <form id="booking-form" class="space-y-3 text-xs sm:text-sm">
+        <input type="hidden" id="modal-activity-select" value="Colombo Airport (CMB) Transfer" />
+        <div>
+          <label class="block font-bold mb-1">Date</label>
+          <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl" required />
+        </div>
+        <div>
+          <label class="block font-bold mb-1">Flight Number / Notes</label>
+          <input type="text" id="modal-notes-input" placeholder="e.g. Flight UL123 arriving at 09:30" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl" />
+        </div>
+        <button type="submit" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow-md cursor-pointer">
+          Confirm on WhatsApp →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

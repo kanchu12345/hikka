@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kanchu12345.github.io/hikka/sitemap.xml
