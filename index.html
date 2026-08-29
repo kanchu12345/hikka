@@ -76,11 +76,38 @@
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased selection:bg-surf-500 selection:text-white">
 
-  <!-- Header Navigation (The Surfer Weligama Exact Style) -->
-  <header id="main-navbar" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-transparent py-4 text-white">
+  <!-- Top Live Surf & Weather Conditions Bar -->
+  <div class="bg-ocean-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-ocean-800 relative z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1 text-emerald-400 font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>LIVE SURF REPORT</span>
+        </span>
+        <span class="hidden md:inline text-gray-300">•</span>
+        <span class="hidden sm:inline text-gray-300">🌊 Waves: <strong class="text-white">2–4 ft Clean</strong></span>
+        <span class="hidden md:inline text-gray-300">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
+        <span class="hidden lg:inline text-gray-300">💨 Wind: <strong class="text-white">Offshore Morning</strong></span>
+      </div>
+
+      <!-- Currency Switcher -->
+      <div class="flex items-center gap-2">
+        <span class="text-gray-400 text-[10px] uppercase font-bold tracking-wider">Currency:</span>
+        <div class="flex items-center bg-white/10 rounded-lg p-0.5 text-[10px] font-bold">
+          <button onclick="setCurrency('USD')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">USD ($)</button>
+          <button onclick="setCurrency('EUR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">EUR (€)</button>
+          <button onclick="setCurrency('GBP')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">GBP (£)</button>
+          <button onclick="setCurrency('LKR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">LKR (Rs.)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation (Exact The Surfer Weligama Style) -->
+  <header id="main-navbar" class="fixed top-8 left-0 right-0 z-40 transition-all duration-300 bg-transparent py-4 text-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       
-      <!-- Brand Logo (Wave & Surfer Emblem) -->
+      <!-- Brand Logo (Wave & Surfer) -->
       <a href="index.html" class="flex items-center gap-3 group">
         <img src="images/logo-white.svg" alt="Hikka Surf School Sri Lanka Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105" />
       </a>
@@ -145,7 +172,7 @@
     </div>
   </header>
 
-  <!-- 1. HERO SECTION (Exact Copy of The Surfer Weligama Layout) -->
+  <!-- 1. HERO SECTION (The Surfer Weligama Exact Layout) -->
   <section class="relative min-h-screen flex flex-col justify-center items-center text-white overflow-hidden bg-ocean-950 pt-20">
     <!-- Hero Background Image -->
     <div class="absolute inset-0 z-0">
@@ -162,7 +189,7 @@
         <span class="text-white">Hikka Surf Hikkaduwa</span>
       </h1>
 
-      <!-- 3 Rounded Badges (Exact match to screenshot) -->
+      <!-- 3 Rounded Badges -->
       <div class="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8">
         <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-xs sm:text-sm font-semibold text-white shadow-lg">
           <svg class="w-4 h-4 text-cyan-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"></path></svg>
@@ -180,7 +207,7 @@
         </div>
       </div>
 
-      <!-- Action Button -->
+      <!-- Action Buttons -->
       <div class="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md">
         <button onclick="openBookingModal('Beginner Surf Lesson')" class="w-full sm:w-auto px-8 py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-full shadow-xl hover:shadow-2xl transform hover:-translate-y-0.5 active:scale-95 transition-all text-sm sm:text-base flex items-center justify-center gap-2 cursor-pointer border border-emerald-400/30">
           <span>BOOK YOUR SURF LESSON</span>
@@ -200,8 +227,8 @@
     </a>
   </section>
 
-  <!-- 2. "WHY TRAVELLERS CHOOSE US" (The Surfer Weligama Summary Section) -->
-  <section id="why-choose-us" class="relative bg-white py-16 sm:py-20 border-b border-gray-100">
+  <!-- 2. "WHY TRAVELLERS CHOOSE US" -->
+  <section id="why-choose-us" class="relative bg-white py-16 sm:py-20 border-b border-gray-100 reveal-on-scroll">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <span class="inline-block text-[11px] uppercase tracking-[0.3em] font-bold text-surf-600 mb-3">Why travellers choose us</span>
       <h2 class="text-3xl sm:text-4xl md:text-5xl font-black font-serif-heading text-gray-900 tracking-tight leading-tight mb-4">
@@ -209,13 +236,13 @@
       </h2>
       <div class="gold-divider mx-auto mb-6"></div>
       <p class="text-base sm:text-lg text-gray-700 leading-[1.8] text-center">
-        Hikka Surf School is rated <strong>5.0 out of 5 from verified Google reviews</strong> on Narigama Beach, Hikkaduwa. We run daily beginner, private, and progression surf lessons led by passionate, certified local instructors. With maximum four students per coach or private 1-on-1 training, you get immediate feedback on every wave. The south coast surf season runs all year with warm 28 °C tropical water so no wetsuit is needed, and lessons start at just $25.
+        Hikka Surf School is rated <strong>5.0 out of 5 from verified Google reviews</strong> on Narigama Beach, Hikkaduwa. We run daily beginner, private, and progression surf lessons led by passionate, certified local instructors. With maximum four students per coach or private 1-on-1 training, you get immediate feedback on every wave. The south coast surf season runs all year with warm 28 °C tropical water so no wetsuit is needed, and lessons start at just <strong data-usd="25">$25</strong>.
       </p>
     </div>
   </section>
 
-  <!-- 3. 4 FEATURE ICON CARDS (The Surfer Weligama Style) -->
-  <section class="py-16 bg-slate-50 border-b border-gray-200">
+  <!-- 3. 4 FEATURE ICON CARDS -->
+  <section class="py-16 bg-slate-50 border-b border-gray-200 reveal-on-scroll">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         
@@ -255,113 +282,254 @@
     </div>
   </section>
 
-  <!-- 4. CORE SURF LESSON PACKAGES & RATES -->
-  <section id="rates" class="py-24 bg-white">
+  <!-- 4. ADVANCED INTERACTIVE PACKAGE SHOWCASE (The Surfer Weligama 01, 02, 03 Style) -->
+  <section class="py-24 bg-white reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Our Surf Packages</span>
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Our Signature Coaching</span>
         <h2 class="text-3xl sm:text-5xl font-black font-serif-heading text-gray-900 tracking-tight">
-          Surf Lesson Rates & Pricing
+          Find Your Perfect Surf Session
         </h2>
         <div class="gold-divider mx-auto my-4"></div>
-        <p class="text-gray-600 text-base sm:text-lg">
-          All lessons include surfboards, rash guards, beach theory, and 100% standing guarantee.
-        </p>
       </div>
 
-      <!-- Packages Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-        
-        <!-- Beginner Lesson -->
-        <div class="bg-white rounded-3xl p-8 border-2 border-surf-500 shadow-xl flex flex-col justify-between relative transform hover:-translate-y-1 transition-all">
-          <span class="absolute -top-3.5 left-8 px-3.5 py-1 bg-surf-600 text-white rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-sm">Most Popular</span>
-          <div>
-            <h3 class="font-serif-heading font-black text-2xl text-gray-900 mt-2 mb-1">Beginner Surf Lesson</h3>
-            <p class="text-xs text-gray-500 mb-6">Perfect for first-timers & beginners</p>
-            
-            <div class="bg-surf-50 p-4 rounded-2xl border border-surf-100 mb-6">
-              <div class="text-4xl font-black font-serif-heading text-surf-900">$25 <span class="text-xs text-gray-500 font-sans">USD / Person</span></div>
-              <div class="text-xs text-gray-500 mt-0.5">approx. Rs. 8,000 LKR</div>
-              <div class="text-xs text-surf-700 font-bold mt-1">⏱️ 1.5 Hours in Water</div>
-            </div>
-
-            <ul class="space-y-2.5 text-xs text-gray-700 mb-6">
-              <li class="flex items-center gap-2">✓ <span>Soft-top surfboard & rash guard included</span></li>
-              <li class="flex items-center gap-2">✓ <span>Beach safety & pop-up technique</span></li>
-              <li class="flex items-center gap-2">✓ <span>100% standing up guarantee</span></li>
-              <li class="flex items-center gap-2">✓ <span>Action photos during lesson</span></li>
-            </ul>
-          </div>
-          <button onclick="openBookingModal('Beginner Surf Lesson')" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl text-xs flex items-center justify-center gap-1 shadow-md cursor-pointer transition-all">
-            Book Beginner Lesson
-          </button>
-        </div>
-
-        <!-- Private 1-on-1 -->
-        <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-md flex flex-col justify-between relative transform hover:-translate-y-1 transition-all">
-          <span class="absolute -top-3.5 left-8 px-3.5 py-1 bg-gray-900 text-white rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-sm">VIP Coaching</span>
-          <div>
-            <h3 class="font-serif-heading font-black text-2xl text-gray-900 mt-2 mb-1">Private 1-on-1 Lesson</h3>
-            <p class="text-xs text-gray-500 mb-6">Dedicated private instructor</p>
-            
-            <div class="bg-slate-50 p-4 rounded-2xl border border-gray-100 mb-6">
-              <div class="text-4xl font-black font-serif-heading text-gray-900">$35 <span class="text-xs text-gray-500 font-sans">USD</span></div>
-              <div class="text-xs text-gray-500 mt-0.5">approx. Rs. 11,000 LKR</div>
-              <div class="text-xs text-surf-700 font-bold mt-1">⏱️ 1.5 Hours in Water</div>
-            </div>
-
-            <ul class="space-y-2.5 text-xs text-gray-700 mb-6">
-              <li class="flex items-center gap-2">✓ <span>Dedicated coach exclusively for you</span></li>
-              <li class="flex items-center gap-2">✓ <span>Fastest technique progress</span></li>
-              <li class="flex items-center gap-2">✓ <span>Video & wave analysis</span></li>
-              <li class="flex items-center gap-2">✓ <span>Board & rash guard included</span></li>
-            </ul>
-          </div>
-          <button onclick="openBookingModal('Private 1-on-1 Lesson')" class="w-full py-3.5 bg-gray-900 hover:bg-surf-600 text-white font-extrabold rounded-2xl text-xs flex items-center justify-center gap-1 shadow-md cursor-pointer transition-all">
-            Book Private Lesson
-          </button>
-        </div>
-
-        <!-- Couple / Semi-Private -->
-        <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-md flex flex-col justify-between relative transform hover:-translate-y-1 transition-all">
-          <span class="absolute -top-3.5 left-8 px-3.5 py-1 bg-gray-900 text-white rounded-full text-[10px] font-extrabold uppercase tracking-wider shadow-sm">Couple / Duo</span>
-          <div>
-            <h3 class="font-serif-heading font-black text-2xl text-gray-900 mt-2 mb-1">Couple / Semi-Private</h3>
-            <p class="text-xs text-gray-500 mb-6">For 2 friends or couples</p>
-            
-            <div class="bg-slate-50 p-4 rounded-2xl border border-gray-100 mb-6">
-              <div class="text-4xl font-black font-serif-heading text-gray-900">$45 <span class="text-xs text-gray-500 font-sans">USD Total</span></div>
-              <div class="text-xs text-gray-500 mt-0.5">approx. Rs. 14,500 LKR</div>
-              <div class="text-xs text-surf-700 font-bold mt-1">⏱️ 1.5 Hours in Water</div>
-            </div>
-
-            <ul class="space-y-2.5 text-xs text-gray-700 mb-6">
-              <li class="flex items-center gap-2">✓ <span>2 Surfers with 1 Dedicated Coach</span></li>
-              <li class="flex items-center gap-2">✓ <span>Fun & supportive surf session</span></li>
-              <li class="flex items-center gap-2">✓ <span>High quality boards & rash guards</span></li>
-              <li class="flex items-center gap-2">✓ <span>Photos & videos included</span></li>
-            </ul>
-          </div>
-          <button onclick="openBookingModal('Semi-Private Couple Lesson')" class="w-full py-3.5 bg-gray-900 hover:bg-surf-600 text-white font-extrabold rounded-2xl text-xs flex items-center justify-center gap-1 shadow-md cursor-pointer transition-all">
-            Book Couple Lesson
-          </button>
-        </div>
-
+      <!-- Tab Buttons -->
+      <div class="flex items-center justify-center gap-3 mb-10">
+        <button id="camp-btn-01" onclick="switchCampTab('01')" class="camp-tab-btn px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-surf-600 text-white shadow-lg cursor-pointer transition-all">
+          01. Beginner Surf Lesson
+        </button>
+        <button id="camp-btn-02" onclick="switchCampTab('02')" class="camp-tab-btn px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer transition-all">
+          02. Private 1-on-1 VIP
+        </button>
+        <button id="camp-btn-03" onclick="switchCampTab('03')" class="camp-tab-btn px-6 py-3 rounded-full text-xs sm:text-sm font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 cursor-pointer transition-all">
+          03. Couple & Family
+        </button>
       </div>
 
-      <!-- More Surf Packages Link -->
-      <div class="text-center">
-        <a href="surf-lessons.html" class="inline-flex items-center gap-2 text-sm font-bold text-surf-700 hover:text-surf-800 underline underline-offset-4">
-          <span>View all packages (Kids Surfing, Intermediate Coaching & Surfboard Rentals)</span> →
-        </a>
+      <!-- Tab Panes -->
+      <div id="camp-pane-01" class="camp-tab-pane grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-50 p-8 sm:p-12 rounded-3xl border border-gray-200">
+        <div class="lg:col-span-6 space-y-5">
+          <span class="px-3.5 py-1 rounded-full bg-surf-100 text-surf-800 text-xs font-bold uppercase tracking-wider">Session 01 • First Timers</span>
+          <h3 class="text-3xl sm:text-4xl font-black font-serif-heading text-gray-900">Beginner Surf Lesson</h3>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Our most popular lesson. We start on the soft sands of Narigama Beach covering ocean safety, wave timing, and correct pop-up posture before paddling into waist-deep whitewash with your coach right beside you.
+          </p>
+          <div class="text-3xl font-black font-serif-heading text-surf-800" data-usd="25">$25 <span class="text-xs font-sans text-gray-500 font-normal">/ 1.5 Hours</span></div>
+          <ul class="space-y-2 text-xs sm:text-sm text-gray-700">
+            <li>✓ Soft-top progression surfboard included</li>
+            <li>✓ UV sun rash guard provided</li>
+            <li>✓ 100% Guaranteed to stand up and ride waves</li>
+          </ul>
+          <button onclick="openBookingModal('Beginner Surf Lesson')" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-full text-xs uppercase tracking-wider shadow-md cursor-pointer transition-all">
+            Book Beginner Lesson →
+          </button>
+        </div>
+        <div class="lg:col-span-6 rounded-2xl overflow-hidden shadow-xl h-80 sm:h-96">
+          <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80" alt="Beginner Surfing" class="w-full h-full object-cover" />
+        </div>
+      </div>
+
+      <div id="camp-pane-02" class="camp-tab-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-50 p-8 sm:p-12 rounded-3xl border border-gray-200">
+        <div class="lg:col-span-6 space-y-5">
+          <span class="px-3.5 py-1 rounded-full bg-gray-900 text-white text-xs font-bold uppercase tracking-wider">Session 02 • Dedicated VIP</span>
+          <h3 class="text-3xl sm:text-4xl font-black font-serif-heading text-gray-900">Private 1-on-1 Surf Coaching</h3>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            One dedicated instructor entirely focused on your technique, paddle power, and wave selection. Includes beachside video review to fast-track your progression onto unbroken green waves.
+          </p>
+          <div class="text-3xl font-black font-serif-heading text-gray-900" data-usd="35">$35 <span class="text-xs font-sans text-gray-500 font-normal">/ 1.5 Hours</span></div>
+          <ul class="space-y-2 text-xs sm:text-sm text-gray-700">
+            <li>✓ 100% Dedicated 1-on-1 private attention</li>
+            <li>✓ Video analysis and personalized tips</li>
+            <li>✓ Faster progression to reef & point breaks</li>
+          </ul>
+          <button onclick="openBookingModal('Private 1-on-1 Lesson')" class="px-8 py-3.5 bg-gray-900 hover:bg-surf-600 text-white font-extrabold rounded-full text-xs uppercase tracking-wider shadow-md cursor-pointer transition-all">
+            Book Private Coaching →
+          </button>
+        </div>
+        <div class="lg:col-span-6 rounded-2xl overflow-hidden shadow-xl h-80 sm:h-96">
+          <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1000&q=80" alt="Private Surfing" class="w-full h-full object-cover" />
+        </div>
+      </div>
+
+      <div id="camp-pane-03" class="camp-tab-pane hidden grid grid-cols-1 lg:grid-cols-12 gap-8 items-center bg-slate-50 p-8 sm:p-12 rounded-3xl border border-gray-200">
+        <div class="lg:col-span-6 space-y-5">
+          <span class="px-3.5 py-1 rounded-full bg-sand-100 text-sand-800 text-xs font-bold uppercase tracking-wider">Session 03 • Duo & Family</span>
+          <h3 class="text-3xl sm:text-4xl font-black font-serif-heading text-gray-900">Couple & Family Surfing</h3>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            Share the magic of catching tropical waves together. Perfect for couples or parents with kids (ages 5+) with patient coaches ensuring safety and endless smiles.
+          </p>
+          <div class="text-3xl font-black font-serif-heading text-gray-900" data-usd="45">$45 <span class="text-xs font-sans text-gray-500 font-normal">/ Couple</span></div>
+          <ul class="space-y-2 text-xs sm:text-sm text-gray-700">
+            <li>✓ Shared instructor for 2 persons</li>
+            <li>✓ High-float safe soft boards for children</li>
+            <li>✓ Souvenir action photos included</li>
+          </ul>
+          <button onclick="openBookingModal('Semi-Private Couple Lesson')" class="px-8 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-full text-xs uppercase tracking-wider shadow-md cursor-pointer transition-all">
+            Book Couple Session →
+          </button>
+        </div>
+        <div class="lg:col-span-6 rounded-2xl overflow-hidden shadow-xl h-80 sm:h-96">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=1000&q=80" alt="Family Surfing" class="w-full h-full object-cover" />
+        </div>
       </div>
 
     </div>
   </section>
 
-  <!-- 5. ACTIVITIES BANNER (Clean Banner Leading to Dedicated activities.html) -->
-  <section class="py-16 bg-ocean-950 text-white relative overflow-hidden">
+  <!-- 5. INTERACTIVE LIVE QUOTE CALCULATOR & BUILDER -->
+  <section class="py-20 bg-gradient-to-b from-slate-50 to-white border-y border-gray-200 reveal-on-scroll">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="bg-ocean-950 text-white p-8 sm:p-12 rounded-3xl shadow-2xl border border-ocean-800">
+        <div class="text-center max-w-xl mx-auto mb-8">
+          <span class="text-xs font-bold uppercase tracking-widest text-sand-300">Live Package Calculator</span>
+          <h3 class="text-2xl sm:text-4xl font-black font-serif-heading mt-1">Estimate & Book Instantly</h3>
+          <p class="text-xs sm:text-sm text-cyan-200 mt-2">Customize your session, view real-time converted rates, and send directly to WhatsApp.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-1.5">Lesson Type</label>
+            <select id="calc-activity" class="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-xs sm:text-sm text-white font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400">
+              <option value="25" class="text-gray-900">Beginner Surf Lesson ($25)</option>
+              <option value="35" class="text-gray-900">Private 1-on-1 Lesson ($35)</option>
+              <option value="45" class="text-gray-900">Couple Lesson ($45)</option>
+              <option value="30" class="text-gray-900">Kids & Family Surfing ($30)</option>
+              <option value="40" class="text-gray-900">Intermediate Coaching ($40)</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-1.5">Number of Surfers</label>
+            <select id="calc-people" class="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-xs sm:text-sm text-white font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400">
+              <option value="1" class="text-gray-900">1 Person</option>
+              <option value="2" selected class="text-gray-900">2 People</option>
+              <option value="3" class="text-gray-900">3 People</option>
+              <option value="4" class="text-gray-900">4 People</option>
+              <option value="5" class="text-gray-900">5+ Group</option>
+            </select>
+          </div>
+
+          <div>
+            <label class="block text-xs font-bold text-gray-300 mb-1.5">Days / Sessions</label>
+            <select id="calc-days" class="w-full p-3 bg-white/10 border border-white/20 rounded-xl text-xs sm:text-sm text-white font-semibold focus:outline-none focus:ring-2 focus:ring-cyan-400">
+              <option value="1" selected class="text-gray-900">1 Day / Session</option>
+              <option value="3" class="text-gray-900">3-Day Surf Package</option>
+              <option value="5" class="text-gray-900">5-Day Surf Intensive</option>
+              <option value="7" class="text-gray-900">7-Day Surf Week</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Addon Checkboxes -->
+        <div class="flex flex-wrap items-center justify-between gap-4 p-4 rounded-2xl bg-white/5 border border-white/10 mb-8 text-xs">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="calc-addon-video" class="w-4 h-4 rounded text-surf-600 focus:ring-0" />
+            <span>Include Video Analysis (+<span data-usd="15">$15</span>/day)</span>
+          </label>
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input type="checkbox" id="calc-addon-transfer" class="w-4 h-4 rounded text-surf-600 focus:ring-0" />
+            <span>Include Airport Pickup (+<span data-usd="45">$45</span>)</span>
+          </label>
+        </div>
+
+        <!-- Calculated Summary Banner -->
+        <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-6 border-t border-white/15">
+          <div class="text-center sm:text-left">
+            <div class="text-xs text-gray-400 uppercase font-bold tracking-wider">Estimated Total</div>
+            <div id="calc-total-display" class="text-3xl sm:text-4xl font-black text-cyan-300 font-serif-heading">$50</div>
+            <div class="text-[11px] text-gray-400">No deposit needed • Pay on beach</div>
+          </div>
+
+          <button onclick="sendCalculatedQuoteToWhatsApp()" class="w-full sm:w-auto px-8 py-4 bg-[#25D366] hover:bg-[#20bd5a] text-white font-extrabold rounded-full text-xs sm:text-sm uppercase tracking-wider shadow-lg flex items-center justify-center gap-2 cursor-pointer transition-all hover:scale-105">
+            <svg class="w-5 h-5 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.662.062-2.083-.527-1.782-.74-2.92-2.56-3.009-2.678-.088-.118-.722-.96-.722-1.831s.456-1.3.619-1.477c.162-.177.355-.221.474-.221.119 0 .238.001.341.006.109.006.255-.041.398.303.148.356.505 1.23.549 1.32.044.089.073.193.015.311-.059.119-.089.193-.177.297-.089.104-.187.232-.267.311-.089.09-.182.187-.078.365.104.178.462.763.992 1.235.684.609 1.261.798 1.439.887.178.089.282.074.386-.045.104-.118.444-.518.563-.696.119-.178.238-.148.398-.089.162.059 1.025.483 1.202.572.177.089.296.133.341.207.045.074.045.429-.099.834z"/></svg>
+            <span>Book This Quote on WhatsApp</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. ALL LESSON RATES (TABLE / CARDS) -->
+  <section id="rates" class="py-24 bg-white reveal-on-scroll">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Complete Rate Card</span>
+        <h2 class="text-3xl sm:text-5xl font-black font-serif-heading text-gray-900 tracking-tight">
+          All Surf Coaching Options
+        </h2>
+        <div class="gold-divider mx-auto my-4"></div>
+      </div>
+
+      <!-- 3 Columns -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+        
+        <!-- Card 1 -->
+        <div class="surfer-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <span class="px-3 py-1 bg-surf-50 text-surf-700 rounded-full text-[10px] font-bold uppercase">Beginner</span>
+            <h3 class="font-serif-heading font-black text-2xl text-gray-900 mt-3 mb-1">Beginner Lesson</h3>
+            <p class="text-xs text-gray-500 mb-6">Group or semi-private beginner guidance</p>
+            
+            <div class="text-3xl font-black font-serif-heading text-surf-900 mb-4" data-usd="25">$25 <span class="text-xs font-sans text-gray-500 font-normal">/ Person</span></div>
+            <ul class="space-y-2.5 text-xs text-gray-700 mb-6">
+              <li>✓ 1.5 Hours in Water</li>
+              <li>✓ Soft-top surfboard & rash guard</li>
+              <li>✓ Safety theory & pop-up practice</li>
+              <li>✓ 100% Standing Guarantee</li>
+            </ul>
+          </div>
+          <button onclick="openBookingModal('Beginner Surf Lesson')" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-full text-xs cursor-pointer shadow-md">
+            Book on WhatsApp
+          </button>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="surfer-card rounded-3xl p-8 flex flex-col justify-between border-2 border-surf-500">
+          <div>
+            <span class="px-3 py-1 bg-gray-900 text-white rounded-full text-[10px] font-bold uppercase">1:1 VIP</span>
+            <h3 class="font-serif-heading font-black text-2xl text-gray-900 mt-3 mb-1">Private 1-on-1</h3>
+            <p class="text-xs text-gray-500 mb-6">Exclusive personal surf coach</p>
+            
+            <div class="text-3xl font-black font-serif-heading text-gray-900 mb-4" data-usd="35">$35 <span class="text-xs font-sans text-gray-500 font-normal">/ Session</span></div>
+            <ul class="space-y-2.5 text-xs text-gray-700 mb-6">
+              <li>✓ 1.5 Hours in Water</li>
+              <li>✓ Dedicated private coach</li>
+              <li>✓ Video analysis & tips</li>
+              <li>✓ Custom wave positioning</li>
+            </ul>
+          </div>
+          <button onclick="openBookingModal('Private 1-on-1 Lesson')" class="w-full py-3.5 bg-gray-900 hover:bg-surf-600 text-white font-extrabold rounded-full text-xs cursor-pointer shadow-md">
+            Book on WhatsApp
+          </button>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="surfer-card rounded-3xl p-8 flex flex-col justify-between">
+          <div>
+            <span class="px-3 py-1 bg-sand-100 text-sand-800 rounded-full text-[10px] font-bold uppercase">Rentals</span>
+            <h3 class="font-serif-heading font-black text-2xl text-gray-900 mt-3 mb-1">Board Rental</h3>
+            <p class="text-xs text-gray-500 mb-6">Soft-tops, shortboards & longboards</p>
+            
+            <div class="text-3xl font-black font-serif-heading text-gray-900 mb-4" data-usd="10">$10 <span class="text-xs font-sans text-gray-500 font-normal">/ Day</span></div>
+            <ul class="space-y-2.5 text-xs text-gray-700 mb-6">
+              <li>✓ Soft-tops (7ft to 9ft)</li>
+              <li>✓ Epoxy funboards & longboards</li>
+              <li>✓ Leashes & wax included</li>
+              <li>✓ Swap boards anytime</li>
+            </ul>
+          </div>
+          <button onclick="openBookingModal('Surfboard Rental')" class="w-full py-3.5 bg-gray-900 hover:bg-surf-600 text-white font-extrabold rounded-full text-xs cursor-pointer shadow-md">
+            Rent on WhatsApp
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. ACTIVITIES BANNER -->
+  <section class="py-16 bg-ocean-950 text-white relative overflow-hidden reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-8 relative z-10">
       <div class="space-y-2 text-center md:text-left">
         <span class="text-xs font-bold text-sand-300 uppercase tracking-widest">Beyond Surfing</span>
@@ -377,11 +545,10 @@
     </div>
   </section>
 
-  <!-- 6. 100% REAL GOOGLE REVIEWS SECTION -->
-  <section id="reviews" class="py-24 bg-white text-gray-900 relative">
+  <!-- 8. 100% REAL GOOGLE REVIEWS -->
+  <section id="reviews" class="py-24 bg-white text-gray-900 relative reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <!-- Google Header Badge -->
       <div class="text-center max-w-3xl mx-auto mb-16">
         <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full bg-slate-100 text-gray-900 text-xs font-bold shadow-sm mb-4 border border-gray-200">
           <svg class="w-4 h-4" viewBox="0 0 24 24">
@@ -403,7 +570,6 @@
         <p class="text-xs text-gray-500 mt-1">Verified traveler reviews for Hikka Surf School, Hikkaduwa</p>
       </div>
 
-      <!-- Real Google Review Cards -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         
         <!-- Review 1 -->
@@ -544,8 +710,8 @@
     </div>
   </section>
 
-  <!-- 7. GALLERY -->
-  <section id="gallery" class="py-24 bg-slate-50 border-t border-gray-200">
+  <!-- 9. GALLERY -->
+  <section id="gallery" class="py-24 bg-slate-50 border-t border-gray-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Visual Moments</span>
@@ -575,8 +741,8 @@
     </div>
   </section>
 
-  <!-- 8. LOCATION SECTION -->
-  <section id="location" class="py-24 bg-white border-t border-gray-200">
+  <!-- 10. LOCATION SECTION -->
+  <section id="location" class="py-24 bg-white border-t border-gray-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-16">
         <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Beachfront Meeting Point</span>
@@ -618,8 +784,8 @@
     </div>
   </section>
 
-  <!-- 9. FAQ ACCORDION -->
-  <section id="faq" class="py-24 bg-slate-50 border-t border-gray-200">
+  <!-- 11. FAQ ACCORDION -->
+  <section id="faq" class="py-24 bg-slate-50 border-t border-gray-200 reveal-on-scroll">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16">
         <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Got Questions?</span>
@@ -673,7 +839,7 @@
     </div>
   </section>
 
-  <!-- 10. FOOTER WITH DESIGN CREDITS -->
+  <!-- 12. FOOTER WITH DESIGN CREDITS -->
   <footer class="bg-ocean-950 text-white pt-16 pb-20 border-t border-ocean-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
@@ -730,9 +896,9 @@
     </div>
   </footer>
 
-  <!-- FLOATING WHATSAPP BUTTON (Bottom Right) -->
+  <!-- FLOATING WHATSAPP BUTTON WITH PULSE GLOW -->
   <div class="fixed bottom-6 right-6 z-50">
-    <button onclick="openDirectWhatsApp()" class="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer" aria-label="WhatsApp Chat">
+    <button onclick="openDirectWhatsApp()" class="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer whatsapp-glow" aria-label="WhatsApp Chat">
       <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.662.062-2.083-.527-1.782-.74-2.92-2.56-3.009-2.678-.088-.118-.722-.96-.722-1.831s.456-1.3.619-1.477c.162-.177.355-.221.474-.221.119 0 .238.001.341.006.109.006.255-.041.398.303.148.356.505 1.23.549 1.32.044.089.073.193.015.311-.059.119-.089.193-.177.297-.089.104-.187.232-.267.311-.089.09-.182.187-.078.365.104.178.462.763.992 1.235.684.609 1.261.798 1.439.887.178.089.282.074.386-.045.104-.118.444-.518.563-.696.119-.178.238-.148.398-.089.162.059 1.025.483 1.202.572.177.089.296.133.341.207.045.074.045.429-.099.834z"/></svg>
     </button>
   </div>
