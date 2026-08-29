@@ -464,6 +464,86 @@
         ℹ️ <em>Partner Activities (Whale watching, deep sea fishing, river safaris, long-distance tours) are arranged on request with our trusted, verified local partners.</em>
       </div>
 
+      <!-- INTERACTIVE AUTO-SWAPPING GALLERY WITH DESCRIPTIONS -->
+      <div class="mt-16 bg-[#12161A] text-white rounded-3xl p-6 sm:p-8 md:p-10 shadow-2xl border border-gray-800" id="gallery-story-showcase">
+        
+        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-gray-800 pb-6 mb-8">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-[0.2em] text-[#0084B4] block mb-1">PHOTO & MOMENT SPOTLIGHT</span>
+            <h3 class="text-2xl sm:text-3xl font-black font-serif-heading text-white">
+              Ocean Stories & Live Experiences
+            </h3>
+          </div>
+          <div class="flex items-center gap-3">
+            <span id="story-counter" class="px-3 py-1 bg-white/10 rounded-full text-xs font-mono font-bold text-cyan-300">01 / 05</span>
+            <span class="text-[11px] text-gray-400 font-medium">⚡ Auto-swapping</span>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          
+          <!-- Left: Big Auto-Swapping Visual -->
+          <div class="lg:col-span-7 relative h-[280px] sm:h-[380px] md:h-[440px] rounded-2xl overflow-hidden shadow-2xl bg-black group">
+            <img id="story-img" src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80" alt="Hikka Experience" class="w-full h-full object-cover transition-opacity duration-300 group-hover:scale-105 transition-transform duration-700" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"></div>
+            
+            <div class="absolute top-4 left-4 z-10">
+              <span id="story-category" class="px-3.5 py-1.5 bg-[#0084B4] text-white rounded-full text-xs font-extrabold tracking-wider uppercase shadow-lg">
+                🏄 SURF LESSONS
+              </span>
+            </div>
+          </div>
+
+          <!-- Right: Narrative & Booking Description -->
+          <div class="lg:col-span-5 flex flex-col justify-between space-y-6">
+            <div>
+              <div id="story-tags" class="flex flex-wrap gap-2 mb-4">
+                <span class="px-2.5 py-1 bg-white/10 rounded-full text-[11px] font-semibold">📍 Narigama Beach</span>
+                <span class="px-2.5 py-1 bg-white/10 rounded-full text-[11px] font-semibold">🏄 Beginner to Pro</span>
+                <span class="px-2.5 py-1 bg-white/10 rounded-full text-[11px] font-semibold">🕒 1.5 - 2 Hours</span>
+              </div>
+
+              <h4 id="story-title" class="text-xl sm:text-2xl font-black font-serif-heading text-white leading-snug mb-3">
+                Catching Your First Wave on Narigama Sandbank
+              </h4>
+
+              <p id="story-desc" class="text-sm sm:text-base text-gray-300 leading-relaxed mb-6">
+                Feel the pure rush of standing up on unbroken green waves with patient 1-on-1 coaching from native ISA instructors. Soft-top boards, personalized wave selection, and 100% stand-up guarantee.
+              </p>
+            </div>
+
+            <!-- Action & Thumbnails -->
+            <div class="space-y-4 pt-2">
+              <button id="story-book-btn" class="w-full py-4 bg-[#25D366] hover:bg-emerald-600 text-white font-extrabold rounded-2xl text-xs sm:text-sm uppercase tracking-wider flex items-center justify-center gap-2 shadow-xl cursor-pointer transition-all hover:scale-[1.02]">
+                <span>BOOK THIS EXPERIENCE ON WHATSAPP</span> →
+              </button>
+
+              <!-- Interactive Thumbnail Click Strip -->
+              <div class="grid grid-cols-5 gap-2 pt-2">
+                <button onclick="selectStorySlide(0)" class="story-thumb-btn relative h-14 rounded-xl overflow-hidden border-2 border-surf-500 ring-2 ring-surf-400 cursor-pointer">
+                  <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover" />
+                </button>
+                <button onclick="selectStorySlide(1)" class="story-thumb-btn relative h-14 rounded-xl overflow-hidden border border-white/20 opacity-60 hover:opacity-100 cursor-pointer">
+                  <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover" />
+                </button>
+                <button onclick="selectStorySlide(2)" class="story-thumb-btn relative h-14 rounded-xl overflow-hidden border border-white/20 opacity-60 hover:opacity-100 cursor-pointer">
+                  <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover" />
+                </button>
+                <button onclick="selectStorySlide(3)" class="story-thumb-btn relative h-14 rounded-xl overflow-hidden border border-white/20 opacity-60 hover:opacity-100 cursor-pointer">
+                  <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover" />
+                </button>
+                <button onclick="selectStorySlide(4)" class="story-thumb-btn relative h-14 rounded-xl overflow-hidden border border-white/20 opacity-60 hover:opacity-100 cursor-pointer">
+                  <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=200&q=80" class="w-full h-full object-cover" />
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
     </div>
   </section>
 

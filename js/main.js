@@ -31,10 +31,13 @@ function initApp() {
   // 2. Middle Cinematic Slideshow ("Our Home Base - Sri Lanka")
   initMiddleSlideshow();
 
-  // 3. Activity Card Mini Sliders Auto-Swap
+  // 3. Interactive Gallery Story Showcase (Auto-Swap with Descriptions)
+  initGalleryStoryShowcase();
+
+  // 4. Activity Card Mini Sliders Auto-Swap
   initCardSliders();
 
-  // 4. Mobile Menu Toggle
+  // 5. Mobile Menu Toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenuBtn && mobileMenu) {
@@ -43,7 +46,7 @@ function initApp() {
     };
   }
 
-  // 5. Sticky Glass Navbar on Scroll
+  // 6. Sticky Glass Navbar on Scroll
   const mainNavbar = document.getElementById('main-navbar');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
@@ -55,7 +58,7 @@ function initApp() {
     }
   });
 
-  // 6. Scroll Reveal Animation (Intersection Observer)
+  // 7. Scroll Reveal Animation (Intersection Observer)
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries, obs) => {
@@ -72,7 +75,7 @@ function initApp() {
     revealElements.forEach(el => el.classList.add('is-visible'));
   }
 
-  // 7. Currency Switcher System
+  // 8. Currency Switcher System
   window.setCurrency = function(code) {
     if (!CURRENCY_RATES[code]) return;
     currentCurrency = code;
@@ -91,7 +94,7 @@ function initApp() {
     });
   };
 
-  // 8. WhatsApp Booking Modal System
+  // 9. WhatsApp Booking Modal System
   const bookingModal = document.getElementById('booking-modal');
   const modalActivitySelect = document.getElementById('modal-activity-select');
   const modalDateInput = document.getElementById('modal-date-input');
@@ -154,14 +157,14 @@ function initApp() {
     closeBookingModal();
   });
 
-  // 9. Direct WhatsApp Trigger
+  // 10. Direct WhatsApp Trigger
   window.openDirectWhatsApp = function(customMessage = null) {
     const defaultMsg = `Hi Hikka Surf School! I would like to inquire about surf lessons and ocean activities in Hikkaduwa.`;
     const msg = customMessage || defaultMsg;
     window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  // 10. FAQ Accordion Toggle
+  // 11. FAQ Accordion Toggle
   document.querySelectorAll('.faq-btn').forEach(btn => {
     btn.onclick = () => {
       const content = btn.nextElementSibling;
@@ -250,6 +253,121 @@ function initMiddleSlideshow() {
       }
     }, 4000);
   }
+}
+
+// Interactive Gallery Story Showcase Handler (Auto-Swapping with Rich Descriptions)
+const GALLERY_STORIES = [
+  {
+    category: "🏄 SURF LESSONS",
+    title: "Catching Your First Wave on Narigama Sandbank",
+    description: "Feel the pure rush of standing up on unbroken green waves with patient 1-on-1 coaching from native ISA instructors. Soft-top boards, personalized wave selection, and 100% stand-up guarantee.",
+    tags: ["📍 Narigama Beach", "🏄 Beginner to Pro", "🕒 1.5 - 2 Hours"],
+    image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80",
+    activityName: "Beginner Surf Lesson"
+  },
+  {
+    category: "🐢 WILD TURTLES",
+    title: "Swimming with Giant Green Turtles in Shallow Waters",
+    description: "Wade directly into the warm crystalline waters of Turtle Beach and swim face-to-face with friendly green sea turtles in their protected natural habitat. Completely ethical and safe for kids.",
+    tags: ["📍 Turtle Beach Reef", "🤿 All Ages & Families", "🌿 100% Ethical Wildlife"],
+    image: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1200&q=80",
+    activityName: "Turtle Snorkeling"
+  },
+  {
+    category: "🤿 CORAL REEF",
+    title: "Exploring Hikkaduwa’s National Coral Reef Sanctuary",
+    description: "Immerse yourself in a vibrant underwater paradise teeming with schools of yellow snapper, parrotfish, and vivid corals. Sanitized masks, snorkels, fins, and life jackets included.",
+    tags: ["📍 Marine Coral Sanctuary", "🐠 60+ Marine Species", "🦺 Gear Included"],
+    image: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1200&q=80",
+    activityName: "Snorkeling Tour"
+  },
+  {
+    category: "🎣 FISHING TOURS",
+    title: "Deep-Sea Big Game & Traditional Lagoon Fishing",
+    description: "Head past the reef at sunrise for thrilling big game trolling (Tuna, Wahoo, Barracuda) or enjoy tranquil evening handline lagoon angling with generational local fishermen.",
+    tags: ["📍 Deep Sea & Lagoon", "🐟 Traditional & Modern", "🛥️ Private Boat Option"],
+    image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+    activityName: "Fishing Tour"
+  },
+  {
+    category: "🚤 RIVER SAFARI",
+    title: "Madu River Mangrove Safaris & Secret Island Temples",
+    description: "Glide through breathtaking mangrove tunnels on the scenic Madu Ganga. Visit historic Cinnamon Island, receive natural fish therapy, and explore ancient island Buddhist shrines.",
+    tags: ["📍 Madu River Mangroves", "🏝️ Cinnamon Island", "🦜 Tropical Wildlife"],
+    image: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1200&q=80",
+    activityName: "Boat Tour"
+  }
+];
+
+let currentStoryIdx = 0;
+let storyTimer = null;
+
+function initGalleryStoryShowcase() {
+  const container = document.getElementById('gallery-story-showcase');
+  if (!container) return;
+
+  renderStorySlide(0);
+
+  // Start Auto-Swap Timer (every 4 seconds)
+  if (storyTimer) clearInterval(storyTimer);
+  storyTimer = setInterval(() => {
+    currentStoryIdx = (currentStoryIdx + 1) % GALLERY_STORIES.length;
+    renderStorySlide(currentStoryIdx);
+  }, 4200);
+
+  // Pause on hover
+  container.onmouseenter = () => { if (storyTimer) clearInterval(storyTimer); };
+  container.onmouseleave = () => {
+    if (storyTimer) clearInterval(storyTimer);
+    storyTimer = setInterval(() => {
+      currentStoryIdx = (currentStoryIdx + 1) % GALLERY_STORIES.length;
+      renderStorySlide(currentStoryIdx);
+    }, 4200);
+  };
+}
+
+window.selectStorySlide = function(idx) {
+  currentStoryIdx = idx;
+  renderStorySlide(idx);
+  if (storyTimer) clearInterval(storyTimer);
+};
+
+function renderStorySlide(idx) {
+  const story = GALLERY_STORIES[idx];
+  const imgEl = document.getElementById('story-img');
+  const catEl = document.getElementById('story-category');
+  const titleEl = document.getElementById('story-title');
+  const descEl = document.getElementById('story-desc');
+  const tagsEl = document.getElementById('story-tags');
+  const counterEl = document.getElementById('story-counter');
+  const bookBtn = document.getElementById('story-book-btn');
+
+  if (imgEl) {
+    imgEl.style.opacity = '0.3';
+    setTimeout(() => {
+      imgEl.src = story.image;
+      imgEl.style.opacity = '1';
+    }, 150);
+  }
+  if (catEl) catEl.textContent = story.category;
+  if (titleEl) titleEl.textContent = story.title;
+  if (descEl) descEl.textContent = story.description;
+  if (counterEl) counterEl.textContent = `0${idx + 1} / 0${GALLERY_STORIES.length}`;
+  if (tagsEl) {
+    tagsEl.innerHTML = story.tags.map(t => `<span class="px-2.5 py-1 bg-white/10 rounded-full text-[11px] font-semibold">${t}</span>`).join('');
+  }
+  if (bookBtn) {
+    bookBtn.onclick = () => openBookingModal(story.activityName);
+  }
+
+  // Update Thumbnail Active states
+  document.querySelectorAll('.story-thumb-btn').forEach((btn, bIdx) => {
+    if (bIdx === idx) {
+      btn.className = "story-thumb-btn relative rounded-2xl overflow-hidden border-2 border-surf-500 ring-2 ring-surf-400 scale-105 transition-all";
+    } else {
+      btn.className = "story-thumb-btn relative rounded-2xl overflow-hidden border border-white/20 opacity-60 hover:opacity-100 transition-all";
+    }
+  });
 }
 
 // Auto-Swapping Activity Card Slider Handler
