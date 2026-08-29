@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin CMS | Hikka Surf School</title>
+  <title>CMS Dashboard | ❤️ Hikkaduwa Hikka Surf School</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -11,385 +11,351 @@
         extend: {
           colors: {
             surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
-            ocean: { 900: '#164e63', 950: '#083344' }
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 500: '#eab308' }
           }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="css/styles.css" />
+  <!-- Firebase CDN -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/firebase-client.js"></script>
 </head>
-<body class="bg-slate-100 text-gray-800 antialiased min-h-screen">
+<body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen">
 
-  <!-- Login Modal / Screen -->
-  <div id="admin-login-screen" class="fixed inset-0 z-50 bg-ocean-950 flex items-center justify-center p-4">
-    <div class="bg-white rounded-3xl shadow-2xl p-8 max-w-md w-full text-center space-y-6">
-      <div class="w-16 h-16 rounded-3xl bg-surf-600 text-white text-3xl flex items-center justify-center mx-auto shadow-lg">
-        🔒
-      </div>
-      <div>
-        <h1 class="text-2xl font-extrabold font-heading text-gray-900">Hikka Surf Admin CMS</h1>
-        <p class="text-xs text-gray-500 mt-1">Manage website content, activities, prices & reviews</p>
-      </div>
-      <form id="admin-login-form" class="space-y-4 text-left">
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Admin Password</label>
-          <input type="password" id="admin-pass-input" placeholder="Default: admin123" class="w-full p-3 bg-slate-50 border border-gray-200 rounded-xl text-sm font-semibold" required />
-          <p class="text-[11px] text-gray-400 mt-1">Default password: <code class="bg-gray-100 px-1 py-0.5 rounded text-gray-800">admin123</code></p>
-        </div>
-        <button type="submit" class="w-full py-3.5 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-xl text-sm shadow-md transition-colors cursor-pointer">
-          Sign In to Dashboard
-        </button>
-      </form>
-      <div class="pt-4 border-t border-gray-100 text-center">
-        <a href="index.html" class="text-xs text-gray-500 hover:text-surf-600">← Back to Website</a>
-      </div>
+  <!-- Top Admin Bar -->
+  <header class="bg-ocean-950 text-white py-4 px-6 border-b border-ocean-800 flex items-center justify-between sticky top-0 z-50">
+    <div class="flex items-center gap-3">
+      <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-9 w-auto" />
+      <span class="text-xs bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2.5 py-0.5 rounded-full font-bold">
+        CMS Admin Dashboard
+      </span>
     </div>
-  </div>
 
-  <!-- Admin Dashboard Screen -->
-  <div id="admin-dashboard" class="hidden min-h-screen flex flex-col">
-    <!-- Admin Header -->
-    <header class="bg-ocean-950 text-white py-4 px-6 sticky top-0 z-30 shadow-md border-b border-ocean-800 flex items-center justify-between flex-wrap gap-4">
-      <div class="flex items-center gap-3">
-        <img src="images/logo-white.svg" alt="Hikka Surf CMS" class="h-9 w-auto" />
-      </div>
+    <div class="flex items-center gap-3">
+      <a href="index.html" target="_blank" class="px-4 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all">
+        View Live Website ↗
+      </a>
+      <button onclick="saveAllSettings()" class="px-5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-extrabold shadow-md transition-all">
+        💾 Save All Changes
+      </button>
+    </div>
+  </header>
 
-      <div class="flex items-center gap-2">
-        <a href="index.html" target="_blank" class="px-3.5 py-2 rounded-xl bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-colors flex items-center gap-1">
-          <span>View Website</span> ↗
-        </a>
-        <button onclick="saveAllChanges()" class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold shadow-md cursor-pointer flex items-center gap-1.5">
-          <span>💾 SAVE ALL CHANGES</span>
-        </button>
-        <button onclick="adminLogout()" class="px-3 py-2 rounded-xl bg-red-600/80 hover:bg-red-600 text-white text-xs font-bold cursor-pointer">
-          Logout
-        </button>
-      </div>
-    </header>
+  <div class="max-w-7xl mx-auto px-4 py-8 grid grid-cols-1 md:grid-cols-12 gap-8">
+    
+    <!-- Sidebar Navigation -->
+    <aside class="md:col-span-3 space-y-2">
+      <button onclick="showTab('settings')" id="tab-btn-settings" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-ocean-950 text-white shadow-md flex items-center gap-2">
+        <span>⚙️ General Settings</span>
+      </button>
+      <button onclick="showTab('hero')" id="tab-btn-hero" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>🖼️ Hero & Slideshow</span>
+      </button>
+      <button onclick="showTab('activities')" id="tab-btn-activities" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>🏄 Activities & Rates</span>
+      </button>
+      <button onclick="showTab('reviews')" id="tab-btn-reviews" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>⭐ Google Reviews</span>
+      </button>
+      <button onclick="showTab('faqs')" id="tab-btn-faqs" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>❓ FAQ Accordions</span>
+      </button>
+      <button onclick="showTab('firebase')" id="tab-btn-firebase" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>🔥 Firebase Cloud Sync</span>
+      </button>
+    </aside>
 
-    <!-- Main Container with Tabs -->
-    <div class="flex-1 max-w-7xl w-full mx-auto p-4 sm:p-6 lg:p-8">
+    <!-- Main Content Area -->
+    <main class="md:col-span-9 bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm space-y-6">
       
-      <!-- Tab Buttons -->
-      <div class="flex items-center gap-2 overflow-x-auto pb-3 mb-6 border-b border-gray-200 no-scrollbar">
-        <button onclick="switchTab('general')" class="tab-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-surf-600 text-white" id="tab-btn-general">General & Contact</button>
-        <button onclick="switchTab('hero')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-hero">Hero Section</button>
-        <button onclick="switchTab('surf')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-surf">🏄 Surf Lessons</button>
-        <button onclick="switchTab('activities')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-activities">Activities</button>
-        <button onclick="switchTab('tours')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-tours">Day Trips</button>
-        <button onclick="switchTab('reviews')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-reviews">⭐ Reviews</button>
-        <button onclick="switchTab('faqs')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-faqs">FAQs</button>
-        <button onclick="switchTab('backup')" class="tab-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-bold bg-white text-gray-700 border border-gray-200" id="tab-btn-backup">Backup & GitHub</button>
-      </div>
-
-      <!-- TAB 1: General & Contact -->
-      <div id="tab-general" class="tab-panel bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">Branding, WhatsApp & Contact Info</h2>
+      <!-- 1. GENERAL SETTINGS TAB -->
+      <section id="tab-settings" class="tab-content space-y-4">
+        <h2 class="text-xl font-bold text-gray-900 border-b pb-2">General Business & Contact Settings</h2>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Business Name</label>
-            <input type="text" id="set-business-name" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
+            <input type="text" id="set-name" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Tagline</label>
-            <input type="text" id="set-tagline" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-emerald-800 mb-1">WhatsApp Number (with Country Code)</label>
-            <input type="text" id="set-whatsapp" class="w-full p-2.5 bg-emerald-50 border border-emerald-300 rounded-xl text-sm font-bold text-emerald-900" />
-            <p class="text-[11px] text-gray-400 mt-1">Example: +94771234567</p>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number</label>
-            <input type="text" id="set-phone" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
-            <input type="email" id="set-email" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Google Maps Business URL</label>
-            <input type="text" id="set-maps-url" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
-          </div>
-          <div class="md:col-span-2">
-            <label class="block text-xs font-bold text-gray-700 mb-1">Beach Address / Location</label>
-            <input type="text" id="set-address" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
-          </div>
-          <div class="md:col-span-2">
-            <label class="block text-xs font-bold text-gray-700 mb-1">Top Announcement Banner Text</label>
-            <input type="text" id="set-banner-text" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
+            <input type="text" id="set-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
           </div>
         </div>
-      </div>
 
-      <!-- TAB 2: Hero Section -->
-      <div id="tab-hero" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">Homepage Hero Section</h2>
-        
-        <div class="space-y-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Hero Main Headline</label>
-            <input type="text" id="set-hero-headline" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm font-bold" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number (e.g. +94771234567)</label>
+            <input type="text" id="set-whatsapp" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
           </div>
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Hero Subheadline</label>
-            <input type="text" id="set-hero-subheadline" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Hero Short Description</label>
-            <textarea id="set-hero-desc" rows="3" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm"></textarea>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Hero Background Image URL</label>
-            <input type="text" id="set-hero-img" class="w-full p-2.5 bg-slate-50 border border-gray-200 rounded-xl text-sm" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">Contact Phone</label>
+            <input type="text" id="set-phone" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
           </div>
         </div>
-      </div>
 
-      <!-- TAB 3: Surf Lessons -->
-      <div id="tab-surf" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">🏄 Surf Lesson Packages & Pricing</h2>
-        <div id="surf-packages-editor" class="space-y-6"></div>
-      </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Beach Address / Meeting Point</label>
+          <input type="text" id="set-address" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+        </div>
 
-      <!-- TAB 4: Activities -->
-      <div id="tab-activities" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">Activities (Snorkeling, Turtles, Fishing, Boats, Whales)</h2>
-        <div id="activities-editor" class="space-y-6"></div>
-      </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Official Google Maps Profile URL</label>
+          <input type="text" id="set-maps-url" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+        </div>
+      </section>
 
-      <!-- TAB 5: Day Trips -->
-      <div id="tab-tours" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">🌴 Sri Lanka Day Trips & Transport</h2>
-        <div id="tours-editor" class="space-y-6"></div>
-      </div>
+      <!-- 2. HERO SLIDESHOW TAB -->
+      <section id="tab-hero" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between border-b pb-2">
+          <h2 class="text-xl font-bold text-gray-900">Hero Auto-Swapping Slideshow</h2>
+          <button onclick="addHeroImage()" class="px-3 py-1.5 bg-surf-600 text-white rounded-xl text-xs font-bold">+ Add Slide</button>
+        </div>
 
-      <!-- TAB 6: Reviews -->
-      <div id="tab-reviews" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">⭐ Google Reviews & Testimonials</h2>
-        <div id="reviews-editor" class="space-y-6"></div>
-      </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Slide Swap Interval (Milliseconds, e.g. 4500)</label>
+          <input type="number" id="set-hero-interval" class="w-48 p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900" />
+        </div>
 
-      <!-- TAB 7: FAQs -->
-      <div id="tab-faqs" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">Frequently Asked Questions</h2>
-        <div id="faqs-editor" class="space-y-4"></div>
-      </div>
+        <div id="hero-slides-list" class="space-y-3 pt-2">
+          <!-- Dynamic Hero Slides -->
+        </div>
+      </section>
 
-      <!-- TAB 8: Backup & GitHub -->
-      <div id="tab-backup" class="tab-panel hidden bg-white p-6 sm:p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
-        <h2 class="text-xl font-bold font-heading text-gray-900 border-b pb-3">GitHub Sync & Database Backup</h2>
-        
-        <p class="text-sm text-gray-600 leading-relaxed">
-          Your changes are instantly saved to your browser's local storage. To persist changes permanently in your GitHub repository, you can download the updated data file.
+      <!-- 3. ACTIVITIES CMS TAB -->
+      <section id="tab-activities" class="tab-content hidden space-y-4">
+        <h2 class="text-xl font-bold text-gray-900 border-b pb-2">Activities & Experience Packages</h2>
+        <div id="activities-list" class="space-y-4">
+          <!-- Dynamic Activity Cards -->
+        </div>
+      </section>
+
+      <!-- 4. REVIEWS TAB -->
+      <section id="tab-reviews" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between border-b pb-2">
+          <h2 class="text-xl font-bold text-gray-900">Google Maps Reviews (5.0★)</h2>
+          <button onclick="addReviewItem()" class="px-3 py-1.5 bg-surf-600 text-white rounded-xl text-xs font-bold">+ Add Review</button>
+        </div>
+        <div id="reviews-list" class="space-y-4">
+          <!-- Dynamic Reviews -->
+        </div>
+      </section>
+
+      <!-- 5. FAQ TAB -->
+      <section id="tab-faqs" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between border-b pb-2">
+          <h2 class="text-xl font-bold text-gray-900">Frequently Asked Questions</h2>
+          <button onclick="addFaqItem()" class="px-3 py-1.5 bg-surf-600 text-white rounded-xl text-xs font-bold">+ Add FAQ</button>
+        </div>
+        <div id="faqs-list" class="space-y-3">
+          <!-- Dynamic FAQs -->
+        </div>
+      </section>
+
+      <!-- 6. FIREBASE CLOUD SYNC TAB -->
+      <section id="tab-firebase" class="tab-content hidden space-y-4">
+        <h2 class="text-xl font-bold text-gray-900 border-b pb-2">🔥 Firebase Firestore & Storage Configuration</h2>
+        <p class="text-xs text-gray-600 leading-relaxed">
+          Link your Firebase project to enable instant live cloud sync for client visits across the world.
         </p>
 
-        <div class="flex flex-wrap gap-4">
-          <button onclick="downloadJsonBackup()" class="px-6 py-3 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-2xl text-sm cursor-pointer">
-            ⬇️ Download Backup (data.json)
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Paste Firebase Config JSON</label>
+          <textarea id="firebase-config-json" rows="6" placeholder='{ "apiKey": "...", "authDomain": "...", "projectId": "...", "storageBucket": "..." }' class="w-full p-3 font-mono text-xs bg-slate-900 text-emerald-400 rounded-xl border border-gray-700"></textarea>
+        </div>
+
+        <div class="flex gap-3">
+          <button onclick="saveFirebaseConfig()" class="px-5 py-2.5 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+            Connect Firebase Project
           </button>
-          <button onclick="restoreDefaults()" class="px-6 py-3 bg-red-50 hover:bg-red-100 text-red-700 font-bold rounded-2xl text-sm border border-red-200 cursor-pointer">
-            🔄 Reset to Original Defaults
+          <button onclick="pushToFirestore()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold">
+            Push All Local Data to Firestore ☁️
           </button>
         </div>
-      </div>
+      </section>
 
-    </div>
+    </main>
   </div>
 
-  <script src="js/data.js"></script>
   <script>
-    let currentData = getActiveSiteData();
+    let siteData = getActiveSiteData();
 
-    // Login Check
-    const loginScreen = document.getElementById('admin-login-screen');
-    const dashboard = document.getElementById('admin-dashboard');
-    const loginForm = document.getElementById('admin-login-form');
-    const passInput = document.getElementById('admin-pass-input');
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+      document.getElementById('tab-' + tabId)?.classList.remove('hidden');
 
-    if (sessionStorage.getItem('hikka_admin_logged_in') === 'true') {
-      loginScreen.classList.add('hidden');
-      dashboard.classList.remove('hidden');
-      populateAdminFields();
-    }
-
-    loginForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      if (passInput.value === 'admin123') {
-        sessionStorage.setItem('hikka_admin_logged_in', 'true');
-        loginScreen.classList.add('hidden');
-        dashboard.classList.remove('hidden');
-        populateAdminFields();
-      } else {
-        alert('Incorrect password! Default password is: admin123');
-      }
-    });
-
-    function adminLogout() {
-      sessionStorage.removeItem('hikka_admin_logged_in');
-      window.location.reload();
-    }
-
-    // Switch Tabs
-    function switchTab(tabId) {
-      document.querySelectorAll('.tab-panel').forEach(el => el.classList.add('hidden'));
-      document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.classList.remove('bg-surf-600', 'text-white');
-        btn.classList.add('bg-white', 'text-gray-700');
+      document.querySelectorAll('aside button').forEach(b => {
+        b.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2";
       });
-
-      document.getElementById(`tab-${tabId}`)?.classList.remove('hidden');
-      const activeBtn = document.getElementById(`tab-btn-${tabId}`);
+      const activeBtn = document.getElementById('tab-btn-' + tabId);
       if (activeBtn) {
-        activeBtn.classList.add('bg-surf-600', 'text-white');
-        activeBtn.classList.remove('bg-white', 'text-gray-700');
+        activeBtn.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-ocean-950 text-white shadow-md flex items-center gap-2";
       }
     }
 
-    // Populate Fields
-    function populateAdminFields() {
-      const s = currentData.settings;
-      document.getElementById('set-business-name').value = s.businessName || '';
+    // Populate Settings
+    function loadSettings() {
+      const s = siteData.settings;
+      document.getElementById('set-name').value = s.businessName || '';
       document.getElementById('set-tagline').value = s.tagline || '';
       document.getElementById('set-whatsapp').value = s.whatsappNumber || '';
       document.getElementById('set-phone').value = s.phoneNumber || '';
-      document.getElementById('set-email').value = s.email || '';
-      document.getElementById('set-maps-url').value = s.googleMapsUrl || '';
       document.getElementById('set-address').value = s.address || '';
-      document.getElementById('set-banner-text').value = s.announcementBanner?.text || '';
+      document.getElementById('set-maps-url').value = s.googleMapsUrl || '';
+      document.getElementById('set-hero-interval').value = s.autoSwapInterval || 4500;
 
-      document.getElementById('set-hero-headline').value = s.heroHeadline || '';
-      document.getElementById('set-hero-subheadline').value = s.heroSubheadline || '';
-      document.getElementById('set-hero-desc').value = s.heroDescription || '';
-      document.getElementById('set-hero-img').value = s.heroMedia?.url || '';
+      // Render Hero Slides
+      renderHeroSlides();
+      // Render Activities
+      renderActivities();
+      // Render Reviews
+      renderReviews();
+      // Render FAQs
+      renderFaqs();
 
-      // Populate Surf Packages
-      const surfActivity = currentData.activities.find(a => a.id === 'surf-lessons');
-      const surfContainer = document.getElementById('surf-packages-editor');
-      if (surfContainer && surfActivity) {
-        surfContainer.innerHTML = surfActivity.packages.map((pkg, idx) => `
-          <div class="p-4 bg-slate-50 border border-gray-200 rounded-2xl space-y-3">
-            <div class="font-bold text-gray-900 text-sm">Package #${idx + 1}: ${pkg.title}</div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <div>
-                <label class="block text-[11px] font-bold text-gray-600">Title</label>
-                <input type="text" value="${pkg.title}" class="surf-pkg-title w-full p-2 bg-white border rounded-lg text-xs" data-idx="${idx}" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-gray-600">Price (USD $)</label>
-                <input type="number" value="${pkg.priceUSD}" class="surf-pkg-usd w-full p-2 bg-white border rounded-lg text-xs" data-idx="${idx}" />
-              </div>
-              <div>
-                <label class="block text-[11px] font-bold text-gray-600">Price (LKR Rs.)</label>
-                <input type="number" value="${pkg.priceLKR}" class="surf-pkg-lkr w-full p-2 bg-white border rounded-lg text-xs" data-idx="${idx}" />
-              </div>
+      // Firebase Config
+      const fbConfig = localStorage.getItem('hikka_firebase_config');
+      if (fbConfig) {
+        document.getElementById('firebase-config-json').value = fbConfig;
+      }
+    }
+
+    function renderHeroSlides() {
+      const container = document.getElementById('hero-slides-list');
+      const slides = siteData.settings.hero_images || [];
+      container.innerHTML = slides.map((img, idx) => `
+        <div class="flex items-center gap-3 p-3 bg-gray-50 border rounded-2xl">
+          <img src="${img.url}" class="w-16 h-12 object-cover rounded-xl border" />
+          <input type="text" value="${img.url}" onchange="siteData.settings.hero_images[${idx}].url = this.value" class="flex-1 p-2 bg-white border rounded-xl text-xs" />
+          <button onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="p-2 text-red-600 font-bold hover:bg-red-50 rounded-xl">✕</button>
+        </div>
+      `).join('');
+    }
+
+    function addHeroImage() {
+      if (!siteData.settings.hero_images) siteData.settings.hero_images = [];
+      siteData.settings.hero_images.push({
+        url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
+        caption: "New Slide"
+      });
+      renderHeroSlides();
+    }
+
+    function renderActivities() {
+      const container = document.getElementById('activities-list');
+      container.innerHTML = siteData.activities.map((act, idx) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-3">
+          <div class="flex items-center justify-between">
+            <h4 class="font-bold text-sm text-gray-900">${act.title}</h4>
+            <span class="text-xs font-bold text-surf-700">From $${act.price_from} USD</span>
+          </div>
+          <div class="grid grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-500">Price (USD)</label>
+              <input type="number" value="${act.price_from}" onchange="siteData.activities[${idx}].price_from = parseFloat(this.value)" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-500">Duration</label>
+              <input type="text" value="${act.duration}" onchange="siteData.activities[${idx}].duration = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
             </div>
           </div>
-        `).join('');
-      }
-
-      // Populate Reviews
-      const revContainer = document.getElementById('reviews-editor');
-      if (revContainer) {
-        revContainer.innerHTML = currentData.reviews.map((rev, idx) => `
-          <div class="p-4 bg-slate-50 border border-gray-200 rounded-2xl space-y-3">
-            <div class="flex items-center justify-between">
-              <span class="font-bold text-sm text-gray-900">${rev.authorName} (${rev.authorLocation})</span>
-              <span class="text-xs text-amber-500 font-bold">★ ${rev.rating}.0</span>
-            </div>
-            <textarea class="rev-text w-full p-2.5 bg-white border rounded-lg text-xs" rows="2" data-idx="${idx}">${rev.text}</textarea>
+          <div>
+            <label class="block text-[10px] uppercase font-bold text-gray-500">Short Description</label>
+            <input type="text" value="${act.description}" onchange="siteData.activities[${idx}].description = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
           </div>
-        `).join('');
-      }
+        </div>
+      `).join('');
+    }
 
-      // Populate FAQs
-      const faqContainer = document.getElementById('faqs-editor');
-      if (faqContainer) {
-        faqContainer.innerHTML = currentData.faqs.map((faq, idx) => `
-          <div class="p-4 bg-slate-50 border border-gray-200 rounded-2xl space-y-2">
-            <input type="text" value="${faq.question}" class="faq-q w-full p-2 bg-white border rounded-lg text-xs font-bold" data-idx="${idx}" />
-            <textarea class="faq-a w-full p-2 bg-white border rounded-lg text-xs" rows="2" data-idx="${idx}">${faq.answer}</textarea>
+    function renderReviews() {
+      const container = document.getElementById('reviews-list');
+      container.innerHTML = siteData.reviews.map((rev, idx) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-2">
+          <div class="flex items-center justify-between">
+            <input type="text" value="${rev.authorName}" onchange="siteData.reviews[${idx}].authorName = this.value" class="font-bold text-xs p-1.5 bg-white border rounded-xl" />
+            <input type="text" value="${rev.authorLocation}" onchange="siteData.reviews[${idx}].authorLocation = this.value" class="text-xs p-1.5 bg-white border rounded-xl" />
           </div>
-        `).join('');
+          <textarea onchange="siteData.reviews[${idx}].text = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${rev.text}</textarea>
+        </div>
+      `).join('');
+    }
+
+    function addReviewItem() {
+      siteData.reviews.push({
+        id: "rev-" + Date.now(),
+        authorName: "Guest Name",
+        authorLocation: "City, Country",
+        authorPhoto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+        rating: 5,
+        text: "Amazing experience learning to surf in Hikkaduwa!",
+        googleVerified: true
+      });
+      renderReviews();
+    }
+
+    function renderFaqs() {
+      const container = document.getElementById('faqs-list');
+      container.innerHTML = siteData.faqs.map((faq, idx) => `
+        <div class="p-3 bg-gray-50 border rounded-2xl space-y-2">
+          <input type="text" value="${faq.question}" onchange="siteData.faqs[${idx}].question = this.value" class="w-full p-2 bg-white border rounded-xl font-bold text-xs" />
+          <textarea onchange="siteData.faqs[${idx}].answer = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${faq.answer}</textarea>
+        </div>
+      `).join('');
+    }
+
+    function addFaqItem() {
+      siteData.faqs.push({
+        question: "New Question?",
+        answer: "Answer to question."
+      });
+      renderFaqs();
+    }
+
+    function saveAllSettings() {
+      siteData.settings.businessName = document.getElementById('set-name').value;
+      siteData.settings.tagline = document.getElementById('set-tagline').value;
+      siteData.settings.whatsappNumber = document.getElementById('set-whatsapp').value;
+      siteData.settings.phoneNumber = document.getElementById('set-phone').value;
+      siteData.settings.address = document.getElementById('set-address').value;
+      siteData.settings.googleMapsUrl = document.getElementById('set-maps-url').value;
+      siteData.settings.autoSwapInterval = parseInt(document.getElementById('set-hero-interval').value) || 4500;
+
+      saveActiveSiteData(siteData);
+      alert("✅ All changes saved successfully! Live website is updated.");
+    }
+
+    function saveFirebaseConfig() {
+      try {
+        const val = document.getElementById('firebase-config-json').value;
+        const parsed = JSON.parse(val);
+        localStorage.setItem('hikka_firebase_config', JSON.stringify(parsed));
+        alert("🔥 Firebase configuration saved. Connecting...");
+        window.location.reload();
+      } catch (e) {
+        alert("❌ Invalid JSON format. Please paste valid Firebase config JSON.");
       }
     }
 
-    // Save All Changes
-    function saveAllChanges() {
-      const s = currentData.settings;
-      s.businessName = document.getElementById('set-business-name').value;
-      s.tagline = document.getElementById('set-tagline').value;
-      s.whatsappNumber = document.getElementById('set-whatsapp').value;
-      s.phoneNumber = document.getElementById('set-phone').value;
-      s.email = document.getElementById('set-email').value;
-      s.googleMapsUrl = document.getElementById('set-maps-url').value;
-      s.address = document.getElementById('set-address').value;
-      if (!s.announcementBanner) s.announcementBanner = {};
-      s.announcementBanner.text = document.getElementById('set-banner-text').value;
-
-      s.heroHeadline = document.getElementById('set-hero-headline').value;
-      s.heroSubheadline = document.getElementById('set-hero-subheadline').value;
-      s.heroDescription = document.getElementById('set-hero-desc').value;
-      if (!s.heroMedia) s.heroMedia = {};
-      s.heroMedia.url = document.getElementById('set-hero-img').value;
-
-      // Update Surf packages
-      const surfActivity = currentData.activities.find(a => a.id === 'surf-lessons');
-      if (surfActivity) {
-        document.querySelectorAll('.surf-pkg-title').forEach(el => {
-          const idx = parseInt(el.getAttribute('data-idx'));
-          surfActivity.packages[idx].title = el.value;
-        });
-        document.querySelectorAll('.surf-pkg-usd').forEach(el => {
-          const idx = parseInt(el.getAttribute('data-idx'));
-          surfActivity.packages[idx].priceUSD = parseFloat(el.value);
-        });
-        document.querySelectorAll('.surf-pkg-lkr').forEach(el => {
-          const idx = parseInt(el.getAttribute('data-idx'));
-          surfActivity.packages[idx].priceLKR = parseFloat(el.value);
-        });
-      }
-
-      // Update Reviews
-      document.querySelectorAll('.rev-text').forEach(el => {
-        const idx = parseInt(el.getAttribute('data-idx'));
-        currentData.reviews[idx].text = el.value;
-      });
-
-      // Update FAQs
-      document.querySelectorAll('.faq-q').forEach(el => {
-        const idx = parseInt(el.getAttribute('data-idx'));
-        currentData.faqs[idx].question = el.value;
-      });
-      document.querySelectorAll('.faq-a').forEach(el => {
-        const idx = parseInt(el.getAttribute('data-idx'));
-        currentData.faqs[idx].answer = el.value;
-      });
-
-      saveActiveSiteData(currentData);
-      alert('✅ All changes saved successfully! The website is updated live.');
-    }
-
-    function downloadJsonBackup() {
-      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(currentData, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", dataStr);
-      downloadAnchor.setAttribute("download", "data.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
-    }
-
-    function restoreDefaults() {
-      if (confirm('Are you sure you want to reset all content to the original defaults?')) {
-        localStorage.removeItem('hikka_surf_site_data');
-        currentData = DEFAULT_SITE_DATA;
-        populateAdminFields();
-        alert('Reset to defaults complete!');
+    async function pushToFirestore() {
+      try {
+        if (window.firebaseSync && window.firebaseSync.isConfigured) {
+          await window.firebaseSync.syncLocalToCloud();
+          alert("☁️ Successfully pushed all data to Firestore!");
+        } else {
+          alert("⚠️ Please configure Firebase with valid credentials first.");
+        }
+      } catch (err) {
+        alert("Error syncing to Firestore: " + err.message);
       }
     }
+
+    document.addEventListener('DOMContentLoaded', loadSettings);
   </script>
 </body>
 </html>

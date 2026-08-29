@@ -21,7 +21,7 @@
   </script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="bg-slate-50 text-gray-800 antialiased pt-28">
+<body class="bg-slate-50 text-gray-800 antialiased pt-28 pb-16 lg:pb-0">
 
     <!-- Top Live Surf & Weather Conditions Bar -->
   <div class="bg-ocean-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-ocean-800 fixed top-0 left-0 right-0 z-50">
@@ -289,6 +289,16 @@
   </div>
 
   <script src="js/data.js"></script>
+  <script src="js/firebase-client.js"></script>
   <script src="js/main.js"></script>
+  <!-- PERSISTENT STICKY MOBILE CONVERSION BAR -->
+  <div id="sticky-mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-ocean-950/95 backdrop-blur-md border-t border-ocean-800 p-2.5 flex items-center justify-between gap-2 lg:hidden shadow-2xl">
+    <button onclick="openDirectWhatsApp()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+      <span>💬 Chat on WhatsApp</span>
+    </button>
+    <button onclick="openBookingModal('Beginner Surf Lesson')" class="flex-1 py-3 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+      <span>🏄 Book a Lesson</span>
+    </button>
+  </div>
 </body>
 </html>

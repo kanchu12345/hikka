@@ -4,15 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>❤️ Hikkaduwa Hikka Surf School | Surf • Snorkel • Explore Hikkaduwa & Sri Lanka</title>
-  <meta name="description" content="Welcome to Hikka Surf School in Hikkaduwa, Sri Lanka. Learn to surf on Narigama Beach with ISA-certified local instructors. Beginner surf lessons, snorkeling, sea turtle experiences, boat tours, fishing, and Sri Lanka day trips." />
+  <meta name="description" content="Welcome to Hikka Surf School on Narigama Beach, Hikkaduwa, Sri Lanka. Learn to surf with certified local instructors. Beginner surf lessons, coral snorkeling, sea turtle experiences, boat tours, fishing, and Sri Lanka day trips." />
   <meta name="keywords" content="Surf school Hikkaduwa, Surf lessons Hikkaduwa, Surfing Hikkaduwa, Beginner surf lessons Hikkaduwa, Private surf lessons Hikkaduwa, Hikkaduwa snorkeling, Turtle snorkeling Hikkaduwa, Hikkaduwa fishing tours, Hikkaduwa boat tours, Things to do in Hikkaduwa, Hikkaduwa whale watching, Sri Lanka tours from Hikkaduwa, Hikkaduwa airport transfer" />
   <link rel="canonical" href="https://hikkasurfschool.com" />
-
-  <!-- OpenGraph / Facebook -->
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content="❤️ Hikkaduwa Hikka Surf School | Surf • Snorkel • Explore" />
-  <meta property="og:description" content="Premier local surf school on Narigama Beach, Hikkaduwa. 5.0 Google Reviews. Surf lessons, sea turtles, snorkeling, boat safaris, and island tours." />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80" />
 
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
@@ -40,7 +34,7 @@
   </script>
   <link rel="stylesheet" href="css/styles.css" />
 
-  <!-- Structured Data JSON-LD for 100% SEO -->
+  <!-- Structured Data JSON-LD for SEO -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -74,9 +68,9 @@
   }
   </script>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-surf-500 selection:text-white pt-28">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-surf-500 selection:text-white pt-28 pb-16 lg:pb-0">
 
-    <!-- Top Live Surf & Weather Conditions Bar -->
+  <!-- Top Live Surf & Weather Conditions Bar -->
   <div class="bg-ocean-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-ocean-800 fixed top-0 left-0 right-0 z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
       <div class="flex items-center gap-3">
@@ -113,7 +107,7 @@
 
       <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-bold tracking-wider">
-        <a href="index.html" class="text-cyan-400 font-extrabold underline underline-offset-4 hover:text-cyan-300 transition-colors">HOME</a>
+        <a href="index.html" class="text-cyan-400 font-extrabold underline underline-offset-4">HOME</a>
         <a href="surf-lessons.html" class="text-white hover:text-cyan-300 transition-colors">SURF LESSONS</a>
         <a href="activities.html" class="text-white hover:text-cyan-300 transition-colors">ACTIVITIES</a>
         <a href="surf-lessons.html#rates" class="text-white hover:text-cyan-300 transition-colors">RATES</a>
@@ -153,7 +147,7 @@
 
     <!-- Mobile Slide Drawer -->
     <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
-      <a href="index.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Home</a>
+      <a href="index.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300 bg-white/10">Home</a>
       <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">🏄 Surf Lessons</a>
       <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🌴 Activities & Tours</a>
       <a href="surf-lessons.html#rates" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Rates & Pricing</a>
@@ -171,13 +165,17 @@
     </div>
   </header>
 
-  <!-- 1. HOMEPAGE HERO (Brand Positioning & Direct WhatsApp Action) -->
-  <section class="relative min-h-[90vh] flex flex-col justify-center items-center text-white overflow-hidden bg-ocean-950 -mt-28 pt-32 pb-20">
-    <!-- Hero Background Image -->
-    <div class="absolute inset-0 z-0">
-      <div class="w-full h-full bg-cover bg-center opacity-70 scale-105" style="background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80');"></div>
-      <div class="absolute inset-0 bg-gradient-to-t from-ocean-950 via-black/40 to-black/60"></div>
+  <!-- 1. HOMEPAGE HERO (With Auto-Swapping Slideshow Background) -->
+  <section class="relative min-h-[92vh] flex flex-col justify-center items-center text-white overflow-hidden bg-ocean-950 -mt-28 pt-32 pb-20">
+    
+    <!-- Auto-Swapping Hero Slideshow Container -->
+    <div id="hero-slideshow-container" class="absolute inset-0 z-0 overflow-hidden">
+      <!-- Injected by JS: smoothly transitions between 4-6 high-res Hikkaduwa photos -->
+      <div class="hero-slide active" style="background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80'); background-size: cover; background-position: center;"></div>
     </div>
+
+    <!-- Gradient Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-t from-ocean-950 via-black/40 to-black/60 z-1 pointer-events-none"></div>
 
     <!-- Centered Hero Content -->
     <div class="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center my-auto">
@@ -231,7 +229,7 @@
     </a>
   </section>
 
-  <!-- 2. POPULAR EXPERIENCES (All 8 Core Activities Grid) -->
+  <!-- 2. POPULAR EXPERIENCES (Auto-Swapping Card Grids) -->
   <section id="popular-experiences" class="py-24 bg-white reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
@@ -246,15 +244,16 @@
         </p>
       </div>
 
-      <!-- 8 Activity Cards Grid -->
+      <!-- 8 Activity Cards Grid with Auto-Rotating Photos -->
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- 1. Surf Lessons -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80" alt="Surf Lessons" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-surf-600 text-white rounded-full text-[10px] font-extrabold uppercase">Main Service</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="3600">
+              <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80" alt="Surf Lessons" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Surfing" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-surf-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Main Service</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🏄 Surf Lessons</h3>
@@ -279,9 +278,10 @@
         <!-- 2. Snorkeling -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Snorkeling" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-cyan-600 text-white rounded-full text-[10px] font-extrabold uppercase">Coral Reef</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="4000">
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Snorkeling" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=600&q=80" alt="Reef" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-cyan-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Coral Reef</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🤿 Snorkeling</h3>
@@ -304,9 +304,10 @@
         <!-- 3. Turtle Experiences -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=600&q=80" alt="Turtle Experiences" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-emerald-600 text-white rounded-full text-[10px] font-extrabold uppercase">Wildlife</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="4200">
+              <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=600&q=80" alt="Sea Turtles" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Lagoon" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-emerald-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Wildlife</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🐢 Turtle Experiences</h3>
@@ -329,9 +330,10 @@
         <!-- 4. Fishing Tours -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Fishing Tours" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-blue-600 text-white rounded-full text-[10px] font-extrabold uppercase">Ocean Angling</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="4500">
+              <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80" alt="Fishing" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Boat" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-blue-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Ocean Angling</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🎣 Fishing Tours</h3>
@@ -354,9 +356,10 @@
         <!-- 5. Boat Tours -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Boat Tours" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-teal-600 text-white rounded-full text-[10px] font-extrabold uppercase">River & Sea</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="4800">
+              <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="Boat Tours" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80" alt="River Safari" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-teal-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">River & Sea</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🚤 Boat Tours</h3>
@@ -379,9 +382,10 @@
         <!-- 6. Whale Watching -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=600&q=80" alt="Whale Watching" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-indigo-600 text-white rounded-full text-[10px] font-extrabold uppercase">Mirissa Blue Whales</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="5000">
+              <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=600&q=80" alt="Whale Watching" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=600&q=80" alt="Ocean" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-indigo-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Mirissa Blue Whales</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🐋 Whale Watching</h3>
@@ -404,9 +408,10 @@
         <!-- 7. Sri Lanka Day Trips -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80" alt="Sri Lanka Tours" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-amber-600 text-white rounded-full text-[10px] font-extrabold uppercase">Day Trips</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="5200">
+              <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80" alt="Sri Lanka Tours" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=600&q=80" alt="Yala Safari" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-amber-600 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Day Trips</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🌴 Sri Lanka Day Trips</h3>
@@ -429,9 +434,10 @@
         <!-- 8. Transfers & Transport -->
         <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between border border-gray-200">
           <div>
-            <div class="relative h-48 overflow-hidden">
-              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Transfers" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" />
-              <span class="absolute top-3 left-3 px-3 py-1 bg-slate-700 text-white rounded-full text-[10px] font-extrabold uppercase">Private Chauffeur</span>
+            <div class="relative h-48 overflow-hidden card-slider-box" data-interval="5400">
+              <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=600&q=80" alt="Transfers" class="card-slide-img active" />
+              <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=600&q=80" alt="Private Car" class="card-slide-img" />
+              <span class="absolute top-3 left-3 px-3 py-1 bg-slate-700 text-white rounded-full text-[10px] font-extrabold uppercase z-10">Private Chauffeur</span>
             </div>
             <div class="p-6">
               <h3 class="font-serif-heading font-black text-xl text-gray-900 mb-2">🚕 Transfers & Transport</h3>
@@ -519,7 +525,6 @@
       </div>
 
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        
         <div class="p-8 rounded-3xl bg-slate-50 border border-gray-200 space-y-3">
           <div class="text-3xl">🏄‍♂️</div>
           <h3 class="text-xl font-bold font-serif-heading text-gray-900">Local Experience</h3>
@@ -567,7 +572,6 @@
             Activities arranged seamlessly with trusted, safety-verified local boat captains and licensed tourist drivers.
           </p>
         </div>
-
       </div>
 
     </div>
@@ -649,7 +653,7 @@
             </div>
             <div class="text-amber-500 text-xs mb-2 font-bold">★★★★★ • Turtle & Surf Lesson</div>
             <p class="text-gray-600 text-xs sm:text-sm leading-relaxed italic">
-              "Swimming with wild giant sea turtles in Hikkaduwa was pure magic. Our local guide was fantastic and showed us the best spots. Also booked private surf lessons next day via WhatsApp. 10/10!"
+              "Swimming with wild giant sea turtles in Hikkaduwa was pure magic. Our local guide was fantastic and showed us the best spots. Also booked private surf lessons next day via WhatsApp."
             </p>
           </div>
           <div class="text-[11px] text-gray-400 mt-4 pt-3 border-t border-gray-200 flex items-center justify-between">
@@ -738,7 +742,7 @@
     </div>
   </section>
 
-  <!-- 6. PHOTO & VIDEO GALLERY (High-Res Photos of Surfing, Ocean, Turtles, Boats, Happy Guests) -->
+  <!-- 6. PHOTO & VIDEO GALLERY (Filterable with Lightbox) -->
   <section id="gallery" class="py-24 bg-slate-50 border-t border-gray-200 reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center max-w-3xl mx-auto mb-12">
@@ -971,8 +975,18 @@
     </div>
   </footer>
 
-  <!-- FLOATING WHATSAPP BUTTON WITH PULSE GLOW -->
-  <div class="fixed bottom-6 right-6 z-50">
+  <!-- PERSISTENT STICKY MOBILE CONVERSION BAR -->
+  <div id="sticky-mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-ocean-950/95 backdrop-blur-md border-t border-ocean-800 p-2.5 flex items-center justify-between gap-2 lg:hidden shadow-2xl">
+    <button onclick="openDirectWhatsApp()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+      <span>💬 Chat on WhatsApp</span>
+    </button>
+    <button onclick="openBookingModal('Beginner Surf Lesson')" class="flex-1 py-3 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+      <span>🏄 Book a Lesson</span>
+    </button>
+  </div>
+
+  <!-- FLOATING WHATSAPP BUTTON (Desktop) -->
+  <div class="hidden lg:block fixed bottom-6 right-6 z-50">
     <button onclick="openDirectWhatsApp()" class="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer whatsapp-glow" aria-label="WhatsApp Chat">
       <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.662.062-2.083-.527-1.782-.74-2.92-2.56-3.009-2.678-.088-.118-.722-.96-.722-1.831s.456-1.3.619-1.477c.162-.177.355-.221.474-.221.119 0 .238.001.341.006.109.006.255-.041.398.303.148.356.505 1.23.549 1.32.044.089.073.193.015.311-.059.119-.089.193-.177.297-.089.104-.187.232-.267.311-.089.09-.182.187-.078.365.104.178.462.763.992 1.235.684.609 1.261.798 1.439.887.178.089.282.074.386-.045.104-.118.444-.518.563-.696.119-.178.238-.148.398-.089.162.059 1.025.483 1.202.572.177.089.296.133.341.207.045.074.045.429-.099.834z"/></svg>
     </button>
@@ -1016,11 +1030,11 @@
           <div>
             <label class="block font-bold text-gray-700 mb-1">Number of People</label>
             <select id="modal-guests-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
-              <option value="1">1 Person</option>
-              <option value="2" selected>2 People</option>
-              <option value="3">3 People</option>
-              <option value="4">4 People</option>
-              <option value="5+">5+ Group</option>
+              <option value="1 Person">1 Person</option>
+              <option value="2 People" selected>2 People</option>
+              <option value="3 People">3 People</option>
+              <option value="4 People">4 People</option>
+              <option value="5+ People Group">5+ Group</option>
             </select>
           </div>
         </div>
@@ -1061,8 +1075,12 @@
     </div>
   </div>
 
-  <!-- Scripts -->
+  <!-- Firebase Scripts (Optional CDN) & Local Sync Scripts -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
   <script src="js/data.js"></script>
+  <script src="js/firebase-client.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

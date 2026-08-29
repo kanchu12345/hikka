@@ -1,33 +1,258 @@
 // Master Data Store for Hikkaduwa Hikka Surf School
-// Verified authentic Google Maps reviews & information
+// Dynamic schema matching Firebase Firestore collections
 
 const DEFAULT_SITE_DATA = {
   settings: {
     businessName: "Hikkaduwa Hikka Surf School",
     brandHeart: "❤️",
     tagline: "Surf • Snorkel • Explore Hikkaduwa & Sri Lanka",
-    heroHeadline: "Hikkaduwa Hikka Surf School",
+    heroHeadline: "Hikkaduwa Hikka\nSurf School",
     heroSubheadline: "Surf • Snorkel • Explore Hikkaduwa & Sri Lanka",
-    heroDescription: "Discover Hikkaduwa with passionate local instructors and guides. Enjoy beginner & private surf lessons, coral snorkeling, wild turtle experiences, ocean fishing, boat tours, and Sri Lanka day trips.",
+    heroDescription: "Discover Hikkaduwa with local instructors and guides. Enjoy surf lessons, snorkeling, turtle experiences, fishing, boat tours, day trips and more.",
     whatsappNumber: "+94771234567",
     phoneNumber: "+94 77 123 4567",
     email: "info@hikkasurfschool.com",
-    address: "Galle Road, Narigama Beach, Hikkaduwa 80240, Sri Lanka (Directly Opposite Hotel Citrus)",
+    address: "Galle Road, Narigama Beach (Opposite Hotel Citrus), Hikkaduwa 80240, Sri Lanka",
     googleMapsUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
     googleMapsEmbedIframe: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15871.277864387532!2d80.098485!3d6.136423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae177e776ffc1ab%3A0x28974a9ee1f3910c!2sHikkaduwa%20Beach!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk",
     tripadvisorUrl: "https://www.tripadvisor.com",
     instagramUrl: "https://www.instagram.com",
     facebookUrl: "https://www.facebook.com",
     googleBusinessUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
-    announcementBanner: {
-      enabled: true,
-      text: "🌊 Hikkaduwa Surf Season is ON — Clean Waves & Perfect Water Temperature!",
-      linkText: "Book on WhatsApp →"
-    },
-    heroMedia: {
-      url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80"
-    }
+    autoSwapInterval: 4500, // ms per hero slide
+    hero_images: [
+      {
+        url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
+        caption: "Clean Morning Waves on Narigama Beach, Hikkaduwa"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
+        caption: "Golden Sunset Surfing in Tropical 28°C Waters"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1920&q=80",
+        caption: "Hikkaduwa Coral Reef & Marine Sanctuary"
+      },
+      {
+        url: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1920&q=80",
+        caption: "Wild Sea Turtle Encounters in Shallow Lagoons"
+      }
+    ]
   },
+  activities: [
+    {
+      id: "surf-lessons",
+      category: "surfing",
+      title: "🏄 Surf Lessons",
+      tagline: "Main Core Service • Narigama Beach",
+      price_from: 25,
+      duration: "1.5 Hours",
+      images: [
+        "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Beginner Surf Lessons",
+        "Private 1:1 Surf Lessons",
+        "Semi-Private & Couples",
+        "Kids & Family Surfing",
+        "Intermediate Coaching",
+        "Surfboard Rental"
+      ],
+      description: "Learn to surf on sandy-bottom waves with patient local instructors. 100% stand up guarantee.",
+      pageUrl: "surf-lessons.html",
+      is_partner_activity: false,
+      order: 1
+    },
+    {
+      id: "snorkeling",
+      category: "snorkeling",
+      title: "🤿 Snorkeling",
+      tagline: "Coral Reef & Marine Life",
+      price_from: 20,
+      duration: "1.5 - 2 Hours",
+      images: [
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Hikkaduwa Coral Reef",
+        "Turtle Snorkeling Tours",
+        "Private Snorkeling Trips",
+        "Family Shallow Snorkel"
+      ],
+      description: "Explore crystal-clear waters, live coral formations, colorful fish, and marine life with mask, fins, and guide.",
+      pageUrl: "snorkeling.html",
+      is_partner_activity: false,
+      order: 2
+    },
+    {
+      id: "turtle-experiences",
+      category: "turtles",
+      title: "🐢 Turtle Experiences",
+      tagline: "Wild Ocean Wildlife",
+      price_from: 20,
+      duration: "1.5 Hours",
+      images: [
+        "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Wild Turtle Watching",
+        "Turtle Snorkeling",
+        "Responsible Wildlife Tours",
+        "Natural Habitat Protection"
+      ],
+      description: "Meet friendly wild green sea turtles in their natural feeding lagoon with ethical guidance.",
+      pageUrl: "turtle-experiences.html",
+      is_partner_activity: false,
+      order: 3
+    },
+    {
+      id: "fishing-tours",
+      category: "fishing",
+      title: "🎣 Fishing Tours",
+      tagline: "Traditional & Deep Sea",
+      price_from: 70,
+      duration: "3 - 4 Hours",
+      images: [
+        "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Traditional Local Fishing",
+        "Deep-Sea Game Fishing",
+        "Private Fishing Charters",
+        "Sunset Reef Fishing"
+      ],
+      description: "Catch Tuna, Mahi Mahi, and Wahoo with experienced boat captains. All rods and tackle provided.",
+      pageUrl: "fishing-tours.html",
+      is_partner_activity: true,
+      order: 4
+    },
+    {
+      id: "boat-tours",
+      category: "boat",
+      title: "🚤 Boat Tours",
+      tagline: "Madu River & Coastline",
+      price_from: 30,
+      duration: "1.5 - 2 Hours",
+      images: [
+        "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Private Boat Trips",
+        "Lagoon & River Safaris",
+        "Sunset Boat Tours",
+        "Coastal Glass-Bottom Boats"
+      ],
+      description: "Scenic boat journeys along coral reefs and the lush mangrove maze of the Madu Ganga.",
+      pageUrl: "boat-tours.html",
+      is_partner_activity: true,
+      order: 5
+    },
+    {
+      id: "whale-watching",
+      category: "whale_watching",
+      title: "🐋 Whale Watching",
+      tagline: "Mirissa Blue Whales",
+      price_from: 55,
+      duration: "Early Morning Tour",
+      images: [
+        "https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Hikkaduwa → Mirissa Tour",
+        "Blue Whales & Dolphins",
+        "Private & Group Options",
+        "Seasonal Prime Viewing"
+      ],
+      description: "Witness the largest mammals on earth with return AC transport from your Hikkaduwa hotel.",
+      pageUrl: "whale-watching.html",
+      is_partner_activity: true,
+      order: 6
+    },
+    {
+      id: "day-trips",
+      category: "day_trips",
+      title: "🌴 Sri Lanka Day Trips",
+      tagline: "Galle, Ella, Yala & Kandy",
+      price_from: 35,
+      duration: "Half / Full Day",
+      images: [
+        "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1546708973-b339540b5162?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Galle Fort UNESCO Heritage",
+        "Bentota River Safari",
+        "Ella Scenic Highlands & Tea",
+        "Yala Wildlife Leopard Safari"
+      ],
+      description: "Explore the island in air-conditioned private vehicles with trusted local drivers.",
+      pageUrl: "tours.html",
+      is_partner_activity: true,
+      order: 7
+    },
+    {
+      id: "transfers",
+      category: "transfers",
+      title: "🚕 Transfers & Transport",
+      tagline: "Colombo Airport (CMB) ⇄ Hikka",
+      price_from: 45,
+      duration: "Expressway Highway",
+      images: [
+        "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80"
+      ],
+      included_items: [
+        "Airport Pickup CMB ⇄ Hikka",
+        "Intercity Private Driver",
+        "Day-Trip Transportation",
+        "Modern AC Vans & Cars"
+      ],
+      description: "Reliable, comfortable 24/7 door-to-door airport pickup with flight tracking and highway tolls included.",
+      pageUrl: "transfers.html",
+      is_partner_activity: true,
+      order: 8
+    }
+  ],
+  why_choose_us: [
+    {
+      title: "Local Experience",
+      description: "Local instructors who grew up in Hikkaduwa with profound knowledge of tides, sandbars, and wave timing.",
+      icon: "🏄‍♂️"
+    },
+    {
+      title: "Personal Attention",
+      description: "Private 1:1 and small-group experiences ensuring you get feedback and support on every single wave.",
+      icon: "👥"
+    },
+    {
+      title: "More Than Surfing",
+      description: "Explore the ocean, wildlife, beaches, and Sri Lanka's cultural heritage with welcoming local friends.",
+      icon: "🌴"
+    },
+    {
+      title: "Easy Booking",
+      description: "Simple and fast WhatsApp booking with zero advance deposit required. Free weather rescheduling.",
+      icon: "⚡"
+    },
+    {
+      title: "Trusted by Travelers",
+      description: "Consistent 5.0 Google Reviews from guests across Europe, UK, Australia, and worldwide.",
+      icon: "⭐"
+    },
+    {
+      title: "Local Connections",
+      description: "Activities arranged seamlessly with trusted, safety-verified local boat captains and licensed tourist drivers.",
+      icon: "🤝"
+    }
+  ],
   reviews: [
     {
       id: "google-rev-1",
@@ -38,7 +263,7 @@ const DEFAULT_SITE_DATA = {
       date: "Reviewed on Google Maps",
       source: "Google Reviews",
       activityReviewed: "Beginner Surf Lesson",
-      text: "Best surf school in Hikkaduwa by far! We were complete beginners and a bit nervous, but the instructors were so patient and encouraging. We both stood up on our very first wave! Amazing beach vibe and top quality boards.",
+      text: "Best surf school in Hikkaduwa by far! We were complete beginners and a bit nervous, but the instructors were so patient and encouraging. We both stood up on our very first wave!",
       googleVerified: true
     },
     {
@@ -50,7 +275,7 @@ const DEFAULT_SITE_DATA = {
       date: "Reviewed on Google Maps",
       source: "Google Reviews",
       activityReviewed: "Turtle Snorkeling & Surfing",
-      text: "Swimming with wild giant sea turtles in Hikkaduwa was pure magic. Our local guide was fantastic and showed us the best spots. Also booked private surf lessons next day via WhatsApp with zero hassle. 10/10 service!",
+      text: "Swimming with wild giant sea turtles in Hikkaduwa was pure magic. Our local guide was fantastic and showed us the best spots. Also booked private surf lessons next day via WhatsApp.",
       googleVerified: true
     },
     {
@@ -62,7 +287,7 @@ const DEFAULT_SITE_DATA = {
       date: "Reviewed on Google Maps",
       source: "Google Reviews",
       activityReviewed: "Intermediate Surf Coaching",
-      text: "As an intermediate surfer trying to progress from whitewash to unbroken green waves, the lineup coaching and video feedback were gold. Friendly local vibe, top boards, and genuine ocean knowledge.",
+      text: "As an intermediate surfer trying to progress from whitewash to unbroken green waves, the lineup coaching and video feedback were gold. Friendly local vibe and top boards.",
       googleVerified: true
     },
     {
@@ -74,18 +299,93 @@ const DEFAULT_SITE_DATA = {
       date: "Reviewed on Google Maps",
       source: "Google Reviews",
       activityReviewed: "Family Surfing & Galle Tour",
-      text: "We visited Hikkaduwa with our two children (ages 8 & 11). The instructors were brilliant with the kids, super safe and smiling the whole time. They also arranged a private airport transfer from CMB for us with a great driver.",
+      text: "We visited Hikkaduwa with our two children. The instructors were brilliant with the kids, super safe and smiling the whole time. They also arranged an airport transfer from CMB.",
       googleVerified: true
+    }
+  ],
+  gallery: [
+    {
+      id: "g1",
+      category: "Surfing",
+      imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80",
+      title: "Surfing Narigama Beach",
+      caption: "Catching clean waves on Narigama beach with Hikka Surf coaches."
+    },
+    {
+      id: "g2",
+      category: "Surfing",
+      imageUrl: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1000&q=80",
+      title: "Happy Surf Students",
+      caption: "Big smiles after standing up on tropical waves."
+    },
+    {
+      id: "g3",
+      category: "Turtles",
+      imageUrl: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1000&q=80",
+      title: "Sea Turtles in Hikkaduwa",
+      caption: "Swimming with wild giant sea turtles in shallow lagoons."
+    },
+    {
+      id: "g4",
+      category: "Snorkeling",
+      imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80",
+      title: "Coral Reef Sanctuary",
+      caption: "Tropical fish and colorful coral gardens."
+    },
+    {
+      id: "g5",
+      category: "Boats",
+      imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80",
+      title: "Madu River Safari",
+      caption: "Cruising through mangrove tunnels and cinnamon islands."
+    },
+    {
+      id: "g6",
+      category: "Sri Lanka",
+      imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1000&q=80",
+      title: "Galle Fort Heritage",
+      caption: "Historic ramparts and colonial streets on our day trips."
+    }
+  ],
+  faqs: [
+    {
+      question: "Do I need previous surfing experience?",
+      answer: "No. Beginners are welcome! Over 80% of our guests have never touched a surfboard before. We guide you step-by-step from beach theory to riding gentle waves."
+    },
+    {
+      question: "Do you provide surfboards and rash guards?",
+      answer: "Yes, high-float soft-top boards, progression hardboards, leashes, and UV sun protection rash guards are all included free with your lessons."
+    },
+    {
+      question: "Can children and families join?",
+      answer: "Yes, kids from 5 years and up can safely join with dedicated 1-on-1 shallow-water instruction."
+    },
+    {
+      question: "Can I book privately?",
+      answer: "Yes, we offer dedicated Private 1-on-1 coaching for personalized progression and video review."
+    },
+    {
+      question: "How do I book?",
+      answer: "Contact us through WhatsApp with your date, time, and number of people for instant confirmation. No deposit needed."
+    },
+    {
+      question: "Can you arrange snorkeling and other activities?",
+      answer: "Yes, coral snorkeling, sea turtle tours, deep-sea fishing, lagoon safaris, and whale watching can all be arranged directly through our WhatsApp."
+    },
+    {
+      question: "Can you arrange Sri Lanka day trips & airport transfers?",
+      answer: "Yes, we provide comfortable AC cars and vans with trusted tourist drivers for Galle Fort, Bentota, Yala, Ella, and CMB airport pickups."
     }
   ]
 };
 
-// Helper to get active site data
+// Data Store Accessor with dual-layer fallback
 function getActiveSiteData() {
   try {
     const local = localStorage.getItem('hikka_surf_site_data');
     if (local) {
-      return JSON.parse(local);
+      const parsed = JSON.parse(local);
+      return Object.assign({}, DEFAULT_SITE_DATA, parsed);
     }
   } catch (e) {
     console.error('Error reading localStorage data', e);
@@ -93,10 +393,11 @@ function getActiveSiteData() {
   return DEFAULT_SITE_DATA;
 }
 
-// Helper to save site data
 function saveActiveSiteData(data) {
   try {
     localStorage.setItem('hikka_surf_site_data', JSON.stringify(data));
+    // Trigger custom event so open tabs or live views update immediately
+    window.dispatchEvent(new CustomEvent('hikkaDataUpdated', { detail: data }));
     return true;
   } catch (e) {
     console.error('Error saving to localStorage', e);
