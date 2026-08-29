@@ -113,9 +113,104 @@
         <img src="images/logo-white.svg" alt="Hikka Surf School Sri Lanka Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105" />
       </a>
 
-      <!-- Desktop Nav -->
+            <!-- Desktop Nav -->
       <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-bold tracking-wider">
         <a href="index.html" class="text-white hover:text-cyan-300 transition-colors">HOME</a>
+        
+        <!-- DESTINATIONS Mega Menu Dropdown -->
+        <div class="relative group">
+          <a href="destinations.html" class="text-white hover:text-cyan-300 transition-colors flex items-center gap-1 py-2">
+            <span>DESTINATION</span>
+            <span class="text-[10px] opacity-70">▾</span>
+          </a>
+
+          <!-- Mega Dropdown Panel -->
+          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[820px] max-w-[95vw] bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 p-6 hidden group-hover:block transition-all z-50">
+            <div class="grid grid-cols-12 gap-6">
+              
+              <!-- Left Column: COUNTRIES / REGIONS -->
+              <div class="col-span-4 border-r border-gray-100 pr-4 space-y-3">
+                <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">COUNTRIES & REGIONS</div>
+                
+                <a href="destinations.html" class="p-3 bg-cyan-50 border border-cyan-200 rounded-2xl flex items-center justify-between group/item hover:bg-cyan-100 transition-all">
+                  <div class="flex items-center gap-2.5">
+                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-xl object-cover" />
+                    <div>
+                      <div class="text-xs font-black text-gray-900">Sri Lanka</div>
+                      <div class="text-[10px] font-bold text-surf-600">Southern Province</div>
+                    </div>
+                  </div>
+                  <span class="text-surf-600 font-black text-xs group-hover/item:translate-x-1 transition-transform">→</span>
+                </a>
+
+                <div class="p-3 bg-gray-50 rounded-2xl border border-gray-100 space-y-1">
+                  <div class="text-[11px] font-bold text-gray-700">📍 Pick-up & Transfers</div>
+                  <div class="text-[10px] text-gray-500">Available from Hikkaduwa, Galle, Unawatuna, Weligama & Colombo BIA.</div>
+                </div>
+              </div>
+
+              <!-- Right Column: SOUTHERN PROVINCE ATTRACTIONS -->
+              <div class="col-span-8 space-y-3">
+                <div class="flex items-center justify-between">
+                  <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">★ SOUTHERN PROVINCE ATTRACTIONS</div>
+                  <a href="destinations.html" class="text-[10px] font-bold text-surf-600 hover:underline">View All Locations →</a>
+                </div>
+
+                <div class="grid grid-cols-2 gap-2.5">
+                  <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
+                    <span class="text-base">🏰</span>
+                    <div>
+                      <div class="text-xs font-bold text-gray-900">Galle Dutch Fort</div>
+                      <div class="text-[10px] text-gray-500">UNESCO Ramparts & Lighthouse</div>
+                    </div>
+                  </a>
+
+                  <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
+                    <span class="text-base">🐋</span>
+                    <div>
+                      <div class="text-xs font-bold text-gray-900">Mirissa Beach</div>
+                      <div class="text-[10px] text-gray-500">Whale Watching & Coconut Hill</div>
+                    </div>
+                  </a>
+
+                  <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
+                    <span class="text-base">🏖️</span>
+                    <div>
+                      <div class="text-xs font-bold text-gray-900">Unawatuna & Jungle Beach</div>
+                      <div class="text-[10px] text-gray-500">Peace Pagoda & Calm Bay</div>
+                    </div>
+                  </a>
+
+                  <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
+                    <span class="text-base">🚤</span>
+                    <div>
+                      <div class="text-xs font-bold text-gray-900">Madu River & Bentota</div>
+                      <div class="text-[10px] text-gray-500">Mangrove Safari & Cinnamon Isle</div>
+                    </div>
+                  </a>
+
+                  <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
+                    <span class="text-base">🐆</span>
+                    <div>
+                      <div class="text-xs font-bold text-gray-900">Yala National Park</div>
+                      <div class="text-[10px] text-gray-500">Wild Leopard & Elephant Safari</div>
+                    </div>
+                  </a>
+
+                  <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
+                    <span class="text-base">🏄</span>
+                    <div>
+                      <div class="text-xs font-bold text-gray-900">Weligama & Stilt Fishermen</div>
+                      <div class="text-[10px] text-gray-500">Culture & Gentle Sand Surf</div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
         <a href="surf-lessons.html" class="text-white hover:text-cyan-300 transition-colors">SURF LESSONS</a>
         <a href="activities.html" class="text-white hover:text-cyan-300 transition-colors">ACTIVITIES</a>
         <a href="surf-lessons.html#rates" class="text-white hover:text-cyan-300 transition-colors">RATES</a>
@@ -123,7 +218,7 @@
         <a href="gallery.html" class="text-white hover:text-cyan-300 transition-colors">GALLERY</a>
         <a href="reviews.html" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1"><span>★</span><span>REVIEWS</span></a>
         <a href="about.html" class="text-white hover:text-cyan-300 transition-colors">ABOUT</a>
-        <a href="contact.html" class="text-cyan-400 font-extrabold underline underline-offset-4 hover:text-cyan-300 transition-colors">CONTACT</a>
+        <a href="contact.html" class="text-white hover:text-cyan-300 transition-colors">CONTACT</a>
       </nav>
 
       <!-- Language & Book Now Button -->
@@ -156,6 +251,7 @@
     <!-- Mobile Slide Drawer -->
     <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
       <a href="index.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Home</a>
+      <a href="destinations.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300">🌴 Destinations (Southern Province)</a>
       <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">🏄 Surf Lessons</a>
       <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🌴 Activities & Tours</a>
       <a href="surf-lessons.html#rates" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Rates & Pricing</a>
