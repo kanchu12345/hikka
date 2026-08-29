@@ -21,30 +21,104 @@
   </script>
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="bg-slate-50 text-gray-800 antialiased">
-  
-  <!-- Header -->
-  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+<body class="bg-slate-50 text-gray-800 antialiased pt-28">
+
+  <!-- Top Live Surf & Weather Conditions Bar -->
+  <div class="bg-ocean-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-ocean-800 fixed top-0 left-0 right-0 z-50">
+    <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
+      <div class="flex items-center gap-3">
+        <span class="flex items-center gap-1 text-emerald-400 font-bold">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>LIVE SURF REPORT</span>
+        </span>
+        <span class="hidden md:inline text-gray-300">•</span>
+        <span class="hidden sm:inline text-gray-300">🌊 Waves: <strong class="text-white">2–4 ft Clean</strong></span>
+        <span class="hidden md:inline text-gray-300">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
+      </div>
+
+      <!-- Currency Switcher -->
+      <div class="flex items-center gap-2">
+        <span class="text-gray-400 text-[10px] uppercase font-bold tracking-wider">Currency:</span>
+        <div class="flex items-center bg-white/10 rounded-lg p-0.5 text-[10px] font-bold">
+          <button onclick="setCurrency('USD')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">USD ($)</button>
+          <button onclick="setCurrency('EUR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">EUR (€)</button>
+          <button onclick="setCurrency('GBP')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">GBP (£)</button>
+          <button onclick="setCurrency('LKR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">LKR (Rs.)</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Header Navigation -->
+  <header id="main-navbar" class="fixed top-8 left-0 right-0 z-40 transition-all duration-300 bg-ocean-950/95 backdrop-blur-md py-3 text-white shadow-xl">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-2.5">
-        <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-10 w-auto" />
+      
+      <!-- Brand Logo -->
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="images/logo-white.svg" alt="Hikka Surf School Sri Lanka Logo" class="h-10 sm:h-12 w-auto object-contain transition-transform group-hover:scale-105" />
       </a>
-      <nav class="hidden md:flex items-center gap-4 text-sm font-semibold">
-        <a href="index.html" class="text-white/80 hover:text-white">Home</a>
-        <a href="surf-lessons.html" class="text-sand-300 font-bold">Surf Lessons</a>
-        <a href="snorkeling.html" class="text-white/80 hover:text-white">Snorkeling</a>
-        <a href="turtle-experiences.html" class="text-white/80 hover:text-white">Turtles</a>
-        <a href="tours.html" class="text-white/80 hover:text-white">Day Trips</a>
-        <a href="contact.html" class="text-white/80 hover:text-white">Contact</a>
+
+      <!-- Desktop Nav -->
+      <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-bold tracking-wider">
+        <a href="index.html" class="text-white hover:text-cyan-300 transition-colors">HOME</a>
+        <a href="surf-lessons.html" class="text-white hover:text-cyan-300 transition-colors">SURF LESSONS</a>
+        <a href="activities.html" class="text-white hover:text-cyan-300 transition-colors">ACTIVITIES</a>
+        <a href="index.html#rates" class="text-white hover:text-cyan-300 transition-colors">RATES</a>
+        <a href="index.html#faq" class="text-white hover:text-cyan-300 transition-colors">FAQ</a>
+        <a href="gallery.html" class="text-white hover:text-cyan-300 transition-colors">GALLERY</a>
+        <a href="reviews.html" class="text-white hover:text-cyan-300 transition-colors">⭐ REVIEWS</a>
+        <a href="about.html" class="text-white hover:text-cyan-300 transition-colors">ABOUT</a>
+        <a href="contact.html" class="text-white hover:text-cyan-300 transition-colors">CONTACT</a>
       </nav>
-      <button onclick="openBookingModal('Beginner Surf Lesson')" class="px-5 py-2 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md cursor-pointer">
-        Book Lesson
-      </button>
+
+      <!-- Language & Book Now Button -->
+      <div class="hidden lg:flex items-center gap-4">
+        <div class="flex items-center gap-1 text-xs font-semibold text-white/90">
+          <span>🇬🇧</span>
+          <span>English</span>
+          <span class="text-[10px] opacity-70">▾</span>
+        </div>
+
+        <button onclick="openBookingModal()" class="px-6 xl:px-7 py-2 text-xs xl:text-sm font-bold rounded-full border border-white text-white hover:bg-white hover:text-gray-900 transition-all duration-300 hover:scale-105 hover:shadow-lg transform cursor-pointer">
+          BOOK NOW
+        </button>
+      </div>
+
+      <!-- Mobile Button -->
+      <div class="flex lg:hidden items-center gap-2">
+        <button onclick="openBookingModal()" class="px-4 py-1.5 rounded-full border border-white text-white hover:bg-white hover:text-gray-900 text-xs font-bold shadow-md">
+          BOOK NOW
+        </button>
+        <button id="mobile-menu-btn" class="p-2 rounded-xl text-white hover:bg-white/10" aria-label="Toggle menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Thin divider line under header -->
+    <div class="w-full border-b border-white/20 mt-3"></div>
+
+    <!-- Mobile Slide Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
+      <a href="index.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Home</a>
+      <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">🏄 Surf Lessons & Packages</a>
+      <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-cyan-300">🌴 Other Activities & Tours</a>
+      <a href="index.html#rates" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Rates & Pricing</a>
+      <a href="index.html#faq" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">FAQ</a>
+      <a href="gallery.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📷 Gallery</a>
+      <a href="reviews.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">⭐ Google Reviews</a>
+      <a href="about.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">About Us</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📍 Location & Contact</a>
+      
+      <div class="pt-3 border-t border-white/10">
+        <button onclick="openBookingModal()" class="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 shadow-md">
+          <span>BOOK NOW ON WHATSAPP</span>
+        </button>
+      </div>
     </div>
   </header>
 
-  <!-- Hero Section -->
-  <section class="relative py-20 bg-ocean-950 text-white overflow-hidden">
+<section class="relative py-20 bg-ocean-950 text-white overflow-hidden">
     <div class="absolute inset-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1600&q=80');"></div>
     <div class="relative z-10 max-w-4xl mx-auto px-4 text-center">
       <span class="px-3.5 py-1.5 rounded-full bg-amber-500 text-white text-xs font-bold uppercase tracking-wider mb-4 inline-block">Core Main Service</span>
@@ -185,43 +259,135 @@
   </section>
 
   <!-- Footer -->
-  <footer class="bg-ocean-950 text-white pt-12 pb-20 border-t border-ocean-800">
-    <div class="max-w-7xl mx-auto px-4 text-center text-xs text-gray-400 space-y-4">
-      <p>© 2026 ❤️ Hikkaduwa Hikka Surf School. All rights reserved.</p>
-      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    <!-- FOOTER WITH DESIGN CREDITS -->
+  <footer class="bg-ocean-950 text-white pt-16 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+        <div class="space-y-3">
+          <a href="index.html" class="inline-block">
+            <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-12 w-auto" />
+          </a>
+          <p class="text-xs text-cyan-200 font-semibold uppercase">Surf School Sri Lanka • Hikkaduwa</p>
+          <p class="text-xs text-gray-300 leading-relaxed">
+            Your premier local surf school on Narigama Beach, Hikkaduwa.
+          </p>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Surfing</h4>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li><a href="surf-lessons.html" class="hover:text-white font-bold text-cyan-200">🏄 Beginner Lessons</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Private 1:1 Coaching</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Couple & Duo Lessons</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Kids & Family Surfing</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Surfboard Rental</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Explore</h4>
+          <ul class="space-y-2 text-xs text-gray-300">
+            <li><a href="activities.html" class="hover:text-white font-bold text-cyan-200">🌴 All Activities & Tours</a></li>
+            <li><a href="snorkeling.html" class="hover:text-white">🤿 Snorkeling Sanctuary</a></li>
+            <li><a href="turtle-experiences.html" class="hover:text-white">🐢 Wild Sea Turtles</a></li>
+            <li><a href="gallery.html" class="hover:text-white">📷 Photo Gallery</a></li>
+            <li><a href="reviews.html" class="hover:text-white">⭐ Google Reviews</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Contact & Location</h4>
+          <p class="text-xs text-gray-300 mb-3">Galle Road, Narigama Beach (Opposite Hotel Citrus), Hikkaduwa</p>
+          <button onclick="openDirectWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+            <span>WhatsApp: +94 77 123 4567</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Copyright & Design Credits -->
+      <div class="pt-8 border-t border-ocean-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
+        <p>© 2026 Hikka Surf School Sri Lanka. All rights reserved.</p>
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <span>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2 ml-1">Infinite Creative Web Design</a></span>
+          <span>•</span>
+          <a href="admin.html" class="text-gray-500 hover:text-gray-300">Admin CMS</a>
+        </div>
+      </div>
     </div>
   </footer>
 
-  <!-- Booking Modal Container -->
+  <!-- FLOATING WHATSAPP BUTTON WITH PULSE GLOW -->
+  <div class="fixed bottom-6 right-6 z-50">
+    <button onclick="openDirectWhatsApp()" class="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer whatsapp-glow" aria-label="WhatsApp Chat">
+      <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.662.062-2.083-.527-1.782-.74-2.92-2.56-3.009-2.678-.088-.118-.722-.96-.722-1.831s.456-1.3.619-1.477c.162-.177.355-.221.474-.221.119 0 .238.001.341.006.109.006.255-.041.398.303.148.356.505 1.23.549 1.32.044.089.073.193.015.311-.059.119-.089.193-.177.297-.089.104-.187.232-.267.311-.089.09-.182.187-.078.365.104.178.462.763.992 1.235.684.609 1.261.798 1.439.887.178.089.282.074.386-.045.104-.118.444-.518.563-.696.119-.178.238-.148.398-.089.162.059 1.025.483 1.202.572.177.089.296.133.341.207.045.074.045.429-.099.834z"/></svg>
+    </button>
+  </div>
+
+  <!-- BOOKING MODAL -->
   <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl p-6">
-      <button onclick="closeBookingModal()" class="absolute top-4 right-4 p-2 font-bold text-gray-500">✕</button>
-      <h3 class="text-xl font-bold font-heading mb-4 text-gray-900">Book Surf Lesson</h3>
-      <form id="booking-form" class="space-y-3 text-xs sm:text-sm">
-        <input type="hidden" id="modal-activity-select" value="Beginner Surf Lesson" />
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+      <div class="bg-gradient-to-r from-ocean-900 to-surf-900 p-6 text-white relative">
+        <button onclick="closeBookingModal()" class="absolute top-5 right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-lg font-bold cursor-pointer">✕</button>
+        <span class="text-sand-300 text-xs font-bold uppercase tracking-wider block mb-1">Instant WhatsApp Reservation</span>
+        <h3 class="text-2xl font-bold font-serif-heading">Book Your Experience</h3>
+        <p class="text-ocean-100 text-xs mt-1">Connect directly with our local team in Hikkaduwa</p>
+      </div>
+
+      <form id="booking-form" class="p-6 overflow-y-auto space-y-4 flex-1 text-xs sm:text-sm">
         <div>
-          <label class="block font-bold mb-1">Date</label>
-          <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl" required />
-        </div>
-        <div>
-          <label class="block font-bold mb-1">Number of People</label>
-          <select id="modal-guests-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl">
-            <option value="1">1 Person</option>
-            <option value="2" selected>2 People</option>
-            <option value="3">3 People</option>
-            <option value="4+">4+ Group</option>
+          <label class="block font-bold text-gray-700 mb-1">Select Activity / Package</label>
+          <select id="modal-activity-select" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-semibold text-gray-900">
+            <option value="Beginner Surf Lesson">🏄 Beginner Surf Lesson ($25)</option>
+            <option value="Private 1-on-1 Surf Lesson">🏄 Private 1-on-1 Surf Lesson ($35)</option>
+            <option value="Semi-Private Couple Lesson">🏄 Semi-Private Couple Lesson ($45)</option>
+            <option value="Kids & Family Surfing">🏄 Kids & Family Surfing ($30)</option>
+            <option value="Intermediate Surf Coaching">🏄 Intermediate Coaching ($40)</option>
+            <option value="Surfboard Rental">🏄 Surfboard Rental ($10)</option>
+            <option value="Guided Coral Reef Snorkeling">🤿 Guided Coral Reef Snorkeling ($20)</option>
+            <option value="Turtle Snorkeling & Beach Walk">🐢 Turtle Snorkeling ($20)</option>
+            <option value="Deep Sea & Reef Fishing">🎣 Deep Sea Fishing ($70)</option>
+            <option value="Glass Bottom & River Safari">🚤 Boat Tour ($30)</option>
+            <option value="Mirissa Whale Watching">🐋 Whale Watching ($55)</option>
+            <option value="Sri Lanka Day Trips">🚗 Day Trips & Excursions ($45)</option>
+            <option value="Airport & Island Transfers">🚐 Airport & Island Transfers ($45)</option>
           </select>
         </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Preferred Date</label>
+            <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium" required />
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Number of People</label>
+            <select id="modal-guests-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
+              <option value="1">1 Person</option>
+              <option value="2" selected>2 People</option>
+              <option value="3">3 People</option>
+              <option value="4">4 People</option>
+              <option value="5+">5+ Group</option>
+            </select>
+          </div>
+        </div>
+
         <div>
-          <label class="block font-bold mb-1">Time</label>
-          <select id="modal-time-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl">
+          <label class="block font-bold text-gray-700 mb-1">Preferred Time Slot</label>
+          <select id="modal-time-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
             <option value="07:00 AM (Early Glassy Waves)">07:00 AM (Early Glassy Waves)</option>
             <option value="08:30 AM (Best Morning Session)" selected>08:30 AM (Best Morning Session)</option>
+            <option value="10:30 AM (Late Morning)">10:30 AM (Late Morning)</option>
+            <option value="02:00 PM (Afternoon)">02:00 PM (Afternoon)</option>
             <option value="04:00 PM (Sunset Golden Hour)">04:00 PM (Sunset Golden Hour)</option>
           </select>
         </div>
-        <button type="submit" class="w-full py-3.5 bg-emerald-600 text-white font-bold rounded-xl shadow-md cursor-pointer">
-          Confirm on WhatsApp →
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Your Name (Optional)</label>
+          <input type="text" id="modal-name-input" placeholder="e.g. Sarah" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900" />
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl shadow-lg text-base flex items-center justify-center gap-2 cursor-pointer transition-all">
+          <span>Send Booking Request on WhatsApp</span> →
         </button>
       </form>
     </div>
