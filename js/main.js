@@ -110,26 +110,43 @@ function initApp() {
     modalDateInput.min = new Date().toISOString().split('T')[0];
   }
 
+  // 9. WhatsApp Booking Modal System
   window.openBookingModal = function(activityTitle = 'Beginner Surf Lesson') {
-    if (!bookingModal) return;
-    if (modalActivitySelect) {
-      for (let i = 0; i < modalActivitySelect.options.length; i++) {
-        if (modalActivitySelect.options[i].value.toLowerCase().includes(activityTitle.toLowerCase()) || 
-            activityTitle.toLowerCase().includes(modalActivitySelect.options[i].value.toLowerCase())) {
-          modalActivitySelect.selectedIndex = i;
+    const modal = document.getElementById('booking-modal');
+    if (!modal) {
+      // Fallback directly to WhatsApp if modal element missing
+      const cleanPhone = (window.siteSettings?.whatsappNumber || '+94771234567').replace(/[^0-9]/g, '');
+      window.open(`https://wa.me/${cleanPhone}?text=Hi%20Hikka%20Surf%20School!%20I%20would%20like%20to%20book%20${encodeURIComponent(activityTitle)}`, '_blank');
+      return;
+    }
+    const selectEl = document.getElementById('modal-activity-select');
+    if (selectEl) {
+      for (let i = 0; i < selectEl.options.length; i++) {
+        if (selectEl.options[i].value.toLowerCase().includes(activityTitle.toLowerCase()) || 
+            activityTitle.toLowerCase().includes(selectEl.options[i].value.toLowerCase())) {
+          selectEl.selectedIndex = i;
           break;
         }
       }
     }
-    bookingModal.classList.remove('hidden');
-    bookingModal.classList.add('flex');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
   };
 
   window.closeBookingModal = function() {
-    if (!bookingModal) return;
-    bookingModal.classList.add('hidden');
-    bookingModal.classList.remove('flex');
+    const modal = document.getElementById('booking-modal');
+    if (!modal) return;
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
   };
+
+  const bookingModal = document.getElementById('booking-modal');
+  const bookingForm = document.getElementById('booking-form');
+  const modalActivitySelect = document.getElementById('modal-activity-select');
+  const modalDateInput = document.getElementById('modal-date-input');
+  const modalGuestsSelect = document.getElementById('modal-guests-select');
+  const modalTimeSelect = document.getElementById('modal-time-select');
+  const modalNameInput = document.getElementById('modal-name-input');
 
   bookingModal?.addEventListener('click', (e) => {
     if (e.target === bookingModal) {
@@ -163,6 +180,68 @@ function initApp() {
     const msg = customMessage || defaultMsg;
     window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
+
+  // 11. Multi-Language Switcher
+  initLanguageSwitcher();
+}
+
+// Multi-Language Translation Switcher
+function initLanguageSwitcher() {
+  window.toggleLangMenu = function() {
+    const menu = document.getElementById('lang-menu-dropdown');
+    if (menu) menu.classList.toggle('hidden');
+  };
+
+  window.switchLanguage = function(langCode, flag, langName) {
+    const flagEls = document.querySelectorAll('.current-lang-flag');
+    const textEls = document.querySelectorAll('.current-lang-text');
+    flagEls.forEach(el => el.textContent = flag);
+    textEls.forEach(el => el.textContent = langName);
+
+    const menu = document.getElementById('lang-menu-dropdown');
+    if (menu) menu.classList.add('hidden');
+
+    if (langCode === 'en') {
+      // Clear translation cookie / reset
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname;
+      location.reload();
+      return;
+    }
+
+    // Set Google Translate cookie and initialize
+    document.cookie = `googtrans=/en/${langCode}; path=/;`;
+    document.cookie = `googtrans=/en/${langCode}; path=/; domain=${location.hostname};`;
+
+    if (!window.googleTranslateLoaded) {
+      window.googleTranslateLoaded = true;
+      const script = document.createElement('script');
+      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateInit';
+      document.body.appendChild(script);
+
+      window.googleTranslateInit = function() {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          autoDisplay: false
+        }, 'google_translate_element');
+        setTimeout(() => {
+          location.reload();
+        }, 300);
+      };
+    } else {
+      location.reload();
+    }
+  };
+
+  // Close dropdown on outside click
+  document.addEventListener('click', (e) => {
+    const wrapper = document.getElementById('lang-dropdown-wrapper');
+    const menu = document.getElementById('lang-menu-dropdown');
+    if (wrapper && menu && !wrapper.contains(e.target)) {
+      menu.classList.add('hidden');
+    }
+  });
+}
 
   // 11. FAQ Accordion Toggle
   document.querySelectorAll('.faq-btn').forEach(btn => {
