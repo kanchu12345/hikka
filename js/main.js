@@ -28,10 +28,13 @@ function initApp() {
   // 1. Hero Auto-Swapping Slideshow
   initHeroSlideshow(settings);
 
-  // 2. Activity Card Mini Sliders Auto-Swap
+  // 2. Middle Cinematic Slideshow ("Our Home Base - Sri Lanka")
+  initMiddleSlideshow();
+
+  // 3. Activity Card Mini Sliders Auto-Swap
   initCardSliders();
 
-  // 3. Mobile Menu Toggle
+  // 4. Mobile Menu Toggle
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenuBtn && mobileMenu) {
@@ -40,7 +43,7 @@ function initApp() {
     };
   }
 
-  // 4. Sticky Glass Navbar on Scroll
+  // 5. Sticky Glass Navbar on Scroll
   const mainNavbar = document.getElementById('main-navbar');
   window.addEventListener('scroll', () => {
     if (window.scrollY > 40) {
@@ -52,7 +55,7 @@ function initApp() {
     }
   });
 
-  // 5. Scroll Reveal Animation (Intersection Observer)
+  // 6. Scroll Reveal Animation (Intersection Observer)
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
   if ('IntersectionObserver' in window) {
     const observer = new IntersectionObserver((entries, obs) => {
@@ -69,7 +72,7 @@ function initApp() {
     revealElements.forEach(el => el.classList.add('is-visible'));
   }
 
-  // 6. Currency Switcher System
+  // 7. Currency Switcher System
   window.setCurrency = function(code) {
     if (!CURRENCY_RATES[code]) return;
     currentCurrency = code;
@@ -88,7 +91,7 @@ function initApp() {
     });
   };
 
-  // 7. WhatsApp Booking Modal System
+  // 8. WhatsApp Booking Modal System
   const bookingModal = document.getElementById('booking-modal');
   const modalActivitySelect = document.getElementById('modal-activity-select');
   const modalDateInput = document.getElementById('modal-date-input');
@@ -151,14 +154,14 @@ function initApp() {
     closeBookingModal();
   });
 
-  // 8. Direct WhatsApp Trigger
+  // 9. Direct WhatsApp Trigger
   window.openDirectWhatsApp = function(customMessage = null) {
     const defaultMsg = `Hi Hikka Surf School! I would like to inquire about surf lessons and ocean activities in Hikkaduwa.`;
     const msg = customMessage || defaultMsg;
     window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
   };
 
-  // 9. FAQ Accordion Toggle
+  // 10. FAQ Accordion Toggle
   document.querySelectorAll('.faq-btn').forEach(btn => {
     btn.onclick = () => {
       const content = btn.nextElementSibling;
@@ -201,6 +204,51 @@ function initHeroSlideshow(settings) {
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('active');
     }, intervalTime);
+  }
+}
+
+// Middle Cinematic Slideshow Handler ("Our Home Base - Sri Lanka")
+function initMiddleSlideshow() {
+  const container = document.getElementById('middle-slideshow-container');
+  const titleEl = document.getElementById('middle-slide-title');
+  if (!container) return;
+
+  const middleSlides = [
+    {
+      url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1920&q=80",
+      title: "Sri Lanka"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
+      title: "Hikkaduwa"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
+      title: "Narigama Beach"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1920&q=80",
+      title: "Coral Sanctuary"
+    }
+  ];
+
+  container.innerHTML = middleSlides.map((slide, idx) => `
+    <div class="middle-slide ${idx === 0 ? 'active' : ''}" style="background-image: url('${slide.url}'); background-size: cover; background-position: center;"></div>
+  `).join('');
+
+  let currentIdx = 0;
+  const slides = container.querySelectorAll('.middle-slide');
+
+  if (slides.length > 1) {
+    if (window.middleTimer) clearInterval(window.middleTimer);
+    window.middleTimer = setInterval(() => {
+      slides[currentIdx].classList.remove('active');
+      currentIdx = (currentIdx + 1) % slides.length;
+      slides[currentIdx].classList.add('active');
+      if (titleEl) {
+        titleEl.textContent = middleSlides[currentIdx].title;
+      }
+    }, 4000);
   }
 }
 

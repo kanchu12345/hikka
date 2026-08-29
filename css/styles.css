@@ -1,25 +1,28 @@
-/* ❤️ HIKKA SURF SCHOOL - MASTER LUXURY STYLES (Inspired by thesurferweligama.com/en) */
+/* ❤️ HIKKA SURF SCHOOL - EXACT TYPOGRAPHY & LUXURY STYLES (Inspired by thesurferweligama.com/en) */
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,600;0,700;0,900;1,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,400;1,600&display=swap');
 
 :root {
-  --font-heading: 'Plus Jakarta Sans', sans-serif;
-  --font-serif-heading: 'Playfair Display', serif;
+  --font-primary: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-heading: 'Montserrat', sans-serif;
+  --font-display: 'Poppins', sans-serif;
   --color-navy: #082f49;
   --color-aqua: #0284c7;
   --color-gold: #d97706;
 }
 
 body {
-  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  letter-spacing: -0.01em;
 }
 
-.font-heading {
-  font-family: var(--font-heading);
+h1, h2, h3, h4, h5, h6, .font-heading, .font-serif-heading {
+  font-family: 'Montserrat', sans-serif;
+  letter-spacing: -0.02em;
 }
 
-.font-serif-heading {
-  font-family: var(--font-serif-heading);
+.font-display {
+  font-family: 'Poppins', sans-serif;
 }
 
 /* Glassmorphism & Surface Styles */
@@ -47,7 +50,15 @@ body {
   box-shadow: 0 20px 30px -10px rgba(2, 132, 199, 0.15), 0 10px 15px -5px rgba(0, 0, 0, 0.05);
 }
 
-/* Subtle Gold/Cyan Accent Divider */
+/* Subtle Blue/Cyan Accent Underline Bar (Exact thesurferweligama style) */
+.our-home-base-bar {
+  width: 50px;
+  height: 3px;
+  background: #0284c7;
+  border-radius: 9999px;
+  margin: 0.5rem auto;
+}
+
 .gold-divider {
   width: 60px;
   height: 3px;
@@ -67,6 +78,22 @@ body {
 
 .hero-slide.active {
   opacity: 0.75;
+  transform: scale(1);
+  z-index: 2;
+}
+
+/* Middle Cinematic Slideshow */
+.middle-slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 1s ease-in-out, transform 5s ease;
+  transform: scale(1.04);
+  z-index: 1;
+}
+
+.middle-slide.active {
+  opacity: 1;
   transform: scale(1);
   z-index: 2;
 }
