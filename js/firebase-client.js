@@ -1,5 +1,15 @@
-// Firebase Client & Realtime Sync Engine for Hikka Surf School
-// Seamlessly connects with Firestore, Auth, and Storage with automatic local fallback
+// Firebase Client & Realtime Sync Engine for ❤️ Hikkaduwa Hikka Surf School
+// Automatically connected to Project: hikka-5389b
+
+const DEFAULT_FIREBASE_CONFIG = {
+  apiKey: "AIzaSyBSrvs9sjXQTEApSveIh_-So3LlsZEzsxs",
+  authDomain: "hikka-5389b.firebaseapp.com",
+  projectId: "hikka-5389b",
+  storageBucket: "hikka-5389b.firebasestorage.app",
+  messagingSenderId: "35091263543",
+  appId: "1:35091263543:web:139df76cc9be07c99e4fb2",
+  measurementId: "G-E84DYY8YBS"
+};
 
 class FirebaseSyncEngine {
   constructor() {
@@ -13,9 +23,9 @@ class FirebaseSyncEngine {
   getStoredConfig() {
     try {
       const cfg = localStorage.getItem('hikka_firebase_config');
-      return cfg ? JSON.parse(cfg) : null;
+      return cfg ? JSON.parse(cfg) : DEFAULT_FIREBASE_CONFIG;
     } catch (e) {
-      return null;
+      return DEFAULT_FIREBASE_CONFIG;
     }
   }
 
@@ -39,13 +49,13 @@ class FirebaseSyncEngine {
         this.db = firebase.firestore();
         this.auth = firebase.auth();
         this.isConfigured = true;
-        console.log("🔥 Firebase Firestore connected successfully.");
+        console.log("🔥 Firebase Firestore connected successfully to project:", config.projectId);
         this.setupRealtimeListeners();
       } catch (err) {
         console.warn("Firebase init note:", err);
       }
     } else {
-      console.log("⚡ Running on fast local sync engine (Zero latency).");
+      console.log("⚡ Running on fast local sync engine with zero latency.");
     }
   }
 
@@ -89,7 +99,7 @@ class FirebaseSyncEngine {
   // Push local data up to Firestore
   async syncLocalToCloud() {
     if (!this.isConfigured || !this.db) {
-      throw new Error("Firebase is not configured yet. Please enter your Firebase config in the Admin panel.");
+      throw new Error("Firebase is connecting... Please ensure you are online.");
     }
     const data = getActiveSiteData();
     
