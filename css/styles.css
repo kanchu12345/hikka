@@ -48,6 +48,44 @@ h1, h2, h3, h4, h5, h6, .font-heading, .font-serif-heading {
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+/* Brand Navbar Logo Styles - Guaranteed Large & Unshrinkable */
+.brand-logo-container {
+  flex-shrink: 0 !important;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  z-index: 50;
+}
+
+.brand-logo-img {
+  height: 54px !important;
+  min-height: 48px !important;
+  max-height: 72px !important;
+  width: auto !important;
+  object-fit: contain;
+  display: block;
+  flex-shrink: 0 !important;
+  transition: transform 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .brand-logo-img {
+    height: 62px !important;
+    min-height: 56px !important;
+  }
+}
+
+@media (min-width: 1024px) {
+  .brand-logo-img {
+    height: 68px !important;
+    min-height: 64px !important;
+  }
+}
+
+.brand-logo-container:hover .brand-logo-img {
+  transform: scale(1.03);
+}
+
 /* Card Transitions & Hover Effects */
 .surfer-card {
   border-radius: 1rem; /* 16px */

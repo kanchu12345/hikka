@@ -87,7 +87,7 @@ export default function PopularExperiences({ activities, tours, settings }: Popu
       badge: 'Local Captains',
       badgeColor: 'bg-blue-600 text-white',
       tagline: 'Coastal & Deep-Sea Trips',
-      image: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80',
+      image: 'https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80',
       href: '/activities/fishing-tours',
       buttonText: 'Explore Fishing',
       price: 'From $50 / Trip',

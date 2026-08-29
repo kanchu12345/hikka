@@ -71,18 +71,12 @@ export default function Navbar({ settings }: NavbarProps) {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-surf-500 to-ocean-600 flex items-center justify-center text-white shadow-md shadow-surf-500/20 group-hover:scale-105 transition-transform">
-              <span className="text-xl leading-none">❤️</span>
-            </div>
-            <div>
-              <div className="font-heading font-extrabold text-lg sm:text-xl tracking-tight leading-tight flex items-center gap-1">
-                <span>Hikka Surf School</span>
-              </div>
-              <p className={`text-[10px] sm:text-[11px] font-medium tracking-wide uppercase ${isScrolled ? 'text-surf-600' : 'text-cyan-200'}`}>
-                Hikkaduwa • Sri Lanka
-              </p>
-            </div>
+          <Link href="/" className="brand-logo-container group">
+            <img
+              src={isScrolled ? "/images/logo.svg" : "/images/logo-white.svg"}
+              alt="Hikka Surf School"
+              className="brand-logo-img drop-shadow-md"
+            />
           </Link>
 
           {/* Desktop Nav Links */}

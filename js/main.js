@@ -218,7 +218,7 @@ function initMiddleSlideshow() {
 
   const middleSlides = [
     {
-      url: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1920&q=80",
+      url: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1920&q=80",
       title: "Sri Lanka"
     },
     {
@@ -286,7 +286,7 @@ const GALLERY_STORIES = [
     title: "Deep-Sea Big Game & Traditional Lagoon Fishing",
     description: "Head past the reef at sunrise for thrilling big game trolling (Tuna, Wahoo, Barracuda) or enjoy tranquil evening handline lagoon angling with generational local fishermen.",
     tags: ["📍 Deep Sea & Lagoon", "🐟 Traditional & Modern", "🛥️ Private Boat Option"],
-    image: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1200&q=80",
+    image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=1200&q=80",
     activityName: "Fishing Tour"
   },
   {
