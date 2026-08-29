@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Activities & Ocean Experiences in Hikkaduwa | Hikka Surf School</title>
+  <meta name="description" content="Discover top activities in Hikkaduwa & Sri Lanka: Coral snorkeling, giant sea turtle encounters, ocean fishing, glass-bottom boat tours, whale watching, day trips, and airport transfers." />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            surf: { 50: '#f0f9ff', 100: '#e0f2fe', 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
+            ocean: { 900: '#164e63', 950: '#083344' },
+            sand: { 300: '#fde047', 400: '#facc15', 500: '#eab308' }
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-slate-50 text-gray-800 antialiased">
+
+  <!-- Header Navigation -->
+  <header class="bg-ocean-950 text-white py-4 sticky top-0 z-40 shadow-lg border-b border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
+      <a href="index.html" class="flex items-center gap-2.5">
+        <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-10 sm:h-12 w-auto" />
+      </a>
+      <nav class="hidden lg:flex items-center gap-5 text-sm font-semibold">
+        <a href="index.html" class="text-white/80 hover:text-white">HOME</a>
+        <a href="surf-lessons.html" class="text-white/80 hover:text-white">SURF LESSONS</a>
+        <a href="activities.html" class="text-cyan-400 font-bold underline underline-offset-4">ACTIVITIES</a>
+        <a href="index.html#rates" class="text-white/80 hover:text-white">RATES</a>
+        <a href="gallery.html" class="text-white/80 hover:text-white">GALLERY</a>
+        <a href="reviews.html" class="text-white/80 hover:text-white">⭐ REVIEWS</a>
+        <a href="about.html" class="text-white/80 hover:text-white">ABOUT</a>
+        <a href="contact.html" class="text-white/80 hover:text-white">CONTACT</a>
+      </nav>
+      <button onclick="openBookingModal()" class="px-6 py-2 rounded-full border border-white text-white hover:bg-white hover:text-gray-900 font-bold text-xs uppercase tracking-wider transition-all cursor-pointer">
+        BOOK NOW
+      </button>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="relative py-20 bg-ocean-950 text-white text-center overflow-hidden">
+    <div class="absolute inset-0 z-0 opacity-40 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1600&q=80');"></div>
+    <div class="relative z-10 max-w-4xl mx-auto px-4">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-sand-300 mb-4">
+        🌴 Hikkaduwa & Beyond
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-black font-serif-heading mb-4">Ocean Activities & Tours</h1>
+      <p class="text-gray-200 text-sm sm:text-lg max-w-2xl mx-auto">
+        Beyond world-class surfing, explore coral reefs, wild sea turtles, deep sea fishing, scenic boat safaris, and Sri Lanka day trips with our trusted local guides.
+      </p>
+    </div>
+  </section>
+
+  <!-- Activities Catalog (7 Non-Surf Activities) -->
+  <section class="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      
+      <!-- 1. Snorkeling -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Coral Snorkeling" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $20 / Person</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🤿 Coral Reef Snorkeling</h3>
+              <p class="text-xs text-cyan-200">Hikkaduwa Marine National Park</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Explore vibrant living coral gardens and swim with colorful tropical reef fish in clear, warm waters with mask, snorkel, and local guide included.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Snorkel gear & life jackets provided</li>
+              <li>✓ Experienced local guide in water</li>
+              <li>✓ 1.5 Hours guided tour</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="snorkeling.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Guided Coral Reef Snorkeling')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Turtle Experiences -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=800&q=80" alt="Sea Turtles" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $20 / Person</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🐢 Turtle Experiences</h3>
+              <p class="text-xs text-cyan-200">Wild Sea Turtles in Shallow Bay</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Encounter wild Green Sea Turtles that swim naturally into Hikkaduwa's shallow reef bay. Ethical, respectful wildlife viewing.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Wild turtle watching & swimming</li>
+              <li>✓ Suitable for non-swimmers & kids</li>
+              <li>✓ Natural shallow beach location</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="turtle-experiences.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Turtle Snorkeling & Beach Walk')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 3. Fishing Tours -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Fishing Tours" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $50 / Trip</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🎣 Fishing Tours</h3>
+              <p class="text-xs text-cyan-200">Coastal & Deep Sea Trips</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Experience authentic Sri Lankan ocean fishing with experienced local fishermen. Sunset coastal trolling or deep-sea big game excursions.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Traditional fishing techniques</li>
+              <li>✓ Rods, bait, and safety gear</li>
+              <li>✓ Arranged with trusted captains</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="fishing-tours.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Traditional Coastal Fishing')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 4. Boat Tours -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Boat Tours" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $20 / Person</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🚤 Boat Tours & Safari</h3>
+              <p class="text-xs text-cyan-200">Glass Bottom & Madu River</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Glass-bottom coral reef boat rides or scenic Madu River mangrove lagoon safaris with cinnamon island visits and fish therapy.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Glass-bottom reef boat tours</li>
+              <li>✓ Madu River mangrove safari</li>
+              <li>✓ Arranged with certified boat operators</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="boat-tours.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Glass-Bottom Coral Boat Tour')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 5. Whale Watching -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80" alt="Whale Watching" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $65 / Person</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🐋 Whale Watching</h3>
+              <p class="text-xs text-cyan-200">Mirissa Blue Whale Day Tour</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Seasonal day excursions from Hikkaduwa to Mirissa harbor to see giant Blue Whales, Sperm Whales, and pods of spinner dolphins.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Early morning hotel pickup in Hikkaduwa</li>
+              <li>✓ Certified boat crew & breakfast included</li>
+              <li>✓ Peak season: Nov to April</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="whale-watching.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Mirissa Whale Watching Package')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 6. Sri Lanka Day Trips -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80" alt="Day Trips" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $35 / Tour</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🌴 Sri Lanka Day Trips</h3>
+              <p class="text-xs text-cyan-200">Galle • Bentota • Yala • Ella</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Explore Sri Lanka's finest culture and wildlife with private AC vehicles and friendly English-speaking drivers.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Galle Fort UNESCO heritage tour</li>
+              <li>✓ Yala National Park leopard safari</li>
+              <li>✓ Ella tea plantations & waterfalls</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="tours.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Galle Fort & Southern Heritage Tour')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- 7. Airport Transfers -->
+      <div class="surfer-card rounded-3xl overflow-hidden flex flex-col justify-between group">
+        <div>
+          <div class="relative h-60 overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1549317661-bd32c8ce0db2?auto=format&fit=crop&w=800&q=80" alt="Airport Transfers" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+            <span class="absolute top-3 right-3 bg-black/60 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-bold border border-white/20">From $45 (Airport)</span>
+            <div class="absolute bottom-3 left-4 right-4 text-white">
+              <h3 class="font-serif-heading text-2xl font-bold">🚕 Transfers & Transport</h3>
+              <p class="text-xs text-cyan-200">24/7 Colombo Airport (CMB)</p>
+            </div>
+          </div>
+          <div class="p-6">
+            <p class="text-xs text-gray-600 mb-4 leading-relaxed">
+              Hassle-free 24/7 private airport pickups and drop-offs between Colombo Airport (CMB) and Hikkaduwa via the Southern Expressway.
+            </p>
+            <ul class="space-y-1.5 text-xs text-gray-700">
+              <li>✓ Flight delay monitoring & meet-and-greet</li>
+              <li>✓ Clean AC car / van with surfboard racks</li>
+              <li>✓ Fixed upfront pricing with highway tolls</li>
+            </ul>
+          </div>
+        </div>
+        <div class="p-6 pt-0 space-y-2">
+          <a href="transfers.html" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 transition-colors">
+            <span>Read Details</span> →
+          </a>
+          <button onclick="openBookingModal('Colombo Airport (CMB) Transfer')" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1 cursor-pointer">
+            Book on WhatsApp
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-ocean-950 text-white pt-16 pb-20 border-t border-ocean-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-gray-400 space-y-4">
+      <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-12 w-auto mx-auto" />
+      <p>© 2026 Hikka Surf School Hikkaduwa. All rights reserved.</p>
+      <p>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2">Infinite Creative Web Design</a></p>
+    </div>
+  </footer>
+
+  <!-- Booking Modal -->
+  <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
+      <div class="bg-gradient-to-r from-ocean-900 to-surf-900 p-6 text-white relative">
+        <button onclick="closeBookingModal()" class="absolute top-5 right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-lg font-bold cursor-pointer">✕</button>
+        <span class="text-sand-300 text-xs font-bold uppercase tracking-wider block mb-1">Instant WhatsApp Reservation</span>
+        <h3 class="text-2xl font-bold font-serif-heading">Book Your Experience</h3>
+        <p class="text-ocean-100 text-xs mt-1">Connect directly with our team in Hikkaduwa</p>
+      </div>
+
+      <form id="booking-form" class="p-6 overflow-y-auto space-y-4 flex-1 text-xs sm:text-sm">
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Select Activity / Lesson</label>
+          <select id="modal-activity-select" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-semibold text-gray-900">
+            <option value="Beginner Surf Lesson">🏄 Beginner Surf Lesson (1.5 Hours - $25)</option>
+            <option value="Private 1-on-1 Surf Lesson">🏄 Private 1-on-1 Surf Lesson (1.5 Hours - $35)</option>
+            <option value="Semi-Private Couple Lesson">🏄 Semi-Private Couple Lesson (1.5 Hours - $45)</option>
+            <option value="Kids & Family Surfing">🏄 Kids & Family Surfing (1.5 Hours - $30)</option>
+            <option value="Guided Coral Reef Snorkeling">🤿 Guided Coral Reef Snorkeling (1.5 Hours - $20)</option>
+            <option value="Turtle Snorkeling & Beach Walk">🐢 Turtle Snorkeling & Beach Walk (1.5 Hours - $20)</option>
+            <option value="Traditional Coastal Fishing">🎣 Traditional Coastal Fishing (2.5 Hours - $50)</option>
+            <option value="Glass-Bottom Coral Boat Tour">🚤 Glass-Bottom Coral Boat Tour (1 Hour - $20)</option>
+            <option value="Mirissa Whale Watching Package">🐋 Mirissa Whale Watching Day Trip ($65)</option>
+            <option value="Galle Fort & Southern Heritage Tour">🌴 Galle Fort UNESCO Day Trip ($35)</option>
+            <option value="Colombo Airport (CMB) Transfer">🚕 Colombo Airport (CMB) Transfer ($45)</option>
+          </select>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Preferred Date</label>
+            <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium" required />
+          </div>
+          <div>
+            <label class="block font-bold text-gray-700 mb-1">Number of People</label>
+            <select id="modal-guests-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
+              <option value="1">1 Person</option>
+              <option value="2" selected>2 People</option>
+              <option value="3">3 People</option>
+              <option value="4">4 People</option>
+              <option value="5+">5+ Group</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Preferred Time Slot</label>
+          <select id="modal-time-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
+            <option value="07:00 AM (Early Glassy Waves)">07:00 AM (Early Glassy Waves)</option>
+            <option value="08:30 AM (Best Morning Session)" selected>08:30 AM (Best Morning Session)</option>
+            <option value="10:30 AM (Late Morning)">10:30 AM (Late Morning)</option>
+            <option value="02:00 PM (Afternoon)">02:00 PM (Afternoon)</option>
+            <option value="04:00 PM (Sunset Golden Hour)">04:00 PM (Sunset Golden Hour)</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block font-bold text-gray-700 mb-1">Your Name (Optional)</label>
+          <input type="text" id="modal-name-input" placeholder="e.g. Sarah" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900" />
+        </div>
+
+        <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl shadow-lg text-base flex items-center justify-center gap-2 cursor-pointer transition-all">
+          <span>Send Booking Request on WhatsApp</span> →
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/data.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
