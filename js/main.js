@@ -8,6 +8,15 @@ const CURRENCY_RATES = {
   LKR: { symbol: 'Rs. ', rate: 320.0, label: 'LKR (Rs.)' }
 };
 
+const LANG_MAP = {
+  en: { name: 'English', label: 'EN', flag: 'https://flagcdn.com/w40/gb.png' },
+  de: { name: 'Deutsch', label: 'DE', flag: 'https://flagcdn.com/w40/de.png' },
+  ru: { name: 'Русский', label: 'RU', flag: 'https://flagcdn.com/w40/ru.png' },
+  fr: { name: 'Français', label: 'FR', flag: 'https://flagcdn.com/w40/fr.png' },
+  it: { name: 'Italiano', label: 'IT', flag: 'https://flagcdn.com/w40/it.png' },
+  si: { name: 'සිංහල', label: 'LK', flag: 'https://flagcdn.com/w40/lk.png' }
+};
+
 let currentCurrency = 'USD';
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -21,8 +30,8 @@ window.addEventListener('hikkaDataUpdated', () => {
 });
 
 function initApp() {
-  const siteData = getActiveSiteData();
-  const settings = siteData.settings;
+  const siteData = typeof getActiveSiteData === 'function' ? getActiveSiteData() : (window.DEFAULT_SITE_DATA || {});
+  const settings = siteData.settings || {};
   const cleanWhatsApp = (settings.whatsappNumber || '+94771234567').replace(/[^0-9]/g, '');
 
   // 1. Hero Auto-Swapping Slideshow
@@ -41,7 +50,8 @@ function initApp() {
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
   if (mobileMenuBtn && mobileMenu) {
-    mobileMenuBtn.onclick = () => {
+    mobileMenuBtn.onclick = (e) => {
+      e.stopPropagation();
       mobileMenu.classList.toggle('hidden');
     };
   }
@@ -95,6 +105,23 @@ function initApp() {
   };
 
   // 9. WhatsApp Booking Modal System
+  initBookingModal(cleanWhatsApp);
+
+  // 10. Direct WhatsApp Trigger
+  window.openDirectWhatsApp = function(customMessage = null) {
+    const defaultMsg = `Hi Hikka Surf School! I would like to inquire about surf lessons and ocean activities in Hikkaduwa.`;
+    const msg = customMessage || defaultMsg;
+    window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
+  };
+
+  // 11. Multi-Language Switcher
+  initLanguageSwitcher();
+
+  // 12. FAQ Accordion Toggle
+  initFaqAccordion();
+}
+
+function initBookingModal(cleanWhatsApp) {
   const bookingModal = document.getElementById('booking-modal');
   const modalActivitySelect = document.getElementById('modal-activity-select');
   const modalDateInput = document.getElementById('modal-date-input');
@@ -110,17 +137,15 @@ function initApp() {
     modalDateInput.min = new Date().toISOString().split('T')[0];
   }
 
-  // 9. WhatsApp Booking Modal System
   window.openBookingModal = function(activityTitle = 'Beginner Surf Lesson') {
     const modal = document.getElementById('booking-modal');
     if (!modal) {
-      // Fallback directly to WhatsApp if modal element missing
-      const cleanPhone = (window.siteSettings?.whatsappNumber || '+94771234567').replace(/[^0-9]/g, '');
+      const cleanPhone = cleanWhatsApp || '94771234567';
       window.open(`https://wa.me/${cleanPhone}?text=Hi%20Hikka%20Surf%20School!%20I%20would%20like%20to%20book%20${encodeURIComponent(activityTitle)}`, '_blank');
       return;
     }
     const selectEl = document.getElementById('modal-activity-select');
-    if (selectEl) {
+    if (selectEl && activityTitle) {
       for (let i = 0; i < selectEl.options.length; i++) {
         if (selectEl.options[i].value.toLowerCase().includes(activityTitle.toLowerCase()) || 
             activityTitle.toLowerCase().includes(selectEl.options[i].value.toLowerCase())) {
@@ -140,77 +165,82 @@ function initApp() {
     modal.classList.remove('flex');
   };
 
-  const bookingModal = document.getElementById('booking-modal');
-  const bookingForm = document.getElementById('booking-form');
-  const modalActivitySelect = document.getElementById('modal-activity-select');
-  const modalDateInput = document.getElementById('modal-date-input');
-  const modalGuestsSelect = document.getElementById('modal-guests-select');
-  const modalTimeSelect = document.getElementById('modal-time-select');
-  const modalNameInput = document.getElementById('modal-name-input');
+  if (bookingModal) {
+    bookingModal.onclick = (e) => {
+      if (e.target === bookingModal) {
+        closeBookingModal();
+      }
+    };
+  }
 
-  bookingModal?.addEventListener('click', (e) => {
-    if (e.target === bookingModal) {
+  if (bookingForm) {
+    bookingForm.onsubmit = (e) => {
+      e.preventDefault();
+      const activity = modalActivitySelect?.value || 'Beginner Surf Lesson';
+      const date = modalDateInput?.value || 'Tomorrow';
+      const guests = modalGuestsSelect?.value || '2 People';
+      const time = modalTimeSelect?.value || '08:30 AM';
+      const name = modalNameInput?.value ? `\n• Name: ${modalNameInput.value.trim()}` : '';
+
+      const text = `Hi Hikka Surf School! I would like to book:%0A` +
+        `• Activity: ${encodeURIComponent(activity)}%0A` +
+        `• Date: ${encodeURIComponent(date)}%0A` +
+        `• Guests: ${encodeURIComponent(guests)}%0A` +
+        `• Preferred Time: ${encodeURIComponent(time)}` +
+        `${encodeURIComponent(name)}%0A%0A` +
+        `Please let me know availability!`;
+
+      window.open(`https://wa.me/${cleanWhatsApp}?text=${text}`, '_blank');
       closeBookingModal();
-    }
-  });
-
-  bookingForm?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const activity = modalActivitySelect?.value || 'Beginner Surf Lesson';
-    const date = modalDateInput?.value || 'Tomorrow';
-    const guests = modalGuestsSelect?.value || '2 People';
-    const time = modalTimeSelect?.value || '08:30 AM';
-    const name = modalNameInput?.value ? `\n• Name: ${modalNameInput.value.trim()}` : '';
-
-    const text = `Hi Hikka Surf School! I would like to book:%0A` +
-      `• Activity: ${encodeURIComponent(activity)}%0A` +
-      `• Date: ${encodeURIComponent(date)}%0A` +
-      `• Guests: ${encodeURIComponent(guests)}%0A` +
-      `• Preferred Time: ${encodeURIComponent(time)}` +
-      `${encodeURIComponent(name)}%0A%0A` +
-      `Please let me know availability!`;
-
-    window.open(`https://wa.me/${cleanWhatsApp}?text=${text}`, '_blank');
-    closeBookingModal();
-  });
-
-  // 10. Direct WhatsApp Trigger
-  window.openDirectWhatsApp = function(customMessage = null) {
-    const defaultMsg = `Hi Hikka Surf School! I would like to inquire about surf lessons and ocean activities in Hikkaduwa.`;
-    const msg = customMessage || defaultMsg;
-    window.open(`https://wa.me/${cleanWhatsApp}?text=${encodeURIComponent(msg)}`, '_blank');
-  };
-
-  // 11. Multi-Language Switcher
-  initLanguageSwitcher();
+    };
+  }
 }
 
 // Multi-Language Translation Switcher
 function initLanguageSwitcher() {
-  window.toggleLangMenu = function() {
+  ensureGoogleTranslateElement();
+
+  // Read saved language from cookie or localStorage
+  let savedLang = localStorage.getItem('hikka_selected_lang');
+  const cookieMatch = getCookie('googtrans');
+  if (cookieMatch) {
+    const parts = cookieMatch.split('/');
+    if (parts.length >= 3 && parts[2]) {
+      savedLang = parts[2];
+    }
+  }
+
+  if (savedLang && LANG_MAP[savedLang]) {
+    updateLangUI(savedLang);
+    if (savedLang !== 'en') {
+      loadGoogleTranslateScript(false);
+    }
+  }
+
+  window.toggleLangMenu = function(e) {
+    if (e) {
+      if (typeof e.preventDefault === 'function') e.preventDefault();
+      if (typeof e.stopPropagation === 'function') e.stopPropagation();
+    }
     const menus = document.querySelectorAll('.lang-menu-dropdown');
     menus.forEach(menu => menu.classList.toggle('hidden'));
   };
 
   window.switchLanguage = function(langCode, flagUrl, langName) {
-    const flagEls = document.querySelectorAll('.current-lang-flag');
-    const textEls = document.querySelectorAll('.current-lang-text');
-    flagEls.forEach(el => {
-      if (el.tagName === 'IMG') {
-        el.src = flagUrl;
-      } else {
-        el.textContent = flagUrl;
-      }
-    });
-    textEls.forEach(el => el.textContent = langName);
+    if (!LANG_MAP[langCode]) langCode = 'en';
+    const langInfo = LANG_MAP[langCode];
+
+    localStorage.setItem('hikka_selected_lang', langCode);
+    updateLangUI(langCode);
 
     const menus = document.querySelectorAll('.lang-menu-dropdown');
     menus.forEach(m => m.classList.add('hidden'));
 
     if (langCode === 'en') {
-      // Clear translation cookie / reset
+      // Clear translation cookies / reset
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + location.hostname;
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=." + location.hostname;
       location.reload();
       return;
     }
@@ -218,38 +248,85 @@ function initLanguageSwitcher() {
     // Set Google Translate cookie and initialize
     document.cookie = `googtrans=/en/${langCode}; path=/;`;
     document.cookie = `googtrans=/en/${langCode}; path=/; domain=${location.hostname};`;
+    document.cookie = `googtrans=/en/${langCode}; path=/; domain=.${location.hostname};`;
 
-    if (!window.googleTranslateLoaded) {
-      window.googleTranslateLoaded = true;
-      const script = document.createElement('script');
-      script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateInit';
-      document.body.appendChild(script);
-
-      window.googleTranslateInit = function() {
-        new google.translate.TranslateElement({
-          pageLanguage: 'en',
-          autoDisplay: false
-        }, 'google_translate_element');
-        setTimeout(() => {
-          location.reload();
-        }, 300);
-      };
-    } else {
-      location.reload();
-    }
+    loadGoogleTranslateScript(true);
   };
 
   // Close dropdown on outside click
   document.addEventListener('click', (e) => {
-    const wrapper = document.querySelector('.lang-dropdown-wrapper');
-    const menus = document.querySelectorAll('.lang-menu-dropdown');
-    if (wrapper && !wrapper.contains(e.target)) {
+    if (!e.target.closest('.lang-dropdown-wrapper')) {
+      const menus = document.querySelectorAll('.lang-menu-dropdown');
       menus.forEach(m => m.classList.add('hidden'));
     }
   });
 }
 
-  // 11. FAQ Accordion Toggle
+function updateLangUI(langCode) {
+  const lang = LANG_MAP[langCode];
+  if (!lang) return;
+  document.querySelectorAll('.current-lang-flag').forEach(el => {
+    if (el.tagName === 'IMG') {
+      el.src = lang.flag;
+      el.alt = lang.name;
+    } else {
+      el.textContent = lang.flag;
+    }
+  });
+  document.querySelectorAll('.current-lang-text').forEach(el => {
+    el.textContent = lang.label || lang.name;
+  });
+}
+
+function ensureGoogleTranslateElement() {
+  if (!document.getElementById('google_translate_element')) {
+    const div = document.createElement('div');
+    div.id = 'google_translate_element';
+    div.style.display = 'none';
+    document.body.appendChild(div);
+  }
+}
+
+function getCookie(name) {
+  const v = `; ${document.cookie}`;
+  const parts = v.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return '';
+}
+
+function loadGoogleTranslateScript(triggerReloadOnReady = false) {
+  ensureGoogleTranslateElement();
+  if (window.google && window.google.translate) {
+    if (triggerReloadOnReady) {
+      location.reload();
+    }
+    return;
+  }
+  if (!window.googleTranslateScriptAppended) {
+    window.googleTranslateScriptAppended = true;
+    window.googleTranslateElementInit = function() {
+      try {
+        new google.translate.TranslateElement({
+          pageLanguage: 'en',
+          autoDisplay: false
+        }, 'google_translate_element');
+      } catch (err) {
+        console.warn("Google Translate init:", err);
+      }
+      if (triggerReloadOnReady) {
+        setTimeout(() => { location.reload(); }, 300);
+      }
+    };
+    const script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+    document.body.appendChild(script);
+  } else if (triggerReloadOnReady) {
+    location.reload();
+  }
+}
+
+function initFaqAccordion() {
   document.querySelectorAll('.faq-btn').forEach(btn => {
     btn.onclick = () => {
       const content = btn.nextElementSibling;

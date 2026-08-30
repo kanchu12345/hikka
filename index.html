@@ -63,10 +63,10 @@
     },
     "geo": {
       "@type": "GeoCoordinates",
-      "latitude": 6.136423,
-      "longitude": 80.098485
+      "latitude": 6.132283,
+      "longitude": 80.100754
     },
-    "hasMap": "https://maps.app.goo.gl/coczrnnnajTi581G9",
+    "hasMap": "https://www.google.com/maps/search/?api=1&query=6.132283,80.100754",
     "aggregateRating": {
       "@type": "AggregateRating",
       "ratingValue": "5.0",
@@ -128,7 +128,7 @@
       </a>
 
       <!-- Desktop Nav -->
-      <nav class="hidden lg:flex items-center gap-3.5 xl:gap-5 text-xs xl:text-sm font-bold tracking-wider">
+      <nav class="hidden lg:flex items-center gap-2 xl:gap-3.5 2xl:gap-5 text-[11px] xl:text-xs 2xl:text-sm font-bold tracking-wider">
         <a href="index.html" class="text-white hover:text-cyan-300 transition-colors">HOME</a>
         
         <!-- DESTINATIONS Mega Menu Dropdown -->
@@ -311,40 +311,40 @@
       </nav>
 
       <!-- Language & Highlighted Book Now Button -->
-      <div class="hidden lg:flex items-center gap-4 xl:gap-5 ml-3 xl:ml-6 pl-4 border-l border-white/20">
+      <div class="hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
         <!-- Interactive Language Selector Dropdown -->
         <div class="relative lang-dropdown-wrapper">
-          <button onclick="toggleLangMenu()" class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm">
-            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="current-lang-flag w-5 h-3.5 object-cover rounded-sm shadow-sm" />
-            <span class="current-lang-text font-semibold">EN</span>
+          <button type="button" onclick="toggleLangMenu(event)" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm flex-shrink-0">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="current-lang-flag w-4 h-3 object-cover rounded-sm shadow-sm" />
+            <span class="current-lang-text font-semibold text-[11px] xl:text-xs">EN</span>
             <span class="text-[10px] opacity-70">▾</span>
           </button>
 
           <!-- Dropdown Menu -->
-          <div class="lang-menu-dropdown hidden absolute right-0 top-full mt-2 w-48 bg-ocean-950/98 backdrop-blur-md text-white rounded-2xl shadow-2xl border border-white/20 p-2 z-50 divide-y divide-white/10">
+          <div class="lang-menu-dropdown hidden absolute right-0 top-full mt-2 w-44 bg-ocean-950/98 backdrop-blur-md text-white rounded-2xl shadow-2xl border border-white/20 p-1.5 z-50 divide-y divide-white/10">
             <div class="py-1 space-y-0.5">
-              <button onclick="switchLanguage('en', 'https://flagcdn.com/w40/gb.png', 'EN')" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+              <button type="button" onclick="switchLanguage('en', 'https://flagcdn.com/w40/gb.png', 'EN')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
                 <span>English</span>
               </button>
-              <button onclick="switchLanguage('de', 'https://flagcdn.com/w40/de.png', 'DE')" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+              <button type="button" onclick="switchLanguage('de', 'https://flagcdn.com/w40/de.png', 'DE')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
                 <span>Deutsch</span>
               </button>
-              <button onclick="switchLanguage('ru', 'https://flagcdn.com/w40/ru.png', 'RU')" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/ru.png" alt="Русский" class="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+              <button type="button" onclick="switchLanguage('ru', 'https://flagcdn.com/w40/ru.png', 'RU')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/ru.png" alt="Русский" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
                 <span>Русский</span>
               </button>
-              <button onclick="switchLanguage('fr', 'https://flagcdn.com/w40/fr.png', 'FR')" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+              <button type="button" onclick="switchLanguage('fr', 'https://flagcdn.com/w40/fr.png', 'FR')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
                 <span>Français</span>
               </button>
-              <button onclick="switchLanguage('it', 'https://flagcdn.com/w40/it.png', 'IT')" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/it.png" alt="Italiano" class="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+              <button type="button" onclick="switchLanguage('it', 'https://flagcdn.com/w40/it.png', 'IT')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/it.png" alt="Italiano" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
                 <span>Italiano</span>
               </button>
-              <button onclick="switchLanguage('si', 'https://flagcdn.com/w40/lk.png', 'LK')" class="w-full flex items-center gap-3 px-3 py-2 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/lk.png" alt="සිංහල" class="w-5 h-3.5 object-cover rounded-sm shadow-sm" />
+              <button type="button" onclick="switchLanguage('si', 'https://flagcdn.com/w40/lk.png', 'LK')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/lk.png" alt="සිංහල" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
                 <span>සිංහල</span>
               </button>
             </div>
@@ -352,15 +352,15 @@
         </div>
 
         <!-- Highlighted Book Now Button -->
-        <button onclick="openBookingModal()" class="px-5 xl:px-7 py-2.5 text-xs xl:text-sm font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/60 transition-all duration-300 hover:scale-105 transform cursor-pointer uppercase flex items-center gap-1.5 whitespace-nowrap">
+        <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/60 transition-all duration-300 hover:scale-105 transform cursor-pointer uppercase flex items-center gap-1.5 whitespace-nowrap">
           <span>⚡</span>
           <span>BOOK NOW</span>
         </button>
       </div>
 
       <!-- Mobile Button -->
-      <div class="flex lg:hidden items-center gap-2">
-        <button onclick="openBookingModal()" class="px-4 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 text-xs font-black shadow-md uppercase">
+      <div class="flex lg:hidden items-center gap-2 flex-shrink-0">
+        <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 text-xs font-black shadow-md uppercase whitespace-nowrap">
           BOOK NOW
         </button>
         <button id="mobile-menu-btn" class="p-2 rounded-xl text-white hover:bg-white/10" aria-label="Toggle menu">
@@ -1182,25 +1182,26 @@
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
         <div class="lg:col-span-7 bg-white p-3 rounded-3xl shadow-md border border-gray-200 overflow-hidden h-[400px]">
-          <iframe src="https://maps.google.com/maps?q=6.1322297,80.1005877&hl=en&z=17&output=embed" width="100%" height="100%" style="border:0; border-radius:1.25rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Google Map Location"></iframe>
+          <iframe src="https://maps.google.com/maps?q=6.132283,80.100754&hl=en&z=18&output=embed" width="100%" height="100%" style="border:0; border-radius:1.25rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hikka Surf School Google Map Location"></iframe>
         </div>
 
         <div class="lg:col-span-5 bg-slate-50 p-8 rounded-3xl shadow-sm border border-gray-200 space-y-6">
           <div>
             <h3 class="font-serif-heading font-black text-2xl text-gray-900 mb-2">Beachfront Station</h3>
             <p class="text-sm text-gray-600 leading-relaxed">
-              We are located right on the soft sand of Narigama Beach where the waves are clean and beginner-friendly.
+              We are located right on the beachfront near Hikka Tranz by Cinnamon, where the waves are clean and beginner-friendly.
             </p>
           </div>
 
           <div class="space-y-2 text-xs sm:text-sm text-gray-700">
-            <div>✓ <span>Turtle Beach / Galle Road (Near Hikka Tranz), Hikkaduwa</span></div>
+            <div>✓ <span>Hikka Surf School, Galle Road, Hikkaduwa</span></div>
+            <div>✓ <span>GPS: 6.132283, 80.100754</span></div>
             <div>✓ <span>Open Daily: 6:30 AM – 6:30 PM (All Year)</span></div>
             <div>✓ <span>Boards & Rashguards Ready on Arrival</span></div>
           </div>
 
           <div class="space-y-2 pt-2">
-            <a href="https://maps.app.goo.gl/coczrnnnajTi581G9" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 bg-gray-900 hover:bg-surf-700 text-white font-bold rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors">
+            <a href="https://www.google.com/maps/search/?api=1&query=6.132283,80.100754" target="_blank" rel="noopener noreferrer" class="w-full py-3.5 bg-gray-900 hover:bg-surf-700 text-white font-bold rounded-full text-xs sm:text-sm flex items-center justify-center gap-2 transition-colors shadow-md">
               <span>Open in Google Maps App</span> ↗
             </a>
           </div>
