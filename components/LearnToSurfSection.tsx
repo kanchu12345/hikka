@@ -64,7 +64,7 @@ export default function LearnToSurfSection({ settings, surfActivity }: LearnToSu
   const keyFeatures = [
     {
       title: 'Experienced Local Instructors',
-      desc: 'Native Hikkaduwa surfers with 10+ years ocean knowledge, ISA-aligned coaching, and lifesaver training.',
+      desc: 'Native Hikkaduwa surfers with 10+ years ocean knowledge, expert coaching, and lifesaver training.',
     },
     {
       title: 'Surfboards & Gear Provided',

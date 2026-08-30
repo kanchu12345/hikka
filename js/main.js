@@ -425,7 +425,7 @@ const GALLERY_STORIES = [
   {
     category: "🏄 SURF LESSONS",
     title: "Catching Your First Wave on Narigama Sandbank",
-    description: "Feel the pure rush of standing up on unbroken green waves with patient 1-on-1 coaching from native ISA instructors. Soft-top boards, personalized wave selection, and 100% stand-up guarantee.",
+    description: "Feel the pure rush of standing up on unbroken green waves with patient 1-on-1 coaching from native local instructors. Soft-top boards, personalized wave selection, and 100% stand-up guarantee.",
     tags: ["📍 Narigama Beach", "🏄 Beginner to Pro", "🕒 1.5 - 2 Hours"],
     image: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80",
     activityName: "Beginner Surf Lesson"
@@ -587,56 +587,43 @@ function initSurfIntroShowcase() {
 
   const slidesData = [
     {
-      url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80",
       title: "Clean Peeling Sandbank Waves",
       badge: "🏄 Narigama Main Break",
       tag: "Ideal for All Levels"
     },
     {
-      url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
       title: "Warm 28°C Tropical Waters",
       badge: "🌊 No Wetsuit Needed",
       tag: "100% Stand-Up Guarantee"
     },
     {
-      url: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=1200&q=80",
-      title: "ISA Certified Local Coaches",
-      badge: "🏆 100% Local Native Instructors",
+      title: "Experienced Local Instructors",
+      badge: "🏆 100% Native Surf Guides",
       tag: "Step-by-step Patient Guidance"
     },
     {
-      url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
       title: "All Equipment & Rashguards Included",
       badge: "🛡️ Safety Briefing & Soft-Tops",
       tag: "Zero Coral Hazards"
     }
   ];
 
-  container.innerHTML = slidesData.map((s, idx) => `
-    <div class="surf-intro-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out ${idx === 0 ? 'opacity-100 active' : ''}" style="background-image: url('${s.url}'); background-size: cover; background-position: center;"></div>
-  `).join('');
-
-  if (dotsContainer) {
-    dotsContainer.innerHTML = slidesData.map((_, idx) => `
-      <button type="button" onclick="setSurfIntroSlide(${idx})" class="surf-intro-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${idx === 0 ? 'w-8 bg-amber-400' : 'w-2.5 bg-white/40 hover:bg-white/70'}" aria-label="Go to slide ${idx + 1}"></button>
-    `).join('');
-  }
+  const slides = container.querySelectorAll('.surf-intro-slide');
 
   let currentIdx = 0;
   let introTimer = null;
 
   window.setSurfIntroSlide = function(idx) {
-    const slides = container.querySelectorAll('.surf-intro-slide');
     const dots = dotsContainer ? dotsContainer.querySelectorAll('.surf-intro-dot') : [];
     if (!slides.length) return;
 
     slides.forEach((sl, sIdx) => {
       if (sIdx === idx) {
-        sl.classList.add('opacity-100', 'active');
-        sl.classList.remove('opacity-0');
+        sl.classList.add('opacity-100', 'active', 'z-10');
+        sl.classList.remove('opacity-0', 'z-0');
       } else {
-        sl.classList.remove('opacity-100', 'active');
-        sl.classList.add('opacity-0');
+        sl.classList.remove('opacity-100', 'active', 'z-10');
+        sl.classList.add('opacity-0', 'z-0');
       }
     });
 
