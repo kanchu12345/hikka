@@ -736,14 +736,22 @@
         </p>
       </div>
 
-      <!-- Featured Southern Province Destinations & Sri Lanka Excursions Story Banner -->
-      <div class="rounded-3xl overflow-hidden bg-gradient-to-r from-ocean-950 via-slate-900 to-ocean-900 border border-ocean-800/60 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 text-white">
+      <!-- Featured Southern Province Destinations & Sri Lanka Excursions Story Banner (With Animated Safari Tour Jeep) -->
+      <div class="rounded-3xl overflow-hidden bg-gradient-to-r from-ocean-950 via-slate-900 to-ocean-900 border border-ocean-800/60 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 text-white relative">
         
         <!-- Left: Captivating Story Narrative with Popular Destinations -->
         <div class="lg:col-span-7 space-y-4">
-          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
-            <span>🌴</span>
-            <span>SOUTHERN PROVINCE & SRI LANKA EXCURSIONS</span>
+          <div class="flex items-center justify-between gap-3 flex-wrap">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-500/20 border border-amber-400/30 text-amber-300 text-xs font-bold uppercase tracking-wider">
+              <span>🌴</span>
+              <span>SOUTHERN PROVINCE & SRI LANKA EXCURSIONS</span>
+            </div>
+
+            <!-- Animated Safari & Heritage Explorer Mascot -->
+            <div class="inline-flex items-center gap-2 px-3 py-1 bg-amber-950/60 backdrop-blur-md rounded-full border border-amber-400/30 text-amber-200 text-xs font-bold shadow-md">
+              <span class="taxi-bounce-icon text-sm">🚙</span>
+              <span>Live Safari & Day Tours</span>
+            </div>
           </div>
 
           <h3 class="text-2xl sm:text-4xl font-black font-serif-heading text-white leading-tight">
@@ -753,6 +761,48 @@
           <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
             Beyond the waves of Hikkaduwa lies a world of UNESCO heritage fortresses, wild leopard & elephant safaris, serene mangrove rivers, and golden palm-fringed coastlines. Explore Galle Dutch Fort, Mirissa's blue whales, Yala National Park, and hidden waterfalls in private air-conditioned comfort with our trusted local chauffeur guides.
           </p>
+
+          <!-- Animated Safari Trail Strip with Driving 4x4 Tour Jeep -->
+          <div class="space-y-1.5 pt-1">
+            <div class="flex items-center justify-between text-[10px] font-extrabold uppercase tracking-wider text-amber-400/80 px-1">
+              <span>🏰 Galle Dutch Fort</span>
+              <span class="text-cyan-300">🐋 Mirissa Coast</span>
+              <span class="text-emerald-400">🐆 Yala Safari 🐘</span>
+            </div>
+
+            <div class="safari-trail-strip">
+              <!-- Trail Dashed Line -->
+              <div class="safari-dashed-line"></div>
+
+              <!-- Driving 4x4 Safari Jeep SVG -->
+              <div class="animated-safari-jeep">
+                <svg class="w-16 h-8 drop-shadow-md" viewBox="0 0 100 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Safari Jeep Roof Rack with Luggage -->
+                  <rect x="22" y="6" width="38" height="4" rx="1.5" fill="#78350F" stroke="#D97706" stroke-width="1"/>
+                  <rect x="26" y="2" width="14" height="4" rx="1" fill="#D97706"/>
+                  <rect x="42" y="3" width="12" height="3" rx="1" fill="#0284C7"/>
+                  <!-- Jeep Cabin Rollcage -->
+                  <path d="M12 28 L24 10 L62 10 L75 22 L86 25 L88 34 L12 34 Z" fill="#065F46" stroke="#047857" stroke-width="1.5"/>
+                  <!-- Safari Open Windows -->
+                  <path d="M26 12 L44 12 L44 24 L22 24 Z" fill="#0284C7" opacity="0.85"/>
+                  <path d="M48 12 L60 12 L68 22 L48 22 Z" fill="#0284C7" opacity="0.85"/>
+                  <!-- Safari Headlights & Front Bullbar -->
+                  <circle cx="86" cy="28" r="2.5" fill="#FEF08A"/>
+                  <rect x="85" y="26" width="4" height="8" rx="1" fill="#94A3B8"/>
+                  <circle cx="12" cy="28" r="2" fill="#EF4444"/>
+                  <!-- Heavy Tread Safari Wheels -->
+                  <g class="taxi-wheel" style="transform-box: fill-box; transform-origin: center;">
+                    <circle cx="28" cy="36" r="7" fill="#0F172A" stroke="#CBD5E1" stroke-width="2"/>
+                    <circle cx="28" cy="36" r="3" fill="#D97706"/>
+                  </g>
+                  <g class="taxi-wheel" style="transform-box: fill-box; transform-origin: center;">
+                    <circle cx="72" cy="36" r="7" fill="#0F172A" stroke="#CBD5E1" stroke-width="2"/>
+                    <circle cx="72" cy="36" r="3" fill="#D97706"/>
+                  </g>
+                </svg>
+              </div>
+            </div>
+          </div>
 
           <!-- Key Destination Highlights Grid -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs text-gray-200">
@@ -790,9 +840,9 @@
       </div>
 
       <!-- Right: Stunning Galle Fort & Sri Lanka Visual Showcase -->
-      <div class="lg:col-span-5 relative h-72 sm:h-96 rounded-2xl overflow-hidden shadow-2xl border border-white/20">
-        <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80" alt="Galle Fort Lighthouse Sri Lanka" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
-        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none"></div>
+      <div class="lg:col-span-5 relative h-72 sm:h-96 rounded-2xl overflow-hidden shadow-2xl border border-white/20 bg-ocean-950">
+        <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1000&q=80" alt="Galle Dutch Fort Lighthouse Sri Lanka" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700 block" loading="lazy" />
+        <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-transparent to-transparent pointer-events-none"></div>
         <div class="absolute bottom-4 left-4 right-4 text-white">
           <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">UNESCO World Heritage & Beyond</span>
           <p class="text-sm font-serif-heading font-black">Galle Fort, Safari Parks, Whale Watching & Tea Hills</p>
