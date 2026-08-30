@@ -365,3 +365,88 @@ body {
   transform: scale(1.08);
 }
 
+/* ===== ANIMATED SNORKELER & WATER BUBBLES ===== */
+@keyframes diverSwimGlide {
+  0% {
+    transform: translate(0px, 0px) rotate(3deg);
+  }
+  25% {
+    transform: translate(12px, -8px) rotate(-2deg);
+  }
+  50% {
+    transform: translate(25px, 2px) rotate(4deg);
+  }
+  75% {
+    transform: translate(14px, -6px) rotate(-1deg);
+  }
+  100% {
+    transform: translate(0px, 0px) rotate(3deg);
+  }
+}
+
+@keyframes finKick {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(-18deg);
+  }
+}
+
+@keyframes bubbleFloatUp {
+  0% {
+    transform: translateY(100%) translateX(0px) scale(0.6);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.85;
+  }
+  50% {
+    transform: translateY(40%) translateX(12px) scale(0.9);
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0.85;
+  }
+  100% {
+    transform: translateY(-120%) translateX(-10px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+@keyframes bubbleShimmer {
+  0%, 100% {
+    box-shadow: 0 0 4px rgba(56, 189, 248, 0.4), inset 0 0 4px rgba(255, 255, 255, 0.8);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(56, 189, 248, 0.8), inset 0 0 8px rgba(255, 255, 255, 0.95);
+  }
+}
+
+.snorkeler-swim-container {
+  animation: diverSwimGlide 6s ease-in-out infinite;
+  transform-origin: center center;
+  filter: drop-shadow(0 10px 20px rgba(0, 132, 180, 0.35));
+  transition: all 0.5s ease;
+}
+
+.diver-fin {
+  animation: finKick 1.4s ease-in-out infinite;
+  transform-origin: 15% 50%;
+}
+
+.water-bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.85), rgba(56, 189, 248, 0.4) 60%, rgba(14, 116, 144, 0.2) 100%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  animation: bubbleFloatUp var(--bubble-duration, 5s) linear infinite, bubbleShimmer 3s ease-in-out infinite;
+  animation-delay: var(--bubble-delay, 0s);
+  left: var(--bubble-left, 50%);
+  bottom: 0;
+  width: var(--bubble-size, 16px);
+  height: var(--bubble-size, 16px);
+}
+
+
