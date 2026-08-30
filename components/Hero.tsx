@@ -75,22 +75,25 @@ export default function Hero({ settings }: HeroProps) {
         </p>
 
         {/* Action Buttons */}
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md sm:max-w-none">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-5 w-full max-w-2xl mx-auto">
           {/* Main Button */}
           <button
             onClick={() => setIsBookingOpen(true)}
-            className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-emerald-500 to-green-600 hover:from-emerald-600 hover:to-green-700 text-white font-extrabold rounded-2xl shadow-xl shadow-green-600/30 hover:shadow-2xl hover:shadow-green-600/40 transform hover:-translate-y-0.5 active:scale-95 transition-all text-base sm:text-lg flex items-center justify-center gap-3 border border-emerald-400/30"
+            className="btn-hero-emerald btn-shimmer group w-full sm:w-auto px-8 sm:px-9 py-4 rounded-full text-white font-black text-sm sm:text-base tracking-wider uppercase flex items-center justify-center gap-3 cursor-pointer whitespace-nowrap"
           >
-            <MessageSquare className="w-5 h-5 fill-white" />
-            <span>BOOK YOUR EXPERIENCE → WhatsApp</span>
+            <MessageSquare className="w-5 h-5 fill-current text-white flex-shrink-0 drop-shadow-sm" />
+            <span className="flex items-center gap-1.5 font-black text-white drop-shadow">
+              <span>BOOK ON WHATSAPP</span>
+              <span className="text-emerald-200 group-hover:translate-x-1 transition-transform">→</span>
+            </span>
           </button>
 
           {/* Secondary Button */}
           <a
             href="#activities"
-            className="w-full sm:w-auto px-8 py-4 bg-white/15 hover:bg-white/25 backdrop-blur-md text-white font-bold rounded-2xl border border-white/30 transform hover:-translate-y-0.5 active:scale-95 transition-all text-base sm:text-lg flex items-center justify-center gap-2"
+            className="btn-hero-glass group w-full sm:w-auto px-8 sm:px-9 py-4 rounded-full text-white font-black text-sm sm:text-base tracking-wider uppercase flex items-center justify-center gap-2.5 cursor-pointer whitespace-nowrap"
           >
-            <Compass className="w-5 h-5 text-cyan-300" />
+            <span className="group-hover:rotate-12 transition-transform duration-300 text-base sm:text-lg">🌴</span>
             <span>EXPLORE ACTIVITIES</span>
           </a>
         </div>
