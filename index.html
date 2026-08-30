@@ -627,15 +627,64 @@
   <section id="popular-experiences" class="py-24 bg-white reveal-on-scroll">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       
-      <div class="text-center max-w-3xl mx-auto mb-16">
-        <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Hikkaduwa Adventures</span>
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="text-xs font-bold uppercase tracking-widest text-surf-600 block mb-2">Hikkaduwa Ocean Adventures</span>
         <h2 class="text-3xl sm:text-5xl font-black font-serif-heading text-gray-900 tracking-tight">
           Popular Experiences & Activities
         </h2>
         <div class="gold-divider mx-auto my-4"></div>
         <p class="text-gray-600 text-base sm:text-lg">
-          From riding your first wave on Narigama Beach to swimming with sea turtles and discovering Sri Lanka's cultural treasures.
+          From riding your first wave on Narigama Beach to swimming with wild sea turtles and exploring vibrant marine coral gardens.
         </p>
+      </div>
+
+      <!-- Featured Marine & Coral Sanctuary Story Banner with Snorkeling Showcase -->
+      <div class="mb-14 rounded-3xl overflow-hidden bg-gradient-to-r from-ocean-950 via-slate-900 to-ocean-900 border border-ocean-800/60 shadow-xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center p-6 sm:p-10 text-white">
+        
+        <!-- Left: Captivating Story Narrative -->
+        <div class="lg:col-span-7 space-y-4">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-cyan-500/20 border border-cyan-400/30 text-cyan-300 text-xs font-bold uppercase tracking-wider">
+            <span>🤿</span>
+            <span>MARINE NATIONAL PARK & CORAL REEF</span>
+          </div>
+
+          <h3 class="text-2xl sm:text-4xl font-black font-serif-heading text-white leading-tight">
+            Immerse Yourself in Hikkaduwa's Living Underwater Paradise
+          </h3>
+
+          <p class="text-gray-300 text-xs sm:text-sm leading-relaxed">
+            Step right off the golden shore and drift above shallow, crystal-clear coral gardens teeming with tropical reef fish, butterfly fish, and friendly wild sea turtles. Guided by local ocean experts who know every secret reef corner, all equipment, sanitized masks, fins, and safety life vests are fully provided.
+          </p>
+
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold text-cyan-300">🤿 Coral Gardens Snorkeling</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold text-emerald-300">🐢 Wild Sea Turtle Bay</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold text-sand-300">🐠 60+ Marine Species</span>
+            <span class="px-3 py-1 bg-white/10 rounded-full text-xs font-semibold text-amber-300">👨‍👩‍👧 Family Friendly</span>
+          </div>
+
+          <div class="pt-2 flex flex-wrap gap-3">
+            <button type="button" onclick="openBookingModal('Guided Coral Reef Snorkeling')" class="btn-hero-emerald btn-shimmer px-6 py-3 rounded-full text-white font-bold text-xs uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer shadow-lg">
+              <span>BOOK SNORKELING ON WHATSAPP</span>
+              <span>→</span>
+            </button>
+            <a href="snorkeling.html" class="px-6 py-3 rounded-full bg-white/10 hover:bg-white/20 text-white font-bold text-xs border border-white/20 transition-all inline-flex items-center gap-1.5">
+              <span>View Snorkeling Details</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Stunning Snorkeling & Coral Reef Image Showcase -->
+        <div class="lg:col-span-5 relative h-64 sm:h-80 rounded-2xl overflow-hidden shadow-2xl border border-white/20">
+          <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Snorkeling in Hikkaduwa Coral Sanctuary" class="w-full h-full object-cover hover:scale-105 transition-transform duration-700" loading="lazy" />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent pointer-events-none"></div>
+          <div class="absolute bottom-4 left-4 right-4 text-white">
+            <span class="text-[10px] uppercase font-bold text-cyan-300 tracking-wider">Hikkaduwa Marine Sanctuary</span>
+            <p class="text-sm font-serif-heading font-black">Crystal Clear Waters & Protected Coral Reef</p>
+          </div>
+        </div>
+
       </div>
 
       <!-- 8 Activity Cards Grid with Auto-Rotating Photos -->
@@ -676,7 +725,7 @@
           <div>
             <div class="relative h-52 overflow-hidden card-slider-box" data-interval="4000">
               <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Snorkeling in Hikkaduwa Marine Sanctuary" class="card-slide-img active" loading="lazy">
-              <img src="https://images.unsplash.com/photo-1682687220063-4742bd7fd538?auto=format&fit=crop&w=800&q=80" alt="Hikkaduwa Coral Reef" class="card-slide-img" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=800&q=80" alt="Hikkaduwa Coral Reef Snorkeling" class="card-slide-img" loading="lazy">
               <span class="absolute top-3 left-3 px-3 py-1 bg-cyan-600 text-white rounded-full text-[10px] font-extrabold uppercase tracking-wide z-10 shadow-sm">Coral Reef</span>
             </div>
             <div class="p-6">
@@ -736,7 +785,7 @@
           <div>
             <div class="relative h-52 overflow-hidden card-slider-box" data-interval="4500">
               <img src="https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80" alt="Deep Sea Ocean Fishing Boat" class="card-slide-img active" loading="lazy">
-              <img src="https://images.unsplash.com/photo-1516683037151-9a17603a8dc7?auto=format&fit=crop&w=800&q=80" alt="Sunrise Sea Fishing" class="card-slide-img" loading="lazy">
+              <img src="https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=800&q=80" alt="Sunrise Sea Fishing Boat" class="card-slide-img" loading="lazy">
               <span class="absolute top-3 left-3 px-3 py-1 bg-blue-600 text-white rounded-full text-[10px] font-extrabold uppercase tracking-wide z-10 shadow-sm">Ocean Angling</span>
             </div>
             <div class="p-6">
