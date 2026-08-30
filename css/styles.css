@@ -354,3 +354,14 @@ body {
 .icon-float:nth-child(2) { animation-delay: 0.3s; }
 .icon-float:nth-child(3) { animation-delay: 0.6s; }
 .icon-float:nth-child(4) { animation-delay: 0.9s; }
+
+/* ===== SURF INTRO SHOWCASE SLIDES ===== */
+.surf-intro-slide {
+  transform: scale(1.03);
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), transform 6s ease-out;
+}
+
+.surf-intro-slide.active {
+  transform: scale(1.08);
+}
+

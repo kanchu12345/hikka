@@ -119,6 +119,9 @@ function initApp() {
 
   // 12. FAQ Accordion Toggle
   initFaqAccordion();
+
+  // 13. Surfing Introduction Animated Showcase
+  initSurfIntroShowcase();
 }
 
 function initBookingModal(cleanWhatsApp) {
@@ -573,3 +576,102 @@ window.closeLightbox = function() {
     modal.classList.remove('flex');
   }
 };
+
+// Surfing Intro Showcase (Auto-swapping with dots and captions)
+function initSurfIntroShowcase() {
+  const container = document.getElementById('surf-intro-slideshow');
+  const dotsContainer = document.getElementById('surf-intro-dots');
+  const titleEl = document.getElementById('surf-intro-slide-title');
+  const badgeEl = document.getElementById('surf-intro-slide-badge');
+  if (!container) return;
+
+  const slidesData = [
+    {
+      url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80",
+      title: "Clean Peeling Sandbank Waves",
+      badge: "🏄 Narigama Main Break",
+      tag: "Ideal for All Levels"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1200&q=80",
+      title: "Warm 28°C Tropical Waters",
+      badge: "🌊 No Wetsuit Needed",
+      tag: "100% Stand-Up Guarantee"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1516762689617-e1cffcef479d?auto=format&fit=crop&w=1200&q=80",
+      title: "ISA Certified Local Coaches",
+      badge: "🏆 100% Local Native Instructors",
+      tag: "Step-by-step Patient Guidance"
+    },
+    {
+      url: "https://images.unsplash.com/photo-1509316975850-ff9c5deb0cd9?auto=format&fit=crop&w=1200&q=80",
+      title: "All Equipment & Rashguards Included",
+      badge: "🛡️ Safety Briefing & Soft-Tops",
+      tag: "Zero Coral Hazards"
+    }
+  ];
+
+  container.innerHTML = slidesData.map((s, idx) => `
+    <div class="surf-intro-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out ${idx === 0 ? 'opacity-100 active' : ''}" style="background-image: url('${s.url}'); background-size: cover; background-position: center;"></div>
+  `).join('');
+
+  if (dotsContainer) {
+    dotsContainer.innerHTML = slidesData.map((_, idx) => `
+      <button type="button" onclick="setSurfIntroSlide(${idx})" class="surf-intro-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer ${idx === 0 ? 'w-8 bg-amber-400' : 'w-2.5 bg-white/40 hover:bg-white/70'}" aria-label="Go to slide ${idx + 1}"></button>
+    `).join('');
+  }
+
+  let currentIdx = 0;
+  let introTimer = null;
+
+  window.setSurfIntroSlide = function(idx) {
+    const slides = container.querySelectorAll('.surf-intro-slide');
+    const dots = dotsContainer ? dotsContainer.querySelectorAll('.surf-intro-dot') : [];
+    if (!slides.length) return;
+
+    slides.forEach((sl, sIdx) => {
+      if (sIdx === idx) {
+        sl.classList.add('opacity-100', 'active');
+        sl.classList.remove('opacity-0');
+      } else {
+        sl.classList.remove('opacity-100', 'active');
+        sl.classList.add('opacity-0');
+      }
+    });
+
+    dots.forEach((dot, dIdx) => {
+      if (dIdx === idx) {
+        dot.className = "surf-intro-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer w-8 bg-amber-400";
+      } else {
+        dot.className = "surf-intro-dot h-2.5 rounded-full transition-all duration-300 cursor-pointer w-2.5 bg-white/40 hover:bg-white/70";
+      }
+    });
+
+    if (titleEl && slidesData[idx]) {
+      titleEl.textContent = slidesData[idx].title;
+    }
+    if (badgeEl && slidesData[idx]) {
+      badgeEl.textContent = slidesData[idx].badge;
+    }
+
+    currentIdx = idx;
+  };
+
+  function startAutoPlay() {
+    if (introTimer) clearInterval(introTimer);
+    introTimer = setInterval(() => {
+      const nextIdx = (currentIdx + 1) % slidesData.length;
+      window.setSurfIntroSlide(nextIdx);
+    }, 3800);
+  }
+
+  startAutoPlay();
+
+  container.addEventListener('mouseenter', () => {
+    if (introTimer) clearInterval(introTimer);
+  });
+  container.addEventListener('mouseleave', () => {
+    startAutoPlay();
+  });
+}
