@@ -168,6 +168,12 @@ function initBookingModal(cleanWhatsApp) {
     modal.classList.remove('flex');
   };
 
+  window.inquireTour = function(tourName = 'Sri Lanka Day Trip') {
+    const cleanPhone = cleanWhatsApp || '94771234567';
+    const text = `Hi Hikka Surf School! I would like to inquire about booking the ${tourName} private day tour from Hikkaduwa. Please let me know prices and availability!`;
+    window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
+  };
+
   if (bookingModal) {
     bookingModal.onclick = (e) => {
       if (e.target === bookingModal) {
