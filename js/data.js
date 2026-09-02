@@ -12,13 +12,20 @@ const DEFAULT_SITE_DATA = {
     whatsappNumber: "+94771234567",
     phoneNumber: "+94 77 123 4567",
     email: "info@hikkasurfschool.com",
-    address: "Galle Road, Narigama Beach (Opposite Hotel Citrus), Hikkaduwa 80240, Sri Lanka",
-    googleMapsUrl: "https://www.google.com/maps/search/?api=1&query=6.132283,80.100754",
+    address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
+    googleMapsUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
     googleMapsEmbedIframe: "https://maps.google.com/maps?q=6.132283,80.100754&hl=en&z=18&output=embed",
     tripadvisorUrl: "https://www.tripadvisor.com",
-    instagramUrl: "https://www.instagram.com",
-    facebookUrl: "https://www.facebook.com",
+    instagramUrl: "https://www.instagram.com/hikkasurf",
+    facebookUrl: "https://web.facebook.com/profile.php?id=100088255598601",
     googleBusinessUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
+    liveSurfReport: {
+      waves: "2–4 ft Clean",
+      waterTemp: "28°C (No Wetsuit)",
+      condition: "Glassy Morning",
+      isLive: true,
+      lastUpdated: "Today 06:30 AM"
+    },
     autoSwapInterval: 4500, // ms per hero slide
     hero_images: [
       {
@@ -39,6 +46,44 @@ const DEFAULT_SITE_DATA = {
       }
     ]
   },
+  destinations: [
+    {
+      id: "galle-fort",
+      name: "Galle Dutch Fort",
+      highlight: "UNESCO Ramparts & Lighthouse",
+      duration: "25 Mins from Hikka",
+      icon: "🏰",
+      imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80",
+      description: "Historic 16th-century fortress, lighthouse walk, colonial Dutch architecture, boutiques, and sunset ramparts."
+    },
+    {
+      id: "mirissa-coast",
+      name: "Mirissa & Weligama",
+      highlight: "Whale Watching & Coconut Tree Hill",
+      duration: "50 Mins from Hikka",
+      icon: "🐋",
+      imageUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+      description: "Blue whale & spinner dolphin boat safaris, iconic Coconut Tree Hill headland, and gentle beginner surf bays."
+    },
+    {
+      id: "madu-river",
+      name: "Madu River Mangroves",
+      highlight: "64 Islands & Cinnamon Isle",
+      duration: "25 Mins from Hikka",
+      icon: "🚤",
+      imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+      description: "Serene boat safari through mangrove tunnels, cinnamon peeling demonstration, fish therapy, and island temples."
+    },
+    {
+      id: "yala-safari",
+      name: "Yala & Udawalawe Safari",
+      highlight: "Wild Leopards & Ceylon Elephants",
+      duration: "Full Day / 2.5 Hrs",
+      icon: "🐆",
+      imageUrl: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=600&q=80",
+      description: "High-density leopard territory, wild mother & calf elephant herds, sloth bears, and crocodiles in 4x4 safari jeeps."
+    }
+  ],
   activities: [
     {
       id: "surf-lessons",
