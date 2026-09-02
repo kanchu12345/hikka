@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -11,7 +11,7 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <title>CMS Dashboard | â¤ï¸ Hikkaduwa Hikka Surf School</title>
+  <title>CMS Dashboard | ❤️ Hikkaduwa Hikka Surf School</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -47,26 +47,27 @@
 
     <div class="flex items-center gap-2 sm:gap-3">
       <a href="index.html" target="_blank" class="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 active:scale-95">
-        <span>Site</span> â†—
+        <span>Preview Site</span> ↗
       </a>
       <button onclick="saveAllSettings()" class="px-4 py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-95">
-        <span>💬¾ Save All</span>
+        <span>💾 Save All</span>
       </button>
     </div>
   </header>
 
   <!-- Mobile Horizontal Scrollable Tab Bar -->
   <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2.5 px-3 sm:hidden flex items-center gap-2 no-scrollbar shadow-sm">
-    <button onclick="showTab('settings')" id="m-tab-settings" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">âš™ï¸ Settings</button>
-    <button onclick="showTab('social')" id="m-tab-social" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Social</button>
-    <button onclick="showTab('surfreport')" id="m-tab-surfreport" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌊Š Surf Report</button>
-    <button onclick="showTab('hero')" id="m-tab-hero" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Slides</button>
-    <button onclick="showTab('destinations')" id="m-tab-destinations" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌊´ Destinations</button>
+    <button onclick="showTab('settings')" id="m-tab-settings" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">⚙️ Settings</button>
+    <button onclick="showTab('social')" id="m-tab-social" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📱 Social</button>
+    <button onclick="showTab('surfreport')" id="m-tab-surfreport" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌊 Surf Report</button>
+    <button onclick="showTab('hero')" id="m-tab-hero" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🖼️ Slides</button>
+    <button onclick="showTab('destinations')" id="m-tab-destinations" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌴 Destinations</button>
     <button onclick="showTab('activities')" id="m-tab-activities" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Activities</button>
-    <button onclick="showTab('gallery')" id="m-tab-gallery" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Gallery</button>
-    <button onclick="showTab('reviews')" id="m-tab-reviews" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⭐ Reviews</button>
-    <button onclick="showTab('faqs')" id="m-tab-faqs" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">â“ FAQ</button>
-    <button onclick="showTab('firebase')" id="m-tab-firebase" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Cloud</button>
+    <button onclick="showTab('gallery')" id="m-tab-gallery" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📷 Gallery</button>
+    <button onclick="showTab('reviews')" id="m-tab-reviews" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⭐ Reviews</button>
+    <button onclick="showTab('faqs')" id="m-tab-faqs" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">❓ FAQ</button>
+    <button onclick="showTab('firebase')" id="m-tab-firebase" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">☁️ Cloud</button>
+    <button onclick="showTab('backup')" id="m-tab-backup" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">💾 Backup</button>
   </div>
 
   <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
@@ -74,37 +75,37 @@
     <!-- Desktop Sidebar Navigation -->
     <aside class="hidden sm:block md:col-span-3 space-y-2">
       <button onclick="showTab('settings')" id="tab-btn-settings" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2">
-        <span>âš™ï¸ General Settings</span>
+        <span>⚙️ General Settings</span>
       </button>
       <button onclick="showTab('social')" id="tab-btn-social" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🏄 Social Media & Maps</span>
+        <span>📱 Social Media & Maps</span>
       </button>
       <button onclick="showTab('surfreport')" id="tab-btn-surfreport" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🌊Š Daily Surf Report</span>
+        <span>🌊 Daily Surf Report</span>
       </button>
       <button onclick="showTab('hero')" id="tab-btn-hero" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🏄 Hero Slideshow & Uploads</span>
+        <span>🖼️ Hero Slideshow & Uploads</span>
       </button>
       <button onclick="showTab('destinations')" id="tab-btn-destinations" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🌊´ Destinations & Day Trips</span>
+        <span>🌴 Destinations & Day Trips</span>
       </button>
       <button onclick="showTab('activities')" id="tab-btn-activities" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
         <span>🏄 Activities & Rates</span>
       </button>
       <button onclick="showTab('gallery')" id="tab-btn-gallery" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🏄 Photo Gallery Manager</span>
+        <span>📷 Photo Gallery Manager</span>
       </button>
       <button onclick="showTab('reviews')" id="tab-btn-reviews" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>⭐ Google Reviews</span>
+        <span>⭐ Google Reviews</span>
       </button>
       <button onclick="showTab('faqs')" id="tab-btn-faqs" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>â“ FAQ Accordions</span>
+        <span>❓ FAQ Accordions</span>
       </button>
       <button onclick="showTab('firebase')" id="tab-btn-firebase" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🏄 Firebase Cloud Sync</span>
+        <span>☁️ Firebase Cloud Sync</span>
       </button>
       <button onclick="showTab('backup')" id="tab-btn-backup" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🏄 Backup & JSON Export</span>
+        <span>💾 Backup & JSON Export</span>
       </button>
     </aside>
 
@@ -174,7 +175,7 @@
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🤙 Facebook Page URL</label>
+            <label class="block text-xs font-bold text-gray-700 mb-1">🤙 Facebook Page URL</label>
             <input type="url" id="set-facebook" placeholder="https://web.facebook.com/profile.php?id=100088255598601" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
 
@@ -184,7 +185,7 @@
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🏄 Google Business Maps Profile Link</label>
+            <label class="block text-xs font-bold text-gray-700 mb-1">📍 Google Business Maps Profile Link</label>
             <input type="url" id="set-maps-url" placeholder="https://maps.app.goo.gl/coczrnnnajTi581G9" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
@@ -200,7 +201,7 @@
       <section id="tab-surfreport" class="tab-content hidden space-y-4">
         <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
           <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">🌊Š Daily Live Surf & Beach Conditions</h2>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">🌊 Daily Live Surf & Beach Conditions</h2>
             <p class="text-xs text-gray-500">Updates the live ticker at the very top of every website page</p>
           </div>
           <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black rounded-full">Top Banner</span>
@@ -208,22 +209,22 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌊Š Waves & Swell</label>
-            <input type="text" id="set-surf-waves" placeholder="e.g. 2"“4 ft Clean" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">🌊 Waves & Swell</label>
+            <input type="text" id="set-surf-waves" placeholder="e.g. 2–4 ft Clean" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌊¡ï¸ Water Temperature</label>
+            <label class="block text-xs font-bold text-gray-700 mb-1">🌡️ Water Temperature</label>
             <input type="text" id="set-surf-water" placeholder="e.g. 28°C (No Wetsuit)" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌊¤ï¸ General Condition Note</label>
+            <label class="block text-xs font-bold text-gray-700 mb-1">🏄 General Condition Note</label>
             <input type="text" id="set-surf-condition" placeholder="e.g. Glassy Morning, Best for Beginners" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🏄 Last Updated Tag</label>
+            <label class="block text-xs font-bold text-gray-700 mb-1">🕒 Last Updated Tag</label>
             <input type="text" id="set-surf-updated" placeholder="e.g. Today 06:30 AM" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
@@ -244,118 +245,184 @@
           </div>
           <div class="flex items-center gap-2">
             <label class="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-1 shadow-sm active:scale-95">
-              <span>🏄 Upload from Phone</span>
+              <span>📁 Upload from Phone</span>
               <input type="file" accept="image/*" class="hidden" onchange="uploadHeroImageFile(event)" />
             </label>
             <button onclick="addHeroImage()" class="px-3 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add URL</button>
           </div>
         </div>
 
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Slide Swap Interval (Milliseconds, e.g. 4500)</label>
-          <input type="number" id="set-hero-interval" class="w-full sm:w-48 p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl border">
+          <label class="text-xs font-bold text-gray-700 whitespace-nowrap">Slide Interval (ms):</label>
+          <input type="number" id="set-hero-interval" class="p-2 bg-white border rounded-xl text-xs font-bold w-32" />
+          <span class="text-xs text-gray-500">(4500 = 4.5 seconds)</span>
         </div>
 
-        <div id="hero-slides-list" class="space-y-3 pt-2">
-          <!-- Dynamic Hero Slides with Preview & Upload -->
+        <div id="hero-slides-list" class="space-y-3">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
+            Save Hero Slides
+          </button>
         </div>
       </section>
 
-      <!-- 5. DESTINATIONS & TOURS TAB WITH UPLOAD -->
+      <!-- 5. DESTINATIONS TAB -->
       <section id="tab-destinations" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
           <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">🌊´ Destinations & Day Trips Manager</h2>
-            <p class="text-xs text-gray-500">Manage Southern Province & Sri Lanka sights and photos</p>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">Destinations & Day Trips</h2>
+            <p class="text-xs text-gray-500">Edit Southern Province sights, descriptions, and photo highlights</p>
           </div>
-          <button onclick="addDestinationItem()" class="px-3.5 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Sight</button>
+          <button onclick="addDestinationItem()" class="px-3 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Destination</button>
         </div>
 
         <div id="destinations-list" class="space-y-4">
-          <!-- Dynamic Destinations with Upload -->
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
+            Save Destinations
+          </button>
         </div>
       </section>
 
-      <!-- 6. ACTIVITIES & RATES CMS TAB WITH UPLOAD -->
+      <!-- 6. ACTIVITIES TAB -->
       <section id="tab-activities" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
           <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Activities & Rates CMS</h2>
-            <p class="text-xs text-gray-500">Update lesson pricing, duration, and photos</p>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">Ocean Activities, Surf & Tour Rates</h2>
+            <p class="text-xs text-gray-500">Update USD starting prices, durations, and activity cards</p>
           </div>
-          <span class="text-xs font-bold px-2 py-1 bg-surf-50 text-surf-700 rounded-lg">8 Categories</span>
         </div>
+
         <div id="activities-list" class="space-y-4">
-          <!-- Dynamic Activity Cards with Upload -->
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
+            Save Activities & Rates
+          </button>
         </div>
       </section>
 
-      <!-- 7. PHOTO GALLERY MANAGER WITH DIRECT UPLOAD -->
+      <!-- 7. PHOTO GALLERY TAB -->
       <section id="tab-gallery" class="tab-content hidden space-y-4">
         <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
           <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">🏄 Photo Gallery Manager</h2>
-            <p class="text-xs text-gray-500">Upload new photos to the Gallery page from your phone or PC</p>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">Photo Gallery Manager</h2>
+            <p class="text-xs text-gray-500">Add or remove guest photos, surf action shots, and turtle videos</p>
           </div>
-          <label class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 shadow-md active:scale-95">
-            <span>🏄 Upload New Photo</span>
+          <label class="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-1 shadow-sm active:scale-95">
+            <span>📷 Upload New Photo</span>
             <input type="file" accept="image/*" class="hidden" onchange="uploadGalleryPhoto(event)" />
           </label>
         </div>
 
-        <div id="gallery-items-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          <!-- Dynamic Gallery Cards -->
+        <div id="gallery-items-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
+            Save Photo Gallery
+          </button>
         </div>
       </section>
 
-      <!-- 8. REVIEWS TAB WITH UPLOAD -->
+      <!-- 8. REVIEWS TAB -->
       <section id="tab-reviews" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Google Maps 5.0★ Reviews</h2>
-          <button onclick="addReviewItem()" class="px-3.5 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Review</button>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">Customer Testimonials & Google Reviews</h2>
+            <p class="text-xs text-gray-500">Manage 5.0-star guest reviews shown across the homepage and reviews page</p>
+          </div>
+          <button onclick="addReviewItem()" class="px-3 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Review</button>
         </div>
+
         <div id="reviews-list" class="space-y-4">
-          <!-- Dynamic Reviews -->
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
+            Save Reviews
+          </button>
         </div>
       </section>
 
-      <!-- 9. FAQ TAB -->
+      <!-- 9. FAQS TAB -->
       <section id="tab-faqs" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Frequently Asked Questions</h2>
-          <button onclick="addFaqItem()" class="px-3.5 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add FAQ</button>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">FAQ Accordion Questions & Answers</h2>
+            <p class="text-xs text-gray-500">Update questions and answers for first-time surfers and travelers</p>
+          </div>
+          <button onclick="addFaqItem()" class="px-3 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Question</button>
         </div>
-        <div id="faqs-list" class="space-y-3">
-          <!-- Dynamic FAQs -->
+
+        <div id="faqs-list" class="space-y-4">
+          <!-- Populated by JS -->
+        </div>
+
+        <div class="pt-2">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
+            Save FAQs
+          </button>
         </div>
       </section>
 
       <!-- 10. FIREBASE CLOUD SYNC TAB -->
       <section id="tab-firebase" class="tab-content hidden space-y-4">
-        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">🏄 Firebase Cloud Realtime Sync</h2>
-        <p class="text-xs text-gray-600 leading-relaxed">
-          Sync your local edits to Google Firebase Firestore to update all client phones and laptops worldwide in real time.
-        </p>
+        <div class="border-b border-gray-100 pb-3">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">☁️ Firebase Firestore Cloud Sync</h2>
+          <p class="text-xs text-gray-500">Sync all your website edits across multiple devices and browsers</p>
+        </div>
 
-        <div class="flex flex-col sm:flex-row gap-3">
-          <button onclick="pushToFirestore()" class="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer shadow-md active:scale-95">
-            Push All Local Data to Firestore â˜ï¸
+        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl space-y-2">
+          <div class="flex items-center gap-2 text-emerald-800 font-bold text-xs sm:text-sm">
+            <span class="w-3 h-3 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>Cloud Database Ready</span>
+          </div>
+          <p class="text-xs text-emerald-700 leading-relaxed">
+            When connected to Firebase, your changes are stored in the cloud. Every guest visiting your website from any phone or computer will see your updates instantly!
+          </p>
+        </div>
+
+        <div class="pt-2">
+          <button onclick="pushToFirestore()" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98 flex items-center justify-center gap-2">
+            <span>☁️ Push Local Data to Firebase Cloud</span>
           </button>
         </div>
       </section>
 
       <!-- 11. BACKUP & EXPORT TAB -->
       <section id="tab-backup" class="tab-content hidden space-y-4">
-        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">🏄 Data Backup & JSON Export</h2>
-        <p class="text-xs text-gray-600 leading-relaxed">
-          Download your complete website configuration as a backup file.
-        </p>
+        <div class="border-b border-gray-100 pb-3">
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">💾 Backup, Export & Restore</h2>
+          <p class="text-xs text-gray-500">Export your site configuration as a JSON file or reset to factory defaults</p>
+        </div>
 
-        <div class="p-4 bg-slate-50 border rounded-2xl space-y-3">
-          <div class="text-xs font-bold text-gray-800">Download Full Website Data Backup</div>
-          <button onclick="downloadDataJson()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-2 active:scale-95">
-            <span>💬¾ Download data.json</span>
-          </button>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div class="p-4 bg-gray-50 border rounded-2xl space-y-2">
+            <h3 class="font-bold text-xs sm:text-sm text-gray-900">Download Data JSON</h3>
+            <p class="text-xs text-gray-500">Download a full backup of your current website settings.</p>
+            <button onclick="downloadDataJson()" class="w-full py-2.5 bg-[#0084B4] hover:bg-[#075985] text-white font-bold rounded-xl text-xs cursor-pointer shadow-sm">
+              📥 Download data.json
+            </button>
+          </div>
+
+          <div class="p-4 bg-red-50 border border-red-100 rounded-2xl space-y-2">
+            <h3 class="font-bold text-xs sm:text-sm text-red-900">Reset to Defaults</h3>
+            <p class="text-xs text-red-600">Restore original factory settings for all services and pricing.</p>
+            <button onclick="if(confirm('Are you sure you want to reset all data to default?')){ localStorage.removeItem('hikka_surf_site_data'); location.reload(); }" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs cursor-pointer shadow-sm">
+              ⚠️ Reset All Settings
+            </button>
+          </div>
         </div>
       </section>
 
@@ -365,10 +432,10 @@
   <!-- Persistent Mobile Bottom Save Bar -->
   <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex items-center justify-between gap-3 sm:hidden z-50 shadow-2xl pb-[max(0.75rem,env(safe-area-inset-bottom))]">
     <a href="index.html" target="_blank" class="flex-1 py-3 bg-gray-100 active:bg-gray-200 text-gray-800 text-center rounded-xl text-xs font-bold">
-      Preview â†—
+      Preview Site ↗
     </a>
     <button onclick="saveAllSettings()" class="flex-1 py-3 bg-[#25D366] active:bg-emerald-600 text-white text-center rounded-xl text-xs font-black shadow-md">
-      💬¾ Save Changes
+      💾 Save Changes
     </button>
   </div>
 
@@ -488,7 +555,7 @@
 
       // Live Surf Report
       const rep = s.liveSurfReport || {};
-      document.getElementById('set-surf-waves').value = rep.waves || '2"“4 ft Clean';
+      document.getElementById('set-surf-waves').value = rep.waves || '2–4 ft Clean';
       document.getElementById('set-surf-water').value = rep.waterTemp || '28°C (No Wetsuit)';
       document.getElementById('set-surf-condition').value = rep.condition || 'Glassy Morning';
       document.getElementById('set-surf-updated').value = rep.lastUpdated || 'Today 06:30 AM';
@@ -511,7 +578,7 @@
             <input type="text" value="${img.url}" onchange="siteData.settings.hero_images[${idx}].url = this.value" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs" />
             <div class="flex items-center gap-2">
               <label class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
-                <span>🏄 Replace from Phone</span>
+                <span>📁 Replace from Phone</span>
                 <input type="file" accept="image/*" class="hidden" onchange="readFileAsDataURL(this.files[0]).then(u => { siteData.settings.hero_images[${idx}].url = u; renderHeroSlides(); })" />
               </label>
               <button onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="text-xs text-red-600 font-bold hover:underline cursor-pointer">Delete Slide</button>
@@ -538,7 +605,7 @@
         <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <span class="text-xl">${dest.icon || '🌊´'}</span>
+              <span class="text-xl">${dest.icon || '🌴'}</span>
               <input type="text" value="${dest.name}" onchange="siteData.destinations[${idx}].name = this.value" class="font-bold text-xs sm:text-sm p-1.5 bg-white border rounded-xl" />
             </div>
             <input type="text" value="${dest.duration}" onchange="siteData.destinations[${idx}].duration = this.value" class="text-xs p-1.5 bg-white border rounded-xl w-32" />
@@ -548,7 +615,7 @@
             <div class="flex-1 space-y-2">
               <input type="text" value="${dest.imageUrl}" onchange="siteData.destinations[${idx}].imageUrl = this.value" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs" />
               <label class="inline-block px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
-                <span>🏄 Upload Photo from Phone</span>
+                <span>📁 Upload Photo from Phone</span>
                 <input type="file" accept="image/*" class="hidden" onchange="uploadDestinationPhoto(event, ${idx})" />
               </label>
             </div>
@@ -568,7 +635,7 @@
         name: "New Destination",
         highlight: "Sight Highlight",
         duration: "30 Mins",
-        icon: "🌊´",
+        icon: "🌴",
         imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80",
         description: "Day trip description."
       });
@@ -597,7 +664,7 @@
                 </div>
               </div>
               <label class="inline-block px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
-                <span>🏄 Upload Photo from Phone</span>
+                <span>📁 Upload Photo from Phone</span>
                 <input type="file" accept="image/*" class="hidden" onchange="uploadActivityPhoto(event, ${idx})" />
               </label>
             </div>
@@ -691,7 +758,7 @@
       siteData.settings.liveSurfReport.lastUpdated = document.getElementById('set-surf-updated').value;
 
       saveActiveSiteData(siteData);
-      alert("âœ… All changes saved successfully! Live website is updated instantly.");
+      alert("✅ All changes saved successfully! Live website is updated instantly.");
     }
 
     function downloadDataJson() {
@@ -708,9 +775,9 @@
       try {
         if (window.firebaseSync && window.firebaseSync.isConfigured) {
           await window.firebaseSync.syncLocalToCloud();
-          alert("â˜ï¸ Successfully pushed all data to Firestore!");
+          alert("☁️ Successfully pushed all data to Firestore!");
         } else {
-          alert("âš ï¸ Firebase is connecting... Please ensure you are online.");
+          alert("⚠️ Firebase is connecting... Please ensure you are online.");
         }
       } catch (err) {
         alert("Error syncing to Firestore: " + err.message);
