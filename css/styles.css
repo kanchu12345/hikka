@@ -708,17 +708,17 @@ body {
 /* Area-Specific Animated Vehicles */
 .env-vehicle-wrap {
   position: absolute;
-  bottom: 8px;
+  bottom: 12px;
   z-index: 10;
   animation: vehicleCruising 11s linear infinite;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
+  filter: drop-shadow(0 5px 12px rgba(0, 0, 0, 0.9));
 }
 
 @keyframes vehicleCruising {
-  0% { left: -90px; opacity: 0; }
+  0% { left: -100px; opacity: 0; }
   3% { opacity: 1; }
   97% { opacity: 1; }
-  100% { left: calc(100% + 15px); opacity: 0; }
+  100% { left: calc(100% + 20px); opacity: 0; }
 }
 
 .boat-water-bob {
@@ -738,9 +738,20 @@ body {
   100% { transform: translateY(-1.5px); }
 }
 
-.safari-wheel-spin {
+/* Precise Wheel Hub Spinning Animations */
+@keyframes wheelSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.wheel-front-spin {
+  transform-origin: 28px 32px;
   animation: wheelSpin 0.35s linear infinite;
-  transform-origin: center center;
+}
+
+.wheel-rear-spin {
+  transform-origin: 82px 32px;
+  animation: wheelSpin 0.35s linear infinite;
 }
 
 /* Area Selector Interactive Tabs & Live Badge */
