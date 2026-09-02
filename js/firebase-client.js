@@ -94,6 +94,27 @@ class FirebaseSyncEngine {
         saveActiveSiteData(currentData);
       }
     }, err => console.log('Firestore reviews listener:', err));
+    // Listen to destinations
+    this.db.collection('destinations').onSnapshot(snapshot => {
+      if (!snapshot.empty) {
+        const destinations = [];
+        snapshot.forEach(d => destinations.push(d.data()));
+        const currentData = getActiveSiteData();
+        currentData.destinations = destinations;
+        saveActiveSiteData(currentData);
+      }
+    }, err => console.log('Firestore destinations listener:', err));
+
+    // Listen to faqs
+    this.db.collection('faqs').onSnapshot(snapshot => {
+      if (!snapshot.empty) {
+        const faqs = [];
+        snapshot.forEach(d => faqs.push(d.data()));
+        const currentData = getActiveSiteData();
+        currentData.faqs = faqs;
+        saveActiveSiteData(currentData);
+      }
+    }, err => console.log('Firestore faqs listener:', err));
   }
 
   // Push local data up to Firestore
@@ -107,13 +128,23 @@ class FirebaseSyncEngine {
     await this.db.collection('site_settings').doc('main').set(data.settings, { merge: true });
 
     // Save activities
-    for (const act of data.activities) {
+    for (const act of (data.activities || [])) {
       await this.db.collection('activities').doc(act.id).set(act, { merge: true });
     }
 
+    // Save destinations
+    for (const dest of (data.destinations || [])) {
+      await this.db.collection('destinations').doc(dest.id).set(dest, { merge: true });
+    }
+
     // Save reviews
-    for (const rev of data.reviews) {
+    for (const rev of (data.reviews || [])) {
       await this.db.collection('reviews').doc(rev.id).set(rev, { merge: true });
+    }
+
+    // Save faqs
+    if (data.faqs && data.faqs.length) {
+      await this.db.collection('site_content').doc('faqs').set({ items: data.faqs }, { merge: true });
     }
 
     return true;
@@ -121,3 +152,4 @@ class FirebaseSyncEngine {
 }
 
 window.firebaseSync = new FirebaseSyncEngine();
+
