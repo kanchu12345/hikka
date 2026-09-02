@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-E84DYY8YBS"></script>
@@ -11,82 +11,29 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>📷 Photo & Video Gallery | Hikka Surf School Hikkaduwa</title>
-  <meta name="description" content="View action photos and videos from surf lessons, coral reef snorkeling, wild sea turtles, and happy traveler memories in Hikkaduwa, Sri Lanka." />
+  <title>Photo & Ocean Gallery | â¤ï¸ Hikkaduwa Hikka Surf School</title>
+  <meta name="description" content="Explore real moments, surfing lessons, wildlife tours, and smiling travelers at Hikkaduwa Hikka Surf School." />
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            surf: { 500: '#0284c7', 600: '#0369a1', 700: '#075985', 900: '#082f49' },
-            ocean: { 900: '#164e63', 950: '#083344' },
-            sand: { 300: '#fde047', 500: '#eab308' }
+            surf: { 50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc', 400: '#38bdf8', 500: '#0084B4', 600: '#0284c7', 700: '#075985', 800: '#0c4a6e', 900: '#082f49' },
+            ocean: { 50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0A2540', 950: '#12161A' },
+            sand: { 50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fde047', 400: '#fbbf24', 500: '#F59E0B', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f' }
           }
         }
       }
     }
   </script>
   <link rel="stylesheet" href="css/styles.css" />
-  <!-- International SEO, Canonical & Preconnect Tags -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://images.unsplash.com" />
-  <meta name="theme-color" content="#082f49" />
-  <meta name="robots" content="index, follow" />
-  <meta name="author" content="❤️ Hikkaduwa Hikka Surf School" />
-  <meta property="og:site_name" content="Hikkaduwa Hikka Surf School" />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80" />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80" />
-  <link rel="canonical" href="https://kanchu12345.github.io/hikka/gallery.html" />
-  <meta property="og:url" content="https://kanchu12345.github.io/hikka/gallery.html" />
-  <!-- JSON-LD Structured Data: LocalBusiness & SportsActivityLocation -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "SportsActivityLocation",
-    "name": "❤️ Hikkaduwa Hikka Surf School",
-    "image": "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80",
-    "description": "Premier local surf lessons, reef snorkeling, sea turtle experiences, boat tours, and day trips in Hikkaduwa, Sri Lanka.",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Turtle Beach, Galle Road (Near Hikka Tranz by Cinnamon)",
-      "addressLocality": "Hikkaduwa",
-      "addressRegion": "Southern Province",
-      "postalCode": "80240",
-      "addressCountry": "LK"
-    },
-    "geo": {
-      "@type": "GeoCoordinates",
-      "latitude": "6.1322297",
-      "longitude": "80.1005877"
-    },
-    "url": "https://kanchu12345.github.io/hikka/",
-    "telephone": "+94771234567",
-    "priceRange": "$$-$$$",
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
-        "opens": "06:30",
-        "closes": "18:30"
-      }
-    ],
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "5.0",
-      "reviewCount": "148",
-      "bestRating": "5",
-      "worstRating": "1"
-    }
-  }
-  </script>
+  <script src="js/data.js"></script>
+  <script src="js/firebase-client.js"></script>
 </head>
-<body class="bg-slate-50 text-gray-800 antialiased pt-28 pb-16 lg:pb-0">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-surf-500 selection:text-white pt-28 pb-16 lg:pb-0">
 
-    <!-- Top Live Surf & Weather Conditions Bar -->
+  <!-- Top Live Surf & Weather Conditions Bar -->
   <div class="bg-ocean-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-ocean-800 fixed top-0 left-0 right-0 z-50">
     <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
       <div class="flex items-center gap-3">
@@ -94,9 +41,9 @@
           <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
           <span>LIVE SURF REPORT</span>
         </span>
-        <span class="text-gray-300">•</span>
-        <span class="text-gray-300">🌊 Waves: <strong class="text-white">2–4 ft Clean</strong></span>
-        <span class="hidden sm:inline text-gray-300">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
+        <span class="text-gray-300">â€¢</span>
+        <span class="text-gray-300">ðŸŒŠ Waves: <strong class="text-white">2â€“4 ft Clean</strong></span>
+        <span class="hidden sm:inline text-gray-300">ðŸŒ¡ï¸ Water: <strong class="text-white">28Â°C (No Wetsuit)</strong></span>
       </div>
 
       <!-- Social Media & Currency Switcher -->
@@ -118,8 +65,8 @@
           <span class="text-gray-400 text-[10px] uppercase font-bold tracking-wider hidden sm:inline">Currency:</span>
           <div class="flex items-center bg-white/10 rounded-lg p-0.5 text-[10px] font-bold">
             <button onclick="setCurrency('USD')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">USD ($)</button>
-            <button onclick="setCurrency('EUR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">EUR (€)</button>
-            <button onclick="setCurrency('GBP')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">GBP (£)</button>
+            <button onclick="setCurrency('EUR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">EUR (â‚¬)</button>
+            <button onclick="setCurrency('GBP')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">GBP (Â£)</button>
             <button onclick="setCurrency('LKR')" class="px-2 py-0.5 rounded hover:bg-surf-600 hover:text-white transition-colors cursor-pointer">LKR (Rs.)</button>
           </div>
         </div>
@@ -132,87 +79,78 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="brand-logo-container group">
-        <img src="images/logo-white.svg" alt="Hikka Surf School Sri Lanka Logo" class="brand-logo-img drop-shadow-md" />
+      <a href="index.html" class="flex items-center gap-3 group">
+        <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-10 sm:h-12 w-auto transition-transform group-hover:scale-105" />
       </a>
 
-                  <!-- Desktop Nav -->
+      <!-- Desktop Navigation Links -->
       <nav class="hidden lg:flex items-center gap-5 xl:gap-7 text-xs xl:text-sm font-bold tracking-wider">
         <a href="index.html" class="text-white hover:text-cyan-300 transition-colors">HOME</a>
-        
         <a href="surf-lessons.html" class="text-white hover:text-cyan-300 transition-colors">SURF LESSONS</a>
 
-        <!-- DESTINATIONS Mega Menu Dropdown -->
+        <!-- DESTINATIONS Dropdown -->
         <div class="relative group">
           <a href="destinations.html" class="text-white hover:text-cyan-300 transition-colors flex items-center gap-1 py-2">
-            <span>DESTINATION</span>
-            <span class="text-[10px] opacity-70">▾</span>
+            <span>DESTINATIONS</span>
+            <span class="text-[10px] opacity-70">â–¾</span>
           </a>
 
-          <!-- Mega Dropdown Panel -->
-          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[820px] max-w-[95vw] bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 p-6 hidden group-hover:block transition-all z-50">
-            <div class="grid grid-cols-12 gap-6">
-              <div class="col-span-4 border-r border-gray-100 pr-4 space-y-3">
-                <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">COUNTRIES & REGIONS</div>
-                <a href="destinations.html" class="p-3 bg-cyan-50 border border-cyan-200 rounded-2xl flex items-center justify-between group/item hover:bg-cyan-100 transition-all">
-                  <div class="flex items-center gap-2.5">
-                    <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-xl object-cover" />
-                    <div>
-                      <div class="text-xs font-black text-gray-900">Sri Lanka</div>
-                      <div class="text-[10px] font-bold text-surf-600">Southern Province</div>
-                    </div>
-                  </div>
-                  <span class="text-surf-600 font-black text-xs group-hover/item:translate-x-1 transition-transform">→</span>
-                </a>
-                <div class="p-3 bg-gray-50 rounded-2xl border border-gray-100 space-y-1">
-                  <div class="text-[11px] font-bold text-gray-700">📍 Pick-up & Transfers</div>
-                  <div class="text-[10px] text-gray-500">Available from Hikkaduwa, Galle, Unawatuna, Weligama & Colombo BIA.</div>
+          <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[720px] max-w-[95vw] bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 p-6 hidden group-hover:block transition-all z-50">
+            <div class="grid grid-cols-12 gap-5">
+              <div class="col-span-4 bg-gradient-to-br from-surf-900 to-ocean-950 text-white p-5 rounded-2xl flex flex-col justify-between">
+                <div>
+                  <span class="text-[10px] uppercase font-bold text-amber-300 tracking-wider">Explore Sri Lanka</span>
+                  <h4 class="text-base font-black font-serif-heading mt-1 leading-snug">Day Trips & Tours</h4>
+                  <p class="text-xs text-cyan-200 mt-2 leading-relaxed">Discover Southern Sri Lanka with private air-conditioned transport & local guides.</p>
+                </div>
+                <div class="pt-4">
+                  <a href="destinations.html" class="inline-flex items-center gap-1 text-xs font-bold text-amber-300 hover:text-white transition-colors">Explore All Sights â†’</a>
                 </div>
               </div>
 
               <div class="col-span-8 space-y-3">
                 <div class="flex items-center justify-between">
-                  <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">★ SOUTHERN PROVINCE ATTRACTIONS</div>
-                  <a href="destinations.html" class="text-[10px] font-bold text-surf-600 hover:underline">View All Locations →</a>
+                  <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">â˜… SOUTHERN PROVINCE ATTRACTIONS</div>
+                  <a href="destinations.html" class="text-[10px] font-bold text-surf-600 hover:underline">View All Locations â†’</a>
                 </div>
                 <div class="grid grid-cols-2 gap-2.5">
                   <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
-                    <span class="text-base">🏰</span>
+                    <span class="text-base">ðŸ°</span>
                     <div>
                       <div class="text-xs font-bold text-gray-900">Galle Dutch Fort</div>
                       <div class="text-[10px] text-gray-500">UNESCO Ramparts & Lighthouse</div>
                     </div>
                   </a>
                   <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
-                    <span class="text-base">🐋</span>
+                    <span class="text-base">ðŸ‹</span>
                     <div>
                       <div class="text-xs font-bold text-gray-900">Mirissa Beach</div>
                       <div class="text-[10px] text-gray-500">Whale Watching & Coconut Hill</div>
                     </div>
                   </a>
                   <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
-                    <span class="text-base">🏖️</span>
+                    <span class="text-base">ðŸ–ï¸</span>
                     <div>
                       <div class="text-xs font-bold text-gray-900">Unawatuna & Jungle Beach</div>
                       <div class="text-[10px] text-gray-500">Peace Pagoda & Calm Bay</div>
                     </div>
                   </a>
                   <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
-                    <span class="text-base">🚤</span>
+                    <span class="text-base">ðŸš¤</span>
                     <div>
                       <div class="text-xs font-bold text-gray-900">Madu River & Bentota</div>
                       <div class="text-[10px] text-gray-500">Mangrove Safari & Cinnamon Isle</div>
                     </div>
                   </a>
                   <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
-                    <span class="text-base">🐆</span>
+                    <span class="text-base">ðŸ†</span>
                     <div>
                       <div class="text-xs font-bold text-gray-900">Yala National Park</div>
                       <div class="text-[10px] text-gray-500">Wild Leopard & Elephant Safari</div>
                     </div>
                   </a>
                   <a href="destinations.html" class="p-2.5 rounded-xl hover:bg-gray-50 border border-transparent hover:border-gray-200 transition-all flex items-start gap-2.5">
-                    <span class="text-base">🏄</span>
+                    <span class="text-base">ðŸ„</span>
                     <div>
                       <div class="text-xs font-bold text-gray-900">Weligama & Stilt Fishermen</div>
                       <div class="text-[10px] text-gray-500">Culture & Gentle Sand Surf</div>
@@ -224,49 +162,40 @@
           </div>
         </div>
 
-        
-
-        <!-- ACTIVITIES Dropdown (The Surfer Weligama Style) -->
+        <!-- ACTIVITIES Dropdown -->
         <div class="relative group">
           <a href="activities.html" class="text-white hover:text-cyan-300 transition-colors flex items-center gap-1 py-2">
             <span>ACTIVITIES</span>
-            <span class="text-[10px] opacity-70">▾</span>
+            <span class="text-[10px] opacity-70">â–¾</span>
           </a>
 
-          <!-- Activities Dropdown Panel -->
           <div class="absolute top-full left-1/2 -translate-x-1/2 mt-1 w-[680px] max-w-[95vw] bg-white text-gray-900 rounded-3xl shadow-2xl border border-gray-200 p-6 hidden group-hover:block transition-all z-50">
             <div class="grid grid-cols-2 gap-4">
-              
-              <!-- Left: Ocean & Wildlife Activities -->
               <div class="space-y-2.5">
                 <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">OCEAN & WILDLIFE</div>
-                
                 <a href="snorkeling.html" class="p-2.5 rounded-xl hover:bg-cyan-50 border border-transparent hover:border-cyan-200 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🤿</span>
+                  <span class="text-lg">ðŸ¤¿</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Coral Reef Snorkeling</div>
                     <div class="text-[10px] text-gray-500">Hikkaduwa Marine Sanctuary</div>
                   </div>
                 </a>
-
                 <a href="turtle-experiences.html" class="p-2.5 rounded-xl hover:bg-emerald-50 border border-transparent hover:border-emerald-200 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🐢</span>
+                  <span class="text-lg">ðŸ¢</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Wild Turtle Watching</div>
                     <div class="text-[10px] text-gray-500">Turtle Beach shallow reef swimming</div>
                   </div>
                 </a>
-
                 <a href="fishing-tours.html" class="p-2.5 rounded-xl hover:bg-blue-50 border border-transparent hover:border-blue-200 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🎣</span>
+                  <span class="text-lg">ðŸŽ£</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Fishing Tours</div>
                     <div class="text-[10px] text-gray-500">Deep-sea big game & lagoon angling</div>
                   </div>
                 </a>
-
                 <a href="whale-watching.html" class="p-2.5 rounded-xl hover:bg-indigo-50 border border-transparent hover:border-indigo-200 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🐋</span>
+                  <span class="text-lg">ðŸ‹</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Whale Watching</div>
                     <div class="text-[10px] text-gray-500">Mirissa blue whale & dolphin safaris</div>
@@ -274,104 +203,52 @@
                 </a>
               </div>
 
-              <!-- Right: Boat Safaris, Day Tours & Transfers -->
               <div class="space-y-2.5">
                 <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">TOURS & TRANSFERS</div>
-
                 <a href="boat-tours.html" class="p-2.5 rounded-xl hover:bg-teal-50 border border-transparent hover:border-teal-200 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🚤</span>
+                  <span class="text-lg">ðŸš¤</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Boat Tours & Safaris</div>
                     <div class="text-[10px] text-gray-500">Madu river mangroves & glass bottom</div>
                   </div>
                 </a>
-
                 <a href="tours.html" class="p-2.5 rounded-xl hover:bg-amber-50 border border-transparent hover:border-amber-200 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🌴</span>
+                  <span class="text-lg">ðŸŒ´</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Sri Lanka Day Trips</div>
                     <div class="text-[10px] text-gray-500">Galle Fort, Yala Safari, Ella & Kandy</div>
                   </div>
                 </a>
-
                 <a href="transfers.html" class="p-2.5 rounded-xl hover:bg-slate-100 border border-transparent hover:border-slate-300 transition-all flex items-start gap-2.5">
-                  <span class="text-lg">🚕</span>
+                  <span class="text-lg">ðŸš•</span>
                   <div>
                     <div class="text-xs font-bold text-gray-900">Private Airport Transfers</div>
                     <div class="text-[10px] text-gray-500">Colombo BIA & Islandwide A/C Driver</div>
                   </div>
                 </a>
-
-                <div class="pt-2 border-t border-gray-100">
-                  <a href="activities.html" class="text-xs font-bold text-surf-600 hover:underline flex items-center gap-1">
-                    <span>Explore All 8 Activities</span> →
-                  </a>
-                </div>
               </div>
-
             </div>
           </div>
         </div>
 
         <a href="surf-lessons.html#rates" class="text-white hover:text-cyan-300 transition-colors">RATES</a>
         <a href="faq.html" class="text-white hover:text-cyan-300 transition-colors">FAQ</a>
-        <a href="gallery.html" class="text-white hover:text-cyan-300 transition-colors">GALLERY</a>
-        <a href="reviews.html" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1"><span>★</span><span>REVIEWS</span></a>
+        <a href="gallery.html" class="text-white hover:text-cyan-300 transition-colors text-sand-300">GALLERY</a>
+        <a href="reviews.html" class="text-amber-400 hover:text-amber-300 transition-colors flex items-center gap-1"><span>â˜…</span><span>REVIEWS</span></a>
         <a href="about.html" class="text-white hover:text-cyan-300 transition-colors">ABOUT</a>
         <a href="contact.html" class="text-white hover:text-cyan-300 transition-colors">CONTACT</a>
       </nav>
 
-      <!-- Language & Highlighted Book Now Button -->
-      <div class="hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
-        <!-- Interactive Language Selector Dropdown -->
-        <div class="relative lang-dropdown-wrapper">
-          <button type="button" onclick="toggleLangMenu(event)" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm flex-shrink-0">
-            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="current-lang-flag w-4 h-3 object-cover rounded-sm shadow-sm" />
-            <span class="current-lang-text font-semibold text-[11px] xl:text-xs">EN</span>
-            <span class="text-[10px] opacity-70">▾</span>
-          </button>
-
-          <!-- Dropdown Menu -->
-          <div class="lang-menu-dropdown hidden absolute right-0 top-full mt-2 w-44 bg-ocean-950/98 backdrop-blur-md text-white rounded-2xl shadow-2xl border border-white/20 p-1.5 z-50 divide-y divide-white/10">
-            <div class="py-1 space-y-0.5">
-              <button type="button" onclick="switchLanguage('en', 'https://flagcdn.com/w40/gb.png', 'EN')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
-                <span>English</span>
-              </button>
-              <button type="button" onclick="switchLanguage('de', 'https://flagcdn.com/w40/de.png', 'DE')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
-                <span>Deutsch</span>
-              </button>
-              <button type="button" onclick="switchLanguage('ru', 'https://flagcdn.com/w40/ru.png', 'RU')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/ru.png" alt="Русский" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
-                <span>Русский</span>
-              </button>
-              <button type="button" onclick="switchLanguage('fr', 'https://flagcdn.com/w40/fr.png', 'FR')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
-                <span>Français</span>
-              </button>
-              <button type="button" onclick="switchLanguage('it', 'https://flagcdn.com/w40/it.png', 'IT')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/it.png" alt="Italiano" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
-                <span>Italiano</span>
-              </button>
-              <button type="button" onclick="switchLanguage('si', 'https://flagcdn.com/w40/lk.png', 'LK')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
-                <img src="https://flagcdn.com/w40/lk.png" alt="සිංහල" class="w-4 h-3 object-cover rounded-sm shadow-sm" />
-                <span>සිංහල</span>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- Highlighted Book Now Button -->
-        <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/60 transition-all duration-300 hover:scale-105 transform cursor-pointer uppercase flex items-center gap-1.5 whitespace-nowrap">
-          <span>⚡</span>
-          <span>BOOK NOW</span>
+      <!-- Book Now Button -->
+      <div class="hidden lg:flex items-center gap-4">
+        <button type="button" onclick="openBookingModal()" class="px-6 py-2.5 text-xs font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg cursor-pointer uppercase">
+          BOOK NOW
         </button>
       </div>
 
       <!-- Mobile Button -->
-      <div class="flex lg:hidden items-center gap-2 flex-shrink-0">
-        <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 text-xs font-black shadow-md uppercase whitespace-nowrap">
+      <div class="flex lg:hidden items-center gap-2">
+        <button type="button" onclick="openBookingModal()" class="px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 text-xs font-black shadow-md uppercase">
           BOOK NOW
         </button>
         <button id="mobile-menu-btn" class="p-2 rounded-xl text-white hover:bg-white/10" aria-label="Toggle menu">
@@ -380,23 +257,31 @@
       </div>
     </div>
 
-    <!-- Thin divider line under header -->
-    <div class="w-full border-b border-white/20 mt-3"></div>
-
     <!-- Mobile Slide Drawer -->
     <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
       <a href="index.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Home</a>
-      <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">🏄 Surf Lessons</a>
-      <a href="destinations.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300">🌴 Destinations (Southern Province)</a>
-      
-      <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🌴 Activities & Tours</a>
+      <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">ðŸ„ Surf Lessons</a>
+      <a href="destinations.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300">ðŸŒ´ Destinations (Southern Province)</a>
+      <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">ðŸŒ´ Activities & Tours</a>
       <a href="surf-lessons.html#rates" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Rates & Pricing</a>
       <a href="faq.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">FAQ</a>
-      <a href="gallery.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📷 Gallery</a>
-      <a href="reviews.html" class="block px-3 py-2 rounded-xl font-semibold text-amber-300">★ Google Reviews</a>
+      <a href="gallery.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">ðŸ“· Gallery</a>
+      <a href="reviews.html" class="block px-3 py-2 rounded-xl font-semibold text-amber-300">â˜… Google Reviews</a>
       <a href="about.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">About Us</a>
-      <a href="contact.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📍 Location & Contact</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">ðŸ“ Location & Contact</a>
       
+      <!-- Mobile Social Channels -->
+      <div class="pt-2 flex items-center gap-2">
+        <a href="https://www.instagram.com/hikkasurf" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 bg-gradient-to-r from-purple-600 to-pink-500 rounded-xl text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://web.facebook.com/profile.php?id=100088255598601" target="_blank" rel="noopener noreferrer" class="flex-1 py-2 px-3 bg-[#1877F2] rounded-xl text-white text-xs font-bold flex items-center justify-center gap-2 shadow-sm">
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          <span>Facebook</span>
+        </a>
+      </div>
+
       <div class="pt-3 border-t border-white/10">
         <button onclick="openBookingModal()" class="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 shadow-md">
           <span>BOOK NOW ON WHATSAPP</span>
@@ -405,43 +290,67 @@
     </div>
   </header>
 
-<section class="py-16 bg-ocean-950 text-white text-center">
+  <!-- Title Section -->
+  <section class="py-16 bg-ocean-950 text-white text-center">
     <div class="max-w-4xl mx-auto px-4">
       <h1 class="text-3xl sm:text-5xl font-extrabold font-heading mb-3">Photo & Ocean Gallery</h1>
       <p class="text-cyan-200 text-sm sm:text-base">Moments of surfing, wildlife, and happy ocean travelers in Hikkaduwa.</p>
     </div>
   </section>
 
+  <!-- Photo Grid -->
   <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80', 'Surfing in Hikkaduwa', 'Catching clean waves')">
-        <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80" alt="Surfing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80" alt="Surfing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1000&q=80', 'Wild Sea Turtle', 'Hikkaduwa shallow bay')">
-        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=800&q=80" alt="Turtle" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=800&q=80" alt="Turtle" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80', 'Coral Snorkeling', 'Sanctuary reef fish')">
-        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Snorkeling" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80" alt="Snorkeling" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1000&q=80', 'Happy Surf Students', 'First wave stoke!')">
-        <img src="https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Students" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80" alt="Students" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80', 'Fishing Trip', 'Sunset coastal boat')">
-        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Fishing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80" alt="Fishing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=1000&q=80', 'Blue Whale Watching', 'Mirissa deep ocean')">
-        <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80" alt="Whale Watching" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80" alt="Whale Watching" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=1000&q=80', 'Galle Fort', 'UNESCO World Heritage')">
-        <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80" alt="Galle Fort" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80" alt="Galle Fort" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=1000&q=80', 'Sunset Waves', 'Golden hour Hikkaduwa')">
-        <img src="https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=800&q=80" alt="Sunset" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" / loading="lazy">
+        <img src="https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=800&q=80" alt="Sunset" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" />
       </div>
     </div>
   </section>
 
-    <!-- FOOTER WITH DESIGN CREDITS -->
+  <!-- LIVE INSTAGRAM FEED STREAM -->
+  <section class="py-16 bg-slate-100 border-t border-gray-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col sm:flex-row items-center justify-between gap-4 mb-8 bg-white p-6 sm:p-8 rounded-3xl border border-gray-200 shadow-sm">
+        <div class="flex items-center gap-4 text-center sm:text-left">
+          <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-purple-600 via-pink-600 to-amber-500 p-0.5 shadow-md flex-shrink-0 flex items-center justify-center">
+            <div class="w-full h-full bg-white rounded-2xl flex items-center justify-center">
+              <svg class="w-8 h-8 fill-pink-600" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </div>
+          </div>
+          <div>
+            <h3 class="text-xl font-bold font-heading text-gray-900">Live from Instagram @hikkasurf</h3>
+            <p class="text-xs text-gray-500">Daily real-time moments, ocean stories and surf sessions in Sri Lanka.</p>
+          </div>
+        </div>
+        <a href="https://www.instagram.com/hikkasurf" target="_blank" rel="noopener noreferrer" class="px-6 py-3 bg-gradient-to-r from-purple-600 via-pink-600 to-amber-500 hover:opacity-90 text-white font-bold rounded-2xl text-xs flex items-center gap-2 shadow-md">
+          <span>Follow @hikkasurf â†—</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER WITH DESIGN CREDITS -->
   <footer class="bg-ocean-950 text-white pt-16 pb-20 border-t border-ocean-800">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
@@ -449,7 +358,7 @@
           <a href="index.html" class="inline-block">
             <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-12 w-auto" />
           </a>
-          <p class="text-xs text-cyan-200 font-semibold uppercase">Surf School Sri Lanka • Hikkaduwa</p>
+          <p class="text-xs text-cyan-200 font-semibold uppercase">Surf School Sri Lanka â€¢ Hikkaduwa</p>
           <p class="text-xs text-gray-300 leading-relaxed">
             Your premier local surf school on Narigama Beach, Hikkaduwa.
           </p>
@@ -473,134 +382,75 @@
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Surfing</h4>
           <ul class="space-y-2 text-xs text-gray-300">
-            <li><a href="surf-lessons.html" class="hover:text-white font-bold text-cyan-200">🏄 Beginner Lessons</a></li>
-            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Private 1:1 Coaching</a></li>
-            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Couple & Duo Lessons</a></li>
-            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Kids & Family Surfing</a></li>
-            <li><a href="surf-lessons.html" class="hover:text-white">🏄 Surfboard Rental</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white font-bold text-cyan-200">ðŸ„ Beginner Lessons</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">ðŸ„ Private 1:1 Coaching</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">ðŸ„ Couple & Duo Lessons</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">ðŸ„ Kids & Family Surfing</a></li>
+            <li><a href="surf-lessons.html" class="hover:text-white">ðŸ„ Surfboard Rental</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Explore</h4>
           <ul class="space-y-2 text-xs text-gray-300">
-            <li><a href="activities.html" class="hover:text-white font-bold text-cyan-200">🌴 All Activities & Tours</a></li>
-            <li><a href="snorkeling.html" class="hover:text-white">🤿 Snorkeling Sanctuary</a></li>
-            <li><a href="turtle-experiences.html" class="hover:text-white">🐢 Wild Sea Turtles</a></li>
-            <li><a href="gallery.html" class="hover:text-white">📷 Photo Gallery</a></li>
-            <li><a href="reviews.html" class="hover:text-white">⭐ Google Reviews</a></li>
+            <li><a href="activities.html" class="hover:text-white font-bold text-cyan-200">ðŸŒ´ All Activities & Tours</a></li>
+            <li><a href="snorkeling.html" class="hover:text-white">ðŸ¤¿ Snorkeling Sanctuary</a></li>
+            <li><a href="turtle-experiences.html" class="hover:text-white">ðŸ¢ Wild Sea Turtles</a></li>
+            <li><a href="tours.html" class="hover:text-white">ðŸš— Sri Lanka Day Trips</a></li>
+            <li><a href="transfers.html" class="hover:text-white">ðŸš Airport Transfers</a></li>
+            <li><a href="faq.html" class="hover:text-white">â“ FAQ</a></li>
           </ul>
         </div>
 
         <div>
           <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Contact & Location</h4>
           <p class="text-xs text-gray-300 mb-3">Turtle Beach / Galle Road (Near Hikka Tranz), Hikkaduwa</p>
-          <button onclick="openDirectWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
+          <button onclick="openDirectWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md mb-3">
             <span>WhatsApp: +94 77 123 4567</span>
           </button>
+          <a href="https://maps.app.goo.gl/coczrnnnajTi581G9" target="_blank" class="text-xs text-cyan-300 hover:underline block">
+            ðŸ“ View on Google Maps â†—
+          </a>
         </div>
       </div>
 
       <!-- Copyright & Design Credits -->
       <div class="pt-8 border-t border-ocean-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400">
-        <p>© 2026 Hikka Surf School Sri Lanka. All rights reserved.</p>
+        <p>Â© 2026 â¤ï¸ Hikkaduwa Hikka Surf School. All rights reserved.</p>
         <div class="flex flex-wrap items-center justify-center gap-3">
           <span>Design & Development by <a href="https://infiniteweb.dev/index.html" target="_blank" rel="noopener noreferrer" class="text-cyan-300 hover:text-white font-semibold underline underline-offset-2 ml-1">Infinite Creative Web Design</a></span>
-          <span>•</span>
+          <span>â€¢</span>
           <a href="admin.html" class="text-gray-500 hover:text-gray-300">Admin CMS</a>
         </div>
       </div>
     </div>
   </footer>
 
-  <!-- FLOATING WHATSAPP BUTTON WITH PULSE GLOW -->
-  <div class="fixed bottom-6 right-6 z-50">
-    <button aria-label="Chat on WhatsApp" onclick="openDirectWhatsApp()" class="w-14 h-14 rounded-full bg-[#25D366] hover:bg-[#20bd5a] text-white flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform cursor-pointer whatsapp-glow" aria-label="WhatsApp Chat">
-      <svg class="w-8 h-8 fill-white" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.771-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.312.045-.662.062-2.083-.527-1.782-.74-2.92-2.56-3.009-2.678-.088-.118-.722-.96-.722-1.831s.456-1.3.619-1.477c.162-.177.355-.221.474-.221.119 0 .238.001.341.006.109.006.255-.041.398.303.148.356.505 1.23.549 1.32.044.089.073.193.015.311-.059.119-.089.193-.177.297-.089.104-.187.232-.267.311-.089.09-.182.187-.078.365.104.178.462.763.992 1.235.684.609 1.261.798 1.439.887.178.089.282.074.386-.045.104-.118.444-.518.563-.696.119-.178.238-.148.398-.089.162.059 1.025.483 1.202.572.177.089.296.133.341.207.045.074.045.429-.099.834z"/></svg>
-    </button>
-  </div>
-
-  <!-- BOOKING MODAL -->
-  <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
-    <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
-      <div class="bg-gradient-to-r from-ocean-900 to-surf-900 p-6 text-white relative">
-        <button onclick="closeBookingModal()" class="absolute top-5 right-5 p-2 rounded-full bg-white/10 hover:bg-white/20 text-white text-lg font-bold cursor-pointer">✕</button>
-        <span class="text-sand-300 text-xs font-bold uppercase tracking-wider block mb-1">Instant WhatsApp Reservation</span>
-        <h3 class="text-2xl font-bold font-serif-heading">Book Your Experience</h3>
-        <p class="text-ocean-100 text-xs mt-1">Connect directly with our local team in Hikkaduwa</p>
+  <!-- Lightbox Modal -->
+  <div id="lightbox" class="fixed inset-0 bg-black/95 z-50 hidden flex items-center justify-center p-4">
+    <button onclick="closeLightbox()" class="absolute top-6 right-6 text-white text-3xl font-bold hover:text-gray-300">âœ•</button>
+    <div class="max-w-4xl max-h-[85vh] flex flex-col items-center">
+      <img id="lightbox-img" src="" alt="Enlarged gallery photo" class="max-w-full max-h-[75vh] object-contain rounded-xl shadow-2xl" />
+      <div class="mt-4 text-center">
+        <h3 id="lightbox-title" class="text-white text-lg font-bold"></h3>
+        <p id="lightbox-desc" class="text-gray-300 text-sm mt-1"></p>
       </div>
-
-      <form id="booking-form" class="p-6 overflow-y-auto space-y-4 flex-1 text-xs sm:text-sm">
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">Select Activity / Package</label>
-          <select id="modal-activity-select" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl font-semibold text-gray-900">
-            <option value="Beginner Surf Lesson">🏄 Beginner Surf Lesson ($25)</option>
-            <option value="Private 1-on-1 Surf Lesson">🏄 Private 1-on-1 Surf Lesson ($35)</option>
-            <option value="Semi-Private Couple Lesson">🏄 Semi-Private Couple Lesson ($45)</option>
-            <option value="Kids & Family Surfing">🏄 Kids & Family Surfing ($30)</option>
-            <option value="Intermediate Surf Coaching">🏄 Intermediate Coaching ($40)</option>
-            <option value="Surfboard Rental">🏄 Surfboard Rental ($10)</option>
-            <option value="Guided Coral Reef Snorkeling">🤿 Guided Coral Reef Snorkeling ($20)</option>
-            <option value="Turtle Snorkeling & Beach Walk">🐢 Turtle Snorkeling ($20)</option>
-            <option value="Deep Sea & Reef Fishing">🎣 Deep Sea Fishing ($70)</option>
-            <option value="Glass Bottom & River Safari">🚤 Boat Tour ($30)</option>
-            <option value="Mirissa Whale Watching">🐋 Whale Watching ($55)</option>
-            <option value="Sri Lanka Day Trips">🚗 Day Trips & Excursions ($45)</option>
-            <option value="Airport & Island Transfers">🚐 Airport & Island Transfers ($45)</option>
-          </select>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Preferred Date</label>
-            <input type="date" id="modal-date-input" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium" required />
-          </div>
-          <div>
-            <label class="block font-bold text-gray-700 mb-1">Number of People</label>
-            <select id="modal-guests-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
-              <option value="1">1 Person</option>
-              <option value="2" selected>2 People</option>
-              <option value="3">3 People</option>
-              <option value="4">4 People</option>
-              <option value="5+">5+ Group</option>
-            </select>
-          </div>
-        </div>
-
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">Preferred Time Slot</label>
-          <select id="modal-time-select" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-medium">
-            <option value="07:00 AM (Early Glassy Waves)">07:00 AM (Early Glassy Waves)</option>
-            <option value="08:30 AM (Best Morning Session)" selected>08:30 AM (Best Morning Session)</option>
-            <option value="10:30 AM (Late Morning)">10:30 AM (Late Morning)</option>
-            <option value="02:00 PM (Afternoon)">02:00 PM (Afternoon)</option>
-            <option value="04:00 PM (Sunset Golden Hour)">04:00 PM (Sunset Golden Hour)</option>
-          </select>
-        </div>
-
-        <div>
-          <label class="block font-bold text-gray-700 mb-1">Your Name (Optional)</label>
-          <input type="text" id="modal-name-input" placeholder="e.g. Sarah" class="w-full p-2.5 bg-gray-50 border border-gray-200 rounded-xl text-gray-900" />
-        </div>
-
-        <button type="submit" class="w-full py-4 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-2xl shadow-lg text-base flex items-center justify-center gap-2 cursor-pointer transition-all">
-          <span>Send Booking Request on WhatsApp</span> →
-        </button>
-      </form>
     </div>
   </div>
 
-  <script src="js/data.js"></script>
-  <script src="js/firebase-client.js"></script>
-  <script src="js/main.js"></script>
-  <!-- PERSISTENT STICKY MOBILE CONVERSION BAR -->
-  <div id="sticky-mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-ocean-950/95 backdrop-blur-md border-t border-ocean-800 p-2.5 flex items-center justify-between gap-2 lg:hidden shadow-2xl">
-    <button onclick="openDirectWhatsApp()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
-      <span>💬 Chat on WhatsApp</span>
-    </button>
-    <button onclick="openBookingModal('Beginner Surf Lesson')" class="flex-1 py-3 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
-      <span>🏄 Book a Lesson</span>
-    </button>
-  </div>
+  <script>
+    function openLightbox(url, title, desc) {
+      document.getElementById('lightbox-img').src = url;
+      document.getElementById('lightbox-title').innerText = title;
+      document.getElementById('lightbox-desc').innerText = desc;
+      document.getElementById('lightbox').classList.remove('hidden');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.add('hidden');
+    }
+    document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
 </body>
 </html>
