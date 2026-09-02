@@ -538,66 +538,245 @@ body {
   display: inline-block;
 }
 
-/* ===== ANIMATED SAFARI TOUR JEEP & SCENIC TRAIL ===== */
-@keyframes safariJeepDrive {
-  0% {
-    left: -70px;
-    transform: translateY(-50%) scaleX(1);
-  }
-  48% {
-    transform: translateY(calc(-50% - 2px)) scaleX(1);
-  }
-  50% {
-    left: calc(100% + 20px);
-    transform: translateY(-50%) scaleX(1);
-  }
-  50.1% {
-    left: calc(100% + 20px);
-    transform: translateY(-50%) scaleX(-1);
-  }
-  98% {
-    transform: translateY(calc(-50% - 2px)) scaleX(-1);
-  }
-  100% {
-    left: -70px;
-    transform: translateY(-50%) scaleX(-1);
-  }
-}
-
-@keyframes trailDashes {
-  0% { background-position: 0px 0; }
-  100% { background-position: -40px 0; }
-}
-
-.safari-trail-strip {
+/* ===== DYNAMIC AREA-BASED ENVIRONMENT STAGE & ANIMATIONS ===== */
+.scenic-env-stage {
   position: relative;
-  height: 42px;
-  background: linear-gradient(180deg, #1c1917 0%, #0c0a09 100%);
-  border-radius: 14px;
+  width: 100%;
+  height: 120px;
+  border-radius: 18px;
   overflow: hidden;
-  border: 1px solid rgba(251, 191, 36, 0.25);
-  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(251, 191, 36, 0.4);
+  box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.8), 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+  background: #090d16;
 }
 
-.safari-dashed-line {
+@media (max-width: 640px) {
+  .scenic-env-stage {
+    height: 105px;
+  }
+}
+
+/* Individual Environment Scenes */
+.env-scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.97);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1), transform 0.65s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.65s;
+  pointer-events: none;
+}
+
+.env-scene.active {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  pointer-events: auto;
+  z-index: 2;
+}
+
+/* Scene 1: HOME (Hikkaduwa Narigama Beach & Surf Base) */
+.env-scene-home {
+  background: linear-gradient(90deg, #072e4a 0%, #0369a1 28%, #0284c7 55%, #0d9488 80%, #15803d 100%);
+}
+
+/* Scene 2: SURF LESSONS (Narigama Surf Breaks & Barrel Waves) */
+.env-scene-surfing {
+  background: linear-gradient(90deg, #082f49 0%, #0284c7 30%, #38bdf8 65%, #06b6d4 85%, #0e7490 100%);
+}
+
+/* Scene 3: DESTINATIONS & DAY TRIPS (Galle Fort & Yala Safari) */
+.env-scene-destinations {
+  background: linear-gradient(90deg, #0f172a 0%, #1e1b4b 28%, #78350f 65%, #451a03 100%);
+}
+
+/* Scene 4: ACTIVITIES & OCEAN SAFARIS (Marine Sanctuary, Turtles & Mangroves) */
+.env-scene-activities {
+  background: linear-gradient(90deg, #022c22 0%, #065f46 30%, #0d9488 65%, #0284c7 100%);
+}
+
+/* Scene 5: AIRPORT TRANSFERS (24/7 Colombo CMB Expressway Highway) */
+.env-scene-transfers {
+  background: linear-gradient(90deg, #020617 0%, #0f172a 35%, #1e293b 70%, #0f766e 100%);
+}
+
+/* Surfer Riding Wave Micro-Animation */
+.surfer-wave-rider {
+  animation: surferRide 3.2s ease-in-out infinite alternate;
+}
+@keyframes surferRide {
+  0% { transform: translateY(0) rotate(-3deg); }
+  50% { transform: translateY(-4px) rotate(4deg); }
+  100% { transform: translateY(-1px) rotate(-2deg); }
+}
+
+/* Turtle Swimming Micro-Animation */
+.turtle-swim-anim {
+  animation: turtleSwim 4.5s ease-in-out infinite alternate;
+}
+@keyframes turtleSwim {
+  0% { transform: translate(0, 0) rotate(0deg); }
+  50% { transform: translate(6px, -3px) rotate(-3deg); }
+  100% { transform: translate(12px, 1px) rotate(2deg); }
+}
+
+/* Scene Vector Graphics */
+.env-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* Scene Floating Elements & Micro-Animations */
+.palm-sway-anim {
+  transform-origin: bottom center;
+  animation: palmSway 4s ease-in-out infinite alternate;
+}
+.palm-sway-anim-2 {
+  transform-origin: bottom center;
+  animation: palmSway 4.8s ease-in-out 1.2s infinite alternate;
+}
+
+.lighthouse-sweep-anim {
+  transform-origin: 75px 22px;
+  animation: lighthouseSweep 5s ease-in-out infinite;
+}
+
+.whale-fluke-anim {
+  transform-origin: center bottom;
+  animation: whaleDive 4.2s ease-in-out infinite;
+}
+
+.river-ripple-anim {
+  animation: riverFlow 3s ease-in-out infinite alternate;
+}
+
+.elephant-tail-anim {
+  transform-origin: center top;
+  animation: elephantEarFlap 3s ease-in-out infinite;
+}
+
+/* Floating Atmosphere Fireflies / Sea Mist Particles */
+.particle-glow {
+  animation: particleFloat 4s ease-in-out infinite alternate;
+}
+@keyframes particleFloat {
+  0% { transform: translateY(0) scale(0.8); opacity: 0.3; }
+  50% { transform: translateY(-4px) scale(1.1); opacity: 0.9; }
+  100% { transform: translateY(-8px) scale(0.8); opacity: 0.4; }
+}
+
+/* Ground Road / River Channel Base */
+.env-ground-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(2, 6, 23, 0.98) 100%);
+  border-top: 1.5px solid rgba(251, 191, 36, 0.4);
+}
+
+.env-water-track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 28px;
+  background: linear-gradient(180deg, rgba(4, 120, 87, 0.85) 0%, rgba(2, 44, 34, 0.95) 100%);
+  border-top: 1.5px solid rgba(52, 211, 153, 0.5);
+}
+
+.env-dashes {
   position: absolute;
   top: 50%;
   left: 0;
   right: 0;
   height: 2px;
   transform: translateY(-50%);
-  background: repeating-linear-gradient(90deg, #f59e0b 0, #f59e0b 16px, transparent 16px, transparent 32px);
-  animation: trailDashes 0.8s linear infinite;
-  opacity: 0.75;
+  background: repeating-linear-gradient(90deg, #f59e0b 0, #f59e0b 14px, transparent 14px, transparent 28px);
+  animation: trailDashes 0.75s linear infinite;
+  opacity: 0.8;
 }
 
-.animated-safari-jeep {
+/* Area-Specific Animated Vehicles */
+.env-vehicle-wrap {
   position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  animation: safariJeepDrive 9.5s ease-in-out infinite;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.6));
+  bottom: 8px;
   z-index: 10;
+  animation: vehicleCruising 11s linear infinite;
+  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.85));
+}
+
+@keyframes vehicleCruising {
+  0% { left: -90px; opacity: 0; }
+  3% { opacity: 1; }
+  97% { opacity: 1; }
+  100% { left: calc(100% + 15px); opacity: 0; }
+}
+
+.boat-water-bob {
+  animation: boatBob 1.6s ease-in-out infinite alternate;
+}
+@keyframes boatBob {
+  0% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-2px) rotate(1.2deg); }
+  100% { transform: translateY(1px) rotate(-1deg); }
+}
+
+.jeep-chassis-bob {
+  animation: jeepBobbing 0.45s ease-in-out infinite alternate;
+}
+@keyframes jeepBobbing {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-1.5px); }
+}
+
+.safari-wheel-spin {
+  animation: wheelSpin 0.35s linear infinite;
+  transform-origin: center center;
+}
+
+/* Area Selector Interactive Tabs & Live Badge */
+.area-tab-btn {
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+}
+.area-tab-btn.active {
+  background: rgba(251, 191, 36, 0.2) !important;
+  border-color: #fbbf24 !important;
+  color: #fef08a !important;
+  box-shadow: 0 0 12px rgba(251, 191, 36, 0.4);
+  transform: translateY(-1px);
+}
+
+.journey-progress-fill {
+  transition: width 0.1s linear;
+}
+
+/* Interactive Destination Cards with Active Glowing State */
+.dest-interactive-card {
+  transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+.dest-interactive-card.card-active {
+  border-color: #fbbf24 !important;
+  background: rgba(255, 255, 255, 0.14) !important;
+  box-shadow: 0 0 18px rgba(251, 191, 36, 0.35), inset 0 0 8px rgba(251, 191, 36, 0.2);
+  transform: translateY(-2px);
+}
+.dest-interactive-card:hover:not(.card-active) {
+  background-color: rgba(255, 255, 255, 0.1) !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+  transform: translateY(-1.5px);
 }
 
 

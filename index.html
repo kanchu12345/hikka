@@ -762,67 +762,415 @@
             Beyond the waves of Hikkaduwa lies a world of UNESCO heritage fortresses, wild leopard & elephant safaris, serene mangrove rivers, and golden palm-fringed coastlines. Explore Galle Dutch Fort, Mirissa's blue whales, Yala National Park, and hidden waterfalls in private air-conditioned comfort with our trusted local chauffeur guides.
           </p>
 
-          <!-- Animated Safari Trail Strip with Driving 4x4 Tour Jeep -->
-          <div class="space-y-1.5 pt-1">
-            <div class="flex items-center justify-between text-[10px] font-extrabold uppercase tracking-wider text-amber-400/80 px-1">
-              <span>🏰 Galle Dutch Fort</span>
-              <span class="text-cyan-300">🐋 Mirissa Coast</span>
-              <span class="text-emerald-400">🐆 Yala Safari 🐘</span>
-            </div>
+          <!-- Dynamic Multi-Environment Experience System (Home, Surf Lessons, Destinations, Activities, Transfers) -->
+          <div class="space-y-2 pt-1">
+            <!-- Top Controls: Interactive Category Switcher Tabs & Live Category Status -->
+            <div class="flex items-center justify-between gap-2 flex-wrap text-[10px] sm:text-[11px] font-extrabold px-0.5">
+              <div class="flex items-center gap-1 sm:gap-1.5 flex-wrap">
+                <button type="button" class="area-tab-btn active px-2.5 py-1 rounded-full border border-sky-400/40 bg-sky-500/20 text-sky-200" onclick="switchTourEnvironment(0)">
+                  <span>🏠</span> HOME
+                </button>
+                <button type="button" class="area-tab-btn px-2.5 py-1 rounded-full border border-cyan-400/40 bg-slate-800/80 text-cyan-200" onclick="switchTourEnvironment(1)">
+                  <span>🏄</span> SURF LESSONS
+                </button>
+                <button type="button" class="area-tab-btn px-2.5 py-1 rounded-full border border-amber-400/40 bg-slate-800/80 text-amber-200" onclick="switchTourEnvironment(2)">
+                  <span>🌴</span> DESTINATIONS
+                </button>
+                <button type="button" class="area-tab-btn px-2.5 py-1 rounded-full border border-emerald-400/40 bg-slate-800/80 text-emerald-200" onclick="switchTourEnvironment(3)">
+                  <span>🤿</span> ACTIVITIES
+                </button>
+                <button type="button" class="area-tab-btn px-2.5 py-1 rounded-full border border-purple-400/40 bg-slate-800/80 text-purple-200" onclick="switchTourEnvironment(4)">
+                  <span>🚕</span> TRANSFERS
+                </button>
+              </div>
 
-            <div class="safari-trail-strip">
-              <!-- Trail Dashed Line -->
-              <div class="safari-dashed-line"></div>
-
-              <!-- Driving 4x4 Safari Jeep SVG -->
-              <div class="animated-safari-jeep">
-                <svg class="w-16 h-8 drop-shadow-md" viewBox="0 0 100 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <!-- Safari Jeep Roof Rack with Luggage -->
-                  <rect x="22" y="6" width="38" height="4" rx="1.5" fill="#78350F" stroke="#D97706" stroke-width="1"/>
-                  <rect x="26" y="2" width="14" height="4" rx="1" fill="#D97706"/>
-                  <rect x="42" y="3" width="12" height="3" rx="1" fill="#0284C7"/>
-                  <!-- Jeep Cabin Rollcage -->
-                  <path d="M12 28 L24 10 L62 10 L75 22 L86 25 L88 34 L12 34 Z" fill="#065F46" stroke="#047857" stroke-width="1.5"/>
-                  <!-- Safari Open Windows -->
-                  <path d="M26 12 L44 12 L44 24 L22 24 Z" fill="#0284C7" opacity="0.85"/>
-                  <path d="M48 12 L60 12 L68 22 L48 22 Z" fill="#0284C7" opacity="0.85"/>
-                  <!-- Safari Headlights & Front Bullbar -->
-                  <circle cx="86" cy="28" r="2.5" fill="#FEF08A"/>
-                  <rect x="85" y="26" width="4" height="8" rx="1" fill="#94A3B8"/>
-                  <circle cx="12" cy="28" r="2" fill="#EF4444"/>
-                  <!-- Heavy Tread Safari Wheels -->
-                  <g class="taxi-wheel" style="transform-box: fill-box; transform-origin: center;">
-                    <circle cx="28" cy="36" r="7" fill="#0F172A" stroke="#CBD5E1" stroke-width="2"/>
-                    <circle cx="28" cy="36" r="3" fill="#D97706"/>
-                  </g>
-                  <g class="taxi-wheel" style="transform-box: fill-box; transform-origin: center;">
-                    <circle cx="72" cy="36" r="7" fill="#0F172A" stroke="#CBD5E1" stroke-width="2"/>
-                    <circle cx="72" cy="36" r="3" fill="#D97706"/>
-                  </g>
-                </svg>
+              <!-- Live Status Indicator -->
+              <div class="inline-flex items-center gap-1.5 text-xs text-amber-300 font-mono font-medium">
+                <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+                <span id="envLiveStatus">📍 Exploring: Hikka Surf School on Narigama Beach</span>
               </div>
             </div>
+
+            <!-- Auto-Cycle Progress Timeline Bar -->
+            <div class="w-full bg-white/10 h-1 rounded-full overflow-hidden">
+              <div id="envProgressBar" class="bg-gradient-to-r from-sky-400 via-amber-400 to-emerald-400 h-full journey-progress-fill" style="width: 0%;"></div>
+            </div>
+
+            <!-- Dynamic Scenic Environment Stage (5 Categories) -->
+            <div class="scenic-env-stage" id="scenicTourStage" onmouseenter="pauseTourEnv()" onmouseleave="resumeTourEnv()" title="Interactive Category Explorer - Click any category to switch scenes!">
+              
+              <!-- ===== SCENE 0: HOME (Narigama Beach, Surf Shack & Palms) ===== -->
+              <div class="env-scene env-scene-home active" id="sceneHome">
+                <svg class="env-svg" viewBox="0 0 700 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Sunny Tropical Sky Glow -->
+                  <circle cx="120" cy="35" r="30" fill="#fde047" opacity="0.35"/>
+                  <circle cx="120" cy="35" r="16" fill="#fef08a" opacity="0.85"/>
+
+                  <!-- Swaying Palm Trees on Narigama Beach -->
+                  <g class="palm-sway-anim">
+                    <path d="M480 90 Q485 50 495 28" stroke="#047857" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M495 28 Q482 20 470 24 M495 28 Q480 14 476 6 M495 28 Q496 10 498 3 M495 28 Q508 14 516 8 M495 28 Q512 22 520 28" stroke="#34d399" stroke-width="2" stroke-linecap="round"/>
+                  </g>
+                  <g class="palm-sway-anim-2">
+                    <path d="M510 90 Q514 55 520 35" stroke="#065f46" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M520 35 Q508 28 498 31 M520 35 Q508 18 504 12 M520 35 Q522 15 524 8 M520 35 Q532 18 538 14" stroke="#10b981" stroke-width="1.8" stroke-linecap="round"/>
+                  </g>
+
+                  <!-- Hikkaduwa Beach Surf Hut & Surfboard Rack -->
+                  <!-- Surf Hut -->
+                  <path d="M560 90 L560 62 L595 48 L630 62 L630 90 Z" fill="#78350f" opacity="0.9"/>
+                  <path d="M552 62 L595 44 L638 62 Z" fill="#d97706"/>
+                  <rect x="585" y="66" width="20" height="24" fill="#1e293b"/>
+                  <!-- Surfboards Propped on Rack -->
+                  <path d="M642 90 Q644 64 646 54 Q648 64 650 90 Z" fill="#0284c7" stroke="#38bdf8" stroke-width="0.8"/>
+                  <path d="M650 90 Q652 62 654 52 Q656 62 658 90 Z" fill="#f59e0b" stroke="#fef08a" stroke-width="0.8"/>
+                  <path d="M658 90 Q660 66 662 56 Q664 66 666 90 Z" fill="#10b981" stroke="#6ee7b7" stroke-width="0.8"/>
+
+                  <!-- Ocean Beach Coastline Ripples -->
+                  <path d="M0 90 Q120 78 240 90 Q360 78 480 90 L480 120 L0 120 Z" fill="#0284c7" opacity="0.5"/>
+                  <path d="M0 90 Q140 82 280 90 Q420 82 560 90 L560 120 L0 120 Z" fill="#0369a1" opacity="0.75"/>
+                </svg>
+
+                <div class="env-ground-track">
+                  <div class="env-dashes"></div>
+                </div>
+
+                <!-- Beach Surf Cruiser -->
+                <div class="env-vehicle-wrap">
+                  <div class="jeep-chassis-bob">
+                    <svg class="w-20 sm:w-24 h-10" viewBox="0 0 110 46" fill="none">
+                      <path d="M30 6 Q48 2 68 6 Q50 9 30 6 Z" fill="#f59e0b" stroke="#fef08a" stroke-width="1"/>
+                      <path d="M12 28 L24 12 L70 12 L82 22 L98 25 L99 34 L12 34 Z" fill="#0284c7" stroke="#38bdf8" stroke-width="1.5"/>
+                      <path d="M26 14 L46 14 L46 24 L22 24 Z" fill="#bae6fd" opacity="0.9"/>
+                      <path d="M50 14 L68 14 L78 22 L50 22 Z" fill="#bae6fd" opacity="0.9"/>
+                      <circle cx="98" cy="29" r="2.5" fill="#fef08a"/>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 30px 35px;">
+                        <circle cx="30" cy="35" r="7.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="30" cy="35" r="3" fill="#f59e0b"/>
+                      </g>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 82px 35px;">
+                        <circle cx="82" cy="35" r="7.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="82" cy="35" r="3" fill="#f59e0b"/>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== SCENE 1: SURF LESSONS (Breaking Waves & Active Surfer) ===== -->
+              <div class="env-scene env-scene-surfing" id="sceneSurfing">
+                <svg class="env-svg" viewBox="0 0 700 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Dynamic Breaking Barrel Wave -->
+                  <path d="M0 90 Q120 40 260 40 Q340 40 370 70 Q380 80 390 90 L0 90 Z" fill="#0284c7" opacity="0.7"/>
+                  <!-- Wave Barrel Lip & Foam Curl -->
+                  <path d="M180 50 Q280 20 360 45 Q380 55 365 72 Q350 56 290 48 Q230 40 180 50 Z" fill="#e0f2fe" opacity="0.9"/>
+                  <!-- Breaking Foam Spray Droplets -->
+                  <circle cx="368" cy="46" r="2.5" fill="#fff" opacity="0.9"/>
+                  <circle cx="376" cy="54" r="2" fill="#fff" opacity="0.8"/>
+                  <circle cx="384" cy="62" r="1.5" fill="#fff" opacity="0.7"/>
+                  <circle cx="360" cy="68" r="2" fill="#fff" opacity="0.85"/>
+
+                  <!-- Animated Surfer Carving the Wave Face -->
+                  <g class="surfer-wave-rider" style="transform-origin: 270px 65px;">
+                    <!-- Surfboard -->
+                    <path d="M245 74 Q270 70 295 72 Q270 76 245 74 Z" fill="#f59e0b" stroke="#fff" stroke-width="1"/>
+                    <!-- Surfer Body (Athletic Stance) -->
+                    <!-- Legs bent -->
+                    <path d="M262 72 L266 62 L274 62 L278 72" stroke="#0f172a" stroke-width="3" stroke-linecap="round" fill="none"/>
+                    <!-- Torso -->
+                    <path d="M270 62 L272 50" stroke="#0284c7" stroke-width="4.5" stroke-linecap="round"/>
+                    <!-- Arms balanced -->
+                    <path d="M260 52 L272 52 L284 48" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+                    <!-- Head -->
+                    <circle cx="272" cy="45" r="3.5" fill="#d97706"/>
+                  </g>
+
+                  <!-- Distant Coconut Palms along Narigama Coast -->
+                  <path d="M520 90 Q525 60 535 42" stroke="#047857" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M535 42 Q525 36 515 38 M535 42 Q536 28 538 20 M535 42 Q548 30 555 26" stroke="#34d399" stroke-width="1.8"/>
+                </svg>
+
+                <div class="env-ground-track">
+                  <div class="env-dashes"></div>
+                </div>
+
+                <!-- Surf School Gear Vehicle -->
+                <div class="env-vehicle-wrap">
+                  <div class="jeep-chassis-bob">
+                    <svg class="w-20 sm:w-24 h-10" viewBox="0 0 110 46" fill="none">
+                      <!-- Multiple Surfboards on Roof -->
+                      <path d="M26 6 Q48 1 70 6 Q50 9 26 6 Z" fill="#38bdf8" stroke="#fff" stroke-width="0.8"/>
+                      <path d="M30 3 Q50 -1 72 3 Q52 6 30 3 Z" fill="#f59e0b" stroke="#fff" stroke-width="0.8"/>
+                      <path d="M12 28 L24 12 L70 12 L82 22 L98 25 L99 34 L12 34 Z" fill="#047857" stroke="#34d399" stroke-width="1.5"/>
+                      <path d="M26 14 L46 14 L46 24 L22 24 Z" fill="#6ee7b7" opacity="0.9"/>
+                      <path d="M50 14 L68 14 L78 22 L50 22 Z" fill="#6ee7b7" opacity="0.9"/>
+                      <circle cx="98" cy="29" r="2.5" fill="#fef08a"/>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 30px 35px;">
+                        <circle cx="30" cy="35" r="7.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="30" cy="35" r="3" fill="#10b981"/>
+                      </g>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 82px 35px;">
+                        <circle cx="82" cy="35" r="7.5" fill="#0f172a" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="82" cy="35" r="3" fill="#10b981"/>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== SCENE 2: DESTINATIONS (Galle Dutch Fort & Yala Safari) ===== -->
+              <div class="env-scene env-scene-destinations" id="sceneDestinations">
+                <svg class="env-svg" viewBox="0 0 700 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Distant Safari Mountains -->
+                  <path d="M0 90 L60 50 L140 90 L220 40 L310 90 L420 45 L500 90 L700 90 L700 120 L0 120 Z" fill="#381b10" opacity="0.5"/>
+
+                  <!-- Galle Fort Ramparts -->
+                  <path d="M30 90 L80 90 L85 70 L140 70 L145 90 L260 90 L260 120 L30 120 Z" fill="#334155" opacity="0.9"/>
+                  <rect x="95" y="65" width="8" height="5" rx="1" fill="#1e293b"/>
+
+                  <!-- White & Terracotta Lighthouse with Sweeping Beam -->
+                  <polygon points="200,90 203,32 211,32 214,90" fill="#f8fafc"/>
+                  <rect x="202.5" y="46" width="9" height="5" fill="#dc2626"/>
+                  <rect x="201.5" y="62" width="11" height="5" fill="#dc2626"/>
+                  <rect x="201" y="26" width="12" height="6" fill="#0f172a"/>
+                  <circle cx="207" cy="24" r="3.5" fill="#fbbf24"/>
+                  <polygon class="lighthouse-sweep-anim" points="207,24 60,0 40,65" fill="#fef08a" opacity="0.35"/>
+
+                  <!-- Yala Safari Elephant Silhouette -->
+                  <g class="elephant-tail-anim">
+                    <path d="M480 90 L480 72 Q480 64 488 62 Q495 56 505 56 Q518 56 525 64 Q530 70 530 90 L522 90 L522 76 Q518 72 512 76 L512 90 L504 90 L504 74 Q498 72 494 76 L494 90 Z" fill="#1c1917"/>
+                    <path d="M525 64 Q535 64 538 72 Q540 80 535 82 Q532 83 530 78 Q531 72 528 69 Z" fill="#1c1917"/>
+                  </g>
+                  <!-- Safari Umbrella Tree -->
+                  <path d="M600 90 L603 56 L607 56 L610 90 Z" fill="#291305"/>
+                  <ellipse cx="605" cy="52" rx="32" ry="7" fill="#78350f"/>
+                </svg>
+
+                <div class="env-ground-track">
+                  <div class="env-dashes"></div>
+                </div>
+
+                <!-- Chauffeur Tour Van -->
+                <div class="env-vehicle-wrap">
+                  <div class="jeep-chassis-bob">
+                    <svg class="w-20 sm:w-24 h-10" viewBox="0 0 110 46" fill="none">
+                      <polygon points="98,28 150,18 150,38 98,32" fill="#fef08a" opacity="0.6"/>
+                      <path d="M12 28 L22 14 L75 14 L88 22 L98 25 L99 34 L12 34 Z" fill="#0f172a" stroke="#d97706" stroke-width="1.5"/>
+                      <path d="M26 16 L48 16 L48 24 L22 24 Z" fill="#38bdf8" opacity="0.85"/>
+                      <path d="M52 16 L74 16 L84 23 L52 23 Z" fill="#38bdf8" opacity="0.85"/>
+                      <circle cx="98" cy="29" r="2.5" fill="#fef08a"/>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 30px 35px;">
+                        <circle cx="30" cy="35" r="7.5" fill="#020617" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="30" cy="35" r="3" fill="#d97706"/>
+                      </g>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 82px 35px;">
+                        <circle cx="82" cy="35" r="7.5" fill="#020617" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="82" cy="35" r="3" fill="#d97706"/>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== SCENE 3: ACTIVITIES (Sea Turtles, Snorkeling & Mangrove Riverboat) ===== -->
+              <div class="env-scene env-scene-activities" id="sceneActivities">
+                <svg class="env-svg" viewBox="0 0 700 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Coral Sanctuary Reef & Mangrove Islets -->
+                  <path d="M0 90 Q60 50 140 50 Q200 50 260 90 Z" fill="#064e3b" opacity="0.85"/>
+                  <path d="M460 90 Q530 40 600 40 Q660 40 700 90 Z" fill="#047857" opacity="0.85"/>
+
+                  <!-- Swimming Wild Sea Turtle 🐢 -->
+                  <g class="turtle-swim-anim">
+                    <!-- Turtle Shell -->
+                    <ellipse cx="220" cy="65" rx="14" ry="10" fill="#065f46" stroke="#34d399" stroke-width="1.2"/>
+                    <!-- Turtle Head -->
+                    <circle cx="238" cy="65" r="4.5" fill="#047857"/>
+                    <!-- Flippers -->
+                    <path d="M226 56 Q235 44 245 48" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M226 74 Q235 86 245 82" stroke="#10b981" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M210 58 Q202 50 198 54" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                    <path d="M210 72 Q202 80 198 76" stroke="#10b981" stroke-width="2" stroke-linecap="round"/>
+                  </g>
+
+                  <!-- Swimming Tropical Reef Fish -->
+                  <path d="M360 60 Q370 54 380 60 Q370 66 360 60 Z M355 56 L360 60 L355 64 Z" fill="#f59e0b"/>
+                  <path d="M410 70 Q418 65 426 70 Q418 75 410 70 Z M406 67 L410 70 L406 73 Z" fill="#38bdf8"/>
+                </svg>
+
+                <div class="env-water-track"></div>
+
+                <!-- Covered Lagoon & River Safari Boat -->
+                <div class="env-vehicle-wrap">
+                  <div class="boat-water-bob">
+                    <svg class="w-22 sm:w-26 h-10" viewBox="0 0 120 46" fill="none">
+                      <path d="M0 38 Q20 34 40 38 Q60 34 80 38" stroke="#6ee7b7" stroke-width="1.5" opacity="0.75"/>
+                      <path d="M25 10 L95 10 L90 14 L20 14 Z" fill="#059669" stroke="#34d399" stroke-width="1"/>
+                      <line x1="25" y1="14" x2="25" y2="28" stroke="#cbd5e1" stroke-width="1.5"/>
+                      <line x1="60" y1="14" x2="60" y2="28" stroke="#cbd5e1" stroke-width="1.5"/>
+                      <line x1="90" y1="14" x2="90" y2="28" stroke="#cbd5e1" stroke-width="1.5"/>
+                      <circle cx="35" cy="22" r="3.5" fill="#0f172a"/>
+                      <circle cx="55" cy="22" r="3.5" fill="#0f172a"/>
+                      <circle cx="82" cy="20" r="3.8" fill="#d97706"/>
+                      <path d="M8 28 L108 28 Q118 28 112 36 L18 36 Q10 36 8 28 Z" fill="#022c22" stroke="#34d399" stroke-width="1.5"/>
+                      <circle cx="110" cy="30" r="2" fill="#fef08a"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+              <!-- ===== SCENE 4: TRANSFERS (24/7 Colombo CMB Airport Expressway Taxi) ===== -->
+              <div class="env-scene env-scene-transfers" id="sceneTransfers">
+                <svg class="env-svg" viewBox="0 0 700 120" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Expressway Overhead Directional Signboard -->
+                  <rect x="220" y="24" width="110" height="28" rx="4" fill="#065f46" stroke="#34d399" stroke-width="1.5"/>
+                  <text x="230" y="42" fill="#fff" font-size="10" font-weight="bold" font-family="sans-serif">✈️ AIRPORT (CMB) ➔</text>
+                  <!-- Signboard Gantries -->
+                  <line x1="235" y1="52" x2="235" y2="90" stroke="#64748b" stroke-width="2"/>
+                  <line x1="315" y1="52" x2="315" y2="90" stroke="#64748b" stroke-width="2"/>
+
+                  <!-- Expressway Highway Bridge & Coastal Palms -->
+                  <path d="M480 90 Q510 50 560 50 Q610 50 640 90 Z" fill="#1e293b" opacity="0.8"/>
+                  <path d="M600 90 Q605 60 612 40" stroke="#047857" stroke-width="2" stroke-linecap="round"/>
+                  <path d="M612 40 Q602 34 594 36 M612 40 Q612 26 614 18 M612 40 Q622 28 628 24" stroke="#34d399" stroke-width="1.6"/>
+                </svg>
+
+                <div class="env-ground-track" style="border-top-color: rgba(52, 211, 153, 0.6);">
+                  <div class="env-dashes" style="background: repeating-linear-gradient(90deg, #34d399 0, #34d399 14px, transparent 14px, transparent 28px);"></div>
+                </div>
+
+                <!-- 24/7 Highway Express Chauffeur Taxi -->
+                <div class="env-vehicle-wrap">
+                  <div class="jeep-chassis-bob">
+                    <svg class="w-20 sm:w-24 h-10" viewBox="0 0 110 46" fill="none">
+                      <!-- Aerodynamic Taxi Roof Light -->
+                      <rect x="44" y="9" width="16" height="4" rx="2" fill="#f59e0b"/>
+                      <polygon points="98,28 150,18 150,38 98,32" fill="#34d399" opacity="0.6"/>
+                      <path d="M12 28 L24 13 L72 13 L84 22 L98 25 L99 34 L12 34 Z" fill="#0f172a" stroke="#10b981" stroke-width="1.5"/>
+                      <path d="M26 15 L46 15 L46 24 L22 24 Z" fill="#6ee7b7" opacity="0.85"/>
+                      <path d="M50 15 L70 15 L80 23 L50 23 Z" fill="#6ee7b7" opacity="0.85"/>
+                      <circle cx="98" cy="29" r="2.5" fill="#fef08a"/>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 30px 35px;">
+                        <circle cx="30" cy="35" r="7.5" fill="#020617" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="30" cy="35" r="3" fill="#10b981"/>
+                      </g>
+                      <g class="safari-wheel-spin" style="transform-box: fill-box; transform-origin: 82px 35px;">
+                        <circle cx="82" cy="35" r="7.5" fill="#020617" stroke="#cbd5e1" stroke-width="1.8"/>
+                        <circle cx="82" cy="35" r="3" fill="#10b981"/>
+                      </g>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+
+            </div>
           </div>
 
-          <!-- Key Destination Highlights Grid -->
+          <!-- Key Pillars Highlights Grid (Direct Links to Navigation Pages) -->
           <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-1 text-xs text-gray-200">
-            <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/10">
-              <span class="text-base">🏰</span>
-              <span><strong>Galle Dutch Fort:</strong> UNESCO ramparts & lighthouse (25 mins)</span>
-            </div>
-            <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/10">
-              <span class="text-base">🐋</span>
-              <span><strong>Mirissa & Weligama:</strong> Whales & Coconut Tree Hill (50 mins)</span>
-            </div>
-            <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/10">
-              <span class="text-base">🐆</span>
-              <span><strong>Yala & Udawalawe:</strong> Leopard safaris & wild elephants</span>
-            </div>
-            <div class="flex items-center gap-2 bg-white/5 p-2 rounded-xl border border-white/10">
-              <span class="text-base">🚤</span>
-              <span><strong>Madu River Mangroves:</strong> 64 islands & cinnamon isle (25 mins)</span>
-            </div>
+            <a href="surf-lessons.html" id="destCard1" onclick="switchTourEnvironment(1)" class="dest-interactive-card flex items-center justify-between gap-2 bg-white/5 p-2.5 rounded-xl border border-cyan-500/30 hover:border-cyan-400">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">🏄</span>
+                <span><strong>Surf Lessons:</strong> Beginner, Private & Board Rentals (Narigama)</span>
+              </div>
+              <span class="text-[10px] uppercase font-bold text-cyan-300 opacity-80">Explore ➔</span>
+            </a>
+
+            <a href="destinations.html" id="destCard2" onclick="switchTourEnvironment(2)" class="dest-interactive-card flex items-center justify-between gap-2 bg-white/5 p-2.5 rounded-xl border border-amber-500/30 hover:border-amber-400">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">🌴</span>
+                <span><strong>Destinations:</strong> Galle Fort, Yala Safari & Mirissa Day Trips</span>
+              </div>
+              <span class="text-[10px] uppercase font-bold text-amber-300 opacity-80">Explore ➔</span>
+            </a>
+
+            <a href="activities.html" id="destCard3" onclick="switchTourEnvironment(3)" class="dest-interactive-card flex items-center justify-between gap-2 bg-white/5 p-2.5 rounded-xl border border-emerald-500/30 hover:border-emerald-400">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">🤿</span>
+                <span><strong>Activities:</strong> Snorkeling, Wild Turtles, Fishing & Madu River</span>
+              </div>
+              <span class="text-[10px] uppercase font-bold text-emerald-300 opacity-80">Explore ➔</span>
+            </a>
+
+            <a href="transfers.html" id="destCard4" onclick="switchTourEnvironment(4)" class="dest-interactive-card flex items-center justify-between gap-2 bg-white/5 p-2.5 rounded-xl border border-purple-500/30 hover:border-purple-400">
+              <div class="flex items-center gap-2">
+                <span class="text-lg">🚕</span>
+                <span><strong>Airport Transfers:</strong> 24/7 Colombo (CMB) & Islandwide A/C Taxi</span>
+              </div>
+              <span class="text-[10px] uppercase font-bold text-purple-300 opacity-80">Book ➔</span>
+            </a>
           </div>
+
+          <!-- JavaScript Controller for Multi-Category Experience Engine -->
+          <script>
+            (function() {
+              let currentEnv = 0;
+              let progress = 0;
+              const duration = 4800; // ms per category
+              const stepTime = 100;
+              let isPaused = false;
+
+              const envDescriptions = [
+                "📍 Exploring: Hikka Surf School on Narigama Beach (Home Base)",
+                "📍 Exploring: Surf Lessons (Beginner, Intermediate & Board Rentals)",
+                "📍 Exploring: Destinations (Galle Dutch Fort, Yala Safari & Whales)",
+                "📍 Exploring: Activities (Coral Snorkeling, Wild Turtles & Fishing)",
+                "📍 Exploring: Airport Transfers (24/7 Colombo CMB Expressway Taxi)"
+              ];
+
+              window.switchTourEnvironment = function(index) {
+                currentEnv = index;
+                progress = 0;
+                updateEnvUI();
+              };
+
+              function updateEnvUI() {
+                const scenes = document.querySelectorAll('.env-scene');
+                const tabs = document.querySelectorAll('.area-tab-btn');
+                const cards = document.querySelectorAll('.dest-interactive-card');
+                const statusEl = document.getElementById('envLiveStatus');
+
+                scenes.forEach((s, idx) => {
+                  if (idx === currentEnv) s.classList.add('active');
+                  else s.classList.remove('active');
+                });
+
+                tabs.forEach((t, idx) => {
+                  if (idx === currentEnv) t.classList.add('active');
+                  else t.classList.remove('active');
+                });
+
+                cards.forEach((c, idx) => {
+                  // destCard1 maps to index 1, destCard2 to index 2, etc.
+                  if (idx + 1 === currentEnv) c.classList.add('card-active');
+                  else c.classList.remove('card-active');
+                });
+
+                if (statusEl) {
+                  statusEl.textContent = envDescriptions[currentEnv] || "";
+                }
+              }
+
+              function tick() {
+                if (!isPaused) {
+                  progress += (stepTime / duration) * 100;
+                  const bar = document.getElementById('envProgressBar');
+                  if (bar) bar.style.width = Math.min(progress, 100) + '%';
+
+                  if (progress >= 100) {
+                    currentEnv = (currentEnv + 1) % 5;
+                    progress = 0;
+                    updateEnvUI();
+                  }
+                }
+              }
+
+              window.pauseTourEnv = function() { isPaused = true; };
+              window.resumeTourEnv = function() { isPaused = false; };
+
+              setInterval(tick, stepTime);
+              setTimeout(updateEnvUI, 60);
+            })();
+          </script>
 
           <div class="pt-3 flex flex-wrap gap-3">
             <button type="button" onclick="inquireTour('Southern Sri Lanka Day Excursions')" class="btn-hero-emerald btn-shimmer px-6 py-3.5 rounded-full text-white font-black text-xs sm:text-sm uppercase tracking-wider inline-flex items-center gap-2 cursor-pointer shadow-xl">
