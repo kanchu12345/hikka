@@ -89,6 +89,9 @@ function initApp() {
   window.setCurrency = function(code) {
     if (!CURRENCY_RATES[code]) return;
     currentCurrency = code;
+    try {
+      localStorage.setItem('hikka_selected_currency', code);
+    } catch(e) {}
     const curr = CURRENCY_RATES[code];
 
     document.querySelectorAll('[data-usd]').forEach(el => {
@@ -102,7 +105,24 @@ function initApp() {
         }
       }
     });
+
+    // Highlight active currency button
+    document.querySelectorAll('button[onclick*="setCurrency"]').forEach(btn => {
+      if (btn.getAttribute('onclick') && btn.getAttribute('onclick').includes(`'${code}'`)) {
+        btn.classList.add('text-sand-300', 'font-black', 'underline');
+        btn.classList.remove('text-white/70');
+      } else {
+        btn.classList.remove('text-sand-300', 'font-black', 'underline');
+        btn.classList.add('text-white/70');
+      }
+    });
   };
+
+  // Restore saved currency on load
+  try {
+    const savedCurrency = localStorage.getItem('hikka_selected_currency') || 'USD';
+    window.setCurrency(savedCurrency);
+  } catch(e) {}
 
   // 9. WhatsApp Booking Modal System
   initBookingModal(cleanWhatsApp);
@@ -131,6 +151,8 @@ function initBookingModal(cleanWhatsApp) {
   const modalGuestsSelect = document.getElementById('modal-guests-select');
   const modalTimeSelect = document.getElementById('modal-time-select');
   const modalNameInput = document.getElementById('modal-name-input');
+  const modalPhoneInput = document.getElementById('modal-phone-input');
+  const modalNotesInput = document.getElementById('modal-notes-input');
   const bookingForm = document.getElementById('booking-form');
 
   if (modalDateInput) {
@@ -168,9 +190,13 @@ function initBookingModal(cleanWhatsApp) {
     modal.classList.remove('flex');
   };
 
-  window.inquireTour = function(tourName = 'Sri Lanka Day Trip') {
+  window.inquireTour = function(tourName = 'Southern Province Tour') {
     const cleanPhone = cleanWhatsApp || '94771234567';
-    const text = `Hi Hikka Surf School! I would like to inquire about booking the ${tourName} private day tour from Hikkaduwa. Please let me know prices and availability!`;
+    const text = `Hi Hikka Surf School,
+I would like to book the ${tourName}.
+Preferred date:
+Number of people:
+Pickup location:`;
     window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(text)}`, '_blank');
   };
 
@@ -189,17 +215,44 @@ function initBookingModal(cleanWhatsApp) {
       const date = modalDateInput?.value || 'Tomorrow';
       const guests = modalGuestsSelect?.value || '2 People';
       const time = modalTimeSelect?.value || '08:30 AM';
-      const name = modalNameInput?.value ? `\n• Name: ${modalNameInput.value.trim()}` : '';
+      const name = modalNameInput?.value ? modalNameInput.value.trim() : 'Guest';
+      const phone = modalPhoneInput?.value ? modalPhoneInput.value.trim() : 'Not provided';
+      const notes = modalNotesInput?.value ? modalNotesInput.value.trim() : 'None';
 
-      const text = `Hi Hikka Surf School! I would like to book:%0A` +
-        `• Activity: ${encodeURIComponent(activity)}%0A` +
-        `• Date: ${encodeURIComponent(date)}%0A` +
-        `• Guests: ${encodeURIComponent(guests)}%0A` +
-        `• Preferred Time: ${encodeURIComponent(time)}` +
-        `${encodeURIComponent(name)}%0A%0A` +
-        `Please let me know availability!`;
+      const inquiryObj = {
+        activity,
+        date,
+        guests,
+        time,
+        name,
+        phone,
+        notes,
+        timestamp: new Date().toISOString()
+      };
 
-      window.open(`https://wa.me/${cleanWhatsApp}?text=${text}`, '_blank');
+      try {
+        const stored = JSON.parse(localStorage.getItem('hikka_recent_inquiries') || '[]');
+        stored.unshift(inquiryObj);
+        if (stored.length > 50) stored.pop();
+        localStorage.setItem('hikka_recent_inquiries', JSON.stringify(stored));
+      } catch(err) {}
+
+      const msgLines = [
+        "Hi Hikka Surf School, I would like to book a session:",
+        `• Activity: ${activity}`,
+        `• Preferred Date: ${date}`,
+        `• Number of People: ${guests}`,
+        `• Preferred Time: ${time}`,
+        `• Name: ${name}`,
+        `• Contact: ${phone}`,
+        `• Notes/Pickup: ${notes}`,
+        "",
+        "Please let me know availability!"
+      ];
+
+      const cleanPhone = cleanWhatsApp || '94771234567';
+      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msgLines.join('
+'))}`, '_blank');
       closeBookingModal();
     };
   }
@@ -358,7 +411,7 @@ function initHeroSlideshow(settings) {
 
   const images = settings.hero_images || [
     { url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80" },
-    { url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1920&q=80" },
+    { url: "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=1920&q=80" },
     { url: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1920&q=80" },
     { url: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1920&q=80" }
   ];
@@ -397,7 +450,7 @@ function initMiddleSlideshow() {
       title: "Hikkaduwa"
     },
     {
-      url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
+      url: "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=1920&q=80",
       title: "Narigama Beach"
     },
     {

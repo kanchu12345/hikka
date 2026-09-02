@@ -33,7 +33,7 @@ const DEFAULT_SITE_DATA = {
         caption: "Clean Morning Waves on Narigama Beach, Hikkaduwa"
       },
       {
-        url: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1920&q=80",
+        url: "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=1920&q=80",
         caption: "Golden Sunset Surfing in Tropical 28°C Waters"
       },
       {
@@ -94,7 +94,7 @@ const DEFAULT_SITE_DATA = {
       duration: "1.5 Hours",
       images: [
         "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80",
+        "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=800&q=80",
         "https://images.unsplash.com/photo-1455729552865-3658a5d39692?auto=format&fit=crop&w=800&q=80"
       ],
       included_items: [
@@ -207,7 +207,7 @@ const DEFAULT_SITE_DATA = {
       duration: "Early Morning Tour",
       images: [
         "https://images.unsplash.com/photo-1568430462989-44163eb1752f?auto=format&fit=crop&w=800&q=80",
-        "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=800&q=80"
+        "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=800&q=80"
       ],
       included_items: [
         "Hikkaduwa → Mirissa Tour",
@@ -359,7 +359,7 @@ const DEFAULT_SITE_DATA = {
     {
       id: "g2",
       category: "Surfing",
-      imageUrl: "https://images.unsplash.com/photo-1507525428033-b723cf961d3e?auto=format&fit=crop&w=1000&q=80",
+      imageUrl: "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=1000&q=80",
       title: "Happy Surf Students",
       caption: "Big smiles after standing up on tropical waves."
     },
