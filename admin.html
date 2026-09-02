@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <!-- Google tag (gtag.js) -->
@@ -10,8 +10,8 @@
     gtag('config', 'G-E84DYY8YBS');
   </script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>CMS Dashboard | ❤️ Hikkaduwa Hikka Surf School</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>CMS Dashboard | â¤ï¸ Hikkaduwa Hikka Surf School</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
@@ -34,9 +34,9 @@
   <script src="js/data.js"></script>
   <script src="js/firebase-client.js"></script>
 </head>
-<body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen pb-20">
+<body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen pb-28 selection:bg-surf-500 selection:text-white">
 
-  <!-- Top Admin Bar (Mobile Responsive) -->
+  <!-- Top Admin Bar (Mobile First) -->
   <header class="bg-[#12161A] text-white py-3 sm:py-4 px-4 sm:px-6 border-b border-gray-800 flex items-center justify-between sticky top-0 z-50 shadow-lg">
     <div class="flex items-center gap-2 sm:gap-3">
       <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-8 sm:h-10 w-auto object-contain" />
@@ -46,61 +46,65 @@
     </div>
 
     <div class="flex items-center gap-2 sm:gap-3">
-      <a href="index.html" target="_blank" class="px-3 py-1.5 sm:px-4 sm:py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1">
-        <span>Site</span> ↗
+      <a href="index.html" target="_blank" class="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 active:scale-95">
+        <span>Site</span> â†—
       </a>
-      <button onclick="saveAllSettings()" class="px-3.5 py-1.5 sm:px-5 sm:py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1 cursor-pointer">
-        <span>💾 Save</span>
+      <button onclick="saveAllSettings()" class="px-4 py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-95">
+        <span>ðŸ’¾ Save All</span>
       </button>
     </div>
   </header>
 
   <!-- Mobile Horizontal Scrollable Tab Bar -->
-  <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2 px-3 sm:hidden flex items-center gap-2 no-scrollbar shadow-sm">
-    <button onclick="showTab('settings')" id="m-tab-settings" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">⚙️ Settings</button>
-    <button onclick="showTab('social')" id="m-tab-social" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📱 Social Links</button>
-    <button onclick="showTab('surfreport')" id="m-tab-surfreport" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌊 Surf Report</button>
-    <button onclick="showTab('destinations')" id="m-tab-destinations" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌴 Destinations</button>
-    <button onclick="showTab('hero')" id="m-tab-hero" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🖼️ Slideshow</button>
-    <button onclick="showTab('activities')" id="m-tab-activities" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Activities</button>
-    <button onclick="showTab('reviews')" id="m-tab-reviews" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⭐ Reviews</button>
-    <button onclick="showTab('faqs')" id="m-tab-faqs" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">❓ FAQ</button>
-    <button onclick="showTab('firebase')" id="m-tab-firebase" class="px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🔥 Cloud</button>
+  <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2.5 px-3 sm:hidden flex items-center gap-2 no-scrollbar shadow-sm">
+    <button onclick="showTab('settings')" id="m-tab-settings" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">âš™ï¸ Settings</button>
+    <button onclick="showTab('social')" id="m-tab-social" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸ“± Social</button>
+    <button onclick="showTab('surfreport')" id="m-tab-surfreport" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸŒŠ Surf Report</button>
+    <button onclick="showTab('hero')" id="m-tab-hero" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸ–¼ï¸ Slides</button>
+    <button onclick="showTab('destinations')" id="m-tab-destinations" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸŒ´ Destinations</button>
+    <button onclick="showTab('activities')" id="m-tab-activities" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸ„ Activities</button>
+    <button onclick="showTab('gallery')" id="m-tab-gallery" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸ“· Gallery</button>
+    <button onclick="showTab('reviews')" id="m-tab-reviews" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">â­ Reviews</button>
+    <button onclick="showTab('faqs')" id="m-tab-faqs" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">â“ FAQ</button>
+    <button onclick="showTab('firebase')" id="m-tab-firebase" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">ðŸ”¥ Cloud</button>
   </div>
 
-  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
+  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 grid grid-cols-1 md:grid-cols-12 gap-6 sm:gap-8">
     
     <!-- Desktop Sidebar Navigation -->
     <aside class="hidden sm:block md:col-span-3 space-y-2">
       <button onclick="showTab('settings')" id="tab-btn-settings" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2">
-        <span>⚙️ General Settings</span>
+        <span>âš™ï¸ General Settings</span>
       </button>
       <button onclick="showTab('social')" id="tab-btn-social" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>📱 Social Media & Maps</span>
+        <span>ðŸ“± Social Media & Maps</span>
       </button>
       <button onclick="showTab('surfreport')" id="tab-btn-surfreport" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🌊 Daily Surf Report</span>
-      </button>
-      <button onclick="showTab('destinations')" id="tab-btn-destinations" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🌴 Destinations & Day Trips</span>
+        <span>ðŸŒŠ Daily Surf Report</span>
       </button>
       <button onclick="showTab('hero')" id="tab-btn-hero" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🖼️ Hero & Slideshow</span>
+        <span>ðŸ–¼ï¸ Hero Slideshow & Uploads</span>
+      </button>
+      <button onclick="showTab('destinations')" id="tab-btn-destinations" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>ðŸŒ´ Destinations & Day Trips</span>
       </button>
       <button onclick="showTab('activities')" id="tab-btn-activities" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🏄 Activities & Rates</span>
+        <span>ðŸ„ Activities & Rates</span>
+      </button>
+      <button onclick="showTab('gallery')" id="tab-btn-gallery" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
+        <span>ðŸ“· Photo Gallery Manager</span>
       </button>
       <button onclick="showTab('reviews')" id="tab-btn-reviews" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>⭐ Google Reviews</span>
+        <span>â­ Google Reviews</span>
       </button>
       <button onclick="showTab('faqs')" id="tab-btn-faqs" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>❓ FAQ Accordions</span>
+        <span>â“ FAQ Accordions</span>
       </button>
       <button onclick="showTab('firebase')" id="tab-btn-firebase" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>🔥 Firebase Cloud Sync</span>
+        <span>ðŸ”¥ Firebase Cloud Sync</span>
       </button>
       <button onclick="showTab('backup')" id="tab-btn-backup" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2">
-        <span>📥 Backup & JSON Export</span>
+        <span>ðŸ“¥ Backup & JSON Export</span>
       </button>
     </aside>
 
@@ -110,45 +114,47 @@
       <!-- 1. GENERAL SETTINGS TAB -->
       <section id="tab-settings" class="tab-content space-y-4">
         <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">General Business & Contact Settings</h2>
-          <span class="text-[11px] text-gray-400">Instant Live Update</span>
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">General Business & Contact Settings</h2>
+            <p class="text-[11px] text-gray-500">Contact details are updated instantly across header, mobile drawer and footer</p>
+          </div>
         </div>
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Brand / Business Name</label>
-            <input type="text" id="set-name" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <input type="text" id="set-name" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Tagline</label>
-            <input type="text" id="set-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <input type="text" id="set-tagline" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number (e.g. +94771234567)</label>
-            <input type="text" id="set-whatsapp" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <input type="text" id="set-whatsapp" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Contact Phone</label>
-            <input type="text" id="set-phone" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <input type="text" id="set-phone" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
-            <input type="email" id="set-email" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <input type="email" id="set-email" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
           <div>
             <label class="block text-xs font-bold text-gray-700 mb-1">Beach Address / Meeting Point</label>
-            <input type="text" id="set-address" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <input type="text" id="set-address" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
         <div class="pt-2">
-          <button onclick="saveAllSettings()" class="w-full py-3 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
             Save General Settings
           </button>
         </div>
@@ -158,43 +164,43 @@
       <section id="tab-social" class="tab-content hidden space-y-4">
         <div class="border-b border-gray-100 pb-3">
           <h2 class="text-base sm:text-xl font-bold text-gray-900">Official Social Media Profiles & Maps</h2>
-          <p class="text-xs text-gray-500">Links are reflected across the Header Top Bar, Mobile Drawer, and Footer</p>
+          <p class="text-xs text-gray-500">Connected to header top bar, mobile menu badges, contact page and footer</p>
         </div>
 
         <div class="space-y-3">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">📸 Instagram Profile URL</label>
-            <input type="url" id="set-instagram" placeholder="https://www.instagram.com/hikkasurf" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸ“¸ Instagram Profile URL</label>
+            <input type="url" id="set-instagram" placeholder="https://www.instagram.com/hikkasurf" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">👍 Facebook Page URL</label>
-            <input type="url" id="set-facebook" placeholder="https://web.facebook.com/profile.php?id=100088255598601" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸ‘ Facebook Page URL</label>
+            <input type="url" id="set-facebook" placeholder="https://web.facebook.com/profile.php?id=100088255598601" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🦉 TripAdvisor Profile URL</label>
-            <input type="url" id="set-tripadvisor" placeholder="https://www.tripadvisor.com" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸ¦‰ TripAdvisor Profile URL</label>
+            <input type="url" id="set-tripadvisor" placeholder="https://www.tripadvisor.com" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">📍 Google Business Maps Profile Link</label>
-            <input type="url" id="set-maps-url" placeholder="https://maps.app.goo.gl/coczrnnnajTi581G9" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸ“ Google Business Maps Profile Link</label>
+            <input type="url" id="set-maps-url" placeholder="https://maps.app.goo.gl/coczrnnnajTi581G9" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
         <div class="pt-2">
-          <button onclick="saveAllSettings()" class="w-full py-3 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
             Save Social Media Links
           </button>
         </div>
       </section>
 
-      <!-- 3. LIVE DAILY SURF & WEATHER REPORT TAB -->
+      <!-- 3. LIVE DAILY SURF REPORT TAB -->
       <section id="tab-surfreport" class="tab-content hidden space-y-4">
         <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
           <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">🌊 Daily Live Surf & Beach Conditions</h2>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">ðŸŒŠ Daily Live Surf & Beach Conditions</h2>
             <p class="text-xs text-gray-500">Updates the live ticker at the very top of every website page</p>
           </div>
           <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-[10px] font-black rounded-full">Top Banner</span>
@@ -202,131 +208,153 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌊 Waves & Swell (e.g. "2–4 ft Clean", "3–5 ft Glassy")</label>
-            <input type="text" id="set-surf-waves" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸŒŠ Waves & Swell</label>
+            <input type="text" id="set-surf-waves" placeholder="e.g. 2â€“4 ft Clean" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌡️ Water Temperature (e.g. "28°C (No Wetsuit)")</label>
-            <input type="text" id="set-surf-water" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸŒ¡ï¸ Water Temperature</label>
+            <input type="text" id="set-surf-water" placeholder="e.g. 28Â°C (No Wetsuit)" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌤️ General Condition Note</label>
-            <input type="text" id="set-surf-condition" placeholder="e.g. Glassy Morning, Best for Beginners" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸŒ¤ï¸ General Condition Note</label>
+            <input type="text" id="set-surf-condition" placeholder="e.g. Glassy Morning, Best for Beginners" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
 
           <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🕒 Last Updated Tag</label>
-            <input type="text" id="set-surf-updated" placeholder="e.g. Today 06:30 AM" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+            <label class="block text-xs font-bold text-gray-700 mb-1">ðŸ•’ Last Updated Tag</label>
+            <input type="text" id="set-surf-updated" placeholder="e.g. Today 06:30 AM" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
           </div>
         </div>
 
         <div class="pt-2">
-          <button onclick="saveAllSettings()" class="w-full py-3 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs shadow-md transition-all cursor-pointer">
+          <button onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#0084B4] text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer active:scale-98">
             Update Daily Surf Report
           </button>
         </div>
       </section>
 
-      <!-- 4. DESTINATIONS & TOURS TAB -->
-      <section id="tab-destinations" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">🌴 Destinations & Day Trips Manager</h2>
-            <p class="text-xs text-gray-500">Manage Southern Province & Sri Lanka tour sights</p>
-          </div>
-          <button onclick="addDestinationItem()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add Sight</button>
-        </div>
-
-        <div id="destinations-list" class="space-y-4">
-          <!-- Dynamic Destinations -->
-        </div>
-      </section>
-
-      <!-- 2. HERO SLIDESHOW TAB -->
+      <!-- 4. HERO SLIDESHOW TAB WITH DIRECT DEVICE UPLOAD -->
       <section id="tab-hero" class="tab-content hidden space-y-4">
-        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Hero Auto-Swapping Slideshow</h2>
-          <button onclick="addHeroImage()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add Slide</button>
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">Hero Slideshow & Image Uploads</h2>
+            <p class="text-xs text-gray-500">Upload photos directly from your phone camera roll or paste image links</p>
+          </div>
+          <div class="flex items-center gap-2">
+            <label class="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-1 shadow-sm active:scale-95">
+              <span>ðŸ“ Upload from Phone</span>
+              <input type="file" accept="image/*" class="hidden" onchange="uploadHeroImageFile(event)" />
+            </label>
+            <button onclick="addHeroImage()" class="px-3 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add URL</button>
+          </div>
         </div>
 
         <div>
           <label class="block text-xs font-bold text-gray-700 mb-1">Slide Swap Interval (Milliseconds, e.g. 4500)</label>
-          <input type="number" id="set-hero-interval" class="w-full sm:w-48 p-2.5 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
+          <input type="number" id="set-hero-interval" class="w-full sm:w-48 p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
         </div>
 
         <div id="hero-slides-list" class="space-y-3 pt-2">
-          <!-- Dynamic Hero Slides -->
+          <!-- Dynamic Hero Slides with Preview & Upload -->
         </div>
       </section>
 
-      <!-- 3. ACTIVITIES CMS TAB -->
+      <!-- 5. DESTINATIONS & TOURS TAB WITH UPLOAD -->
+      <section id="tab-destinations" class="tab-content hidden space-y-4">
+        <div class="flex items-center justify-between border-b border-gray-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">ðŸŒ´ Destinations & Day Trips Manager</h2>
+            <p class="text-xs text-gray-500">Manage Southern Province & Sri Lanka sights and photos</p>
+          </div>
+          <button onclick="addDestinationItem()" class="px-3.5 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Sight</button>
+        </div>
+
+        <div id="destinations-list" class="space-y-4">
+          <!-- Dynamic Destinations with Upload -->
+        </div>
+      </section>
+
+      <!-- 6. ACTIVITIES & RATES CMS TAB WITH UPLOAD -->
       <section id="tab-activities" class="tab-content hidden space-y-4">
         <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Activities & Rates CMS</h2>
-          <span class="text-xs text-gray-500">8 Core Categories</span>
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">Activities & Rates CMS</h2>
+            <p class="text-xs text-gray-500">Update lesson pricing, duration, and photos</p>
+          </div>
+          <span class="text-xs font-bold px-2 py-1 bg-surf-50 text-surf-700 rounded-lg">8 Categories</span>
         </div>
         <div id="activities-list" class="space-y-4">
-          <!-- Dynamic Activity Cards -->
+          <!-- Dynamic Activity Cards with Upload -->
         </div>
       </section>
 
-      <!-- 4. REVIEWS TAB -->
+      <!-- 7. PHOTO GALLERY MANAGER WITH DIRECT UPLOAD -->
+      <section id="tab-gallery" class="tab-content hidden space-y-4">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
+          <div>
+            <h2 class="text-base sm:text-xl font-bold text-gray-900">ðŸ“· Photo Gallery Manager</h2>
+            <p class="text-xs text-gray-500">Upload new photos to the Gallery page from your phone or PC</p>
+          </div>
+          <label class="px-4 py-2 bg-gradient-to-r from-purple-600 to-pink-600 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center justify-center gap-1.5 shadow-md active:scale-95">
+            <span>ðŸ“ Upload New Photo</span>
+            <input type="file" accept="image/*" class="hidden" onchange="uploadGalleryPhoto(event)" />
+          </label>
+        </div>
+
+        <div id="gallery-items-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <!-- Dynamic Gallery Cards -->
+        </div>
+      </section>
+
+      <!-- 8. REVIEWS TAB WITH UPLOAD -->
       <section id="tab-reviews" class="tab-content hidden space-y-4">
         <div class="flex items-center justify-between border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Google Maps 5.0★ Reviews</h2>
-          <button onclick="addReviewItem()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add Review</button>
+          <h2 class="text-base sm:text-xl font-bold text-gray-900">Google Maps 5.0â˜… Reviews</h2>
+          <button onclick="addReviewItem()" class="px-3.5 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Review</button>
         </div>
         <div id="reviews-list" class="space-y-4">
           <!-- Dynamic Reviews -->
         </div>
       </section>
 
-      <!-- 5. FAQ TAB -->
+      <!-- 9. FAQ TAB -->
       <section id="tab-faqs" class="tab-content hidden space-y-4">
         <div class="flex items-center justify-between border-b border-gray-100 pb-3">
           <h2 class="text-base sm:text-xl font-bold text-gray-900">Frequently Asked Questions</h2>
-          <button onclick="addFaqItem()" class="px-3 py-1.5 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer">+ Add FAQ</button>
+          <button onclick="addFaqItem()" class="px-3.5 py-2 bg-[#0084B4] text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add FAQ</button>
         </div>
         <div id="faqs-list" class="space-y-3">
           <!-- Dynamic FAQs -->
         </div>
       </section>
 
-      <!-- 6. FIREBASE CLOUD SYNC TAB -->
+      <!-- 10. FIREBASE CLOUD SYNC TAB -->
       <section id="tab-firebase" class="tab-content hidden space-y-4">
-        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">🔥 Firebase Firestore & Storage Configuration</h2>
+        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">ðŸ”¥ Firebase Cloud Realtime Sync</h2>
         <p class="text-xs text-gray-600 leading-relaxed">
-          Link your Firebase project to enable instant live cloud sync for client visits across the world.
+          Sync your local edits to Google Firebase Firestore to update all client phones and laptops worldwide in real time.
         </p>
 
-        <div>
-          <label class="block text-xs font-bold text-gray-700 mb-1">Paste Firebase Config JSON</label>
-          <textarea id="firebase-config-json" rows="6" placeholder='{ "apiKey": "...", "authDomain": "...", "projectId": "...", "storageBucket": "..." }' class="w-full p-3 font-mono text-xs bg-slate-900 text-emerald-400 rounded-xl border border-gray-700"></textarea>
-        </div>
-
         <div class="flex flex-col sm:flex-row gap-3">
-          <button onclick="saveFirebaseConfig()" class="w-full sm:w-auto px-5 py-2.5 bg-[#0084B4] hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer">
-            Connect Firebase Project
-          </button>
-          <button onclick="pushToFirestore()" class="w-full sm:w-auto px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer">
-            Push All Local Data to Firestore ☁️
+          <button onclick="pushToFirestore()" class="w-full sm:w-auto px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer shadow-md active:scale-95">
+            Push All Local Data to Firestore â˜ï¸
           </button>
         </div>
       </section>
 
-      <!-- 7. BACKUP & EXPORT TAB -->
+      <!-- 11. BACKUP & EXPORT TAB -->
       <section id="tab-backup" class="tab-content hidden space-y-4">
-        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">📥 Data Backup & JSON Export</h2>
+        <h2 class="text-base sm:text-xl font-bold text-gray-900 border-b border-gray-100 pb-3">ðŸ“¥ Data Backup & JSON Export</h2>
         <p class="text-xs text-gray-600 leading-relaxed">
-          Download your complete website configuration as a backup file or to sync with GitHub code.
+          Download your complete website configuration as a backup file.
         </p>
 
         <div class="p-4 bg-slate-50 border rounded-2xl space-y-3">
           <div class="text-xs font-bold text-gray-800">Download Full Website Data Backup</div>
-          <button onclick="downloadDataJson()" class="px-5 py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-2">
-            <span>💾 Download data.json</span>
+          <button onclick="downloadDataJson()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-2 active:scale-95">
+            <span>ðŸ’¾ Download data.json</span>
           </button>
         </div>
       </section>
@@ -334,18 +362,92 @@
     </main>
   </div>
 
-  <!-- Persistent Mobile Save Bar -->
-  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-2.5 flex items-center justify-between gap-2 sm:hidden z-50 shadow-2xl">
-    <a href="index.html" target="_blank" class="flex-1 py-2.5 bg-gray-100 text-gray-800 text-center rounded-xl text-xs font-bold">
-      Preview Website ↗
+  <!-- Persistent Mobile Bottom Save Bar -->
+  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex items-center justify-between gap-3 sm:hidden z-50 shadow-2xl pb-[max(0.75rem,env(safe-area-inset-bottom))]">
+    <a href="index.html" target="_blank" class="flex-1 py-3 bg-gray-100 active:bg-gray-200 text-gray-800 text-center rounded-xl text-xs font-bold">
+      Preview â†—
     </a>
-    <button onclick="saveAllSettings()" class="flex-1 py-2.5 bg-[#25D366] text-white text-center rounded-xl text-xs font-black shadow-md">
-      💾 Save Changes
+    <button onclick="saveAllSettings()" class="flex-1 py-3 bg-[#25D366] active:bg-emerald-600 text-white text-center rounded-xl text-xs font-black shadow-md">
+      ðŸ’¾ Save Changes
     </button>
   </div>
 
   <script>
     let siteData = getActiveSiteData();
+
+    // Helper to read image from device & compress if needed
+    function readFileAsDataURL(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = e => resolve(e.target.result);
+        reader.onerror = err => reject(err);
+        reader.readAsDataURL(file);
+      });
+    }
+
+    async function uploadHeroImageFile(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const dataUrl = await readFileAsDataURL(file);
+        if (!siteData.settings.hero_images) siteData.settings.hero_images = [];
+        siteData.settings.hero_images.unshift({
+          url: dataUrl,
+          caption: "Uploaded Photo"
+        });
+        renderHeroSlides();
+        alert("ðŸ“¸ Photo uploaded! Click 'Save All' to publish.");
+      } catch (e) {
+        alert("Error reading file: " + e.message);
+      }
+    }
+
+    async function uploadDestinationPhoto(event, idx) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const dataUrl = await readFileAsDataURL(file);
+        siteData.destinations[idx].imageUrl = dataUrl;
+        renderDestinations();
+        alert("ðŸ“¸ Destination photo updated! Click 'Save All' to publish.");
+      } catch (e) {
+        alert("Error reading file: " + e.message);
+      }
+    }
+
+    async function uploadActivityPhoto(event, idx) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const dataUrl = await readFileAsDataURL(file);
+        if (!siteData.activities[idx].images) siteData.activities[idx].images = [];
+        siteData.activities[idx].images[0] = dataUrl;
+        renderActivities();
+        alert("ðŸ“¸ Activity photo updated! Click 'Save All' to publish.");
+      } catch (e) {
+        alert("Error reading file: " + e.message);
+      }
+    }
+
+    async function uploadGalleryPhoto(event) {
+      const file = event.target.files[0];
+      if (!file) return;
+      try {
+        const dataUrl = await readFileAsDataURL(file);
+        if (!siteData.gallery) siteData.gallery = DEFAULT_SITE_DATA.gallery || [];
+        siteData.gallery.unshift({
+          id: "g-" + Date.now(),
+          category: "Surfing",
+          imageUrl: dataUrl,
+          title: "New Photo",
+          caption: "Surf session in Hikkaduwa"
+        });
+        renderGallery();
+        alert("ðŸ“¸ New gallery photo added! Click 'Save All' to publish.");
+      } catch (e) {
+        alert("Error reading file: " + e.message);
+      }
+    }
 
     function showTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
@@ -362,15 +464,14 @@
 
       // Mobile buttons
       document.querySelectorAll('[id^="m-tab-"]').forEach(b => {
-        b.className = "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700";
+        b.className = "px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700";
       });
       const activeMobileBtn = document.getElementById('m-tab-' + tabId);
       if (activeMobileBtn) {
-        activeMobileBtn.className = "px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white";
+        activeMobileBtn.className = "px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white";
       }
     }
 
-    // Populate Settings
     function loadSettings() {
       const s = siteData.settings;
       document.getElementById('set-name').value = s.businessName || '';
@@ -387,23 +488,46 @@
 
       // Live Surf Report
       const rep = s.liveSurfReport || {};
-      document.getElementById('set-surf-waves').value = rep.waves || '2–4 ft Clean';
-      document.getElementById('set-surf-water').value = rep.waterTemp || '28°C (No Wetsuit)';
+      document.getElementById('set-surf-waves').value = rep.waves || '2â€“4 ft Clean';
+      document.getElementById('set-surf-water').value = rep.waterTemp || '28Â°C (No Wetsuit)';
       document.getElementById('set-surf-condition').value = rep.condition || 'Glassy Morning';
       document.getElementById('set-surf-updated').value = rep.lastUpdated || 'Today 06:30 AM';
 
-      // Render Dynamic Sections
-      renderDestinations();
       renderHeroSlides();
+      renderDestinations();
       renderActivities();
+      renderGallery();
       renderReviews();
       renderFaqs();
+    }
 
-      // Firebase Config
-      const fbConfig = localStorage.getItem('hikka_firebase_config');
-      if (fbConfig) {
-        document.getElementById('firebase-config-json').value = fbConfig;
-      }
+    function renderHeroSlides() {
+      const container = document.getElementById('hero-slides-list');
+      const slides = siteData.settings.hero_images || [];
+      container.innerHTML = slides.map((img, idx) => `
+        <div class="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 border rounded-2xl">
+          <img src="${img.url}" class="w-full sm:w-20 h-28 sm:h-16 object-cover rounded-xl border flex-shrink-0" />
+          <div class="flex-1 space-y-2">
+            <input type="text" value="${img.url}" onchange="siteData.settings.hero_images[${idx}].url = this.value" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            <div class="flex items-center gap-2">
+              <label class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
+                <span>ðŸ“ Replace from Phone</span>
+                <input type="file" accept="image/*" class="hidden" onchange="readFileAsDataURL(this.files[0]).then(u => { siteData.settings.hero_images[${idx}].url = u; renderHeroSlides(); })" />
+              </label>
+              <button onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="text-xs text-red-600 font-bold hover:underline cursor-pointer">Delete Slide</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function addHeroImage() {
+      if (!siteData.settings.hero_images) siteData.settings.hero_images = [];
+      siteData.settings.hero_images.push({
+        url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
+        caption: "New Slide"
+      });
+      renderHeroSlides();
     }
 
     function renderDestinations() {
@@ -414,14 +538,20 @@
         <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-3">
           <div class="flex items-center justify-between">
             <div class="flex items-center gap-2">
-              <span class="text-xl">${dest.icon || '🌴'}</span>
+              <span class="text-xl">${dest.icon || 'ðŸŒ´'}</span>
               <input type="text" value="${dest.name}" onchange="siteData.destinations[${idx}].name = this.value" class="font-bold text-xs sm:text-sm p-1.5 bg-white border rounded-xl" />
             </div>
             <input type="text" value="${dest.duration}" onchange="siteData.destinations[${idx}].duration = this.value" class="text-xs p-1.5 bg-white border rounded-xl w-32" />
           </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
-            <input type="text" value="${dest.highlight}" onchange="siteData.destinations[${idx}].highlight = this.value" placeholder="Highlight tag" class="p-2 bg-white border rounded-xl text-xs font-semibold" />
-            <input type="text" value="${dest.imageUrl}" onchange="siteData.destinations[${idx}].imageUrl = this.value" placeholder="Image URL" class="p-2 bg-white border rounded-xl text-xs" />
+          <div class="flex flex-col sm:flex-row gap-3">
+            <img src="${dest.imageUrl}" class="w-full sm:w-24 h-28 sm:h-20 object-cover rounded-xl border flex-shrink-0" />
+            <div class="flex-1 space-y-2">
+              <input type="text" value="${dest.imageUrl}" onchange="siteData.destinations[${idx}].imageUrl = this.value" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs" />
+              <label class="inline-block px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
+                <span>ðŸ“ Upload Photo from Phone</span>
+                <input type="file" accept="image/*" class="hidden" onchange="uploadDestinationPhoto(event, ${idx})" />
+              </label>
+            </div>
           </div>
           <textarea onchange="siteData.destinations[${idx}].description = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${dest.description}</textarea>
           <div class="text-right">
@@ -436,34 +566,13 @@
       siteData.destinations.push({
         id: "dest-" + Date.now(),
         name: "New Destination",
-        highlight: "Attraction Highlight",
+        highlight: "Sight Highlight",
         duration: "30 Mins",
-        icon: "🌴",
+        icon: "ðŸŒ´",
         imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80",
-        description: "Description of day trip sight."
+        description: "Day trip description."
       });
       renderDestinations();
-    }
-
-    function renderHeroSlides() {
-      const container = document.getElementById('hero-slides-list');
-      const slides = siteData.settings.hero_images || [];
-      container.innerHTML = slides.map((img, idx) => `
-        <div class="flex items-center gap-2 sm:gap-3 p-2.5 sm:p-3 bg-gray-50 border rounded-2xl">
-          <img src="${img.url}" class="w-14 sm:w-16 h-10 sm:h-12 object-cover rounded-xl border" />
-          <input type="text" value="${img.url}" onchange="siteData.settings.hero_images[${idx}].url = this.value" class="flex-1 p-2 bg-white border rounded-xl text-xs" />
-          <button onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="p-2 text-red-600 font-bold hover:bg-red-50 rounded-xl cursor-pointer">✕</button>
-        </div>
-      `).join('');
-    }
-
-    function addHeroImage() {
-      if (!siteData.settings.hero_images) siteData.settings.hero_images = [];
-      siteData.settings.hero_images.push({
-        url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
-        caption: "New Slide"
-      });
-      renderHeroSlides();
     }
 
     function renderActivities() {
@@ -474,19 +583,45 @@
             <h4 class="font-bold text-xs sm:text-sm text-gray-900">${act.title}</h4>
             <span class="text-xs font-bold text-[#0084B4]">From $${act.price_from} USD</span>
           </div>
-          <div class="grid grid-cols-2 gap-2 sm:gap-3">
-            <div>
-              <label class="block text-[10px] uppercase font-bold text-gray-500">Price (USD)</label>
-              <input type="number" value="${act.price_from}" onchange="siteData.activities[${idx}].price_from = parseFloat(this.value)" class="w-full p-2 bg-white border rounded-xl text-xs font-semibold" />
-            </div>
-            <div>
-              <label class="block text-[10px] uppercase font-bold text-gray-500">Duration</label>
-              <input type="text" value="${act.duration}" onchange="siteData.activities[${idx}].duration = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
+          <div class="flex flex-col sm:flex-row gap-3">
+            <img src="${(act.images && act.images[0]) || 'images/hero.webp'}" class="w-full sm:w-24 h-28 sm:h-20 object-cover rounded-xl border flex-shrink-0" />
+            <div class="flex-1 space-y-2">
+              <div class="grid grid-cols-2 gap-2">
+                <div>
+                  <label class="block text-[10px] uppercase font-bold text-gray-500">Price (USD)</label>
+                  <input type="number" value="${act.price_from}" onchange="siteData.activities[${idx}].price_from = parseFloat(this.value)" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
+                </div>
+                <div>
+                  <label class="block text-[10px] uppercase font-bold text-gray-500">Duration</label>
+                  <input type="text" value="${act.duration}" onchange="siteData.activities[${idx}].duration = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
+                </div>
+              </div>
+              <label class="inline-block px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
+                <span>ðŸ“ Upload Photo from Phone</span>
+                <input type="file" accept="image/*" class="hidden" onchange="uploadActivityPhoto(event, ${idx})" />
+              </label>
             </div>
           </div>
           <div>
-            <label class="block text-[10px] uppercase font-bold text-gray-500">Short Description</label>
+            <label class="block text-[10px] uppercase font-bold text-gray-500">Description</label>
             <input type="text" value="${act.description}" onchange="siteData.activities[${idx}].description = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function renderGallery() {
+      const container = document.getElementById('gallery-items-list');
+      if (!container) return;
+      if (!siteData.gallery) siteData.gallery = DEFAULT_SITE_DATA.gallery || [];
+      container.innerHTML = siteData.gallery.map((g, idx) => `
+        <div class="p-3 bg-gray-50 border rounded-2xl space-y-2">
+          <img src="${g.imageUrl}" class="w-full h-36 object-cover rounded-xl border" />
+          <input type="text" value="${g.title}" onchange="siteData.gallery[${idx}].title = this.value" placeholder="Photo Title" class="w-full p-1.5 bg-white border rounded-xl font-bold text-xs" />
+          <input type="text" value="${g.caption}" onchange="siteData.gallery[${idx}].caption = this.value" placeholder="Caption" class="w-full p-1.5 bg-white border rounded-xl text-xs text-gray-600" />
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-[10px] font-bold text-gray-400 uppercase">${g.category || 'Surfing'}</span>
+            <button onclick="siteData.gallery.splice(${idx}, 1); renderGallery();" class="text-xs text-red-600 font-bold hover:underline cursor-pointer">Delete</button>
           </div>
         </div>
       `).join('');
@@ -497,8 +632,8 @@
       container.innerHTML = siteData.reviews.map((rev, idx) => `
         <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-2">
           <div class="flex items-center justify-between gap-2">
-            <input type="text" value="${rev.authorName}" onchange="siteData.reviews[${idx}].authorName = this.value" class="font-bold text-xs p-1.5 bg-white border rounded-xl flex-1" />
-            <input type="text" value="${rev.authorLocation}" onchange="siteData.reviews[${idx}].authorLocation = this.value" class="text-xs p-1.5 bg-white border rounded-xl w-32" />
+            <input type="text" value="${rev.authorName}" onchange="siteData.reviews[${idx}].authorName = this.value" class="font-bold text-xs p-2 bg-white border rounded-xl flex-1" />
+            <input type="text" value="${rev.authorLocation}" onchange="siteData.reviews[${idx}].authorLocation = this.value" class="text-xs p-2 bg-white border rounded-xl w-32" />
           </div>
           <textarea onchange="siteData.reviews[${idx}].text = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${rev.text}</textarea>
         </div>
@@ -556,7 +691,7 @@
       siteData.settings.liveSurfReport.lastUpdated = document.getElementById('set-surf-updated').value;
 
       saveActiveSiteData(siteData);
-      alert("✅ All changes saved successfully! Live website is updated instantly.");
+      alert("âœ… All changes saved successfully! Live website is updated instantly.");
     }
 
     function downloadDataJson() {
@@ -569,25 +704,13 @@
       downloadAnchor.remove();
     }
 
-    function saveFirebaseConfig() {
-      try {
-        const val = document.getElementById('firebase-config-json').value;
-        const parsed = JSON.parse(val);
-        localStorage.setItem('hikka_firebase_config', JSON.stringify(parsed));
-        alert("🔥 Firebase configuration saved. Connecting...");
-        window.location.reload();
-      } catch (e) {
-        alert("❌ Invalid JSON format. Please paste valid Firebase config JSON.");
-      }
-    }
-
     async function pushToFirestore() {
       try {
         if (window.firebaseSync && window.firebaseSync.isConfigured) {
           await window.firebaseSync.syncLocalToCloud();
-          alert("☁️ Successfully pushed all data to Firestore!");
+          alert("â˜ï¸ Successfully pushed all data to Firestore!");
         } else {
-          alert("⚠️ Please configure Firebase with valid credentials first.");
+          alert("âš ï¸ Firebase is connecting... Please ensure you are online.");
         }
       } catch (err) {
         alert("Error syncing to Firestore: " + err.message);
