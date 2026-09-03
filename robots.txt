@@ -1,5 +1,8 @@
 User-agent: *
 Allow: /
 Disallow: /admin.html
+Disallow: /admin/
+Disallow: /scratch/
 
+# Google, Bing & AI Indexing Sitemap Location
 Sitemap: https://kanchu12345.github.io/hikka/sitemap.xml

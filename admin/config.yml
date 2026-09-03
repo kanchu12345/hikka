@@ -1,0 +1,67 @@
+backend:
+  name: github
+  repo: kanchu12345/hikka
+  branch: main
+  base_url: https://kanchu12345.github.io
+  auth_endpoint: auth
+
+media_folder: "images"
+public_folder: "images"
+
+collections:
+  - name: "site_settings"
+    label: "Site Settings & Contact"
+    files:
+      - file: "data/settings.json"
+        label: "Contact & Surf Conditions"
+        name: "general_settings"
+        fields:
+          - { label: "Business Name", name: "businessName", widget: "string", default: "Hikka Surf School" }
+          - { label: "WhatsApp Number", name: "whatsappNumber", widget: "string", default: "94771234567" }
+          - { label: "Email Address", name: "email", widget: "string", default: "info@hikkasurfschool.com" }
+          - { label: "Physical Address", name: "address", widget: "string", default: "Turtle Beach, Galle Road, Hikkaduwa 80240, Sri Lanka" }
+          - { label: "Google Maps URL", name: "mapsUrl", widget: "string", default: "https://maps.app.goo.gl/coczrnnnajTi581G9" }
+          - { label: "Today's Surf Wave Height", name: "surfWaves", widget: "string", default: "2–4 ft Clean" }
+          - { label: "Water Temperature", name: "waterTemp", widget: "string", default: "28°C" }
+          - { label: "Tide Condition", name: "tideCondition", widget: "string", default: "Low incoming" }
+
+  - name: "surf_lessons"
+    label: "Surf Coaching Packages"
+    folder: "data/lessons"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Lesson Title", name: "title", widget: "string" }
+      - { label: "Skill Level", name: "level", widget: "select", options: ["Beginner (Level 1)", "Intermediate (Level 2)", "Private VIP (1:1)", "3-Day Intensive Camp"] }
+      - { label: "Price (USD)", name: "price_usd", widget: "number" }
+      - { label: "Duration", name: "duration", widget: "string", default: "1.5 Hours" }
+      - { label: "Featured Badge", name: "badge", widget: "string", required: false }
+      - { label: "Card Image", name: "image", widget: "image" }
+      - { label: "Highlights", name: "highlights", widget: "list" }
+      - { label: "Detailed Description", name: "body", widget: "markdown" }
+
+  - name: "destinations"
+    label: "Day Tour Destinations"
+    folder: "data/destinations"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Destination Name", name: "title", widget: "string" }
+      - { label: "Region", name: "region", widget: "string", default: "Southern Province, Sri Lanka" }
+      - { label: "Drive Time from Hikkaduwa", name: "drive_time", widget: "string" }
+      - { label: "Featured Image", name: "image", widget: "image" }
+      - { label: "Top Sights", name: "sights", widget: "list" }
+      - { label: "Tour Overview", name: "body", widget: "markdown" }
+
+  - name: "activities"
+    label: "Ocean Activities"
+    folder: "data/activities"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Activity Name", name: "title", widget: "string" }
+      - { label: "Starting Price (USD)", name: "price_usd", widget: "number" }
+      - { label: "Duration", name: "duration", widget: "string" }
+      - { label: "Hero Image", name: "image", widget: "image" }
+      - { label: "Inclusions", name: "inclusions", widget: "list" }
+      - { label: "Description", name: "body", widget: "markdown" }
