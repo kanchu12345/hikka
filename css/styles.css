@@ -239,16 +239,22 @@ body {
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* Scroll Reveal Animations */
+/* Scroll Reveal Animations (Progressive Enhancement - Fail-Safe) */
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
+  opacity: 1;
+  transform: none;
   transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+/* Only hide if JS is confirmed active */
+.js-ready .reveal-on-scroll:not(.is-visible) {
+  opacity: 0;
+  transform: translateY(24px);
+}
+
 .reveal-on-scroll.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+  opacity: 1 !important;
+  transform: translateY(0) !important;
 }
 
 /* Smooth Accordions */

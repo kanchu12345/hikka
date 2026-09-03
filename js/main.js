@@ -30,6 +30,7 @@ window.addEventListener('hikkaDataUpdated', () => {
 });
 
 function initApp() {
+  document.documentElement.classList.add('js-ready');
   const siteData = typeof getActiveSiteData === 'function' ? getActiveSiteData() : (window.DEFAULT_SITE_DATA || {});
   const settings = siteData.settings || {};
   const cleanWhatsApp = (settings.whatsappNumber || '+94771234567').replace(/[^0-9]/g, '');
@@ -251,8 +252,7 @@ Pickup location:`;
       ];
 
       const cleanPhone = cleanWhatsApp || '94771234567';
-      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msgLines.join('
-'))}`, '_blank');
+      window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msgLines.join('\n'))}`, '_blank');
       closeBookingModal();
     };
   }
