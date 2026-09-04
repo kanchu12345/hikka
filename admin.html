@@ -32,6 +32,65 @@
   <script src="js/firebase-client.js"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen pb-28 selection:bg-surf-500 selection:text-white">
+  <!-- ================================================================= -->
+  <!-- ADMIN AUTHENTICATION GATE (USERNAME & PASSWORD LOGIN MODAL)       -->
+  <!-- ================================================================= -->
+  <div id="admin-login-screen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gradient-to-br from-[#0A2540] via-[#061726] to-[#12161A]">
+    <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 relative border border-white/20">
+      
+      <!-- Brand Header -->
+      <div class="text-center space-y-2">
+        <div class="inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-[#0A2540] text-white text-2xl shadow-lg mb-1">
+          🏄
+        </div>
+        <h2 class="text-2xl font-black text-gray-900 tracking-tight font-serif-heading">Admin Portal Login</h2>
+        <p class="text-xs text-gray-500 font-medium">Hikka Surf School Administrative Access</p>
+      </div>
+
+      <!-- Login Form -->
+      <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-4 text-xs sm:text-sm">
+        
+        <!-- Error Alert -->
+        <div id="login-error-msg" class="hidden p-3.5 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-xs font-bold flex items-center gap-2">
+          <span class="text-base">⚠️</span>
+          <span id="login-error-text">Invalid username or password.</span>
+        </div>
+
+        <div>
+          <label for="login-username" class="block font-bold text-gray-700 mb-1">Username</label>
+          <input type="text" id="login-username" placeholder="admin" required autocomplete="username" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-semibold focus:ring-2 focus:ring-[#0A2540] focus:outline-none" />
+        </div>
+
+        <div>
+          <label for="login-password" class="block font-bold text-gray-700 mb-1">Password</label>
+          <div class="relative">
+            <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-semibold focus:ring-2 focus:ring-[#0A2540] focus:outline-none pr-11" />
+            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-3 text-gray-400 hover:text-gray-700 cursor-pointer text-base" aria-label="Toggle password visibility">
+              <span id="pwd-eye-icon">👁️</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="flex items-center justify-between text-xs pt-1">
+          <label class="flex items-center gap-2 text-gray-600 cursor-pointer">
+            <input type="checkbox" id="login-remember" class="rounded text-[#0A2540] focus:ring-[#0A2540] w-4 h-4 cursor-pointer" />
+            <span class="font-medium">Keep me signed in</span>
+          </label>
+        </div>
+
+        <button type="submit" id="btn-login-submit" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#061726] active:scale-98 text-white font-extrabold rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer mt-2">
+          <span>Sign In to Dashboard</span> →
+        </button>
+
+        <div class="text-center pt-2">
+          <a href="index.html" class="text-xs text-gray-400 hover:text-gray-600 font-medium">← Return to Public Website</a>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- MAIN WRAPPER (Hidden until authenticated) -->
+  <div id="admin-main-wrapper" class="hidden">
 
   <!-- Top Admin Bar -->
   <header class="bg-[#12161A] text-white py-3 sm:py-4 px-4 sm:px-6 border-b border-gray-800 flex items-center justify-between sticky top-0 z-50 shadow-lg">
@@ -50,29 +109,18 @@
 
     <div class="flex items-center gap-2 sm:gap-3">
       <a href="index.html" target="_blank" class="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 active:scale-95">
-        <span>View Live Site</span> ↗
+        <span>Live Site</span> ↗
       </a>
       <button type="button" onclick="saveAllSettings()" class="px-4 py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-95">
         <span>💾 Save Changes</span>
       </button>
+      <button type="button" onclick="handleAdminLogout()" class="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95" title="Sign out of Admin Portal">
+        <span>🚪 Sign Out</span>
+      </button>
     </div>
   </header>
 
-  <!-- HONEST SECURITY & ARCHITECTURE NOTICE BANNER (PART 13 & 14) -->
-  <div class="bg-amber-50 border-b border-amber-200 text-amber-900 px-4 py-3 text-xs">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-2">
-      <div class="flex items-center gap-2">
-        <span class="text-base">🔒</span>
-        <span>
-          <strong>Architecture Status:</strong> Client-Side CMS & Local Storage Mode. 
-          <span class="text-amber-800">(Static GitHub Pages hosting cannot securely authenticate via client JavaScript. For multi-user role security, see the Backend Config tab.)</span>
-        </span>
-      </div>
-      <span class="bg-amber-200 text-amber-950 px-2 py-0.5 rounded-md font-bold text-[11px] whitespace-nowrap">
-        NEEDS BACKEND CONFIGURATION FOR PRODUCTION ACCESS CONTROL
-      </span>
-    </div>
-  </div>
+
 
   <!-- Mobile Horizontal Scrollable Tab Bar -->
   <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2.5 px-3 lg:hidden flex items-center gap-2 no-scrollbar shadow-sm">
@@ -262,6 +310,40 @@
         <div class="pt-2">
           <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
             Save Business Details
+          </button>
+        </div>
+
+        <!-- CHANGE ADMIN USERNAME & PASSWORD CARD -->
+        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-4 mt-6">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-sm text-gray-900 flex items-center gap-2">
+              <span>🔐</span><span>Admin Access & Security Credentials</span>
+            </h3>
+            <span class="text-[10px] bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full font-bold">SHA-256 Protected</span>
+          </div>
+          <p class="text-xs text-gray-500">Update the username and password used to unlock this CMS dashboard.</p>
+          
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+            <div>
+              <label for="change-new-username" class="block font-bold text-gray-700 mb-1">New Admin Username</label>
+              <input type="text" id="change-new-username" placeholder="e.g. admin" class="w-full p-2.5 bg-white border rounded-xl font-bold" />
+            </div>
+            <div>
+              <label for="change-current-pwd" class="block font-bold text-gray-700 mb-1">Current Password (Required)</label>
+              <input type="password" id="change-current-pwd" placeholder="Enter current password" class="w-full p-2.5 bg-white border rounded-xl" />
+            </div>
+            <div>
+              <label for="change-new-pwd" class="block font-bold text-gray-700 mb-1">New Password (Min 6 chars)</label>
+              <input type="password" id="change-new-pwd" placeholder="New password" class="w-full p-2.5 bg-white border rounded-xl" />
+            </div>
+            <div>
+              <label for="change-confirm-pwd" class="block font-bold text-gray-700 mb-1">Confirm New Password</label>
+              <input type="password" id="change-confirm-pwd" placeholder="Repeat new password" class="w-full p-2.5 bg-white border rounded-xl" />
+            </div>
+          </div>
+
+          <button type="button" onclick="updateAdminCredentials()" class="px-5 py-2.5 bg-[#0A2540] hover:bg-[#061726] text-white font-bold rounded-xl text-xs cursor-pointer shadow-md active:scale-95 transition-all">
+            Update Login Credentials
           </button>
         </div>
       </section>
@@ -565,6 +647,8 @@
       💾 Save Changes
     </button>
   </div>
+
+  </div><!-- End of #admin-main-wrapper -->
 
   <script>
     let siteData = getActiveSiteData();
@@ -1004,7 +1088,156 @@
       }
     }
 
-    document.addEventListener('DOMContentLoaded', loadSettings);
+    // ===================================================================
+    // ADMIN AUTHENTICATION ENGINE (Salted SHA-256 Cryptography)
+    // ===================================================================
+    const AUTH_SALT = "_hikka_salt_80240";
+    const DEFAULT_USER = "admin";
+    // Default password: hikka2026!
+    const DEFAULT_HASH = "f1e9eb070acecf0800485d1202173e96147e25c9687198aac35ca5b487c95e0b";
+
+    async function computeSha256(text) {
+      const msgBuffer = new TextEncoder().encode(text + AUTH_SALT);
+      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+      const hashArray = Array.from(new Uint8Array(hashBuffer));
+      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    }
+
+    function getAdminCredentials() {
+      try {
+        const stored = localStorage.getItem('hikka_admin_creds');
+        if (stored) return JSON.parse(stored);
+      } catch(e) {}
+      return { username: DEFAULT_USER, passwordHash: DEFAULT_HASH };
+    }
+
+    function isAuthenticated() {
+      return sessionStorage.getItem('hikka_admin_auth') === 'valid' ||
+             localStorage.getItem('hikka_admin_auth_persistent') === 'valid';
+    }
+
+    function revealAdminDashboard() {
+      const loginScreen = document.getElementById('admin-login-screen');
+      const mainWrapper = document.getElementById('admin-main-wrapper');
+      if (loginScreen) loginScreen.classList.add('hidden');
+      if (mainWrapper) mainWrapper.classList.remove('hidden');
+      loadSettings();
+    }
+
+    function showLoginScreen() {
+      const loginScreen = document.getElementById('admin-login-screen');
+      const mainWrapper = document.getElementById('admin-main-wrapper');
+      if (loginScreen) loginScreen.classList.remove('hidden');
+      if (mainWrapper) mainWrapper.classList.add('hidden');
+      const pwdInp = document.getElementById('login-password');
+      if (pwdInp) pwdInp.value = '';
+    }
+
+    async function handleAdminLogin(event) {
+      event.preventDefault();
+      const userInp = document.getElementById('login-username').value.trim();
+      const passInp = document.getElementById('login-password').value;
+      const remember = document.getElementById('login-remember').checked;
+      const errorMsg = document.getElementById('login-error-msg');
+      const submitBtn = document.getElementById('btn-login-submit');
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `<span>Checking credentials...</span>`;
+
+      const creds = getAdminCredentials();
+      const inputHash = await computeSha256(passInp);
+
+      if (userInp.toLowerCase() === creds.username.toLowerCase() && inputHash === creds.passwordHash) {
+        errorMsg.classList.add('hidden');
+        sessionStorage.setItem('hikka_admin_auth', 'valid');
+        if (remember) {
+          localStorage.setItem('hikka_admin_auth_persistent', 'valid');
+        } else {
+          localStorage.removeItem('hikka_admin_auth_persistent');
+        }
+        revealAdminDashboard();
+      } else {
+        errorMsg.classList.remove('hidden');
+        document.getElementById('login-error-text').textContent = "Incorrect username or password. Please try again.";
+        const pwdInp = document.getElementById('login-password');
+        if (pwdInp) {
+          pwdInp.value = '';
+          pwdInp.focus();
+        }
+      }
+
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = `<span>Sign In to Dashboard</span> →`;
+    }
+
+    function handleAdminLogout() {
+      if (confirm("Are you sure you want to sign out of the Admin Portal?")) {
+        sessionStorage.removeItem('hikka_admin_auth');
+        localStorage.removeItem('hikka_admin_auth_persistent');
+        showLoginScreen();
+      }
+    }
+
+    function togglePasswordVisibility() {
+      const pwdInput = document.getElementById('login-password');
+      const eyeIcon = document.getElementById('pwd-eye-icon');
+      if (pwdInput.type === 'password') {
+        pwdInput.type = 'text';
+        eyeIcon.textContent = '🔒';
+      } else {
+        pwdInput.type = 'password';
+        eyeIcon.textContent = '👁️';
+      }
+    }
+
+    async function updateAdminCredentials() {
+      const currentPwd = document.getElementById('change-current-pwd').value;
+      const newUsername = document.getElementById('change-new-username').value.trim();
+      const newPwd = document.getElementById('change-new-pwd').value;
+      const confirmPwd = document.getElementById('change-confirm-pwd').value;
+
+      if (!currentPwd || !newUsername || !newPwd) {
+        alert("Please fill in all credential fields.");
+        return;
+      }
+
+      if (newPwd !== confirmPwd) {
+        alert("New password and confirm password do not match.");
+        return;
+      }
+
+      if (newPwd.length < 6) {
+        alert("New password must be at least 6 characters long.");
+        return;
+      }
+
+      const creds = getAdminCredentials();
+      const currentHash = await computeSha256(currentPwd);
+
+      if (currentHash !== creds.passwordHash) {
+        alert("Current password is incorrect.");
+        return;
+      }
+
+      const newHash = await computeSha256(newPwd);
+      localStorage.setItem('hikka_admin_creds', JSON.stringify({
+        username: newUsername,
+        passwordHash: newHash
+      }));
+
+      alert(`✅ Credentials updated successfully!\nNew Username: ${newUsername}\nPlease remember your new password.`);
+      document.getElementById('change-current-pwd').value = '';
+      document.getElementById('change-new-pwd').value = '';
+      document.getElementById('change-confirm-pwd').value = '';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      if (isAuthenticated()) {
+        revealAdminDashboard();
+      } else {
+        showLoginScreen();
+      }
+    });
   </script>
 </body>
 </html>
