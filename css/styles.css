@@ -60,8 +60,24 @@ body {
 
 h1, h2, h3, h4, h5, h6, .font-heading, .font-serif-heading {
   font-family: var(--font-heading);
-  color: var(--text-heading);
+  color: inherit;
   letter-spacing: -0.02em;
+}
+
+/* Ensure headings inside dark sections, headers, and banners are always crisp high-contrast white */
+.text-white h1, .text-white h2, .text-white h3, .text-white h4, .text-white h5, .text-white h6,
+.text-white .font-heading, .text-white .font-serif-heading,
+[class*="bg-ocean"] h1, [class*="bg-ocean"] h2, [class*="bg-ocean"] h3, [class*="bg-ocean"] h4,
+[class*="bg-ocean"] .font-heading, [class*="bg-ocean"] .font-serif-heading,
+[class*="bg-slate-900"] h1, [class*="bg-slate-900"] h2, [class*="bg-slate-900"] h3,
+[class*="bg-slate-900"] .font-heading, [class*="bg-slate-900"] .font-serif-heading,
+[class*="from-ocean"] h1, [class*="from-ocean"] h2, [class*="from-ocean"] h3,
+[class*="from-ocean"] .font-heading, [class*="from-ocean"] .font-serif-heading,
+[class*="bg-gray-900"] h1, [class*="bg-gray-900"] h2, [class*="bg-gray-900"] h3,
+[class*="bg-gray-900"] .font-heading, [class*="bg-gray-900"] .font-serif-heading,
+[class*="from-black"] h1, [class*="from-black"] h2, [class*="from-black"] h3,
+[class*="from-black"] .font-heading, [class*="from-black"] .font-serif-heading {
+  color: #FFFFFF !important;
 }
 
 /* Glassmorphism & Surface Styles */
