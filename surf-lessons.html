@@ -63,10 +63,10 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=2.4" />
+  <link rel="stylesheet" href="css/styles.css?v=2.5" />
   <script src="js/data.js?v=2.2"></script>
   <script src="js/firebase-client.js"></script>
-  <script src="js/main.js?v=2.4"></script>
+  <script src="js/main.js?v=2.5"></script>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -307,9 +307,49 @@
         <a href="contact.html" class="text-white hover:text-cyan-300 transition-colors">CONTACT</a>
       </nav>
 
-      <!-- Book Now Action -->
-      <div class="hidden lg:flex items-center gap-4">
-        <button type="button" onclick="openBookingModal('Beginner Surf Lesson')" class="px-6 py-2.5 text-xs font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg shadow-amber-500/30 hover:scale-105 transition-all cursor-pointer uppercase flex items-center gap-1.5">
+      <!-- Language & Highlighted Book Now Button -->
+      <div class="hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
+        <!-- Interactive Language Selector Dropdown -->
+        <div class="relative lang-dropdown-wrapper">
+          <button type="button" onclick="toggleLangMenu(event)" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm flex-shrink-0">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="current-lang-flag w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+            <span class="current-lang-text font-semibold text-[11px] xl:text-xs">EN</span>
+            <span class="text-[10px] opacity-70">▾</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div class="lang-menu-dropdown hidden absolute right-0 top-full mt-2 w-44 bg-ocean-950/98 backdrop-blur-md text-white rounded-2xl shadow-2xl border border-white/20 p-1.5 z-50 divide-y divide-white/10">
+            <div class="py-1 space-y-0.5">
+              <button type="button" onclick="switchLanguage('en', 'https://flagcdn.com/w40/gb.png', 'EN')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>English</span>
+              </button>
+              <button type="button" onclick="switchLanguage('de', 'https://flagcdn.com/w40/de.png', 'DE')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Deutsch</span>
+              </button>
+              <button type="button" onclick="switchLanguage('ru', 'https://flagcdn.com/w40/ru.png', 'RU')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/ru.png" alt="Русский" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Русский</span>
+              </button>
+              <button type="button" onclick="switchLanguage('fr', 'https://flagcdn.com/w40/fr.png', 'FR')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Français</span>
+              </button>
+              <button type="button" onclick="switchLanguage('it', 'https://flagcdn.com/w40/it.png', 'IT')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/it.png" alt="Italiano" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Italiano</span>
+              </button>
+              <button type="button" onclick="switchLanguage('si', 'https://flagcdn.com/w40/lk.png', 'LK')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/lk.png" alt="සිංහල" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>සිංහල</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlighted Book Now Button -->
+        <button type="button" onclick="openBookingModal('Beginner Surf Lesson')" class="flex-shrink-0 px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg shadow-amber-500/30 hover:scale-105 transition-all cursor-pointer uppercase flex items-center gap-1.5 whitespace-nowrap">
           <span>⚡</span>
           <span>BOOK NOW</span>
         </button>
@@ -325,6 +365,9 @@
         </button>
       </div>
     </div>
+
+    <!-- Thin divider line under header -->
+    <div class="w-full border-b border-white/20 mt-3"></div>
 
     <!-- Mobile Slide Drawer -->
     <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
@@ -349,7 +392,7 @@
   </header>
 
   <!-- LUXURY HOMEPAGE-MATCHED HERO SECTION -->
-  <section class="relative min-h-[75vh] sm:min-h-[80vh] flex items-center justify-center bg-ocean-950 text-white text-center overflow-hidden">
+  <section class="relative -mt-28 pt-32 min-h-[75vh] sm:min-h-[80vh] flex items-center justify-center bg-ocean-950 text-white text-center overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center scale-105 animate-pulse transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=85'); filter: brightness(0.42);"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-ocean-950 via-ocean-950/40 to-transparent"></div>
 

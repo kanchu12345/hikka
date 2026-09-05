@@ -53,10 +53,10 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=2.4" />
+  <link rel="stylesheet" href="css/styles.css?v=2.5" />
   <script src="js/data.js?v=2.2"></script>
   <script src="js/firebase-client.js"></script>
-  <script src="js/main.js?v=2.4"></script>
+  <script src="js/main.js?v=2.5"></script>
   
   <!-- Open Graph / Facebook -->
 
@@ -111,8 +111,8 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="index.html" class="flex items-center gap-3 group">
-        <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-10 sm:h-12 w-auto transition-transform group-hover:scale-105" />
+      <a href="index.html" class="brand-logo-container group">
+        <img src="images/logo-white.svg" alt="Hikka Surf School Sri Lanka Logo" class="brand-logo-img drop-shadow-md" />
       </a>
 
       <!-- Desktop Navigation Links -->
@@ -271,10 +271,51 @@
         <a href="contact.html" class="text-white hover:text-cyan-300 transition-colors">CONTACT</a>
       </nav>
 
-      <!-- Book Now Button -->
-      <div class="hidden lg:flex items-center gap-4">
-        <button type="button" onclick="openBookingModal()" class="px-6 py-2.5 text-xs font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg cursor-pointer uppercase">
-          BOOK NOW
+      <!-- Language & Highlighted Book Now Button -->
+      <div class="hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
+        <!-- Interactive Language Selector Dropdown -->
+        <div class="relative lang-dropdown-wrapper">
+          <button type="button" onclick="toggleLangMenu(event)" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm flex-shrink-0">
+            <img src="https://flagcdn.com/w40/gb.png" alt="English" class="current-lang-flag w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+            <span class="current-lang-text font-semibold text-[11px] xl:text-xs">EN</span>
+            <span class="text-[10px] opacity-70">▾</span>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div class="lang-menu-dropdown hidden absolute right-0 top-full mt-2 w-44 bg-ocean-950/98 backdrop-blur-md text-white rounded-2xl shadow-2xl border border-white/20 p-1.5 z-50 divide-y divide-white/10">
+            <div class="py-1 space-y-0.5">
+              <button type="button" onclick="switchLanguage('en', 'https://flagcdn.com/w40/gb.png', 'EN')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/gb.png" alt="English" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>English</span>
+              </button>
+              <button type="button" onclick="switchLanguage('de', 'https://flagcdn.com/w40/de.png', 'DE')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/de.png" alt="Deutsch" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Deutsch</span>
+              </button>
+              <button type="button" onclick="switchLanguage('ru', 'https://flagcdn.com/w40/ru.png', 'RU')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/ru.png" alt="Русский" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Русский</span>
+              </button>
+              <button type="button" onclick="switchLanguage('fr', 'https://flagcdn.com/w40/fr.png', 'FR')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/fr.png" alt="Français" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Français</span>
+              </button>
+              <button type="button" onclick="switchLanguage('it', 'https://flagcdn.com/w40/it.png', 'IT')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/it.png" alt="Italiano" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>Italiano</span>
+              </button>
+              <button type="button" onclick="switchLanguage('si', 'https://flagcdn.com/w40/lk.png', 'LK')" class="w-full flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs font-semibold hover:bg-white/15 transition-colors text-left cursor-pointer">
+                <img src="https://flagcdn.com/w40/lk.png" alt="සිංහල" class="w-4 h-3 object-cover rounded-sm shadow-sm" loading="lazy" decoding="async">
+                <span>සිංහල</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Highlighted Book Now Button -->
+        <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-4 xl:px-6 py-2 xl:py-2.5 text-xs xl:text-sm font-black tracking-wider rounded-full bg-gradient-to-r from-amber-400 via-amber-300 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 shadow-lg shadow-amber-500/30 hover:shadow-amber-500/60 transition-all duration-300 hover:scale-105 transform cursor-pointer uppercase flex items-center gap-1.5 whitespace-nowrap">
+          <span>⚡</span>
+          <span>BOOK NOW</span>
         </button>
       </div>
 
@@ -289,18 +330,21 @@
       </div>
     </div>
 
+    <!-- Thin divider line under header -->
+    <div class="w-full border-b border-white/20 mt-3"></div>
+
     <!-- Mobile Slide Drawer -->
     <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
       <a href="index.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Home</a>
       <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">🏄 Surf Lessons</a>
-      <a href="destinations.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300">🌊´ Destinations (Southern Province)</a>
-      <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🌊´ Activities & Tours</a>
+      <a href="destinations.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300">🌴 Destinations (Southern Province)</a>
+      <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🌴 Activities & Tours</a>
       <a href="surf-lessons.html#rates" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Rates & Pricing</a>
       <a href="faq.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">FAQ</a>
-      <a href="gallery.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🏄 Gallery</a>
+      <a href="gallery.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📷 Gallery</a>
       <a href="reviews.html" class="block px-3 py-2 rounded-xl font-semibold text-amber-300">★ Google Reviews</a>
       <a href="about.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">About Us</a>
-      <a href="contact.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🏄 Location & Contact</a>
+      <a href="contact.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📍 Location & Contact</a>
       
       <!-- Mobile Social Channels -->
       <div class="pt-2 flex items-center gap-2">
@@ -323,7 +367,7 @@
   </header>
 
   <!-- Title Section -->
-  <section class="py-16 bg-ocean-950 text-white text-center">
+  <section class="py-16 -mt-28 pt-32 bg-ocean-950 text-white text-center">
     <div class="max-w-4xl mx-auto px-4">
       <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mb-3">Photo & Ocean Gallery</h1>
       <p class="text-cyan-200 text-sm sm:text-base">Moments of surfing, wildlife, and happy ocean travelers in Hikkaduwa.</p>
