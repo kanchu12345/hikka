@@ -57,17 +57,21 @@ function initApp() {
     };
   }
 
-  // 6. Sticky Glass Navbar on Scroll
+  // 6. Sticky Glass Navbar on Scroll (Persistent High-Contrast Coastal Navy)
   const mainNavbar = document.getElementById('main-navbar');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY > 40) {
-      mainNavbar?.classList.add('bg-ocean-950/95', 'shadow-2xl', 'backdrop-blur-md', 'py-3');
-      mainNavbar?.classList.remove('bg-transparent', 'py-4');
-    } else {
-      mainNavbar?.classList.remove('bg-ocean-950/95', 'shadow-2xl', 'backdrop-blur-md', 'py-3');
-      mainNavbar?.classList.add('bg-transparent', 'py-4');
-    }
-  });
+  if (mainNavbar) {
+    const updateNavbarOnScroll = () => {
+      if (window.scrollY > 30) {
+        mainNavbar.classList.add('shadow-2xl', 'py-2.5');
+        mainNavbar.classList.remove('py-3.5');
+      } else {
+        mainNavbar.classList.remove('shadow-2xl', 'py-2.5');
+        mainNavbar.classList.add('py-3.5');
+      }
+    };
+    window.addEventListener('scroll', updateNavbarOnScroll, { passive: true });
+    updateNavbarOnScroll();
+  }
 
   // 7. Scroll Reveal Animation (Intersection Observer)
   const revealElements = document.querySelectorAll('.reveal-on-scroll');

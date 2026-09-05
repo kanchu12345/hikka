@@ -80,6 +80,28 @@ h1, h2, h3, h4, h5, h6, .font-heading, .font-serif-heading {
   color: #FFFFFF !important;
 }
 
+/* Ensure headings inside light cards retain crisp dark navy text even within dark sections */
+.bg-white h1, .bg-white h2, .bg-white h3, .bg-white h4, .bg-white h5, .bg-white h6,
+.bg-slate-50 h1, .bg-slate-50 h2, .bg-slate-50 h3, .bg-slate-50 h4,
+.bg-gray-50 h1, .bg-gray-50 h2, .bg-gray-50 h3, .bg-gray-50 h4 {
+  color: #0A2540;
+}
+
+/* Persistent Luxury Coastal Navy Navbar - Never turns transparent or white */
+#main-navbar {
+  background-color: #083344 !important;
+  background: rgba(8, 51, 68, 0.96) !important;
+  backdrop-filter: blur(16px) !important;
+  -webkit-backdrop-filter: blur(16px) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08) !important;
+}
+
+#main-navbar a.text-white,
+#main-navbar button.text-white,
+#main-navbar span.text-white {
+  color: #FFFFFF !important;
+}
+
 /* Glassmorphism & Surface Styles */
 .glass-panel {
   background: rgba(255, 255, 255, 0.9);
