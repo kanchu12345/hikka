@@ -14,7 +14,7 @@ const DEFAULT_SITE_DATA = {
     email: "info@hikkasurfschool.com",
     address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
     googleMapsUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
-    googleMapsEmbedIframe: "https://maps.google.com/maps?q=6.132283,80.100754&hl=en&z=18&output=embed",
+    googleMapsEmbedIframe: "https://maps.google.com/maps?q=6.132555056990897,80.10058769999999&hl=en&z=18&output=embed",
     tripadvisorUrl: "https://www.tripadvisor.com",
     instagramUrl: "https://www.instagram.com/hikkasurf",
     facebookUrl: "https://web.facebook.com/profile.php?id=100088255598601",
