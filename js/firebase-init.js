@@ -11,7 +11,8 @@ import {
   getAuth, 
   signInWithEmailAndPassword, 
   signOut, 
-  onAuthStateChanged 
+  onAuthStateChanged,
+  sendPasswordResetEmail
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 import {
   getStorage,
@@ -44,6 +45,12 @@ export async function loginAdmin(email, password) {
 export async function logoutAdmin() {
   return await signOut(auth);
 }
+
+export async function resetAdminPassword(email) {
+  return await sendPasswordResetEmail(auth, email);
+}
+
+export { sendPasswordResetEmail };
 
 export function onAuthChange(callback) {
   return onAuthStateChanged(auth, callback);
