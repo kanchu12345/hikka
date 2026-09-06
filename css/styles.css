@@ -338,11 +338,25 @@ body.mobile-menu-open #sticky-mobile-bar {
   pointer-events: none !important;
 }
 
+/* Mobile Menu Container: Strict clearance above fixed bottom action bar */
 #mobile-menu {
-  max-height: calc(100svh - 4.5rem);
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior: contain;
+  max-height: calc(100vh - 13.5rem) !important;
+  max-height: calc(100dvh - 13.5rem) !important;
+  max-height: calc(100svh - 13.5rem) !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  overscroll-behavior: contain !important;
+  padding-bottom: 7rem !important; /* 112px bottom padding clearance */
+  box-sizing: border-box !important;
+}
+
+/* Guaranteed scroll spacer for WebKit/iOS devices */
+#mobile-menu::after {
+  content: "";
+  display: block;
+  height: 5.5rem; /* 88px physical buffer at the end of the menu */
+  width: 100%;
+  pointer-events: none;
 }
 
 #mobile-menu::-webkit-scrollbar {

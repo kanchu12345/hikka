@@ -53,7 +53,7 @@
       }
     }
   </script>
-  <link rel="stylesheet" href="css/styles.css?v=2.5" />
+  <link rel="stylesheet" href="css/styles.css?v=3.0" />
   <script src="js/data.js?v=2.2"></script>
   <script src="js/firebase-client.js"></script>
   <script src="js/main.js?v=2.5"></script>
@@ -376,7 +376,7 @@
     <div class="w-full border-b border-white/20 mt-3"></div>
 
         <!-- Mobile Slide Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950/98 backdrop-blur-xl text-white border-b border-ocean-800 shadow-2xl px-4 py-3 space-y-1 max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain pb-24">
+    <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950/98 backdrop-blur-xl text-white border-b border-ocean-800 shadow-2xl px-4 py-3 space-y-1 max-h-[calc(100svh-13.5rem)] overflow-y-auto overscroll-contain pb-28">
       <a href="index.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
         <span class="text-base">🏠</span>
         <span>Home</span>
@@ -436,6 +436,8 @@
           <span>BOOK NOW ON WHATSAPP</span>
         </button>
       </div>
+          <!-- Bottom clearance spacer above sticky mobile bar -->
+      <div id="mobile-menu-spacer" class="h-20 lg:hidden w-full pointer-events-none" aria-hidden="true"></div>
     </div>
   </header>
 
@@ -604,7 +606,12 @@
       document.getElementById('lightbox').classList.add('hidden');
     };
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
+      const menu = document.getElementById('mobile-menu');
+      if (menu) {
+        const isOpening = menu.classList.contains('hidden');
+        menu.classList.toggle('hidden');
+        document.body.classList.toggle('mobile-menu-open', isOpening);
+      }
     });
   </script>
   <script type="module" src="js/hydrate-gallery.js"></script>
