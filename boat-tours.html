@@ -175,7 +175,7 @@
             <div class="grid grid-cols-12 gap-6">
               <div class="col-span-4 border-r border-gray-100 pr-4 space-y-3">
                 <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">COUNTRIES & REGIONS</div>
-                <a href="destinations.html" class="p-3 bg-cyan-50 border border-cyan-200 rounded-2xl flex items-center justify-between group/item hover:bg-cyan-100 transition-all">
+                <a href="destinations.html" aria-label="Explore Sri Lanka — Southern Province Tours" class="p-3 bg-cyan-50 border border-cyan-200 rounded-2xl flex items-center justify-between group/item hover:bg-cyan-100 transition-all">
                   <div class="flex items-center gap-2.5">
                     <img alt="" src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-xl object-cover" loading="lazy" decoding="async">
                     <div>
@@ -343,7 +343,7 @@
       </nav>
 
       <!-- Language & Highlighted Book Now Button -->
-      <div class="hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
+      <div class="header-desktop-action hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
         <!-- Interactive Language Selector Dropdown -->
         <div class="relative lang-dropdown-wrapper">
           <button type="button" onclick="toggleLangMenu(event)" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm flex-shrink-0">
@@ -391,7 +391,7 @@
       </div>
 
       <!-- Mobile Button -->
-      <div class="flex lg:hidden items-center gap-2 flex-shrink-0">
+      <div class="header-mobile-action flex lg:hidden items-center gap-2 flex-shrink-0">
         <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 text-xs font-black shadow-md uppercase whitespace-nowrap">
           BOOK NOW
         </button>
@@ -490,6 +490,11 @@
   </section>
 
   <section class="py-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-12">
+      <span class="inline-block px-3 py-1 bg-surf-100 text-surf-800 rounded-full text-xs font-bold uppercase tracking-wider mb-2">Boat Excursions</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold font-heading text-gray-900">Explore Hikkaduwa by Sea & River</h2>
+      <p class="text-gray-600 text-sm mt-2">Choose between scenic glass-bottom coral reef excursions in Hikkaduwa or a biodiverse mangrove boat safari on the Madu Ganga River.</p>
+    </div>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
       <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between">
         <div>
@@ -507,7 +512,7 @@
         <div>
           <span class="px-3 py-1 bg-indigo-600 text-white rounded-full text-xs font-bold">Eco River Cruise</span>
           <h3 class="font-heading font-bold text-2xl text-gray-900 mt-3">Madu Ganga Mangrove River Safari</h3>
-          <div class="text-2xl font-extrabold text-indigo-700 my-3">$45 <span class="text-xs font-normal text-gray-500">USD (Rs. 14,500) • 2.5 Hours</span></div>
+          <div class="text-2xl font-extrabold text-indigo-700 my-3"><span data-usd="45">$45</span> <span class="text-xs font-normal text-gray-500">USD (Rs. 14,500) • 2.5 Hours</span></div>
           <p class="text-sm text-gray-600 mb-6">Cruise through mangrove tunnels across 64 islands, visit historic Buddhist island temples, experience cinnamon peeling demonstrations, and enjoy natural fish therapy.</p>
         </div>
         <button onclick="openBookingModal('Madu Ganga Mangrove River Safari')" class="w-full py-3 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs cursor-pointer">
@@ -547,7 +552,7 @@
         </div>
 
                 <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Surfing</h4>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Surfing</h3>
           <ul class="space-y-2 text-xs text-gray-300">
             <li><a href="surf-lessons.html" class="hover:text-white font-bold text-cyan-200">🏄 Beginner Lessons</a></li>
             <li><a href="surf-lessons.html" class="hover:text-white">🏄 Private 1:1 Coaching</a></li>
@@ -559,7 +564,7 @@
         </div>
 
                 <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Explore</h4>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Explore</h3>
           <ul class="space-y-2 text-xs text-gray-300">
             <li><a href="activities.html" class="hover:text-white font-bold text-cyan-200">🌴 All Activities & Tours</a></li>
             <li><a href="snorkeling.html" class="hover:text-white">🤿 Snorkeling Sanctuary</a></li>
@@ -573,7 +578,7 @@
         </div>
 
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Contact & Location</h4>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Contact & Location</h3>
           <p class="text-xs text-gray-300 mb-3">Turtle Beach / Galle Road (Near Hikka Tranz), Hikkaduwa</p>
           <button onclick="openDirectWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
             <span>WhatsApp: +94 77 123 4567</span>

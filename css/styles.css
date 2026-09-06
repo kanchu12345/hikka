@@ -1002,3 +1002,23 @@ body.mobile-menu-open #sticky-mobile-bar {
 .btn-secondary-ghost:active {
   transform: translateY(1px);
 }
+
+/* Responsive Header Action Isolation (Prevents FOUC / button stacking) */
+@media (min-width: 1024px) {
+  .header-mobile-action {
+    display: none !important;
+  }
+  .header-desktop-action {
+    display: flex !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  .header-desktop-action {
+    display: none !important;
+  }
+  .header-mobile-action {
+    display: flex !important;
+  }
+}
+

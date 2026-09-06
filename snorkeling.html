@@ -175,7 +175,7 @@
             <div class="grid grid-cols-12 gap-6">
               <div class="col-span-4 border-r border-gray-100 pr-4 space-y-3">
                 <div class="text-[10px] uppercase font-bold text-gray-400 tracking-wider">COUNTRIES & REGIONS</div>
-                <a href="destinations.html" class="p-3 bg-cyan-50 border border-cyan-200 rounded-2xl flex items-center justify-between group/item hover:bg-cyan-100 transition-all">
+                <a href="destinations.html" aria-label="Explore Sri Lanka — Southern Province Tours" class="p-3 bg-cyan-50 border border-cyan-200 rounded-2xl flex items-center justify-between group/item hover:bg-cyan-100 transition-all">
                   <div class="flex items-center gap-2.5">
                     <img alt="" src="https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=80&q=80" class="w-8 h-8 rounded-xl object-cover" loading="lazy" decoding="async">
                     <div>
@@ -343,7 +343,7 @@
       </nav>
 
       <!-- Language & Highlighted Book Now Button -->
-      <div class="hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
+      <div class="header-desktop-action hidden lg:flex items-center gap-2.5 xl:gap-4 ml-2 xl:ml-4 pl-3 xl:pl-4 border-l border-white/20 flex-shrink-0">
         <!-- Interactive Language Selector Dropdown -->
         <div class="relative lang-dropdown-wrapper">
           <button type="button" onclick="toggleLangMenu(event)" class="flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-xs font-bold text-white transition-all cursor-pointer border border-white/15 hover:border-white/30 shadow-sm flex-shrink-0">
@@ -391,7 +391,7 @@
       </div>
 
       <!-- Mobile Button -->
-      <div class="flex lg:hidden items-center gap-2 flex-shrink-0">
+      <div class="header-mobile-action flex lg:hidden items-center gap-2 flex-shrink-0">
         <button type="button" onclick="openBookingModal()" class="flex-shrink-0 px-3 py-1.5 rounded-full bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 hover:from-amber-300 hover:to-orange-300 text-xs font-black shadow-md uppercase whitespace-nowrap">
           BOOK NOW
         </button>
@@ -505,7 +505,7 @@
             <div>
               <span class="px-2.5 py-0.5 bg-cyan-600 text-white rounded-full text-[11px] font-bold">Popular</span>
               <h3 class="font-heading font-bold text-xl text-gray-900 mt-2">Guided Coral Reef Snorkeling</h3>
-              <div class="text-2xl font-extrabold text-cyan-700 my-2">$20 <span class="text-xs font-normal text-gray-500">USD (Rs. 6,500) • 1.5 Hours</span></div>
+              <div class="text-2xl font-extrabold text-cyan-700 my-2"><span data-usd="20">$20</span> <span class="text-xs font-normal text-gray-500">USD (Rs. 6,500) • 1.5 Hours</span></div>
               <p class="text-xs text-gray-600 mb-4">Guided snorkeling in the coral sanctuary with sanitized equipment and lifejackets.</p>
             </div>
             <button onclick="openBookingModal('Guided Coral Reef Snorkeling')" class="w-full py-2.5 bg-emerald-600 text-white font-bold rounded-xl text-xs cursor-pointer">
@@ -517,7 +517,7 @@
             <div>
               <span class="px-2.5 py-0.5 bg-gray-900 text-white rounded-full text-[11px] font-bold">Private Tour</span>
               <h3 class="font-heading font-bold text-xl text-gray-900 mt-2">Private Family Snorkeling</h3>
-              <div class="text-2xl font-extrabold text-gray-900 my-2">$35 <span class="text-xs font-normal text-gray-500">USD (Rs. 11,000) • 2 Hours</span></div>
+              <div class="text-2xl font-extrabold text-gray-900 my-2"><span data-usd="35">$35</span> <span class="text-xs font-normal text-gray-500">USD (Rs. 11,000) • 2 Hours</span></div>
               <p class="text-xs text-gray-600 mb-4">Private guide for your family with child-sized gear and extra safety ring assistance.</p>
             </div>
             <button onclick="openBookingModal('Private Family Snorkeling')" class="w-full py-2.5 bg-gray-900 hover:bg-surf-600 text-white font-bold rounded-xl text-xs cursor-pointer">
@@ -572,7 +572,7 @@
         </div>
 
                 <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Surfing</h4>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Surfing</h3>
           <ul class="space-y-2 text-xs text-gray-300">
             <li><a href="surf-lessons.html" class="hover:text-white font-bold text-cyan-200">🏄 Beginner Lessons</a></li>
             <li><a href="surf-lessons.html" class="hover:text-white">🏄 Private 1:1 Coaching</a></li>
@@ -584,7 +584,7 @@
         </div>
 
                 <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Explore</h4>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Explore</h3>
           <ul class="space-y-2 text-xs text-gray-300">
             <li><a href="activities.html" class="hover:text-white font-bold text-cyan-200">🌴 All Activities & Tours</a></li>
             <li><a href="snorkeling.html" class="hover:text-white">🤿 Snorkeling Sanctuary</a></li>
@@ -598,7 +598,7 @@
         </div>
 
         <div>
-          <h4 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Contact & Location</h4>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-sand-300 mb-4">Contact & Location</h3>
           <p class="text-xs text-gray-300 mb-3">Turtle Beach / Galle Road (Near Hikka Tranz), Hikkaduwa</p>
           <button onclick="openDirectWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 cursor-pointer shadow-md">
             <span>WhatsApp: +94 77 123 4567</span>
