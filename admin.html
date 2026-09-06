@@ -554,9 +554,25 @@
               <label class="block text-xs font-bold text-gray-700 mb-1">About Tagline</label>
               <input type="text" id="about-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
             </div>
+          </div>
+
+          <!-- Section 2: Certified Coaches & Instructors -->
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">🏄 Certified Coaches & Ocean Guides</h3>
+                <p class="text-xs text-gray-500">Edit instructor bios, badges, credentials, and profile photos with Firebase Storage upload.</p>
+              </div>
+              <button type="button" id="btn-add-coach" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer">
+                + Add Coach
+              </button>
+            </div>
+            <div id="about-coaches-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
             <div class="pt-2 flex justify-end">
               <button type="button" id="btn-save-about" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
-                💾 Save About Us
+                💾 Save About Us & Coaches
               </button>
             </div>
           </div>
@@ -661,7 +677,8 @@
       getSettings,
       saveSettings,
       getPageData,
-      savePageData
+      savePageData,
+      uploadImageFile
     } from "./js/firebase-init.js";
     import { seedInitialFirestoreData, DEFAULT_SEED_DATA } from "./js/seed-data.js";
 
@@ -864,7 +881,14 @@
         <div class="p-3 bg-gray-50 border rounded-2xl flex flex-col sm:flex-row items-center gap-3">
           <img src="${slide.url}" alt="${slide.caption}" class="w-full sm:w-28 h-20 object-cover rounded-xl border flex-shrink-0" />
           <div class="flex-1 w-full space-y-2">
-            <input type="text" value="${slide.url}" data-slide-url="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+            <div class="flex items-center gap-2">
+              <input type="text" value="${slide.url}" data-slide-url="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+              <label class="cursor-pointer flex-shrink-0 px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1">
+                <span>📤 Upload</span>
+                <input type="file" accept="image/*" data-upload-slide="${i}" class="hidden" />
+              </label>
+            </div>
+            <div data-upload-slide-progress="${i}" class="hidden text-[11px] font-bold text-surf-600"></div>
             <input type="text" value="${slide.caption}" data-slide-cap="${i}" placeholder="Caption" class="w-full p-2 bg-white border rounded-xl text-xs" />
           </div>
           <button type="button" data-del-slide="${i}" class="text-xs text-red-600 font-bold hover:underline p-2">Delete</button>
@@ -876,6 +900,26 @@
           const idx = parseInt(e.target.getAttribute('data-slide-url'));
           siteState.index.heroImages[idx].url = e.target.value;
           renderIndexSlides();
+        };
+      });
+      list.querySelectorAll('[data-upload-slide]').forEach(inp => {
+        inp.onchange = async (e) => {
+          const idx = parseInt(e.target.dataset.uploadSlide);
+          const file = e.target.files[0];
+          if (!file) return;
+          const prog = list.querySelector(`[data-upload-slide-progress="${idx}"]`);
+          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          try {
+            const downloadUrl = await uploadImageFile(file, 'hero', pct => {
+              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+            });
+            siteState.index.heroImages[idx].url = downloadUrl;
+            showToast('✅ Slide image uploaded to Firebase Storage!');
+            renderIndexSlides();
+          } catch(err) {
+            alert('Upload error: ' + err.message);
+            if (prog) prog.classList.add('hidden');
+          }
         };
       });
       list.querySelectorAll('[data-slide-cap]').forEach(inp => {
@@ -1112,7 +1156,14 @@
               <input type="text" value="${d.duration}" data-dest-dur="${i}" placeholder="Duration" class="w-full p-2 bg-white border rounded-xl text-xs" />
             </div>
             <input type="text" value="${d.highlight}" data-dest-hi="${i}" placeholder="Highlight" class="w-full p-2 bg-white border rounded-xl text-xs text-surf-700 font-semibold" />
-            <input type="text" value="${d.imageUrl}" data-dest-img="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+            <div class="flex items-center gap-2">
+              <input type="text" value="${d.imageUrl}" data-dest-img="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+              <label class="cursor-pointer flex-shrink-0 px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1">
+                <span>📤 Upload</span>
+                <input type="file" accept="image/*" data-upload-dest="${i}" class="hidden" />
+              </label>
+            </div>
+            <div data-upload-dest-progress="${i}" class="hidden text-[11px] font-bold text-surf-600"></div>
             <textarea rows="2" data-dest-desc="${i}" placeholder="Description" class="w-full p-2 bg-white border rounded-xl text-xs">${d.description}</textarea>
           </div>
           <button type="button" data-del-dest="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete</button>
@@ -1132,6 +1183,26 @@
         inp.onchange = e => { 
           siteState.destinations.destinations[parseInt(e.target.dataset.destImg)].imageUrl = e.target.value; 
           populateDestinationsPage();
+        };
+      });
+      list.querySelectorAll('[data-upload-dest]').forEach(inp => {
+        inp.onchange = async (e) => {
+          const idx = parseInt(e.target.dataset.uploadDest);
+          const file = e.target.files[0];
+          if (!file) return;
+          const prog = list.querySelector(`[data-upload-dest-progress="${idx}"]`);
+          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          try {
+            const downloadUrl = await uploadImageFile(file, 'destinations', pct => {
+              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+            });
+            siteState.destinations.destinations[idx].imageUrl = downloadUrl;
+            showToast('✅ Destination image uploaded to Firebase Storage!');
+            populateDestinationsPage();
+          } catch(err) {
+            alert('Upload error: ' + err.message);
+            if (prog) prog.classList.add('hidden');
+          }
         };
       });
       list.querySelectorAll('[data-dest-desc]').forEach(inp => {
@@ -1179,6 +1250,14 @@
               <input type="text" value="${a.tagline}" data-act-tag="${i}" placeholder="Tagline" class="w-full p-2 bg-white border rounded-xl text-xs" />
               <input type="text" value="${a.duration}" data-act-dur="${i}" placeholder="Duration" class="w-full p-2 bg-white border rounded-xl text-xs" />
             </div>
+            <div class="flex items-center gap-2">
+              <input type="text" value="${a.imageUrl}" data-act-img="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+              <label class="cursor-pointer flex-shrink-0 px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1">
+                <span>📤 Upload</span>
+                <input type="file" accept="image/*" data-upload-act="${i}" class="hidden" />
+              </label>
+            </div>
+            <div data-upload-act-progress="${i}" class="hidden text-[11px] font-bold text-surf-600"></div>
             <textarea rows="2" data-act-desc="${i}" placeholder="Description" class="w-full p-2 bg-white border rounded-xl text-xs">${a.description}</textarea>
           </div>
           <button type="button" data-del-act="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete</button>
@@ -1196,6 +1275,32 @@
       });
       list.querySelectorAll('[data-act-dur]').forEach(inp => {
         inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actDur)].duration = e.target.value; };
+      });
+      list.querySelectorAll('[data-act-img]').forEach(inp => {
+        inp.onchange = e => { 
+          siteState.activities.activities[parseInt(e.target.dataset.actImg)].imageUrl = e.target.value; 
+          populateActivitiesPage();
+        };
+      });
+      list.querySelectorAll('[data-upload-act]').forEach(inp => {
+        inp.onchange = async (e) => {
+          const idx = parseInt(e.target.dataset.uploadAct);
+          const file = e.target.files[0];
+          if (!file) return;
+          const prog = list.querySelector(`[data-upload-act-progress="${idx}"]`);
+          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          try {
+            const downloadUrl = await uploadImageFile(file, 'activities', pct => {
+              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+            });
+            siteState.activities.activities[idx].imageUrl = downloadUrl;
+            showToast('✅ Activity image uploaded to Firebase Storage!');
+            populateActivitiesPage();
+          } catch(err) {
+            alert('Upload error: ' + err.message);
+            if (prog) prog.classList.add('hidden');
+          }
+        };
       });
       list.querySelectorAll('[data-act-desc]').forEach(inp => {
         inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actDesc)].description = e.target.value; };
@@ -1269,10 +1374,155 @@
     });
 
     // Populate About
+    function renderAboutCoaches() {
+      const list = document.getElementById('about-coaches-list');
+      if (!list) return;
+      const coaches = siteState.about.coaches || [];
+      list.innerHTML = coaches.map((c, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-3">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <img src="${c.imageUrl || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=300&q=80'}" alt="${c.name || 'Coach'}" class="w-16 h-16 rounded-xl object-cover border flex-shrink-0" />
+              <div>
+                <span class="px-2 py-0.5 bg-surf-100 text-surf-800 rounded font-mono text-[10px] font-bold">Coach #${i+1}</span>
+                <h4 class="font-bold text-sm text-gray-900">${c.name || 'New Coach'}</h4>
+                <p class="text-[11px] text-gray-500">${c.role || ''}</p>
+              </div>
+            </div>
+            <button type="button" data-del-coach="${i}" class="text-xs text-red-600 font-bold hover:underline p-1 cursor-pointer">Delete</button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 mb-1">Name</label>
+              <input type="text" value="${c.name || ''}" data-coach-name="${i}" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 mb-1">Role / Specialization</label>
+              <input type="text" value="${c.role || ''}" data-coach-role="${i}" placeholder="e.g. Lead Instructor & Founder" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 mb-1">Badge Tag</label>
+              <input type="text" value="${c.badge || ''}" data-coach-badge="${i}" placeholder="e.g. Head Coach" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Photo (Image URL or Upload)</label>
+            <div class="flex items-center gap-2">
+              <input type="text" value="${c.imageUrl || ''}" data-coach-img="${i}" placeholder="https://..." class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+              <label class="cursor-pointer flex-shrink-0 px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1">
+                <span>📤 Upload</span>
+                <input type="file" accept="image/*" data-upload-coach="${i}" class="hidden" />
+              </label>
+            </div>
+            <div data-upload-coach-progress="${i}" class="hidden text-[11px] font-bold text-surf-600 mt-1"></div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Bio / Credentials</label>
+            <textarea data-coach-bio="${i}" rows="2" class="w-full p-2 bg-white border rounded-xl text-xs leading-relaxed">${c.bio || ''}</textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Highlight Badges (comma separated)</label>
+            <input type="text" value="${(c.tags || []).join(', ')}" data-coach-tags="${i}" placeholder="🏄 10+ Yrs Surfing, 🛡️ ISA Certified, 🛟 Lifeguard" class="w-full p-2 bg-white border rounded-xl text-xs" />
+          </div>
+        </div>
+      `).join('');
+
+      // Input changes
+      list.querySelectorAll('[data-coach-name]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.coachName);
+          siteState.about.coaches[idx].name = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-coach-role]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.coachRole);
+          siteState.about.coaches[idx].role = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-coach-badge]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.coachBadge);
+          siteState.about.coaches[idx].badge = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-coach-img]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.coachImg);
+          siteState.about.coaches[idx].imageUrl = e.target.value;
+          renderAboutCoaches();
+        };
+      });
+      list.querySelectorAll('[data-coach-bio]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.coachBio);
+          siteState.about.coaches[idx].bio = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-coach-tags]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.coachTags);
+          siteState.about.coaches[idx].tags = e.target.value.split(',').map(t => t.trim()).filter(Boolean);
+        };
+      });
+
+      // Firebase Storage Upload
+      list.querySelectorAll('[data-upload-coach]').forEach(inp => {
+        inp.onchange = async (e) => {
+          const idx = parseInt(e.target.dataset.uploadCoach);
+          const file = e.target.files[0];
+          if (!file) return;
+          const prog = list.querySelector(`[data-upload-coach-progress="${idx}"]`);
+          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          try {
+            const downloadUrl = await uploadImageFile(file, 'coaches', pct => {
+              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+            });
+            siteState.about.coaches[idx].imageUrl = downloadUrl;
+            showToast('✅ Coach photo uploaded to Firebase Storage!');
+            renderAboutCoaches();
+          } catch(err) {
+            alert('Upload error: ' + err.message);
+            if (prog) prog.classList.add('hidden');
+          }
+        };
+      });
+
+      // Delete coach
+      list.querySelectorAll('[data-del-coach]').forEach(btn => {
+        btn.onclick = (e) => {
+          const idx = parseInt(e.target.dataset.delCoach);
+          siteState.about.coaches.splice(idx, 1);
+          renderAboutCoaches();
+        };
+      });
+    }
+
     function populateAboutPage() {
       const ab = siteState.about;
       document.getElementById('about-story').value = ab.story || '';
       document.getElementById('about-tagline').value = ab.tagline || '';
+      renderAboutCoaches();
+    }
+
+    const btnAddCoach = document.getElementById('btn-add-coach');
+    if (btnAddCoach) {
+      btnAddCoach.addEventListener('click', () => {
+        if (!siteState.about.coaches) siteState.about.coaches = [];
+        siteState.about.coaches.push({
+          name: "New Local Coach",
+          role: "Surf Instructor",
+          badge: "Instructor",
+          imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80",
+          bio: "Certified surf instructor with deep knowledge of Hikkaduwa breaks.",
+          tags: ["🏄 Certified Coach", "🌊 Ocean Guide"]
+        });
+        renderAboutCoaches();
+      });
     }
 
     // Populate Contact

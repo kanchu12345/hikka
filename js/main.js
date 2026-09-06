@@ -221,8 +221,28 @@ Pickup location:`;
       const guests = modalGuestsSelect?.value || '2 People';
       const time = modalTimeSelect?.value || '08:30 AM';
       const name = modalNameInput?.value ? modalNameInput.value.trim() : 'Guest';
-      const phone = modalPhoneInput?.value ? modalPhoneInput.value.trim() : 'Not provided';
+      const phone = modalPhoneInput?.value ? modalPhoneInput.value.trim() : '';
       const notes = modalNotesInput?.value ? modalNotesInput.value.trim() : 'None';
+
+      if (phone && phone.replace(/[^0-9]/g, '').length < 6) {
+        alert("Please enter a valid phone or WhatsApp number so our local team can reach you.");
+        modalPhoneInput?.focus();
+        return;
+      }
+
+      // Calculate estimated price based on activity and guests
+      let priceMatch = activity.match(/\$(\d+)/);
+      let guestMatch = guests.match(/(\d+)/);
+      let priceNote = "";
+      if (priceMatch && guestMatch) {
+        const unitUsd = parseInt(priceMatch[1], 10);
+        const guestCount = parseInt(guestMatch[1], 10);
+        const totalUsd = unitUsd * guestCount;
+        
+        const curr = CURRENCY_RATES[currentCurrency] || CURRENCY_RATES.USD;
+        const converted = Math.round(totalUsd * curr.rate);
+        priceNote = `• Estimated Total: ${curr.symbol}${converted} ${currentCurrency} (${guestCount} person${guestCount > 1 ? 's' : ''})`;
+      }
 
       const inquiryObj = {
         activity,
@@ -230,7 +250,7 @@ Pickup location:`;
         guests,
         time,
         name,
-        phone,
+        phone: phone || 'Not provided',
         notes,
         timestamp: new Date().toISOString()
       };
@@ -243,17 +263,23 @@ Pickup location:`;
       } catch(err) {}
 
       const msgLines = [
-        "Hi Hikka Surf School, I would like to book a session:",
+        "🏄 *Hikka Surf School Reservation Request* 🏄",
+        "─────────────────────────",
         `• Activity: ${activity}`,
         `• Preferred Date: ${date}`,
-        `• Number of People: ${guests}`,
-        `• Preferred Time: ${time}`,
-        `• Name: ${name}`,
-        `• Contact: ${phone}`,
-        `• Notes/Pickup: ${notes}`,
+        `• Time Slot: ${time}`,
+        `• Group Size: ${guests}`,
+        priceNote,
+        `• Guest Name: ${name}`,
+        phone ? `• WhatsApp / Phone: ${phone}` : null,
+        notes !== 'None' ? `• Pickup / Notes: ${notes}` : null,
+        "─────────────────────────",
+        "✓ Inclusions: High-float Board, Leash, Rash Guard, Zinc & Fresh King Coconut",
+        "✓ Flexibility: 100% Free Rescheduling if ocean conditions are rough",
+        "✓ Payment: Pay in Cash (USD/EUR/GBP/LKR) on arrival at the beach",
         "",
-        "Please let me know availability!"
-      ];
+        "Please confirm our spot!"
+      ].filter(Boolean);
 
       const cleanPhone = cleanWhatsApp || '94771234567';
       window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msgLines.join('\n'))}`, '_blank');
@@ -408,7 +434,7 @@ function initFaqAccordion() {
   });
 }
 
-// Auto-Swapping Hero Slideshow Handler
+// Auto-Swapping Hero Slideshow Handler with Controls & Gestures
 function initHeroSlideshow(settings) {
   const container = document.getElementById('hero-slideshow-container');
   if (!container) return;
@@ -424,18 +450,87 @@ function initHeroSlideshow(settings) {
     <div class="hero-slide ${idx === 0 ? 'active' : ''}" style="background-image: url('${img.url}'); background-size: cover; background-position: center;"></div>
   `).join('');
 
+  const dotsContainer = document.getElementById('hero-dots-container');
+  if (dotsContainer) {
+    dotsContainer.innerHTML = images.map((_, idx) => `
+      <button type="button" class="hero-dot ${idx === 0 ? 'active' : ''}" data-hero-dot="${idx}" aria-label="Go to slide ${idx + 1}"></button>
+    `).join('');
+  }
+
   let currentSlide = 0;
   const slides = container.querySelectorAll('.hero-slide');
+  const dots = dotsContainer ? dotsContainer.querySelectorAll('.hero-dot') : [];
   const intervalTime = settings.autoSwapInterval || 4500;
 
-  if (slides.length > 1) {
-    if (window.heroTimer) clearInterval(window.heroTimer);
-    window.heroTimer = setInterval(() => {
-      slides[currentSlide].classList.remove('active');
-      currentSlide = (currentSlide + 1) % slides.length;
-      slides[currentSlide].classList.add('active');
-    }, intervalTime);
+  function goToSlide(idx) {
+    if (!slides.length) return;
+    slides[currentSlide].classList.remove('active');
+    if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+    currentSlide = (idx + slides.length) % slides.length;
+    slides[currentSlide].classList.add('active');
+    if (dots[currentSlide]) dots[currentSlide].classList.add('active');
   }
+
+  function nextSlide() { goToSlide(currentSlide + 1); }
+  function prevSlide() { goToSlide(currentSlide - 1); }
+
+  function startTimer() {
+    if (slides.length > 1) {
+      if (window.heroTimer) clearInterval(window.heroTimer);
+      window.heroTimer = setInterval(nextSlide, intervalTime);
+    }
+  }
+
+  function stopTimer() {
+    if (window.heroTimer) {
+      clearInterval(window.heroTimer);
+      window.heroTimer = null;
+    }
+  }
+
+  startTimer();
+
+  // Pause on hover
+  const heroSection = document.getElementById('hero-section') || container;
+  heroSection.addEventListener('mouseenter', stopTimer);
+  heroSection.addEventListener('mouseleave', startTimer);
+
+  // Prev / Next Buttons
+  const prevBtn = document.getElementById('hero-prev-btn');
+  const nextBtn = document.getElementById('hero-next-btn');
+  if (prevBtn) prevBtn.onclick = () => { prevSlide(); startTimer(); };
+  if (nextBtn) nextBtn.onclick = () => { nextSlide(); startTimer(); };
+
+  // Indicator dots click
+  if (dotsContainer) {
+    dotsContainer.querySelectorAll('[data-hero-dot]').forEach(dot => {
+      dot.onclick = (e) => {
+        const idx = parseInt(e.target.dataset.heroDot);
+        goToSlide(idx);
+        startTimer();
+      };
+    });
+  }
+
+  // Touch swipe gestures
+  let touchStartX = 0;
+  let touchEndX = 0;
+  heroSection.addEventListener('touchstart', e => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      touchStartX = e.changedTouches[0].screenX;
+    }
+  }, { passive: true });
+  heroSection.addEventListener('touchend', e => {
+    if (e.changedTouches && e.changedTouches[0]) {
+      touchEndX = e.changedTouches[0].screenX;
+      const diffX = touchStartX - touchEndX;
+      if (Math.abs(diffX) > 45) {
+        if (diffX > 0) nextSlide();
+        else prevSlide();
+        startTimer();
+      }
+    }
+  }, { passive: true });
 }
 
 // Middle Cinematic Slideshow Handler ("Our Home Base - Sri Lanka")

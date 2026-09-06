@@ -1,4 +1,4 @@
-﻿// Default Seed Data for Hikka Surf School Firestore Database
+// Default Seed Data for Hikka Surf School Firestore Database
 import { doc, setDoc } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-firestore.js";
 import { db } from "./firebase-init.js";
 
@@ -252,7 +252,7 @@ export const DEFAULT_SEED_DATA = {
         highlight: "UNESCO Ramparts & Lighthouse",
         duration: "25 Mins from Hikka",
         icon: "🏰",
-        imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80",
+        imageUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80",
         description: "Historic 16th-century fortress, lighthouse walk, colonial Dutch architecture, boutiques, and sunset ramparts."
       },
       {
@@ -261,7 +261,7 @@ export const DEFAULT_SEED_DATA = {
         highlight: "Whale Watching & Coconut Tree Hill",
         duration: "50 Mins from Hikka",
         icon: "🐋",
-        imageUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=600&q=80",
+        imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80",
         description: "Blue whale & spinner dolphin boat safaris, iconic Coconut Tree Hill headland, and gentle beginner surf bays."
       },
       {
@@ -270,7 +270,7 @@ export const DEFAULT_SEED_DATA = {
         highlight: "64 Islands & Cinnamon Isle",
         duration: "25 Mins from Hikka",
         icon: "🚤",
-        imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+        imageUrl: "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=800&q=80",
         description: "Serene boat safari through mangrove tunnels, cinnamon peeling demonstration, fish therapy, and island temples."
       },
       {
@@ -279,7 +279,7 @@ export const DEFAULT_SEED_DATA = {
         highlight: "Wild Leopards & Ceylon Elephants",
         duration: "Full Day / 2.5 Hrs",
         icon: "🐆",
-        imageUrl: "https://images.unsplash.com/photo-1534567153574-2b12153a87f0?auto=format&fit=crop&w=600&q=80",
+        imageUrl: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=800&q=80",
         description: "High-density leopard territory, wild mother & calf elephant herds, sloth bears, and crocodiles in 4x4 safari jeeps."
       }
     ]
@@ -325,7 +325,7 @@ export const DEFAULT_SEED_DATA = {
         price_from: 70,
         duration: "3 - 4 Hours",
         description: "Catch Tuna, Mahi Mahi, and Wahoo with experienced boat captains. All rods, lures, safety equipment, and tackle provided.",
-        imageUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=800&q=80"
+        imageUrl: "https://images.unsplash.com/photo-1544551763-77ef2d0cfc6c?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: "boat-tours",
@@ -335,7 +335,7 @@ export const DEFAULT_SEED_DATA = {
         price_from: 30,
         duration: "1.5 - 2 Hours",
         description: "Scenic boat journeys along coral reefs and the lush mangrove maze of the Madu Ganga with cinnamon island stop.",
-        imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=800&q=80"
+        imageUrl: "https://images.unsplash.com/photo-1546776310-eef45dd6d63c?auto=format&fit=crop&w=800&q=80"
       },
       {
         id: "whale-watching",
@@ -403,6 +403,32 @@ export const DEFAULT_SEED_DATA = {
       { title: "Safety First", desc: "Shallow sandy bottom coaching with 100% focus on student security." },
       { title: "Ocean Preservation", desc: "Reef-safe practices, beach cleanups, and wild turtle habitat protection." },
       { title: "Authentic Local Heart", desc: "True Sri Lankan hospitality, community empowerment, and genuine passion." }
+    ],
+    coaches: [
+      {
+        name: "Kanchana & Team",
+        role: "Lead Instructor & Founder",
+        badge: "Head Coach",
+        bio: "10+ years coaching thousands of travelers on Narigama Beach. ISA Level 1 Certified Surf Coach, expert wave forecaster, and certified SLSF beach lifeguard with advanced CPR training.",
+        imageUrl: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80",
+        tags: ["🏄 10+ Yrs Surfing", "🛡️ ISA Certified", "🛟 Lifeguard"]
+      },
+      {
+        name: "Local Senior Coaches",
+        role: "Beginner & Kids Coaching Pro",
+        badge: "Beginner Specialist",
+        bio: "Patient, encouraging, and specialized in helping complete beginners and young children stand up with confidence on their very first wave in safe, shallow sandy water.",
+        imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80",
+        tags: ["👶 Kids Safe", "🌊 Shallow Water", "💯 100% Stand Up"]
+      },
+      {
+        name: "Turtle & Snorkel Captains",
+        role: "Reef Sanctuary & Snorkel Guide",
+        badge: "Ocean & Wildlife",
+        bio: "Born in Hikkaduwa with innate knowledge of the coral sanctuary, tide patterns, and sea turtle behavior. Dedicated to respectful, eco-friendly marine interactions.",
+        imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80",
+        tags: ["🐢 Turtle Safe", "🤿 Marine Guide", "🌿 Eco Certified"]
+      }
     ]
   },
 

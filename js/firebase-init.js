@@ -13,6 +13,12 @@ import {
   signOut, 
   onAuthStateChanged 
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
+import {
+  getStorage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/12.18.0/firebase-storage.js";
 
 export const firebaseConfig = {
   apiKey: "AIzaSyDpUxDVtVFJ0mqJ_Gr4BAk3OWoNtBa-tkY",
@@ -28,6 +34,7 @@ export const firebaseConfig = {
 export const app = initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const auth = getAuth(app);
+export const storage = getStorage(app);
 
 // Authentication Helpers
 export async function loginAdmin(email, password) {
@@ -85,5 +92,37 @@ export function subscribeToSettings(callback) {
     if (docSnap.exists()) {
       callback(docSnap.data());
     }
+  });
+}
+
+// Firebase Storage File Upload Helper
+export function uploadImageFile(file, folderPath = "uploads", onProgress = null) {
+  return new Promise((resolve, reject) => {
+    if (!file) return reject(new Error("No file selected for upload"));
+    const cleanFileName = `${Date.now()}_${file.name.replace(/[^a-zA-Z0-9._-]/g, '_')}`;
+    const cleanFolder = folderPath.replace(/\/+$/, '');
+    const fullPath = `${cleanFolder}/${cleanFileName}`;
+    const storageRef = ref(storage, fullPath);
+    const uploadTask = uploadBytesResumable(storageRef, file);
+
+    uploadTask.on(
+      'state_changed',
+      (snapshot) => {
+        const progress = Math.round((snapshot.bytesTransferred / snapshot.totalBytes) * 100);
+        if (typeof onProgress === 'function') onProgress(progress);
+      },
+      (error) => {
+        console.error("Firebase Storage upload error:", error);
+        reject(error);
+      },
+      async () => {
+        try {
+          const downloadUrl = await getDownloadURL(uploadTask.snapshot.ref);
+          resolve(downloadUrl);
+        } catch (err) {
+          reject(err);
+        }
+      }
+    );
   });
 }

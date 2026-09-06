@@ -1,4 +1,4 @@
-﻿// Real-time Firestore Hydrator for about.html
+// Real-time Firestore Hydrator for about.html
 import { getPageData, getSettings, subscribeToPage, subscribeToSettings } from "./firebase-init.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -68,4 +68,34 @@ function hydrateAbout(data) {
       `).join('');
     }
   }
+
+  // Coaches & Instructors Grid
+  if (data.coaches && data.coaches.length) {
+    const coachGrid = document.getElementById('about-coaches-cards-grid');
+    if (coachGrid) {
+      coachGrid.innerHTML = data.coaches.map(c => `
+        <div class="bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl border border-gray-200 transition-all text-center flex flex-col justify-between">
+          <div>
+            <div class="h-64 overflow-hidden relative">
+              <img src="${c.imageUrl || 'https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=600&q=80'}" alt="${c.name || 'Surf Coach'}" class="w-full h-full object-cover" loading="lazy" decoding="async" />
+              <span class="absolute top-3 right-3 px-3 py-1 bg-[#0A2540] text-white rounded-full text-[10px] font-black uppercase">${c.badge || 'Coach'}</span>
+            </div>
+            <div class="p-6 space-y-2">
+              <h3 class="font-serif-heading font-black text-xl text-gray-900">${c.name || ''}</h3>
+              <p class="text-xs text-surf-600 font-bold uppercase tracking-wider">${c.role || ''}</p>
+              <p class="text-xs text-gray-600 leading-relaxed pt-1">
+                ${c.bio || ''}
+              </p>
+            </div>
+          </div>
+          <div class="p-6 pt-0 border-t border-gray-100 mt-4 flex items-center justify-around text-[11px] font-semibold text-gray-500 flex-wrap gap-2">
+            ${(c.tags || []).map((t, idx) => `
+              <span>${t}</span>${idx < (c.tags || []).length - 1 ? '<span>•</span>' : ''}
+            `).join('')}
+          </div>
+        </div>
+      `).join('');
+    }
+  }
 }
+

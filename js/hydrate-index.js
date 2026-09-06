@@ -1,4 +1,4 @@
-﻿// Real-time Firestore Hydrator for index.html (Homepage)
+// Real-time Firestore Hydrator for index.html (Homepage)
 import { getPageData, getSettings, subscribeToPage, subscribeToSettings } from "./firebase-init.js";
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -90,18 +90,88 @@ function hydrateIndex(data) {
         <div class="hero-slide ${idx === 0 ? 'active' : ''}" style="background-image: url('${img.url}'); background-size: cover; background-position: center;"></div>
       `).join('');
 
+      const dotsContainer = document.getElementById('hero-dots-container');
+      if (dotsContainer) {
+        dotsContainer.innerHTML = data.heroImages.map((_, idx) => `
+          <button type="button" class="hero-dot ${idx === 0 ? 'active' : ''}" data-hero-dot="${idx}" aria-label="Go to slide ${idx + 1}"></button>
+        `).join('');
+      }
+
       let currentSlide = 0;
       const slides = container.querySelectorAll('.hero-slide');
+      const dots = dotsContainer ? dotsContainer.querySelectorAll('.hero-dot') : [];
       const intervalTime = data.autoSwapInterval || 4500;
 
-      if (slides.length > 1) {
-        if (window.heroTimer) clearInterval(window.heroTimer);
-        window.heroTimer = setInterval(() => {
-          slides[currentSlide].classList.remove('active');
-          currentSlide = (currentSlide + 1) % slides.length;
-          slides[currentSlide].classList.add('active');
-        }, intervalTime);
+      function goToSlide(idx) {
+        if (!slides.length) return;
+        slides[currentSlide].classList.remove('active');
+        if (dots[currentSlide]) dots[currentSlide].classList.remove('active');
+        currentSlide = (idx + slides.length) % slides.length;
+        slides[currentSlide].classList.add('active');
+        if (dots[currentSlide]) dots[currentSlide].classList.add('active');
       }
+
+      function nextSlide() { goToSlide(currentSlide + 1); }
+      function prevSlide() { goToSlide(currentSlide - 1); }
+
+      function startTimer() {
+        if (slides.length > 1) {
+          if (window.heroTimer) clearInterval(window.heroTimer);
+          window.heroTimer = setInterval(nextSlide, intervalTime);
+        }
+      }
+
+      function stopTimer() {
+        if (window.heroTimer) {
+          clearInterval(window.heroTimer);
+          window.heroTimer = null;
+        }
+      }
+
+      startTimer();
+
+      // Pause on hover
+      const heroSection = document.getElementById('hero-section') || container;
+      heroSection.addEventListener('mouseenter', stopTimer);
+      heroSection.addEventListener('mouseleave', startTimer);
+
+      // Prev / Next Buttons
+      const prevBtn = document.getElementById('hero-prev-btn');
+      const nextBtn = document.getElementById('hero-next-btn');
+      if (prevBtn) prevBtn.onclick = () => { prevSlide(); startTimer(); };
+      if (nextBtn) nextBtn.onclick = () => { nextSlide(); startTimer(); };
+
+      // Dots Click
+      if (dotsContainer) {
+        dotsContainer.querySelectorAll('[data-hero-dot]').forEach(dot => {
+          dot.onclick = (e) => {
+            const idx = parseInt(e.target.dataset.heroDot);
+            goToSlide(idx);
+            startTimer();
+          };
+        });
+      }
+
+      // Touch swipe gestures
+      let touchStartX = 0;
+      let touchEndX = 0;
+      heroSection.addEventListener('touchstart', e => {
+        if (e.changedTouches && e.changedTouches[0]) {
+          touchStartX = e.changedTouches[0].screenX;
+        }
+      }, { passive: true });
+      heroSection.addEventListener('touchend', e => {
+        if (e.changedTouches && e.changedTouches[0]) {
+          touchEndX = e.changedTouches[0].screenX;
+          const diffX = touchStartX - touchEndX;
+          if (Math.abs(diffX) > 45) {
+            if (diffX > 0) nextSlide();
+            else prevSlide();
+            startTimer();
+          }
+        }
+      }, { passive: true });
     }
   }
 }
+

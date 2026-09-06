@@ -234,6 +234,31 @@ body {
   z-index: 2;
 }
 
+/* Hero Slide Dots Indicator */
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 9999px;
+  background-color: rgba(255, 255, 255, 0.45);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 0;
+}
+
+.hero-dot:hover {
+  background-color: rgba(255, 255, 255, 0.85);
+  transform: scale(1.15);
+}
+
+.hero-dot.active {
+  width: 24px;
+  background-color: #fde047;
+  border-color: #fde047;
+  box-shadow: 0 0 10px rgba(253, 224, 71, 0.5);
+}
+
+
 /* Middle Cinematic Slideshow */
 .middle-slide {
   position: absolute;
@@ -282,10 +307,23 @@ body {
   animation: pulseGlow 2.2s infinite;
 }
 
-/* Sticky Mobile Conversion Bar */
+/* Sticky Mobile Conversion Bar & Viewport Clearance */
+@media (max-width: 1023px) {
+  body {
+    padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  
+  /* Prevent duplicate round floating WhatsApp button from covering mobile content or sticky bar */
+  .whatsapp-glow,
+  .fixed.bottom-6.right-6 {
+    display: none !important;
+  }
+}
+
 #sticky-mobile-bar {
   transition: transform 0.3s ease-in-out;
-  padding-bottom: env(safe-area-inset-bottom);
+  padding-bottom: max(0.625rem, env(safe-area-inset-bottom, 0px));
+  z-index: 45;
 }
 
 /* Scroll Reveal Animations (Progressive Enhancement - Fail-Safe) */
