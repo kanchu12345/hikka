@@ -125,6 +125,7 @@
       <button data-tab="activities" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🤿 Ocean Activities</button>
       <button data-tab="faq" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">❓ FAQ</button>
       <button data-tab="about" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📖 About Us</button>
+      <button data-tab="gallery" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📷 Gallery</button>
       <button data-tab="contact" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📍 Contact & Hours</button>
       <button data-tab="cloud" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">☁️ Cloud & Seed</button>
     </div>
@@ -156,6 +157,9 @@
         </button>
         <button data-tab="about" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
           <span>📖</span><span>About Us & Instructors</span>
+        </button>
+        <button data-tab="gallery" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>📷</span><span>Photo Gallery (gallery.html)</span>
         </button>
         <button data-tab="contact" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
           <span>📍</span><span>Contact & Opening Hours</span>
@@ -237,6 +241,15 @@
               </div>
               <h3 class="font-bold text-sm text-gray-900">FAQ Accordions</h3>
               <p class="text-xs text-gray-500 mt-1">Frequently asked questions and detailed answers</p>
+            </div>
+
+            <div data-jump="gallery" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center text-xl font-bold">📷</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">Photo Gallery</h3>
+              <p class="text-xs text-gray-500 mt-1">Upload gallery photos to ImgBB with titles & categories</p>
             </div>
 
             <div data-jump="contact" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
@@ -604,7 +617,32 @@
         </section>
 
         <!-- ============================================================= -->
-        <!-- TAB 9: CONTACT & HOURS (CONTACT.HTML)                         -->
+        <!-- TAB 9: PHOTO GALLERY (GALLERY.HTML)                           -->
+        <!-- ============================================================= -->
+        <section id="tab-gallery" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">📷 Photo Gallery Management</h3>
+                <p class="text-xs text-gray-500">Manage photos displayed on gallery.html. Upload directly to ImgBB or paste image URLs.</p>
+              </div>
+              <button type="button" id="btn-add-gallery" class="px-3.5 py-2 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold transition-all cursor-pointer">
+                + Add Photo
+              </button>
+            </div>
+            <div id="gallery-items-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-gallery" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save Gallery Photos
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 10: CONTACT & HOURS (CONTACT.HTML)                        -->
         <!-- ============================================================= -->
         <section id="tab-contact" class="tab-panel hidden space-y-6">
           <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
@@ -703,7 +741,8 @@
       saveSettings,
       getPageData,
       savePageData,
-      uploadImageFile
+      uploadImageFile,
+      DEFAULT_IMGBB_KEY
     } from "./js/firebase-init.js";
     import { seedInitialFirestoreData, DEFAULT_SEED_DATA } from "./js/seed-data.js";
 
@@ -715,6 +754,7 @@
       surflessons: {},
       destinations: {},
       activities: {},
+      gallery: {},
       faq: {},
       about: {},
       contact: {}
@@ -867,6 +907,9 @@
       siteState.contact = (await getPageData('contact')) || DEFAULT_SEED_DATA.page_contact;
       populateContactPage();
 
+      siteState.gallery = (await getPageData('gallery')) || DEFAULT_SEED_DATA.page_gallery || { items: [] };
+      populateGalleryPage();
+
       showToast("✅ All Firestore content loaded successfully!");
     }
 
@@ -888,7 +931,7 @@
       document.getElementById('gen-address').value = s.address || '';
       document.getElementById('gen-maps-url').value = s.googleMapsUrl || '';
       const imgbbInp = document.getElementById('gen-imgbb-key');
-      if (imgbbInp) imgbbInp.value = s.imgbbApiKey || localStorage.getItem('hikka_imgbb_key') || '';
+      if (imgbbInp) imgbbInp.value = s.imgbbApiKey || localStorage.getItem('hikka_imgbb_key') || DEFAULT_IMGBB_KEY;
     }
 
     // Populate Index
@@ -934,21 +977,33 @@
           const idx = parseInt(e.target.dataset.uploadSlide);
           const file = e.target.files[0];
           if (!file) return;
+          e.target.value = '';
           const prog = list.querySelector(`[data-upload-slide-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) {
+            prog.classList.remove('hidden');
+            prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+          }
           try {
             const downloadUrl = await uploadImageFile(file, 'hero', pct => {
-              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
             });
             siteState.index.heroImages[idx].url = downloadUrl;
-            showToast('✅ Slide image uploaded to ImgBB!');
             renderIndexSlides();
+            const newProg = document.querySelector(`[data-upload-slide-progress="${idx}"]`);
+            if (newProg) {
+              newProg.classList.remove('hidden');
+              newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
+              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              setTimeout(() => newProg.classList.add('hidden'), 4000);
+            }
+            showToast('✅ Slide image uploaded to ImgBB!');
           } catch(err) {
             console.error('Slide upload error:', err);
             if (prog) {
               prog.classList.remove('hidden');
               prog.className = 'text-[11px] font-bold text-red-600 mt-1';
-              prog.textContent = `❌ ${err.message}`;
+              prog.textContent = `❌ Upload failed: ${err.message}`;
             }
             showToast(`❌ Upload failed: ${err.message}`);
           }
@@ -1222,21 +1277,33 @@
           const idx = parseInt(e.target.dataset.uploadDest);
           const file = e.target.files[0];
           if (!file) return;
+          e.target.value = '';
           const prog = list.querySelector(`[data-upload-dest-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) {
+            prog.classList.remove('hidden');
+            prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+          }
           try {
             const downloadUrl = await uploadImageFile(file, 'destinations', pct => {
-              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
             });
             siteState.destinations.destinations[idx].imageUrl = downloadUrl;
-            showToast('✅ Destination image uploaded to ImgBB!');
             populateDestinationsPage();
+            const newProg = document.querySelector(`[data-upload-dest-progress="${idx}"]`);
+            if (newProg) {
+              newProg.classList.remove('hidden');
+              newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
+              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              setTimeout(() => newProg.classList.add('hidden'), 4000);
+            }
+            showToast('✅ Destination image uploaded to ImgBB!');
           } catch(err) {
             console.error('Destination upload error:', err);
             if (prog) {
               prog.classList.remove('hidden');
               prog.className = 'text-[11px] font-bold text-red-600 mt-1';
-              prog.textContent = `❌ ${err.message}`;
+              prog.textContent = `❌ Upload failed: ${err.message}`;
             }
             showToast(`❌ Upload failed: ${err.message}`);
           }
@@ -1324,21 +1391,33 @@
           const idx = parseInt(e.target.dataset.uploadAct);
           const file = e.target.files[0];
           if (!file) return;
+          e.target.value = '';
           const prog = list.querySelector(`[data-upload-act-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) {
+            prog.classList.remove('hidden');
+            prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+          }
           try {
             const downloadUrl = await uploadImageFile(file, 'activities', pct => {
-              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
             });
             siteState.activities.activities[idx].imageUrl = downloadUrl;
-            showToast('✅ Activity image uploaded to ImgBB!');
             populateActivitiesPage();
+            const newProg = document.querySelector(`[data-upload-act-progress="${idx}"]`);
+            if (newProg) {
+              newProg.classList.remove('hidden');
+              newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
+              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              setTimeout(() => newProg.classList.add('hidden'), 4000);
+            }
+            showToast('✅ Activity image uploaded to ImgBB!');
           } catch(err) {
             console.error('Activity upload error:', err);
             if (prog) {
               prog.classList.remove('hidden');
               prog.className = 'text-[11px] font-bold text-red-600 mt-1';
-              prog.textContent = `❌ ${err.message}`;
+              prog.textContent = `❌ Upload failed: ${err.message}`;
             }
             showToast(`❌ Upload failed: ${err.message}`);
           }
@@ -1518,21 +1597,33 @@
           const idx = parseInt(e.target.dataset.uploadCoach);
           const file = e.target.files[0];
           if (!file) return;
+          e.target.value = '';
           const prog = list.querySelector(`[data-upload-coach-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) {
+            prog.classList.remove('hidden');
+            prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+          }
           try {
             const downloadUrl = await uploadImageFile(file, 'coaches', pct => {
-              if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
             });
             siteState.about.coaches[idx].imageUrl = downloadUrl;
-            showToast('✅ Coach photo uploaded to ImgBB!');
             renderAboutCoaches();
+            const newProg = document.querySelector(`[data-upload-coach-progress="${idx}"]`);
+            if (newProg) {
+              newProg.classList.remove('hidden');
+              newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
+              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              setTimeout(() => newProg.classList.add('hidden'), 4000);
+            }
+            showToast('✅ Coach photo uploaded to ImgBB!');
           } catch(err) {
             console.error('Coach upload error:', err);
             if (prog) {
               prog.classList.remove('hidden');
               prog.className = 'text-[11px] font-bold text-red-600 mt-1';
-              prog.textContent = `❌ ${err.message}`;
+              prog.textContent = `❌ Upload failed: ${err.message}`;
             }
             showToast(`❌ Upload failed: ${err.message}`);
           }
@@ -1581,6 +1672,154 @@
       document.getElementById('contact-whatsapp').value = c.whatsapp || '';
       document.getElementById('contact-address').value = c.address || '';
       document.getElementById('contact-directions').value = c.directionsNote || '';
+    }
+
+    // Populate Gallery
+    function renderGalleryItems() {
+      const list = document.getElementById('gallery-items-list');
+      if (!list) return;
+      if (!siteState.gallery) siteState.gallery = { items: [] };
+      if (!siteState.gallery.items) siteState.gallery.items = [];
+      const items = siteState.gallery.items;
+
+      list.innerHTML = items.map((item, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-3">
+          <div class="flex items-start justify-between gap-4">
+            <div class="flex items-center gap-3">
+              <img src="${item.imageUrl || 'https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=300&q=80'}" alt="${item.title || 'Photo'}" class="w-20 h-16 rounded-xl object-cover border flex-shrink-0" />
+              <div>
+                <span class="px-2 py-0.5 bg-surf-100 text-surf-800 rounded font-mono text-[10px] font-bold">Photo #${i+1} • ${item.category || 'Gallery'}</span>
+                <h4 class="font-bold text-sm text-gray-900">${item.title || 'Untitled Photo'}</h4>
+                <p class="text-[11px] text-gray-500 line-clamp-1">${item.caption || ''}</p>
+              </div>
+            </div>
+            <button type="button" data-del-gallery="${i}" class="text-xs text-red-600 font-bold hover:underline p-1 cursor-pointer">Delete</button>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 mb-1">Photo Title</label>
+              <input type="text" value="${item.title || ''}" data-gallery-title="${i}" placeholder="e.g. Surfing Narigama Beach" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
+            </div>
+            <div>
+              <label class="block text-[11px] font-bold text-gray-700 mb-1">Category</label>
+              <input type="text" value="${item.category || ''}" data-gallery-cat="${i}" placeholder="e.g. Surfing, Turtles, Snorkeling, Day Tours" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Caption / Description</label>
+            <textarea data-gallery-caption="${i}" rows="2" placeholder="e.g. Catching clean morning waves on Narigama sandbars with Hikka Surf coaches." class="w-full p-2 bg-white border rounded-xl text-xs leading-relaxed">${item.caption || ''}</textarea>
+          </div>
+
+          <div>
+            <label class="block text-[11px] font-bold text-gray-700 mb-1">Photo (Image URL or Upload)</label>
+            <div class="flex items-center gap-2">
+              <input type="text" value="${item.imageUrl || ''}" data-gallery-url="${i}" placeholder="https://..." class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+              <label class="cursor-pointer flex-shrink-0 px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold transition-all shadow-sm flex items-center gap-1">
+                <span>📤 Upload</span>
+                <input type="file" accept="image/*" data-upload-gallery="${i}" class="hidden" />
+              </label>
+            </div>
+            <div data-upload-gallery-progress="${i}" class="hidden text-[11px] font-bold text-surf-600 mt-1"></div>
+          </div>
+        </div>
+      `).join('');
+
+      // Input changes
+      list.querySelectorAll('[data-gallery-title]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.galleryTitle);
+          siteState.gallery.items[idx].title = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-gallery-cat]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.galleryCat);
+          siteState.gallery.items[idx].category = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-gallery-caption]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.galleryCaption);
+          siteState.gallery.items[idx].caption = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-gallery-url]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.dataset.galleryUrl);
+          siteState.gallery.items[idx].imageUrl = e.target.value;
+          renderGalleryItems();
+        };
+      });
+
+      // ImgBB Upload
+      list.querySelectorAll('[data-upload-gallery]').forEach(inp => {
+        inp.onchange = async (e) => {
+          const idx = parseInt(e.target.dataset.uploadGallery);
+          const file = e.target.files[0];
+          if (!file) return;
+          e.target.value = '';
+          const prog = list.querySelector(`[data-upload-gallery-progress="${idx}"]`);
+          if (prog) {
+            prog.classList.remove('hidden');
+            prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+          }
+          try {
+            const downloadUrl = await uploadImageFile(file, 'gallery', pct => {
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+            });
+            siteState.gallery.items[idx].imageUrl = downloadUrl;
+            renderGalleryItems();
+            const newProg = document.querySelector(`[data-upload-gallery-progress="${idx}"]`);
+            if (newProg) {
+              newProg.classList.remove('hidden');
+              newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
+              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              setTimeout(() => newProg.classList.add('hidden'), 4000);
+            }
+            showToast('✅ Gallery photo uploaded to ImgBB!');
+          } catch(err) {
+            console.error('Gallery upload error:', err);
+            if (prog) {
+              prog.classList.remove('hidden');
+              prog.className = 'text-[11px] font-bold text-red-600 mt-1';
+              prog.textContent = `❌ Upload failed: ${err.message}`;
+            }
+            showToast(`❌ Upload failed: ${err.message}`);
+          }
+        };
+      });
+
+      // Delete photo
+      list.querySelectorAll('[data-del-gallery]').forEach(btn => {
+        btn.onclick = (e) => {
+          const idx = parseInt(e.target.dataset.delGallery);
+          siteState.gallery.items.splice(idx, 1);
+          renderGalleryItems();
+        };
+      });
+    }
+
+    function populateGalleryPage() {
+      renderGalleryItems();
+    }
+
+    const btnAddGallery = document.getElementById('btn-add-gallery');
+    if (btnAddGallery) {
+      btnAddGallery.addEventListener('click', () => {
+        if (!siteState.gallery) siteState.gallery = { items: [] };
+        if (!siteState.gallery.items) siteState.gallery.items = [];
+        siteState.gallery.items.push({
+          id: "g" + Date.now(),
+          category: "Surfing",
+          imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80",
+          title: "New Photo",
+          caption: "Description of this photo"
+        });
+        renderGalleryItems();
+      });
     }
 
     // Save Handlers (Direct to Firestore)
@@ -1688,6 +1927,13 @@
     }
     document.getElementById('btn-save-contact').addEventListener('click', saveTabContact);
 
+    async function saveTabGallery() {
+      showToast("Saving Gallery photos to Firestore...");
+      await savePageData('gallery', siteState.gallery);
+      showToast("✅ Gallery photos updated live in Firestore!");
+    }
+    document.getElementById('btn-save-gallery')?.addEventListener('click', saveTabGallery);
+
     // Header "Save Changes" Button
     saveCurrentTabBtn.addEventListener('click', async () => {
       switch (currentTab) {
@@ -1699,6 +1945,7 @@
         case 'faq': await saveTabFaq(); break;
         case 'about': await saveTabAbout(); break;
         case 'contact': await saveTabContact(); break;
+        case 'gallery': await saveTabGallery(); break;
         default:
           await saveTabGeneral();
           await saveTabSurfLessons();

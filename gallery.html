@@ -407,7 +407,7 @@
 
   <!-- Photo Grid -->
   <section class="py-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+    <div id="gallery-photo-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
       <div class="h-64 rounded-2xl overflow-hidden cursor-pointer shadow-sm hover:shadow-xl transition-all" onclick="openLightbox('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80', 'Surfing in Hikkaduwa', 'Catching clean waves')">
         <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80" alt="Surfing" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" loading="lazy" / decoding="async">
       </div>
@@ -549,19 +549,20 @@
   </div>
 
   <script>
-    function openLightbox(url, title, desc) {
+    window.openLightbox = function(url, title, desc) {
       document.getElementById('lightbox-img').src = url;
       document.getElementById('lightbox-title').innerText = title;
-      document.getElementById('lightbox-desc').innerText = desc;
+      document.getElementById('lightbox-desc').innerText = desc || '';
       document.getElementById('lightbox').classList.remove('hidden');
-    }
-    function closeLightbox() {
+    };
+    window.closeLightbox = function() {
       document.getElementById('lightbox').classList.add('hidden');
-    }
+    };
     document.getElementById('mobile-menu-btn')?.addEventListener('click', () => {
       document.getElementById('mobile-menu').classList.toggle('hidden');
     });
   </script>
+  <script type="module" src="js/hydrate-gallery.js"></script>
   <!-- UNIFIED BOOKING MODAL (PART 10 COMPLIANT) -->
   <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">
@@ -656,6 +657,16 @@
         <p class="text-center text-[11px] text-gray-500">Pay on the beach in USD, EUR, GBP or LKR cash. Free rescheduling.</p>
       </form>
     </div>
+  </div>
+
+  <!-- PERSISTENT STICKY MOBILE CONVERSION BAR -->
+  <div id="sticky-mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-ocean-950/95 backdrop-blur-md border-t border-ocean-800 p-2.5 flex items-center justify-between gap-2 lg:hidden shadow-2xl pb-safe">
+    <button onclick="openDirectWhatsApp()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+      <span>💬 Chat on WhatsApp</span>
+    </button>
+    <button onclick="openBookingModal('Beginner Surf Lesson')" class="flex-1 py-3 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
+      <span>🏄 Book a Lesson</span>
+    </button>
   </div>
 </body>
 </html>

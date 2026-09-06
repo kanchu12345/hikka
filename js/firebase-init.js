@@ -95,6 +95,8 @@ export function subscribeToSettings(callback) {
   });
 }
 
+export const DEFAULT_IMGBB_KEY = "580db6f671331120289dba6d8ec108c2";
+
 // ImgBB 100% Free Image Upload Helper (No Credit Card / Zero-Cost)
 export function uploadImageFile(file, folderPath = "uploads", onProgress = null) {
   return new Promise((resolve, reject) => {
@@ -102,8 +104,10 @@ export function uploadImageFile(file, folderPath = "uploads", onProgress = null)
       return reject(new Error("No file selected for upload."));
     }
 
-    // Retrieve ImgBB API Key from localStorage or global site state
-    let apiKey = localStorage.getItem('hikka_imgbb_key') || window.siteState?.settings?.imgbbApiKey;
+    // Retrieve ImgBB API Key: user-configured, state, or default key
+    let apiKey = localStorage.getItem('hikka_imgbb_key') || 
+                 window.siteState?.settings?.imgbbApiKey || 
+                 DEFAULT_IMGBB_KEY;
 
     if (!apiKey || !apiKey.trim()) {
       const promptKey = prompt(
@@ -128,6 +132,7 @@ export function uploadImageFile(file, folderPath = "uploads", onProgress = null)
     }
 
     console.group(`🖼️ [ImgBB Upload] Starting: ${file.name}`);
+    console.log("Using API Key:", apiKey.substring(0, 6) + "..." + apiKey.substring(apiKey.length - 4));
     console.log("Size:", `${(file.size / 1024).toFixed(1)} KB`);
     console.log("Type:", file.type || "unknown");
     console.groupEnd();
@@ -152,11 +157,15 @@ export function uploadImageFile(file, folderPath = "uploads", onProgress = null)
       try {
         const res = JSON.parse(xhr.responseText);
         if (xhr.status === 200 && res.success && res.data) {
-          const directUrl = res.data.display_url || res.data.url;
+          // ImgBB returns direct URL in data.url and display_url
+          const directUrl = res.data.url || res.data.display_url;
           console.log("✅ [ImgBB Upload] Success! Direct URL:", directUrl);
           resolve(directUrl);
         } else {
-          const errMsg = res.error?.message || `ImgBB upload failed (Status ${xhr.status})`;
+          let errMsg = res.error?.message || `ImgBB upload failed (Status ${xhr.status})`;
+          if (res.error?.code === 103) {
+            errMsg = "Access forbidden by ImgBB security filter. Please try again or paste image URL manually.";
+          }
           console.error("❌ [ImgBB Upload] Error:", errMsg, res);
           if (res.error?.code === 100) {
             localStorage.removeItem('hikka_imgbb_key');
@@ -172,7 +181,7 @@ export function uploadImageFile(file, folderPath = "uploads", onProgress = null)
 
     xhr.onerror = () => {
       console.error("❌ [ImgBB Upload] Network error");
-      reject(new Error("Network error connecting to ImgBB. Check your internet connection."));
+      reject(new Error("Network error connecting to ImgBB. Please check your internet connection or paste image URL manually."));
     };
 
     xhr.ontimeout = () => {

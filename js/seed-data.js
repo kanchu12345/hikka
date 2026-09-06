@@ -440,6 +440,53 @@ export const DEFAULT_SEED_DATA = {
     openingHours: "06:00 AM – 07:00 PM (Monday – Sunday, 7 Days a Week)",
     mapIframeUrl: "https://maps.google.com/maps?q=6.132555056990897,80.10058769999999&hl=en&z=18&output=embed",
     directionsNote: "Located right on the beach next to Hikka Tranz by Cinnamon hotel. Look for our surfboards and Hikka Surf School flags on the sand."
+  },
+
+  page_gallery: {
+    items: [
+      {
+        id: "g1",
+        category: "Surfing",
+        imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1000&q=80",
+        title: "Surfing Narigama Beach",
+        caption: "Catching clean morning waves on Narigama sandbars with Hikka Surf coaches."
+      },
+      {
+        id: "g2",
+        category: "Surfing",
+        imageUrl: "https://images.unsplash.com/photo-1516815231560-8f41ec531527?auto=format&fit=crop&w=1000&q=80",
+        title: "Happy Surf Students",
+        caption: "Big smiles after standing up and catching their first tropical wave."
+      },
+      {
+        id: "g3",
+        category: "Turtles",
+        imageUrl: "https://images.unsplash.com/photo-1437622368342-7a3d73a34c8f?auto=format&fit=crop&w=1000&q=80",
+        title: "Sea Turtles in Hikkaduwa",
+        caption: "Swimming with wild giant green turtles in shallow lagoon waters."
+      },
+      {
+        id: "g4",
+        category: "Snorkeling",
+        imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1000&q=80",
+        title: "Coral Reef Snorkeling",
+        caption: "Vibrant coral gardens and exotic tropical reef fish in marine sanctuary."
+      },
+      {
+        id: "g5",
+        category: "Day Tours",
+        imageUrl: "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=1000&q=80",
+        title: "Galle Dutch Fort Heritage",
+        caption: "Exploring historic ramparts, lighthouse, and cobblestone colonial streets."
+      },
+      {
+        id: "g6",
+        category: "Day Tours",
+        imageUrl: "https://images.unsplash.com/photo-1557050543-4d5f4e07ef46?auto=format&fit=crop&w=1000&q=80",
+        title: "Yala National Park Safari",
+        caption: "Witnessing wild leopards and Asian elephants in their natural habitat."
+      }
+    ]
   }
 };
 
@@ -454,6 +501,7 @@ export async function seedInitialFirestoreData() {
   await setDoc(doc(db, "pages", "faq"), DEFAULT_SEED_DATA.page_faq, { merge: true });
   await setDoc(doc(db, "pages", "about"), DEFAULT_SEED_DATA.page_about, { merge: true });
   await setDoc(doc(db, "pages", "contact"), DEFAULT_SEED_DATA.page_contact, { merge: true });
-  console.log("✅ Seeding complete! All 7 pages and settings are populated in Firestore.");
+  await setDoc(doc(db, "pages", "gallery"), DEFAULT_SEED_DATA.page_gallery, { merge: true });
+  console.log("✅ Seeding complete! All pages, gallery, and settings are populated in Firestore.");
   return true;
 }
