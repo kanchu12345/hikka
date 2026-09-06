@@ -99,7 +99,7 @@
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        <span class="font-medium text-cyan-200">
+        <span class="font-medium text-cyan-200" id="live-surf-dest-ticker">
           🌊 <strong>Today's Surf & Tour Update:</strong> Clean 3-4ft waves • 28°C Water • Sunny & Clear
         </span>
       </div>
@@ -451,7 +451,7 @@
         </div>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div id="destinations-cards-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         
         <!-- 1. Hikkaduwa & Turtle Beach -->
         <div id="hikkaduwa" class="surfer-card bg-white rounded-3xl overflow-hidden shadow-sm hover:shadow-xl transition-all flex flex-col justify-between border border-gray-200 group scroll-mt-28">
@@ -1056,6 +1056,7 @@
 
   <script src="js/firebase-client.js"></script>
   <script src="js/main.js?v=2.5"></script>
+  <script type="module" src="js/hydrate-destinations.js"></script>
   <!-- UNIFIED BOOKING MODAL (PART 10 COMPLIANT) -->
   <div id="booking-modal" class="hidden fixed inset-0 z-50 items-center justify-center p-4 bg-black/70 backdrop-blur-sm" role="dialog" aria-modal="true" aria-labelledby="modal-title">
     <div class="relative w-full max-w-lg bg-white rounded-3xl shadow-2xl overflow-hidden max-h-[92vh] flex flex-col">

@@ -116,8 +116,8 @@
           <span>Today's Surf Update</span>
         </span>
         <span class="text-gray-300">•</span>
-        <span class="text-gray-300">🌊 Waves: <strong class="text-white">2–4 ft Clean</strong></span>
-        <span class="hidden sm:inline text-gray-300">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
+        <span class="text-gray-300" id="live-surf-waves">🌊 Waves: <strong class="text-white">2–4 ft Clean</strong></span>
+        <span class="hidden sm:inline text-gray-300" id="live-surf-water">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
       </div>
 
       <!-- Social Media & Currency Switcher -->
@@ -430,7 +430,7 @@
     <div class="max-w-4xl mx-auto px-4">
       <span class="px-3.5 py-1.5 rounded-full bg-white/10 text-sand-300 text-xs font-bold uppercase tracking-wider mb-3 inline-block">Authentic Local Beach Culture</span>
       <h1 class="text-3xl sm:text-5xl font-extrabold font-heading text-white mb-3">Born on Hikkaduwa Beach</h1>
-      <p class="text-cyan-200 text-sm sm:text-base">Surfing and ocean adventures with passionate local hosts.</p>
+      <p id="about-tagline-text" class="text-cyan-200 text-sm sm:text-base">Surfing and ocean adventures with passionate local hosts.</p>
     </div>
   </section>
 
@@ -438,15 +438,17 @@
     <div class="bg-white p-8 sm:p-12 rounded-3xl shadow-sm border border-gray-200 space-y-8">
       <div>
         <h2 class="text-2xl sm:text-3xl font-extrabold font-heading text-gray-900 mb-4">Our Local Story</h2>
-        <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
-          Hikka Surf School is a local Hikkaduwa surf school founded by ocean lovers who grew up riding the legendary waves of Sri Lanka's southern coast. Our focus is simple: helping travelers enjoy the ocean safely, learn the genuine art of surfing, and discover our hometown through authentic local experiences.
-        </p>
-        <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
-          Whether it is your very first time standing up on a surfboard in gentle white-water, improving your cutback on green waves, or snorkeling alongside gentle giant sea turtles on the Hikkaduwa reef, we treat every guest like family.
-        </p>
-        <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
-          We believe in honest, grounded hospitality. All gear, rash guards, and safety briefings are provided, and all tours outside our direct school are coordinated transparently with respected local community partners.
-        </p>
+        <div id="about-story-content">
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+            Hikka Surf School is a local Hikkaduwa surf school founded by ocean lovers who grew up riding the legendary waves of Sri Lanka's southern coast. Our focus is simple: helping travelers enjoy the ocean safely, learn the genuine art of surfing, and discover our hometown through authentic local experiences.
+          </p>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed mb-4">
+            Whether it is your very first time standing up on a surfboard in gentle white-water, improving your cutback on green waves, or snorkeling alongside gentle giant sea turtles on the Hikkaduwa reef, we treat every guest like family.
+          </p>
+          <p class="text-gray-600 text-sm sm:text-base leading-relaxed">
+            We believe in honest, grounded hospitality. All gear, rash guards, and safety briefings are provided, and all tours outside our direct school are coordinated transparently with respected local community partners.
+          </p>
+        </div>
       </div>
 
       <div class="bg-ocean-50 p-6 rounded-2xl border-l-4 border-surf-600 italic text-sm text-ocean-900 font-medium">
@@ -740,9 +742,10 @@
     </div>
   </div>
 
-<script src="js/data.js?v=2.2"></script>
+  <script src="js/data.js?v=2.2"></script>
   <script src="js/firebase-client.js"></script>
   <script src="js/main.js?v=2.5"></script>
+  <script type="module" src="js/hydrate-about.js"></script>
   <!-- PERSISTENT STICKY MOBILE CONVERSION BAR -->
   <div id="sticky-mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-ocean-950/95 backdrop-blur-md border-t border-ocean-800 p-2.5 flex items-center justify-between gap-2 lg:hidden shadow-2xl pb-safe">
     <button onclick="openDirectWhatsApp()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">

@@ -67,6 +67,7 @@
   <script src="js/data.js?v=2.2"></script>
   <script src="js/firebase-client.js"></script>
   <script src="js/main.js?v=2.5"></script>
+  <script type="module" src="js/hydrate-surflessons.js"></script>
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -115,8 +116,8 @@
           <span>Today's Surf Update</span>
         </span>
         <span class="text-gray-300">•</span>
-        <span class="text-gray-300">🌊 Waves: <strong class="text-white">2–4 ft Clean & Glassy</strong></span>
-        <span class="hidden sm:inline text-gray-300">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
+        <span class="text-gray-300" id="live-surf-waves">🌊 Waves: <strong class="text-white">2–4 ft Clean & Glassy</strong></span>
+        <span class="hidden sm:inline text-gray-300" id="live-surf-water">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
         <span class="hidden md:inline text-amber-300 font-bold">🏄 100% Standing Guarantee</span>
       </div>
 
@@ -649,7 +650,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div id="surf-spots-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         
         <!-- Break 1: Narigama Beach (Beginners & Intermediate) -->
         <div class="bg-white rounded-3xl p-6 border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-xl transition-all flex flex-col justify-between group">
@@ -750,11 +751,11 @@
         
         <div class="text-center max-w-3xl mx-auto mb-10">
           <span class="text-xs font-black uppercase tracking-widest text-amber-300 block mb-2">Interactive Quiver Assistant</span>
-          <h2 class="text-3xl sm:text-5xl font-black font-serif-heading tracking-tight text-white">
+          <h2 id="quiver-section-title" class="text-3xl sm:text-5xl font-black font-serif-heading tracking-tight text-white">
             Find Your Perfect Surfboard
           </h2>
           <div class="gold-divider mx-auto my-4"></div>
-          <p class="text-sm sm:text-base text-cyan-200">
+          <p id="quiver-section-desc" class="text-sm sm:text-base text-cyan-200">
             Select your experience level and body weight to get an instant recommendation from our 50+ board quiver.
           </p>
         </div>
@@ -796,7 +797,7 @@
               <span id="board-tag2" class="px-2.5 py-1 bg-black/30 rounded-lg border border-white/10">Fins: Flexible Safety Thruster</span>
             </div>
             <div class="pt-3">
-              <button onclick="openBookingModal('Surfboard Rental - ' + document.getElementById('board-title').innerText)" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 font-black rounded-xl text-xs uppercase shadow-md active:scale-95 transition-all">
+              <button id="quiver-reserve-btn" onclick="openBookingModal('Surfboard Rental - ' + document.getElementById('board-title').innerText)" class="w-full sm:w-auto px-6 py-2.5 bg-gradient-to-r from-amber-400 to-orange-400 text-gray-950 font-black rounded-xl text-xs uppercase shadow-md active:scale-95 transition-all">
                 Reserve This Board ($10/Day)
               </button>
             </div>
@@ -821,7 +822,7 @@
         </p>
       </div>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div id="surf-guidelines-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8">
         
         <!-- Pillar 1: Personal Safety & Wipeouts -->
         <div class="bg-white p-8 rounded-3xl border border-gray-200 shadow-sm flex flex-col justify-between hover:shadow-xl transition-all">
@@ -955,7 +956,7 @@
       </p>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div id="surf-rates-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
       
       <!-- 1. Beginner Lesson (FEATURED POPULAR) -->
       <div class="bg-white rounded-3xl overflow-hidden border-2 border-surf-500 shadow-2xl flex flex-col justify-between relative transform hover:-translate-y-1 transition-all">

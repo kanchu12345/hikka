@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Admin CMS Dashboard | Hikka Surf School</title>
   
-  <!-- SECURITY: Strictly prevent search indexing of admin area -->
+  <!-- Strictly prevent search indexing of admin portal -->
   <meta name="robots" content="noindex, nofollow, noarchive" />
   <meta name="googlebot" content="noindex, nofollow" />
 
@@ -16,7 +16,7 @@
         extend: {
           colors: {
             surf: { 500: '#0084B4', 600: '#0284c7', 700: '#075985', 900: '#082f49' },
-            ocean: { 900: '#0A2540', 950: '#12161A' },
+            ocean: { 800: '#0c3559', 900: '#0A2540', 950: '#12161A' },
             sand: { 300: '#fde047', 500: '#F59E0B' }
           }
         }
@@ -24,16 +24,11 @@
     }
   </script>
   <link rel="stylesheet" href="css/styles.css?v=2.5" />
-  <!-- Firebase SDK Compatibility Libraries -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="js/data.js?v=2.2"></script>
-  <script src="js/firebase-client.js"></script>
 </head>
 <body class="bg-slate-100 text-slate-800 antialiased font-sans min-h-screen pb-28 selection:bg-surf-500 selection:text-white">
+
   <!-- ================================================================= -->
-  <!-- ADMIN AUTHENTICATION GATE (USERNAME & PASSWORD LOGIN MODAL)       -->
+  <!-- 1. FIREBASE AUTHENTICATION GATE (EMAIL & PASSWORD)                -->
   <!-- ================================================================= -->
   <div id="admin-login-screen" class="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-gradient-to-br from-[#0A2540] via-[#061726] to-[#12161A]">
     <div class="w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 space-y-6 relative border border-white/20">
@@ -44,38 +39,30 @@
           🏄
         </div>
         <h2 class="text-2xl font-black text-gray-900 tracking-tight font-serif-heading">Admin Portal Login</h2>
-        <p class="text-xs text-gray-500 font-medium">Hikka Surf School Administrative Access</p>
+        <p class="text-xs text-gray-500 font-medium">Hikka Surf School • Firebase Cloud CMS</p>
       </div>
 
       <!-- Login Form -->
-      <form id="admin-login-form" onsubmit="handleAdminLogin(event)" class="space-y-4 text-xs sm:text-sm">
-        
+      <form id="admin-login-form" class="space-y-4 text-xs sm:text-sm">
         <!-- Error Alert -->
         <div id="login-error-msg" class="hidden p-3.5 bg-red-50 border border-red-200 rounded-2xl text-red-700 text-xs font-bold flex items-center gap-2">
           <span class="text-base">⚠️</span>
-          <span id="login-error-text">Invalid username or password.</span>
+          <span id="login-error-text">Authentication failed.</span>
         </div>
 
         <div>
-          <label for="login-username" class="block font-bold text-gray-700 mb-1">Username</label>
-          <input type="text" id="login-username" placeholder="admin" required autocomplete="username" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-semibold focus:ring-2 focus:ring-[#0A2540] focus:outline-none" />
+          <label for="login-email" class="block font-bold text-gray-700 mb-1">Admin Email</label>
+          <input type="email" id="login-email" placeholder="admin@surfhikka.com" required autocomplete="email" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-semibold focus:ring-2 focus:ring-[#0A2540] focus:outline-none" />
         </div>
 
         <div>
           <label for="login-password" class="block font-bold text-gray-700 mb-1">Password</label>
           <div class="relative">
             <input type="password" id="login-password" placeholder="••••••••" required autocomplete="current-password" class="w-full p-3 bg-gray-50 border border-gray-200 rounded-xl text-gray-900 font-semibold focus:ring-2 focus:ring-[#0A2540] focus:outline-none pr-11" />
-            <button type="button" onclick="togglePasswordVisibility()" class="absolute right-3.5 top-3 text-gray-400 hover:text-gray-700 cursor-pointer text-base" aria-label="Toggle password visibility">
+            <button type="button" id="btn-toggle-pwd" class="absolute right-3.5 top-3 text-gray-400 hover:text-gray-700 cursor-pointer text-base" aria-label="Toggle password visibility">
               <span id="pwd-eye-icon">👁️</span>
             </button>
           </div>
-        </div>
-
-        <div class="flex items-center justify-between text-xs pt-1">
-          <label class="flex items-center gap-2 text-gray-600 cursor-pointer">
-            <input type="checkbox" id="login-remember" class="rounded text-[#0A2540] focus:ring-[#0A2540] w-4 h-4 cursor-pointer" />
-            <span class="font-medium">Keep me signed in</span>
-          </label>
         </div>
 
         <button type="submit" id="btn-login-submit" class="w-full py-3.5 bg-[#0A2540] hover:bg-[#061726] active:scale-98 text-white font-extrabold rounded-xl text-sm transition-all shadow-lg flex items-center justify-center gap-2 cursor-pointer mt-2">
@@ -89,1154 +76,1341 @@
     </div>
   </div>
 
-  <!-- MAIN WRAPPER (Hidden until authenticated) -->
+  <!-- ================================================================= -->
+  <!-- 2. MAIN ADMIN DASHBOARD (Hidden until authenticated)              -->
+  <!-- ================================================================= -->
   <div id="admin-main-wrapper" class="hidden">
 
-  <!-- Top Admin Bar -->
-  <header class="bg-[#12161A] text-white py-3 sm:py-4 px-4 sm:px-6 border-b border-gray-800 flex items-center justify-between sticky top-0 z-50 shadow-lg">
-    <div class="flex items-center gap-2 sm:gap-3">
-      <img src="images/logo-white.svg" alt="Hikka Surf School" class="h-8 sm:h-10 w-auto object-contain" />
-      <div>
-        <div class="flex items-center gap-2">
-          <span class="font-bold text-xs sm:text-sm tracking-wide">Hikka Surf School</span>
-          <span class="text-[10px] bg-amber-500/20 text-amber-300 border border-amber-500/30 px-2 py-0.5 rounded-full font-black">
-            CMS Portal
-          </span>
-        </div>
-        <p class="text-[10px] text-gray-400 hidden sm:block">Administrative Content & Operations Management</p>
-      </div>
-    </div>
-
-    <div class="flex items-center gap-2 sm:gap-3">
-      <a href="index.html" target="_blank" class="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 active:scale-95">
-        <span>Live Site</span> ↗
-      </a>
-      <button type="button" onclick="saveAllSettings()" class="px-4 py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-95">
-        <span>💾 Save Changes</span>
-      </button>
-      <button type="button" onclick="handleAdminLogout()" class="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95" title="Sign out of Admin Portal">
-        <span>🚪 Sign Out</span>
-      </button>
-    </div>
-  </header>
-
-
-
-  <!-- Mobile Horizontal Scrollable Tab Bar -->
-  <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2.5 px-3 lg:hidden flex items-center gap-2 no-scrollbar shadow-sm">
-    <button onclick="showTab('dashboard')" id="m-tab-dashboard" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">📊 Dashboard</button>
-    <button onclick="showTab('settings')" id="m-tab-settings" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⚙️ Settings</button>
-    <button onclick="showTab('surfreport')" id="m-tab-surfreport" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌊 Surf Update</button>
-    <button onclick="showTab('destinations')" id="m-tab-destinations" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌴 Destinations (13)</button>
-    <button onclick="showTab('activities')" id="m-tab-activities" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🤿 Activities</button>
-    <button onclick="showTab('surflessons')" id="m-tab-surflessons" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Surf Lessons</button>
-    <button onclick="showTab('hero')" id="m-tab-hero" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🖼️ Hero Slides</button>
-    <button onclick="showTab('gallery')" id="m-tab-gallery" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📷 Gallery</button>
-    <button onclick="showTab('reviews')" id="m-tab-reviews" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⭐ Testimonials</button>
-    <button onclick="showTab('faqs')" id="m-tab-faqs" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">❓ FAQ</button>
-    <button onclick="showTab('seo')" id="m-tab-seo" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🔍 SEO</button>
-    <button onclick="showTab('backend')" id="m-tab-backend" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">☁️ Cloud & Auth</button>
-    <button onclick="showTab('backup')" id="m-tab-backup" class="px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">💾 Backup</button>
-  </div>
-
-  <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
-    
-    <!-- Desktop Sidebar Navigation -->
-    <aside class="hidden lg:block lg:col-span-3 space-y-1.5">
-      <button onclick="showTab('dashboard')" id="tab-btn-dashboard" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2.5">
-        <span>📊</span><span>Dashboard Overview</span>
-      </button>
-      <button onclick="showTab('settings')" id="tab-btn-settings" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>⚙️</span><span>General Business & Hours</span>
-      </button>
-      <button onclick="showTab('surfreport')" id="tab-btn-surfreport" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>🌊</span><span>Today's Surf Update</span>
-      </button>
-      <button onclick="showTab('destinations')" id="tab-btn-destinations" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>🌴</span><span>Destinations Manager (13)</span>
-      </button>
-      <button onclick="showTab('activities')" id="tab-btn-activities" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>🤿</span><span>Ocean Activities & Tours</span>
-      </button>
-      <button onclick="showTab('surflessons')" id="tab-btn-surflessons" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>🏄</span><span>Surf Lessons & Coaching</span>
-      </button>
-      <button onclick="showTab('hero')" id="tab-btn-hero" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>🖼️</span><span>Hero Slideshow & Uploads</span>
-      </button>
-      <button onclick="showTab('gallery')" id="tab-btn-gallery" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>📷</span><span>Photo Gallery Manager</span>
-      </button>
-      <button onclick="showTab('reviews')" id="tab-btn-reviews" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>⭐</span><span>Guest Testimonials</span>
-      </button>
-      <button onclick="showTab('faqs')" id="tab-btn-faqs" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>❓</span><span>FAQ Accordions</span>
-      </button>
-      <button onclick="showTab('seo')" id="tab-btn-seo" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>🔍</span><span>SEO & OpenGraph Tags</span>
-      </button>
-      <button onclick="showTab('backend')" id="tab-btn-backend" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>☁️</span><span>Backend & Auth Setup</span>
-      </button>
-      <button onclick="showTab('backup')" id="tab-btn-backup" class="w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
-        <span>💾</span><span>Backup & JSON Export</span>
-      </button>
-    </aside>
-
-    <!-- Main Content Area -->
-    <main class="lg:col-span-9 bg-white p-4 sm:p-8 rounded-2xl sm:rounded-3xl border border-gray-200 shadow-sm space-y-6">
-      
-      <!-- 0. DASHBOARD OVERVIEW TAB -->
-      <section id="tab-dashboard" class="tab-content space-y-6">
-        <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Website Overview & Metrics</h2>
-            <p class="text-[11px] text-gray-500">Live operational status and quick shortcuts</p>
-          </div>
-          <span class="px-2.5 py-1 bg-emerald-100 text-emerald-800 text-xs font-bold rounded-full">● Online & Ready</span>
-        </div>
-
-        <!-- Metric Stat Cards -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4">
-          <div class="bg-slate-50 border p-4 rounded-2xl">
-            <span class="text-xs text-gray-500 font-bold uppercase block">Destinations</span>
-            <span id="stat-dest-count" class="text-2xl font-black text-gray-900">13</span>
-            <span class="text-[10px] text-surf-600 block mt-1">Southern Province</span>
-          </div>
-          <div class="bg-slate-50 border p-4 rounded-2xl">
-            <span class="text-xs text-gray-500 font-bold uppercase block">Activities</span>
-            <span id="stat-act-count" class="text-2xl font-black text-gray-900">6</span>
-            <span class="text-[10px] text-surf-600 block mt-1">Snorkel, Turtles, Whales</span>
-          </div>
-          <div class="bg-slate-50 border p-4 rounded-2xl">
-            <span class="text-xs text-gray-500 font-bold uppercase block">Surf Tiers</span>
-            <span id="stat-surf-count" class="text-2xl font-black text-gray-900">6</span>
-            <span class="text-[10px] text-surf-600 block mt-1">Beginner to Pro</span>
-          </div>
-          <div class="bg-slate-50 border p-4 rounded-2xl">
-            <span class="text-xs text-gray-500 font-bold uppercase block">Inquiries</span>
-            <span id="stat-inq-count" class="text-2xl font-black text-emerald-600">0</span>
-            <span class="text-[10px] text-gray-500 block mt-1">Recent Booking Leads</span>
-          </div>
-        </div>
-
-        <!-- Quick Actions -->
+    <!-- Top Admin Bar -->
+    <header class="bg-[#12161A] text-white py-3 sm:py-4 px-4 sm:px-6 border-b border-gray-800 flex items-center justify-between sticky top-0 z-50 shadow-lg">
+      <div class="flex items-center gap-2 sm:gap-3">
+        <div class="w-9 h-9 bg-surf-600 rounded-xl flex items-center justify-center font-bold text-base shadow">🏄</div>
         <div>
-          <h3 class="text-xs font-bold uppercase text-gray-500 mb-3 tracking-wider">Quick Actions</h3>
-          <div class="flex flex-wrap gap-2.5">
-            <button onclick="showTab('destinations')" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold">🌴 Edit Destinations</button>
-            <button onclick="showTab('surflessons')" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold">🏄 Edit Surf Rates</button>
-            <button onclick="showTab('surfreport')" class="px-4 py-2.5 bg-gray-100 hover:bg-gray-200 text-gray-800 rounded-xl text-xs font-bold">🌊 Update Wave Report</button>
-            <button onclick="showTab('gallery')" class="px-4 py-2.5 bg-purple-50 hover:bg-purple-100 text-purple-700 rounded-xl text-xs font-bold">📷 Upload New Photo</button>
-            <button onclick="downloadDataJson()" class="px-4 py-2.5 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-xs font-bold">📥 Download Backup</button>
-          </div>
-        </div>
-
-        <!-- Recent WhatsApp Inquiries Log -->
-        <div>
-          <div class="flex items-center justify-between mb-3">
-            <h3 class="text-xs font-bold uppercase text-gray-500 tracking-wider">Recent Website Inquiries Log</h3>
-            <button onclick="clearInquiries()" class="text-[11px] text-red-600 font-bold hover:underline">Clear Log</button>
-          </div>
-          <div id="inquiries-log-container" class="border rounded-2xl overflow-hidden bg-gray-50 text-xs">
-            <!-- Populated by JS -->
-          </div>
-        </div>
-      </section>
-
-      <!-- 1. GENERAL BUSINESS SETTINGS TAB -->
-      <section id="tab-settings" class="tab-content hidden space-y-4">
-        <div class="border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">General Business & Contact Details</h2>
-          <p class="text-xs text-gray-500">Contact details update headers, footers, and direct WhatsApp links across all 16 pages</p>
-        </div>
-        
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Official Brand Name</label>
-            <input type="text" id="set-name" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Tagline</label>
-            <input type="text" id="set-tagline" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp International Number (e.g. +94771234567)</label>
-            <input type="text" id="set-whatsapp" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number (Display)</label>
-            <input type="text" id="set-phone" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
-            <input type="email" id="set-email" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Physical Beach Meeting Address</label>
-            <input type="text" id="set-address" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Surf School Operating Hours</label>
-            <input type="text" id="set-hours-surf" value="06:30 AM – 06:30 PM (Daily)" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Airport Transfers Availability</label>
-            <input type="text" id="set-hours-transfers" value="24/7 (Advance Booking Required)" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Google Maps Authoritative URL</label>
-            <input type="url" id="set-maps-url" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Instagram Profile URL</label>
-            <input type="url" id="set-instagram" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save Business Details
-          </button>
-        </div>
-
-        <!-- CHANGE ADMIN USERNAME & PASSWORD CARD -->
-        <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl space-y-4 mt-6">
-          <div class="flex items-center justify-between">
-            <h3 class="font-bold text-sm text-gray-900 flex items-center gap-2">
-              <span>🔐</span><span>Admin Access & Security Credentials</span>
-            </h3>
-            <span class="text-[10px] bg-slate-200 text-slate-700 px-2.5 py-1 rounded-full font-bold">SHA-256 Protected</span>
-          </div>
-          <p class="text-xs text-gray-500">Update the username and password used to unlock this CMS dashboard.</p>
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-            <div>
-              <label for="change-new-username" class="block font-bold text-gray-700 mb-1">New Admin Username</label>
-              <input type="text" id="change-new-username" placeholder="e.g. admin" class="w-full p-2.5 bg-white border rounded-xl font-bold" />
-            </div>
-            <div>
-              <label for="change-current-pwd" class="block font-bold text-gray-700 mb-1">Current Password (Required)</label>
-              <input type="password" id="change-current-pwd" placeholder="Enter current password" class="w-full p-2.5 bg-white border rounded-xl" />
-            </div>
-            <div>
-              <label for="change-new-pwd" class="block font-bold text-gray-700 mb-1">New Password (Min 6 chars)</label>
-              <input type="password" id="change-new-pwd" placeholder="New password" class="w-full p-2.5 bg-white border rounded-xl" />
-            </div>
-            <div>
-              <label for="change-confirm-pwd" class="block font-bold text-gray-700 mb-1">Confirm New Password</label>
-              <input type="password" id="change-confirm-pwd" placeholder="Repeat new password" class="w-full p-2.5 bg-white border rounded-xl" />
-            </div>
-          </div>
-
-          <button type="button" onclick="updateAdminCredentials()" class="px-5 py-2.5 bg-[#0A2540] hover:bg-[#061726] text-white font-bold rounded-xl text-xs cursor-pointer shadow-md active:scale-95 transition-all">
-            Update Login Credentials
-          </button>
-        </div>
-      </section>
-
-      <!-- 2. TODAY'S SURF UPDATE TAB -->
-      <section id="tab-surfreport" class="tab-content hidden space-y-4">
-        <div class="border-b border-gray-100 pb-3 flex items-center justify-between">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Today's Surf & Beach Update</h2>
-            <p class="text-xs text-gray-500">Updates the daily top ticker bar across the website</p>
-          </div>
-          <span class="px-2.5 py-1 bg-cyan-100 text-cyan-800 text-xs font-bold rounded-full">Top Ticker</span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌊 Waves & Swell Size</label>
-            <input type="text" id="set-surf-waves" placeholder="e.g. 2–4 ft Clean" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🌡️ Water Temperature</label>
-            <input type="text" id="set-surf-water" placeholder="e.g. 28°C (No Wetsuit)" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-bold" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🏄 Condition Notes</label>
-            <input type="text" id="set-surf-condition" placeholder="e.g. Glassy Morning, Best for Beginners" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">🕒 Timestamp / Updated Tag</label>
-            <input type="text" id="set-surf-updated" placeholder="e.g. Today 06:30 AM" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Update Today's Surf Report
-          </button>
-        </div>
-      </section>
-
-      <!-- 3. DESTINATIONS MANAGEMENT (13 DESTINATIONS) -->
-      <section id="tab-destinations" class="tab-content hidden space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Southern Province Destinations (13)</h2>
-            <p class="text-xs text-gray-500">Manage names, travel times, highlights, photos, and WhatsApp booking CTAs</p>
-          </div>
-          <button type="button" onclick="addDestinationItem()" class="px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add New Destination</button>
-        </div>
-
-        <div id="destinations-list" class="space-y-4">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save All Destinations
-          </button>
-        </div>
-      </section>
-
-      <!-- 4. ACTIVITIES MANAGEMENT -->
-      <section id="tab-activities" class="tab-content hidden space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Ocean Activities & Marine Tours</h2>
-            <p class="text-xs text-gray-500">Edit starting USD prices, durations, descriptions, and photos</p>
-          </div>
-          <button type="button" onclick="addActivityItem()" class="px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Activity</button>
-        </div>
-
-        <div id="activities-list" class="space-y-4">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save Activities & Rates
-          </button>
-        </div>
-      </section>
-
-      <!-- 5. SURF LESSONS MANAGEMENT -->
-      <section id="tab-surflessons" class="tab-content hidden space-y-4">
-        <div class="border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Surf Lessons & Coaching Tiers</h2>
-          <p class="text-xs text-gray-500">Manage lesson prices, durations, and instruction descriptions</p>
-        </div>
-
-        <div id="surf-lessons-list" class="space-y-4">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save Surf Coaching Tiers
-          </button>
-        </div>
-      </section>
-
-      <!-- 6. HERO SLIDESHOW -->
-      <section id="tab-hero" class="tab-content hidden space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Hero Slideshow & Uploads</h2>
-            <p class="text-xs text-gray-500">Upload photos directly from your phone camera roll or paste image URLs</p>
-          </div>
           <div class="flex items-center gap-2">
-            <label class="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-1 shadow-sm active:scale-95">
-              <span>📁 Upload from Phone</span>
-              <input type="file" accept="image/*" class="hidden" onchange="uploadHeroImageFile(event)" />
-            </label>
-            <button type="button" onclick="addHeroImage()" class="px-3 py-2 bg-surf-600 text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add URL</button>
+            <span class="font-bold text-xs sm:text-sm tracking-wide">Hikka Surf School</span>
+            <span class="text-[10px] bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full font-black">
+              Firebase Live
+            </span>
           </div>
+          <p id="admin-user-display" class="text-[10px] text-gray-400 font-mono truncate max-w-[200px] sm:max-w-xs">admin@surfhikka.com</p>
         </div>
+      </div>
 
-        <div class="flex items-center gap-3 bg-gray-50 p-3 rounded-2xl border">
-          <label class="text-xs font-bold text-gray-700 whitespace-nowrap">Slide Transition Speed (ms):</label>
-          <input type="number" id="set-hero-interval" class="p-2 bg-white border rounded-xl text-xs font-bold w-32" />
-          <span class="text-xs text-gray-500">(4500 = 4.5 seconds)</span>
-        </div>
+      <div class="flex items-center gap-2 sm:gap-3">
+        <a href="index.html" target="_blank" class="px-3 py-2 bg-white/10 hover:bg-white/20 text-white rounded-xl text-xs font-bold transition-all flex items-center gap-1 active:scale-95">
+          <span>Live Site</span> ↗
+        </a>
+        <button type="button" id="btn-save-current-tab" class="px-4 py-2 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow-md transition-all flex items-center gap-1.5 cursor-pointer active:scale-95">
+          <span>💾 Save Changes</span>
+        </button>
+        <button type="button" id="btn-admin-logout" class="px-3 py-2 bg-red-500/20 hover:bg-red-500/30 text-red-300 border border-red-500/30 rounded-xl text-xs font-bold transition-all flex items-center gap-1 cursor-pointer active:scale-95" title="Sign Out">
+          <span>🚪 Sign Out</span>
+        </button>
+      </div>
+    </header>
 
-        <div id="hero-slides-list" class="space-y-3">
-          <!-- Populated by JS -->
-        </div>
+    <!-- Success / Status Notification Toast -->
+    <div id="status-toast" class="fixed top-20 right-4 z-50 transform translate-x-full transition-transform duration-300 ease-out bg-emerald-600 text-white px-5 py-3 rounded-2xl shadow-2xl font-bold text-xs flex items-center gap-2">
+      <span>✅</span>
+      <span id="status-toast-text">Changes saved to Firestore!</span>
+    </div>
 
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save Hero Slides
-          </button>
-        </div>
-      </section>
+    <!-- Mobile Horizontal Scrollable Tab Bar -->
+    <div class="bg-white border-b border-gray-200 sticky top-14 sm:top-16 z-40 overflow-x-auto py-2.5 px-3 lg:hidden flex items-center gap-2 no-scrollbar shadow-sm">
+      <button data-tab="dashboard" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white">📊 Dashboard</button>
+      <button data-tab="general" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">⚙️ General & Live Surf</button>
+      <button data-tab="index" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏠 Homepage</button>
+      <button data-tab="surflessons" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🏄 Surf Lessons (4)</button>
+      <button data-tab="destinations" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🌴 Destinations</button>
+      <button data-tab="activities" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">🤿 Ocean Activities</button>
+      <button data-tab="faq" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">❓ FAQ</button>
+      <button data-tab="about" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📖 About Us</button>
+      <button data-tab="contact" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">📍 Contact & Hours</button>
+      <button data-tab="cloud" class="tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700">☁️ Cloud & Seed</button>
+    </div>
 
-      <!-- 7. PHOTO GALLERY -->
-      <section id="tab-gallery" class="tab-content hidden space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Photo Gallery Manager</h2>
-            <p class="text-xs text-gray-500">Add or remove guest photos, surf action shots, and turtle pictures</p>
-          </div>
-          <label class="px-3 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-xl text-xs font-bold cursor-pointer flex items-center gap-1 shadow-sm active:scale-95">
-            <span>📷 Upload New Photo</span>
-            <input type="file" accept="image/*" class="hidden" onchange="uploadGalleryPhoto(event)" />
-          </label>
-        </div>
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 py-4 sm:py-8 grid grid-cols-1 lg:grid-cols-12 gap-6 sm:gap-8">
+      
+      <!-- Desktop Sidebar Navigation -->
+      <aside class="hidden lg:block lg:col-span-3 space-y-1.5 sticky top-24 self-start">
+        <button data-tab="dashboard" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2.5">
+          <span>📊</span><span>Dashboard Overview</span>
+        </button>
+        <button data-tab="general" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>⚙️</span><span>General & Live Surf Report</span>
+        </button>
+        <button data-tab="index" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>🏠</span><span>Homepage (index.html)</span>
+        </button>
+        <button data-tab="surflessons" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>🏄</span><span>Surf Lessons (#rates, #spots...)</span>
+        </button>
+        <button data-tab="destinations" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>🌴</span><span>Destinations (Tours & Safaris)</span>
+        </button>
+        <button data-tab="activities" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>🤿</span><span>Ocean Activities (Snorkel...)</span>
+        </button>
+        <button data-tab="faq" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>❓</span><span>FAQ Accordions</span>
+        </button>
+        <button data-tab="about" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>📖</span><span>About Us & Instructors</span>
+        </button>
+        <button data-tab="contact" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>📍</span><span>Contact & Opening Hours</span>
+        </button>
+        <button data-tab="cloud" class="tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5">
+          <span>☁️</span><span>Firestore Database & Seeder</span>
+        </button>
+      </aside>
 
-        <div id="gallery-items-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
-          <!-- Populated by JS -->
-        </div>
+      <!-- Main Content Area -->
+      <main class="lg:col-span-9 space-y-6">
 
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save Photo Gallery
-          </button>
-        </div>
-      </section>
-
-      <!-- 8. GUEST TESTIMONIALS -->
-      <section id="tab-reviews" class="tab-content hidden space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">Guest Testimonials</h2>
-            <p class="text-xs text-gray-500">Genuine traveler feedback (strictly no fake Google badges)</p>
-          </div>
-          <button type="button" onclick="addReviewItem()" class="px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Testimonial</button>
-        </div>
-
-        <div id="reviews-list" class="space-y-4">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save Testimonials
-          </button>
-        </div>
-      </section>
-
-      <!-- 9. FAQS -->
-      <section id="tab-faqs" class="tab-content hidden space-y-4">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-gray-100 pb-3">
-          <div>
-            <h2 class="text-base sm:text-xl font-bold text-gray-900">FAQ Accordions</h2>
-            <p class="text-xs text-gray-500">Common questions for travelers and beginner surfers</p>
-          </div>
-          <button type="button" onclick="addFaqItem()" class="px-3 py-2 bg-surf-600 hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer active:scale-95">+ Add Question</button>
-        </div>
-
-        <div id="faqs-list" class="space-y-4">
-          <!-- Populated by JS -->
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save FAQs
-          </button>
-        </div>
-      </section>
-
-      <!-- 10. SEO SETTINGS -->
-      <section id="tab-seo" class="tab-content hidden space-y-4">
-        <div class="border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">SEO & Social Meta Configuration</h2>
-          <p class="text-xs text-gray-500">Configure page titles, keywords, and OpenGraph social share previews</p>
-        </div>
-
-        <div class="space-y-3">
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Homepage Meta Title</label>
-            <input type="text" id="set-seo-title" value="🏄 Hikka Surf School Hikkaduwa | Surf Coaching, Ocean Tours & Sri Lanka Travel" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Meta Description (150-160 characters)</label>
-            <textarea id="set-seo-desc" rows="2" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium">Premier local surf school on Narigama Beach, Hikkaduwa, Sri Lanka. Surf coaching in warm 28°C waters, coral snorkeling, wild turtles & Southern Province day trips.</textarea>
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">Target Keywords</label>
-            <input type="text" id="set-seo-keywords" value="Surf school Hikkaduwa, Surf lessons Hikkaduwa, Surfing Sri Lanka, Learn to surf Hikkaduwa, Narigama beach surfing" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-          <div>
-            <label class="block text-xs font-bold text-gray-700 mb-1">OpenGraph Social Share Image URL</label>
-            <input type="url" id="set-seo-og-image" value="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1200&q=80" class="w-full p-3 bg-gray-50 border rounded-xl text-xs text-gray-900 font-medium" />
-          </div>
-        </div>
-
-        <div class="pt-2">
-          <button type="button" onclick="saveAllSettings()" class="w-full py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-bold rounded-xl text-xs sm:text-sm shadow-md transition-all cursor-pointer">
-            Save SEO Meta Settings
-          </button>
-        </div>
-      </section>
-
-      <!-- 11. BACKEND & AUTH SETUP GUIDE (PART 13 & 14) -->
-      <section id="tab-backend" class="tab-content hidden space-y-4">
-        <div class="border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Backend & Authentication Configuration Guide</h2>
-          <p class="text-xs text-gray-500">How to secure this admin dashboard with genuine server-side authentication</p>
-        </div>
-
-        <div class="bg-blue-50 border border-blue-200 p-4 rounded-2xl space-y-3 text-xs text-blue-950">
-          <h3 class="font-bold text-sm text-blue-900">Why Frontend Passwords are Not Secure:</h3>
-          <p>
-            Because GitHub Pages is a static host, any JavaScript code or passwords stored in the repository can be viewed by anyone inspecting the source code. True security requires server-side verification using an authentication provider.
-          </p>
-          <div class="p-3 bg-white rounded-xl border border-blue-100 space-y-2">
-            <strong>Recommended Solutions:</strong>
-            <ul class="list-disc list-inside space-y-1 text-gray-700">
-              <li><strong>Firebase Authentication (Pre-wired):</strong> Enable Email/Password or Google Auth in the Firebase Console. The Firebase client in <code>js/firebase-client.js</code> is already configured to sync data securely to Firestore.</li>
-              <li><strong>Supabase Auth:</strong> Connect Supabase with Row Level Security (RLS) policies.</li>
-              <li><strong>Cloudflare Access / GitHub OAuth:</strong> Protect the <code>/admin.html</code> route with an enterprise proxy gate.</li>
-            </ul>
-          </div>
-        </div>
-
-        <div class="bg-emerald-50 border border-emerald-200 p-4 rounded-2xl space-y-3 text-xs text-emerald-950">
-          <h3 class="font-bold text-sm text-emerald-900">Firebase Firestore Cloud Sync:</h3>
-          <p>
-            You can push your local browser edits to Firestore so that every visitor across the world sees your updates in real time.
-          </p>
-          <button type="button" onclick="pushToFirestore()" class="px-5 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs cursor-pointer shadow-md">
-            ☁️ Sync Local Data to Firebase Cloud
-          </button>
-        </div>
-      </section>
-
-      <!-- 12. BACKUP & EXPORT TAB -->
-      <section id="tab-backup" class="tab-content hidden space-y-4">
-        <div class="border-b border-gray-100 pb-3">
-          <h2 class="text-base sm:text-xl font-bold text-gray-900">Backup, Export & Restore</h2>
-          <p class="text-xs text-gray-500">Download your site data as a JSON file or restore defaults</p>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div class="p-4 bg-gray-50 border rounded-2xl space-y-2">
-            <h3 class="font-bold text-xs sm:text-sm text-gray-900">Download Site Data JSON</h3>
-            <p class="text-xs text-gray-500">Save a complete snapshot backup of all destinations, activities, rates, and reviews.</p>
-            <button type="button" onclick="downloadDataJson()" class="w-full py-2.5 bg-surf-600 hover:bg-surf-700 text-white font-bold rounded-xl text-xs cursor-pointer shadow-sm">
-              📥 Download data.json
-            </button>
+        <!-- ============================================================= -->
+        <!-- TAB 1: DASHBOARD OVERVIEW                                     -->
+        <!-- ============================================================= -->
+        <section id="tab-dashboard" class="tab-panel space-y-6">
+          <div class="bg-gradient-to-br from-[#0A2540] to-[#12161A] text-white p-6 sm:p-8 rounded-3xl shadow-xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+            <div class="space-y-2">
+              <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded-full text-[11px] font-black uppercase tracking-wider inline-block">
+                ⚡ Firebase Cloud Firestore Active
+              </span>
+              <h1 class="text-2xl sm:text-3xl font-black font-serif-heading">Hikka Surf School CMS</h1>
+              <p class="text-xs sm:text-sm text-gray-300 max-w-xl">
+                Manage live content for all 7 public website pages. When you click <strong>Save Changes</strong>, updates sync directly to Firestore and reflect instantly for visitors worldwide.
+              </p>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+              <button type="button" id="btn-seed-overview" class="px-5 py-3 bg-amber-500 hover:bg-amber-400 text-gray-950 font-black rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer">
+                <span>🌱 Seed Default Data</span>
+              </button>
+              <a href="surf-lessons.html" target="_blank" class="px-5 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs transition-all flex items-center justify-center gap-2">
+                <span>Preview Lessons</span> ↗
+              </a>
+            </div>
           </div>
 
-          <div class="p-4 bg-red-50 border border-red-100 rounded-2xl space-y-2">
-            <h3 class="font-bold text-xs sm:text-sm text-red-900">Reset to Defaults</h3>
-            <p class="text-xs text-red-600">Restore factory settings for all services and pricing.</p>
-            <button type="button" onclick="if(confirm('Are you sure you want to reset all data to default?')){ localStorage.removeItem('hikka_surf_site_data'); location.reload(); }" class="w-full py-2.5 bg-red-600 hover:bg-red-700 text-white font-bold rounded-xl text-xs cursor-pointer shadow-sm">
-              ⚠️ Reset All Settings
-            </button>
+          <!-- Quick Navigation Cards to 7 Pages -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div data-jump="surflessons" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-surf-50 text-surf-600 flex items-center justify-center text-xl font-bold">🏄</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">Surf Lessons Page</h3>
+              <p class="text-xs text-gray-500 mt-1">#rates (Packages), #spots (Breaks), #quiver, #guidelines</p>
+            </div>
+
+            <div data-jump="general" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center text-xl font-bold">🌊</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">Live Surf & Contact</h3>
+              <p class="text-xs text-gray-500 mt-1">Top live wave report, phone numbers, WhatsApp, address</p>
+            </div>
+
+            <div data-jump="destinations" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center text-xl font-bold">🌴</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">Destinations & Safaris</h3>
+              <p class="text-xs text-gray-500 mt-1">Galle Fort, Mirissa Whales, Madu River, Yala Safari</p>
+            </div>
+
+            <div data-jump="activities" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-purple-50 text-purple-600 flex items-center justify-center text-xl font-bold">🤿</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">Ocean Activities</h3>
+              <p class="text-xs text-gray-500 mt-1">Snorkeling, Wild Sea Turtles, Boat Tours, Fishing</p>
+            </div>
+
+            <div data-jump="faq" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center text-xl font-bold">❓</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">FAQ Accordions</h3>
+              <p class="text-xs text-gray-500 mt-1">Frequently asked questions and detailed answers</p>
+            </div>
+
+            <div data-jump="contact" class="p-5 bg-white rounded-2xl border border-gray-200 shadow-sm hover:border-surf-500 hover:shadow-md transition-all cursor-pointer group">
+              <div class="flex items-center justify-between mb-3">
+                <span class="w-10 h-10 rounded-xl bg-rose-50 text-rose-600 flex items-center justify-center text-xl font-bold">📍</span>
+                <span class="text-xs font-bold text-gray-400 group-hover:text-surf-600">Edit →</span>
+              </div>
+              <h3 class="font-bold text-sm text-gray-900">Contact & Hours</h3>
+              <p class="text-xs text-gray-500 mt-1">Opening hours, GPS map, beach directions</p>
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-    </main>
-  </div>
+        <!-- ============================================================= -->
+        <!-- TAB 2: GENERAL SETTINGS & LIVE SURF REPORT                     -->
+        <!-- ============================================================= -->
+        <section id="tab-general" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-bold font-serif-heading text-gray-900">🌊 Live Surf Report (Site-Wide Top Bar)</h3>
+              <p class="text-xs text-gray-500">Updates the animated live wave banner across every page header.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Wave Conditions</label>
+                <input type="text" id="gen-surf-waves" placeholder="e.g. 2–4 ft Clean" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Water Temperature</label>
+                <input type="text" id="gen-surf-water" placeholder="e.g. 28°C (No Wetsuit)" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Condition Description</label>
+                <input type="text" id="gen-surf-condition" placeholder="e.g. Glassy Morning, Best for Beginners" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Timestamp</label>
+                <input type="text" id="gen-surf-updated" placeholder="e.g. Today 06:30 AM" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+            </div>
+          </div>
 
-  <!-- Persistent Mobile Bottom Save Bar -->
-  <div class="fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-gray-200 p-3 flex items-center justify-between gap-3 lg:hidden z-50 shadow-2xl pb-[max(0.75rem,env(safe-area-inset-bottom))]">
-    <a href="index.html" target="_blank" class="flex-1 py-3 bg-gray-100 active:bg-gray-200 text-gray-800 text-center rounded-xl text-xs font-bold">
-      Preview Site ↗
-    </a>
-    <button type="button" onclick="saveAllSettings()" class="flex-1 py-3 bg-[#25D366] active:bg-emerald-600 text-white text-center rounded-xl text-xs font-black shadow-md">
-      💾 Save Changes
-    </button>
-  </div>
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-bold font-serif-heading text-gray-900">⚙️ School Contact & Profile Details</h3>
+              <p class="text-xs text-gray-500">Shared across all page navbars, footers, and WhatsApp booking triggers.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Business Name</label>
+                <input type="text" id="gen-name" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Tagline</label>
+                <input type="text" id="gen-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number (with country code)</label>
+                <input type="text" id="gen-whatsapp" placeholder="+94771234567" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-mono font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number (Display Format)</label>
+                <input type="text" id="gen-phone" placeholder="+94 77 123 4567" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Email Address</label>
+                <input type="email" id="gen-email" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Instagram URL</label>
+                <input type="url" id="gen-instagram" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Physical Beach Address</label>
+                <input type="text" id="gen-address" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Google Maps Link</label>
+                <input type="url" id="gen-maps-url" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-general" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save General Settings
+              </button>
+            </div>
+          </div>
+        </section>
 
-  </div><!-- End of #admin-main-wrapper -->
+        <!-- ============================================================= -->
+        <!-- TAB 3: HOMEPAGE (INDEX.HTML)                                  -->
+        <!-- ============================================================= -->
+        <section id="tab-index" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-bold font-serif-heading text-gray-900">🏠 Homepage Hero Section</h3>
+              <p class="text-xs text-gray-500">Edit headline, intro description, and hero background slides.</p>
+            </div>
+            <div class="space-y-3">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Hero Headline</label>
+                <input type="text" id="idx-headline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Subheadline</label>
+                <input type="text" id="idx-subheadline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Description</label>
+                <textarea id="idx-description" rows="3" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs"></textarea>
+              </div>
+            </div>
+          </div>
 
-  <script>
-    let siteData = getActiveSiteData();
+          <!-- Hero Slideshow Cards -->
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">🖼️ Hero Slideshow Images</h3>
+                <p class="text-xs text-gray-500">High-resolution slide photos with captions.</p>
+              </div>
+              <button type="button" id="btn-add-slide" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+                + Add Slide
+              </button>
+            </div>
+            <div id="idx-slides-list" class="space-y-3">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-index" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save Homepage Content
+              </button>
+            </div>
+          </div>
+        </section>
 
-    // Helper to read image from device & compress if needed
-    function readFileAsDataURL(file) {
-      return new Promise((resolve, reject) => {
-        const reader = new FileReader();
-        reader.onload = e => resolve(e.target.result);
-        reader.onerror = err => reject(err);
-        reader.readAsDataURL(file);
+        <!-- ============================================================= -->
+        <!-- TAB 4: SURF LESSONS (SURF-LESSONS.HTML)                         -->
+        <!-- ============================================================= -->
+        <section id="tab-surflessons" class="tab-panel hidden space-y-6">
+          
+          <!-- Section Anchor 1: #rates -->
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 bg-surf-100 text-surf-800 rounded font-mono text-[10px] font-black">#rates</span>
+                  <h3 class="text-lg font-bold font-serif-heading text-gray-900">Surf Coaching Packages & Rates</h3>
+                </div>
+                <p class="text-xs text-gray-500">Edit pricing (USD), duration, included items, and badges for lesson cards.</p>
+              </div>
+              <button type="button" id="btn-add-rate" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+                + Add Package
+              </button>
+            </div>
+            <div id="surflessons-rates-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Section Anchor 2: #spots -->
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 rounded font-mono text-[10px] font-black">#spots</span>
+                  <h3 class="text-lg font-bold font-serif-heading text-gray-900">Hikkaduwa Surf Breaks Guide</h3>
+                </div>
+                <p class="text-xs text-gray-500">Spot details: Narigama Beach, Main Reef, Benny's, Inside Reef.</p>
+              </div>
+              <button type="button" id="btn-add-spot" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+                + Add Spot
+              </button>
+            </div>
+            <div id="surflessons-spots-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Section Anchor 3: #quiver -->
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-purple-100 text-purple-800 rounded font-mono text-[10px] font-black">#quiver</span>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">Interactive Quiver Assistant Info</h3>
+              </div>
+              <p class="text-xs text-gray-500">Headline, board count, and daily rental rates.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Quiver Title</label>
+                <input type="text" id="quiver-title" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-bold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Board Count Label</label>
+                <input type="text" id="quiver-board-count" placeholder="50+" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Rental Price / Day (USD)</label>
+                <input type="number" id="quiver-rental-price" placeholder="10" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-bold" />
+              </div>
+            </div>
+          </div>
+
+          <!-- Section Anchor 4: #guidelines -->
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <div class="flex items-center gap-2">
+                <span class="px-2 py-0.5 bg-amber-100 text-amber-800 rounded font-mono text-[10px] font-black">#guidelines</span>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">Surfing Guidelines & Safety Rules</h3>
+              </div>
+              <p class="text-xs text-gray-500">The 3 core pillars of safety and lineup etiquette rules.</p>
+            </div>
+            <div id="surflessons-guidelines-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-surflessons" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save All Surf Lessons Data
+              </button>
+            </div>
+          </div>
+
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 5: DESTINATIONS (DESTINATIONS.HTML)                        -->
+        <!-- ============================================================= -->
+        <section id="tab-destinations" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">🌴 Sri Lanka Tours & Safaris</h3>
+                <p class="text-xs text-gray-500">Manage destination cards shown on destinations.html and tours.html.</p>
+              </div>
+              <button type="button" id="btn-add-dest" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+                + Add Destination
+              </button>
+            </div>
+            <div id="destinations-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-destinations" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save Destinations
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 6: OCEAN ACTIVITIES (ACTIVITIES.HTML)                      -->
+        <!-- ============================================================= -->
+        <section id="tab-activities" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">🤿 Ocean Activities & Watersports</h3>
+                <p class="text-xs text-gray-500">Snorkeling, Turtle Lagoon, Fishing Charters, and Boat Safaris.</p>
+              </div>
+              <button type="button" id="btn-add-act" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+                + Add Activity
+              </button>
+            </div>
+            <div id="activities-list" class="space-y-4">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-activities" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save Activities
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 7: FAQ (FAQ.HTML)                                         -->
+        <!-- ============================================================= -->
+        <section id="tab-faq" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="flex items-center justify-between border-b pb-4">
+              <div>
+                <h3 class="text-lg font-bold font-serif-heading text-gray-900">❓ Frequently Asked Questions</h3>
+                <p class="text-xs text-gray-500">Manage accordion items displayed on faq.html.</p>
+              </div>
+              <button type="button" id="btn-add-faq" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold">
+                + Add FAQ
+              </button>
+            </div>
+            <div id="faq-list" class="space-y-3">
+              <!-- Dynamically populated -->
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-faq" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save FAQs
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 8: ABOUT US (ABOUT.HTML)                                  -->
+        <!-- ============================================================= -->
+        <section id="tab-about" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-bold font-serif-heading text-gray-900">📖 About Hikka Surf School</h3>
+              <p class="text-xs text-gray-500">School origin story, tagline, and credentials.</p>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">Our Story</label>
+              <textarea id="about-story" rows="4" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs leading-relaxed"></textarea>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-gray-700 mb-1">About Tagline</label>
+              <input type="text" id="about-tagline" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-about" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save About Us
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 9: CONTACT & HOURS (CONTACT.HTML)                         -->
+        <!-- ============================================================= -->
+        <section id="tab-contact" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-bold font-serif-heading text-gray-900">📍 Contact Information & Opening Hours</h3>
+              <p class="text-xs text-gray-500">Information displayed on contact.html.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Opening Hours</label>
+                <input type="text" id="contact-hours" placeholder="06:00 AM – 07:00 PM Daily" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Contact Email</label>
+                <input type="email" id="contact-email" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">Phone Number</label>
+                <input type="text" id="contact-phone" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-semibold" />
+              </div>
+              <div>
+                <label class="block text-xs font-bold text-gray-700 mb-1">WhatsApp Number</label>
+                <input type="text" id="contact-whatsapp" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs font-mono font-bold" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Physical Address</label>
+                <input type="text" id="contact-address" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs" />
+              </div>
+              <div class="sm:col-span-2">
+                <label class="block text-xs font-bold text-gray-700 mb-1">Directions Note for Guests</label>
+                <textarea id="contact-directions" rows="2" class="w-full p-2.5 bg-gray-50 border rounded-xl text-xs"></textarea>
+              </div>
+            </div>
+            <div class="pt-2 flex justify-end">
+              <button type="button" id="btn-save-contact" class="px-6 py-2.5 bg-[#25D366] hover:bg-emerald-600 text-white rounded-xl text-xs font-black shadow transition-all cursor-pointer">
+                💾 Save Contact Info
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ============================================================= -->
+        <!-- TAB 10: CLOUD DATABASE & SEEDER                               -->
+        <!-- ============================================================= -->
+        <section id="tab-cloud" class="tab-panel hidden space-y-6">
+          <div class="bg-white p-6 rounded-3xl border border-gray-200 shadow-sm space-y-4">
+            <div class="border-b pb-4">
+              <h3 class="text-lg font-bold font-serif-heading text-gray-900">☁️ Firebase Firestore Database Status</h3>
+              <p class="text-xs text-gray-500">Surfhikka Cloud Connection & Security Rules verification.</p>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+              <div class="p-4 bg-gray-50 rounded-2xl border space-y-1">
+                <span class="text-[10px] uppercase font-bold text-gray-400">Firebase Project</span>
+                <p class="font-mono font-bold text-gray-900">surfhikka</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-2xl border space-y-1">
+                <span class="text-[10px] uppercase font-bold text-gray-400">SDK Version</span>
+                <p class="font-mono font-bold text-emerald-600">v12.18.0 (Modular CDN)</p>
+              </div>
+              <div class="p-4 bg-gray-50 rounded-2xl border space-y-1 sm:col-span-2">
+                <span class="text-[10px] uppercase font-bold text-gray-400">Security Rule Status</span>
+                <p class="text-gray-700">Public Read: <strong class="text-emerald-600">Allowed</strong> | Public Write: <strong class="text-rose-600">Blocked (Admin Auth Required)</strong></p>
+              </div>
+            </div>
+
+            <div class="p-5 bg-amber-50 border border-amber-200 rounded-2xl space-y-3">
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🌱</span>
+                <h4 class="font-bold text-sm text-amber-900">Initialize / Re-seed All Default Content</h4>
+              </div>
+              <p class="text-xs text-amber-800 leading-relaxed">
+                Clicking this button writes full default rich content for all 7 website pages (Rates, Spots, Guidelines, Quiver, Destinations, Activities, FAQs, About, Contact, and General settings) directly into Firestore. Existing documents will be merged safely.
+              </p>
+              <button type="button" id="btn-seed-cloud" class="px-5 py-2.5 bg-amber-500 hover:bg-amber-600 text-gray-950 font-black rounded-xl text-xs shadow-md transition-all cursor-pointer">
+                Populate Complete Website Data into Firestore
+              </button>
+            </div>
+          </div>
+        </section>
+
+      </main>
+    </div>
+
+  </div><!-- End #admin-main-wrapper -->
+
+  <!-- ================================================================= -->
+  <!-- 3. ADMIN FIREBASE JAVASCRIPT CONTROLLER (MODULAR ES6)             -->
+  <!-- ================================================================= -->
+  <script type="module">
+    import { 
+      auth, 
+      loginAdmin, 
+      logoutAdmin, 
+      onAuthChange,
+      getSettings,
+      saveSettings,
+      getPageData,
+      savePageData
+    } from "./js/firebase-init.js";
+    import { seedInitialFirestoreData, DEFAULT_SEED_DATA } from "./js/seed-data.js";
+
+    // Application Global State
+    let currentTab = 'dashboard';
+    window.siteState = {
+      settings: {},
+      index: {},
+      surflessons: {},
+      destinations: {},
+      activities: {},
+      faq: {},
+      about: {},
+      contact: {}
+    };
+
+    // UI Helper: Toast Notification
+    window.showToast = function(message) {
+      const toast = document.getElementById('status-toast');
+      const text = document.getElementById('status-toast-text');
+      if (!toast || !text) return;
+      text.textContent = message;
+      toast.classList.remove('translate-x-full');
+      setTimeout(() => {
+        toast.classList.add('translate-x-full');
+      }, 3500);
+    };
+
+    // Tab Navigation Logic
+    window.switchTab = function(tabId) {
+      currentTab = tabId;
+      document.querySelectorAll('.tab-panel').forEach(p => p.classList.add('hidden'));
+      const activePanel = document.getElementById('tab-' + tabId);
+      if (activePanel) activePanel.classList.remove('hidden');
+
+      // Update Desktop Buttons
+      document.querySelectorAll('.tab-btn').forEach(btn => {
+        if (btn.getAttribute('data-tab') === tabId) {
+          btn.className = "tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2.5";
+        } else {
+          btn.className = "tab-btn w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5";
+        }
       });
-    }
 
-    async function uploadHeroImageFile(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      try {
-        const dataUrl = await readFileAsDataURL(file);
-        if (!siteData.settings.hero_images) siteData.settings.hero_images = [];
-        siteData.settings.hero_images.unshift({
-          url: dataUrl,
-          caption: "Uploaded Photo"
-        });
-        renderHeroSlides();
-        alert("📸 Photo uploaded! Click 'Save Changes' to publish.");
-      } catch (e) {
-        alert("Error reading file: " + e.message);
-      }
-    }
-
-    async function uploadDestinationPhoto(event, idx) {
-      const file = event.target.files[0];
-      if (!file) return;
-      try {
-        const dataUrl = await readFileAsDataURL(file);
-        siteData.destinations[idx].imageUrl = dataUrl;
-        renderDestinations();
-        alert("📸 Destination photo updated! Click 'Save Changes' to publish.");
-      } catch (e) {
-        alert("Error reading file: " + e.message);
-      }
-    }
-
-    async function uploadActivityPhoto(event, idx) {
-      const file = event.target.files[0];
-      if (!file) return;
-      try {
-        const dataUrl = await readFileAsDataURL(file);
-        if (!siteData.activities[idx].images) siteData.activities[idx].images = [];
-        siteData.activities[idx].images[0] = dataUrl;
-        renderActivities();
-        alert("📸 Activity photo updated! Click 'Save Changes' to publish.");
-      } catch (e) {
-        alert("Error reading file: " + e.message);
-      }
-    }
-
-    async function uploadGalleryPhoto(event) {
-      const file = event.target.files[0];
-      if (!file) return;
-      try {
-        const dataUrl = await readFileAsDataURL(file);
-        if (!siteData.gallery) siteData.gallery = DEFAULT_SITE_DATA.gallery || [];
-        siteData.gallery.unshift({
-          id: "g-" + Date.now(),
-          category: "Surfing",
-          imageUrl: dataUrl,
-          title: "New Photo",
-          caption: "Surf session in Hikkaduwa"
-        });
-        renderGallery();
-        alert("📸 New gallery photo added! Click 'Save Changes' to publish.");
-      } catch (e) {
-        alert("Error reading file: " + e.message);
-      }
-    }
-
-    function showTab(tabId) {
-      document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
-      document.getElementById('tab-' + tabId)?.classList.remove('hidden');
-
-      // Desktop buttons
-      document.querySelectorAll('aside button').forEach(b => {
-        b.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-white text-gray-700 hover:bg-slate-200 flex items-center gap-2.5";
+      // Update Mobile Pills
+      document.querySelectorAll('.tab-pill').forEach(pill => {
+        if (pill.getAttribute('data-tab') === tabId) {
+          pill.className = "tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white";
+        } else {
+          pill.className = "tab-pill px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700";
+        }
       });
-      const activeBtn = document.getElementById('tab-btn-' + tabId);
-      if (activeBtn) {
-        activeBtn.className = "w-full text-left px-4 py-3 rounded-2xl font-bold text-xs bg-[#0A2540] text-white shadow-md flex items-center gap-2.5";
-      }
 
-      // Mobile buttons
-      document.querySelectorAll('[id^="m-tab-"]').forEach(b => {
-        b.className = "px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-gray-100 text-gray-700";
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // Bind tab clicks
+    document.querySelectorAll('[data-tab]').forEach(el => {
+      el.addEventListener('click', () => {
+        switchTab(el.getAttribute('data-tab'));
       });
-      const activeMobileBtn = document.getElementById('m-tab-' + tabId);
-      if (activeMobileBtn) {
-        activeMobileBtn.className = "px-3.5 py-2 rounded-xl text-xs font-bold whitespace-nowrap bg-[#0A2540] text-white";
+    });
+
+    document.querySelectorAll('[data-jump]').forEach(el => {
+      el.addEventListener('click', () => {
+        switchTab(el.getAttribute('data-jump'));
+      });
+    });
+
+    // Authentication Handlers
+    const loginForm = document.getElementById('admin-login-form');
+    const loginScreen = document.getElementById('admin-login-screen');
+    const mainWrapper = document.getElementById('admin-main-wrapper');
+    const loginError = document.getElementById('login-error-msg');
+    const loginErrorText = document.getElementById('login-error-text');
+    const submitBtn = document.getElementById('btn-login-submit');
+    const userDisplay = document.getElementById('admin-user-display');
+    const logoutBtn = document.getElementById('btn-admin-logout');
+    const saveCurrentTabBtn = document.getElementById('btn-save-current-tab');
+
+    // Toggle Password View
+    document.getElementById('btn-toggle-pwd').addEventListener('click', () => {
+      const pwdInp = document.getElementById('login-password');
+      const eyeIcon = document.getElementById('pwd-eye-icon');
+      if (pwdInp.type === 'password') {
+        pwdInp.type = 'text';
+        eyeIcon.textContent = '🔒';
+      } else {
+        pwdInp.type = 'password';
+        eyeIcon.textContent = '👁️';
       }
+    });
+
+    // Login Submission
+    loginForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      loginError.classList.add('hidden');
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value;
+
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<span>Verifying with Firebase Auth...</span>';
+
+      try {
+        await loginAdmin(email, password);
+      } catch (err) {
+        loginError.classList.remove('hidden');
+        loginErrorText.textContent = err.message || "Invalid email or password.";
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Sign In to Dashboard</span> →';
+      }
+    });
+
+    // Logout
+    logoutBtn.addEventListener('click', async () => {
+      if (confirm("Are you sure you want to sign out?")) {
+        await logoutAdmin();
+      }
+    });
+
+    // Auth State Observer
+    onAuthChange(async (user) => {
+      if (user) {
+        loginScreen.classList.add('hidden');
+        mainWrapper.classList.remove('hidden');
+        userDisplay.textContent = user.email;
+        await loadAllFirestoreData();
+      } else {
+        loginScreen.classList.remove('hidden');
+        mainWrapper.classList.add('hidden');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = '<span>Sign In to Dashboard</span> →';
+      }
+    });
+
+    // Data Loading & Hydration into Form Fields
+    async function loadAllFirestoreData() {
+      showToast("Loading site data from Firestore...");
+
+      siteState.settings = (await getSettings()) || DEFAULT_SEED_DATA.settings_general;
+      populateGeneralSettings();
+
+      siteState.index = (await getPageData('index')) || DEFAULT_SEED_DATA.page_index;
+      populateIndexPage();
+
+      siteState.surflessons = (await getPageData('surf-lessons')) || DEFAULT_SEED_DATA.page_surflessons;
+      populateSurfLessonsPage();
+
+      siteState.destinations = (await getPageData('destinations')) || DEFAULT_SEED_DATA.page_destinations;
+      populateDestinationsPage();
+
+      siteState.activities = (await getPageData('activities')) || DEFAULT_SEED_DATA.page_activities;
+      populateActivitiesPage();
+
+      siteState.faq = (await getPageData('faq')) || DEFAULT_SEED_DATA.page_faq;
+      populateFaqPage();
+
+      siteState.about = (await getPageData('about')) || DEFAULT_SEED_DATA.page_about;
+      populateAboutPage();
+
+      siteState.contact = (await getPageData('contact')) || DEFAULT_SEED_DATA.page_contact;
+      populateContactPage();
+
+      showToast("✅ All Firestore content loaded successfully!");
     }
 
-    function loadSettings() {
-      const s = siteData.settings;
-      document.getElementById('set-name').value = s.businessName || 'Hikka Surf School';
-      document.getElementById('set-tagline').value = s.tagline || 'Surf • Snorkel • Explore Hikkaduwa & Sri Lanka';
-      document.getElementById('set-whatsapp').value = s.whatsappNumber || '+94 77 123 4567';
-      document.getElementById('set-phone').value = s.phoneNumber || '+94 77 123 4567';
-      document.getElementById('set-email').value = s.email || 'info@hikkasurfschool.com';
-      document.getElementById('set-address').value = s.address || 'Turtle Beach, Galle Road, Hikkaduwa 80240, Sri Lanka';
-      document.getElementById('set-maps-url').value = s.googleMapsUrl || 'https://maps.app.goo.gl/coczrnnnajTi581G9';
-      document.getElementById('set-instagram').value = s.instagramUrl || 'https://www.instagram.com/hikkasurf';
-      document.getElementById('set-hero-interval').value = s.autoSwapInterval || 4500;
-
-      // Live Surf Report
+    // Populate General
+    function populateGeneralSettings() {
+      const s = siteState.settings;
       const rep = s.liveSurfReport || {};
-      document.getElementById('set-surf-waves').value = rep.waves || '2–4 ft Clean';
-      document.getElementById('set-surf-water').value = rep.waterTemp || '28°C (No Wetsuit)';
-      document.getElementById('set-surf-condition').value = rep.condition || 'Glassy Morning';
-      document.getElementById('set-surf-updated').value = rep.lastUpdated || 'Today 06:30 AM';
+      document.getElementById('gen-surf-waves').value = rep.waves || '';
+      document.getElementById('gen-surf-water').value = rep.waterTemp || '';
+      document.getElementById('gen-surf-condition').value = rep.condition || '';
+      document.getElementById('gen-surf-updated').value = rep.lastUpdated || '';
 
-      // Update Dashboard Counters
-      document.getElementById('stat-dest-count').textContent = (siteData.destinations || []).length;
-      document.getElementById('stat-act-count').textContent = (siteData.activities || []).length;
-      
-      renderDashboardInquiries();
-      renderHeroSlides();
-      renderDestinations();
-      renderActivities();
-      renderSurfLessons();
-      renderGallery();
-      renderReviews();
-      renderFaqs();
+      document.getElementById('gen-name').value = s.businessName || '';
+      document.getElementById('gen-tagline').value = s.tagline || '';
+      document.getElementById('gen-whatsapp').value = s.whatsappNumber || '';
+      document.getElementById('gen-phone').value = s.phoneNumber || '';
+      document.getElementById('gen-email').value = s.email || '';
+      document.getElementById('gen-instagram').value = s.instagramUrl || '';
+      document.getElementById('gen-address').value = s.address || '';
+      document.getElementById('gen-maps-url').value = s.googleMapsUrl || '';
     }
 
-    function renderDashboardInquiries() {
-      const container = document.getElementById('inquiries-log-container');
-      let inquiries = [];
-      try {
-        inquiries = JSON.parse(localStorage.getItem('hikka_recent_inquiries') || '[]');
-      } catch(e) {}
-      
-      document.getElementById('stat-inq-count').textContent = inquiries.length;
-
-      if (inquiries.length === 0) {
-        container.innerHTML = `<div class="p-4 text-gray-500 text-center">No inquiries logged yet. When guests submit the booking modal, inquiries appear here.</div>`;
-        return;
-      }
-
-      container.innerHTML = `
-        <table class="w-full text-left border-collapse">
-          <thead>
-            <tr class="bg-gray-100 text-gray-700 font-bold border-b">
-              <th class="p-2.5">Date</th>
-              <th class="p-2.5">Name</th>
-              <th class="p-2.5">Phone</th>
-              <th class="p-2.5">Activity</th>
-              <th class="p-2.5">People</th>
-              <th class="p-2.5">Notes</th>
-            </tr>
-          </thead>
-          <tbody>
-            ${inquiries.map(inq => `
-              <tr class="border-b hover:bg-white transition-colors">
-                <td class="p-2.5 font-bold">${inq.date || '-'}</td>
-                <td class="p-2.5">${inq.name || 'Guest'}</td>
-                <td class="p-2.5 font-mono text-[11px]">${inq.phone || '-'}</td>
-                <td class="p-2.5 font-bold text-surf-700">${inq.activity || '-'}</td>
-                <td class="p-2.5">${inq.guests || '-'}</td>
-                <td class="p-2.5 text-gray-500">${inq.notes || '-'}</td>
-              </tr>
-            `).join('')}
-          </tbody>
-        </table>
-      `;
+    // Populate Index
+    function populateIndexPage() {
+      const idx = siteState.index;
+      document.getElementById('idx-headline').value = idx.heroHeadline || '';
+      document.getElementById('idx-subheadline').value = idx.heroSubheadline || '';
+      document.getElementById('idx-description').value = idx.heroDescription || '';
+      renderIndexSlides();
     }
 
-    function clearInquiries() {
-      if (confirm('Clear all logged inquiries?')) {
-        localStorage.removeItem('hikka_recent_inquiries');
-        renderDashboardInquiries();
-      }
-    }
-
-    function renderHeroSlides() {
-      const container = document.getElementById('hero-slides-list');
-      const slides = siteData.settings.hero_images || [];
-      container.innerHTML = slides.map((img, idx) => `
-        <div class="flex flex-col sm:flex-row sm:items-center gap-3 p-3 bg-gray-50 border rounded-2xl">
-          <img alt="Slide preview" src="${img.url}" class="w-full sm:w-20 h-28 sm:h-16 object-cover rounded-xl border flex-shrink-0" />
-          <div class="flex-1 space-y-2">
-            <input type="text" value="${img.url}" onchange="siteData.settings.hero_images[${idx}].url = this.value" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs" />
-            <div class="flex items-center gap-2">
-              <label class="px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
-                <span>📁 Replace from Phone</span>
-                <input type="file" accept="image/*" class="hidden" onchange="readFileAsDataURL(this.files[0]).then(u => { siteData.settings.hero_images[${idx}].url = u; renderHeroSlides(); })" />
-              </label>
-              <button type="button" onclick="siteData.settings.hero_images.splice(${idx}, 1); renderHeroSlides();" class="text-xs text-red-600 font-bold hover:underline cursor-pointer">Delete Slide</button>
-            </div>
+    function renderIndexSlides() {
+      const list = document.getElementById('idx-slides-list');
+      if (!list) return;
+      const slides = siteState.index.heroImages || [];
+      list.innerHTML = slides.map((slide, i) => `
+        <div class="p-3 bg-gray-50 border rounded-2xl flex flex-col sm:flex-row items-center gap-3">
+          <img src="${slide.url}" alt="${slide.caption}" class="w-full sm:w-28 h-20 object-cover rounded-xl border flex-shrink-0" />
+          <div class="flex-1 w-full space-y-2">
+            <input type="text" value="${slide.url}" data-slide-url="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+            <input type="text" value="${slide.caption}" data-slide-cap="${i}" placeholder="Caption" class="w-full p-2 bg-white border rounded-xl text-xs" />
           </div>
+          <button type="button" data-del-slide="${i}" class="text-xs text-red-600 font-bold hover:underline p-2">Delete</button>
         </div>
       `).join('');
-    }
 
-    function addHeroImage() {
-      if (!siteData.settings.hero_images) siteData.settings.hero_images = [];
-      siteData.settings.hero_images.push({
-        url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
-        caption: "New Slide"
+      list.querySelectorAll('[data-slide-url]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.getAttribute('data-slide-url'));
+          siteState.index.heroImages[idx].url = e.target.value;
+          renderIndexSlides();
+        };
       });
-      renderHeroSlides();
+      list.querySelectorAll('[data-slide-cap]').forEach(inp => {
+        inp.onchange = (e) => {
+          const idx = parseInt(e.target.getAttribute('data-slide-cap'));
+          siteState.index.heroImages[idx].caption = e.target.value;
+        };
+      });
+      list.querySelectorAll('[data-del-slide]').forEach(btn => {
+        btn.onclick = (e) => {
+          const idx = parseInt(e.target.getAttribute('data-del-slide'));
+          siteState.index.heroImages.splice(idx, 1);
+          renderIndexSlides();
+        };
+      });
     }
 
-    function renderDestinations() {
-      const container = document.getElementById('destinations-list');
-      if (!container) return;
-      if (!siteData.destinations) siteData.destinations = DEFAULT_SITE_DATA.destinations || [];
-      container.innerHTML = siteData.destinations.map((dest, idx) => `
-        <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-3">
-          <div class="flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="text-xl">${dest.icon || '🌴'}</span>
-              <input type="text" value="${dest.name}" onchange="siteData.destinations[${idx}].name = this.value" class="font-bold text-xs sm:text-sm p-1.5 bg-white border rounded-xl" />
+    document.getElementById('btn-add-slide').addEventListener('click', () => {
+      if (!siteState.index.heroImages) siteState.index.heroImages = [];
+      siteState.index.heroImages.push({
+        url: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=80",
+        caption: "New Wave Slide Caption"
+      });
+      renderIndexSlides();
+    });
+
+    // Populate Surf Lessons (#rates, #spots, #quiver, #guidelines)
+    function populateSurfLessonsPage() {
+      const sl = siteState.surflessons;
+      renderSurfLessonRates();
+      renderSurfSpots();
+
+      const q = sl.quiver || {};
+      document.getElementById('quiver-title').value = q.introTitle || '';
+      document.getElementById('quiver-board-count').value = q.boardCount || '';
+      document.getElementById('quiver-rental-price').value = q.rentalPricePerDay || 10;
+
+      renderSurfGuidelines();
+    }
+
+    function renderSurfLessonRates() {
+      const list = document.getElementById('surflessons-rates-list');
+      if (!list) return;
+      const rates = siteState.surflessons.rates || [];
+      list.innerHTML = rates.map((r, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Package Name</label>
+              <input type="text" value="${r.name}" data-rate-name="${i}" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
             </div>
-            <input type="text" value="${dest.duration}" onchange="siteData.destinations[${idx}].duration = this.value" class="text-xs p-1.5 bg-white border rounded-xl w-32" />
-          </div>
-          <div class="flex flex-col sm:flex-row gap-3">
-            <img alt="${dest.name}" src="${dest.imageUrl}" class="w-full sm:w-24 h-28 sm:h-20 object-cover rounded-xl border flex-shrink-0" />
-            <div class="flex-1 space-y-2">
-              <input type="text" value="${dest.imageUrl}" onchange="siteData.destinations[${idx}].imageUrl = this.value" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs" />
-              <label class="inline-block px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
-                <span>📁 Upload Photo from Phone</span>
-                <input type="file" accept="image/*" class="hidden" onchange="uploadDestinationPhoto(event, ${idx})" />
-              </label>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Badge</label>
+              <input type="text" value="${r.badge || ''}" data-rate-badge="${i}" class="w-full p-2 bg-white border rounded-xl text-xs text-surf-700 font-bold" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Price (USD)</label>
+              <div class="flex items-center gap-1 font-bold text-xs bg-white border rounded-xl px-2">
+                <span>$</span>
+                <input type="number" value="${r.priceUsd}" data-rate-price="${i}" class="w-full p-2 bg-transparent text-xs font-bold" />
+              </div>
             </div>
           </div>
-          <textarea onchange="siteData.destinations[${idx}].description = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${dest.description}</textarea>
-          <div class="text-right">
-            <button type="button" onclick="siteData.destinations.splice(${idx}, 1); renderDestinations();" class="text-xs text-red-600 font-bold hover:underline cursor-pointer">Delete Destination</button>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Duration</label>
+              <input type="text" value="${r.duration}" data-rate-dur="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Pricing Unit Text</label>
+              <input type="text" value="${r.unit || 'USD / Person'}" data-rate-unit="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+          </div>
+          <div class="flex items-center justify-between pt-1">
+            <span class="text-xs text-gray-400 font-mono">ID: ${r.id}</span>
+            <button type="button" data-del-rate="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete Package</button>
           </div>
         </div>
       `).join('');
+
+      list.querySelectorAll('[data-rate-name]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.rates[parseInt(e.target.dataset.rateName)].name = e.target.value; };
+      });
+      list.querySelectorAll('[data-rate-badge]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.rates[parseInt(e.target.dataset.rateBadge)].badge = e.target.value; };
+      });
+      list.querySelectorAll('[data-rate-price]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.rates[parseInt(e.target.dataset.ratePrice)].priceUsd = parseFloat(e.target.value) || 0; };
+      });
+      list.querySelectorAll('[data-rate-dur]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.rates[parseInt(e.target.dataset.rateDur)].duration = e.target.value; };
+      });
+      list.querySelectorAll('[data-rate-unit]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.rates[parseInt(e.target.dataset.rateUnit)].unit = e.target.value; };
+      });
+      list.querySelectorAll('[data-del-rate]').forEach(btn => {
+        btn.onclick = e => {
+          siteState.surflessons.rates.splice(parseInt(e.target.dataset.delRate), 1);
+          renderSurfLessonRates();
+        };
+      });
     }
 
-    function addDestinationItem() {
-      if (!siteData.destinations) siteData.destinations = [];
-      siteData.destinations.push({
+    document.getElementById('btn-add-rate').addEventListener('click', () => {
+      if (!siteState.surflessons.rates) siteState.surflessons.rates = [];
+      siteState.surflessons.rates.push({
+        id: "rate-" + Date.now(),
+        name: "New Coaching Package",
+        badge: "New",
+        priceUsd: 35,
+        unit: "USD / Person",
+        duration: "1.5 Hours",
+        popular: false,
+        features: ["In-water coaching", "Surfboard & rash vest included"]
+      });
+      renderSurfLessonRates();
+    });
+
+    function renderSurfSpots() {
+      const list = document.getElementById('surflessons-spots-list');
+      if (!list) return;
+      const spots = siteState.surflessons.spots || [];
+      list.innerHTML = spots.map((s, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-3">
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+            <div class="sm:col-span-2">
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Break Name</label>
+              <input type="text" value="${s.name}" data-spot-name="${i}" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Skill Level Badge</label>
+              <input type="text" value="${s.badge}" data-spot-badge="${i}" class="w-full p-2 bg-white border rounded-xl text-xs text-emerald-700 font-bold" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-[10px] uppercase font-bold text-gray-400">Spot Description</label>
+            <input type="text" value="${s.description}" data-spot-desc="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" />
+          </div>
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Wave Type</label>
+              <input type="text" value="${s.waveType || ''}" data-spot-wave="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Ideal For</label>
+              <input type="text" value="${s.idealFor || ''}" data-spot-ideal="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <div>
+              <label class="block text-[10px] uppercase font-bold text-gray-400">Seabed</label>
+              <input type="text" value="${s.seabed || ''}" data-spot-bed="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+          </div>
+          <div class="flex justify-end pt-1">
+            <button type="button" data-del-spot="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete Spot</button>
+          </div>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('[data-spot-name]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.spots[parseInt(e.target.dataset.spotName)].name = e.target.value; };
+      });
+      list.querySelectorAll('[data-spot-badge]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.spots[parseInt(e.target.dataset.spotBadge)].badge = e.target.value; };
+      });
+      list.querySelectorAll('[data-spot-desc]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.spots[parseInt(e.target.dataset.spotDesc)].description = e.target.value; };
+      });
+      list.querySelectorAll('[data-spot-wave]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.spots[parseInt(e.target.dataset.spotWave)].waveType = e.target.value; };
+      });
+      list.querySelectorAll('[data-spot-ideal]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.spots[parseInt(e.target.dataset.spotIdeal)].idealFor = e.target.value; };
+      });
+      list.querySelectorAll('[data-spot-bed]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.spots[parseInt(e.target.dataset.spotBed)].seabed = e.target.value; };
+      });
+      list.querySelectorAll('[data-del-spot]').forEach(btn => {
+        btn.onclick = e => {
+          siteState.surflessons.spots.splice(parseInt(e.target.dataset.delSpot), 1);
+          renderSurfSpots();
+        };
+      });
+    }
+
+    document.getElementById('btn-add-spot').addEventListener('click', () => {
+      if (!siteState.surflessons.spots) siteState.surflessons.spots = [];
+      siteState.surflessons.spots.push({
+        id: "spot-" + Date.now(),
+        name: "New Surf Break",
+        badge: "Beginner",
+        icon: "🏄 Sand Break",
+        description: "Spot description and wave details.",
+        waveType: "Left & Right",
+        idealFor: "All Surfers",
+        seabed: "Sand"
+      });
+      renderSurfSpots();
+    });
+
+    function renderSurfGuidelines() {
+      const list = document.getElementById('surflessons-guidelines-list');
+      if (!list) return;
+      const guidelines = siteState.surflessons.guidelines || [];
+      list.innerHTML = guidelines.map((g, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl space-y-2">
+          <div class="flex items-center gap-2">
+            <span class="text-xl">${g.icon || '🛡️'}</span>
+            <input type="text" value="${g.title}" data-guide-title="${i}" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
+          </div>
+          <textarea rows="3" data-guide-rules="${i}" class="w-full p-2 bg-white border rounded-xl text-xs" placeholder="One rule per line">${(g.rules || []).join('\n')}</textarea>
+          <div class="text-[10px] text-gray-400">Tip: Put each rule on a new line.</div>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('[data-guide-title]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.guidelines[parseInt(e.target.dataset.guideTitle)].title = e.target.value; };
+      });
+      list.querySelectorAll('[data-guide-rules]').forEach(inp => {
+        inp.onchange = e => { siteState.surflessons.guidelines[parseInt(e.target.dataset.guideRules)].rules = e.target.value.split('\n'); };
+      });
+    }
+
+    // Populate Destinations
+    function populateDestinationsPage() {
+      const list = document.getElementById('destinations-list');
+      if (!list) return;
+      const dests = siteState.destinations.destinations || [];
+      list.innerHTML = dests.map((d, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl flex flex-col sm:flex-row items-start gap-4">
+          <img src="${d.imageUrl}" alt="${d.name}" class="w-full sm:w-28 h-24 object-cover rounded-xl border flex-shrink-0" />
+          <div class="flex-1 w-full space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input type="text" value="${d.name}" data-dest-name="${i}" placeholder="Destination Name" class="w-full p-2 bg-white border rounded-xl text-xs font-bold sm:col-span-2" />
+              <input type="text" value="${d.duration}" data-dest-dur="${i}" placeholder="Duration" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <input type="text" value="${d.highlight}" data-dest-hi="${i}" placeholder="Highlight" class="w-full p-2 bg-white border rounded-xl text-xs text-surf-700 font-semibold" />
+            <input type="text" value="${d.imageUrl}" data-dest-img="${i}" placeholder="Image URL" class="w-full p-2 bg-white border rounded-xl text-xs font-mono" />
+            <textarea rows="2" data-dest-desc="${i}" placeholder="Description" class="w-full p-2 bg-white border rounded-xl text-xs">${d.description}</textarea>
+          </div>
+          <button type="button" data-del-dest="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete</button>
+        </div>
+      `).join('');
+
+      list.querySelectorAll('[data-dest-name]').forEach(inp => {
+        inp.onchange = e => { siteState.destinations.destinations[parseInt(e.target.dataset.destName)].name = e.target.value; };
+      });
+      list.querySelectorAll('[data-dest-dur]').forEach(inp => {
+        inp.onchange = e => { siteState.destinations.destinations[parseInt(e.target.dataset.destDur)].duration = e.target.value; };
+      });
+      list.querySelectorAll('[data-dest-hi]').forEach(inp => {
+        inp.onchange = e => { siteState.destinations.destinations[parseInt(e.target.dataset.destHi)].highlight = e.target.value; };
+      });
+      list.querySelectorAll('[data-dest-img]').forEach(inp => {
+        inp.onchange = e => { 
+          siteState.destinations.destinations[parseInt(e.target.dataset.destImg)].imageUrl = e.target.value; 
+          populateDestinationsPage();
+        };
+      });
+      list.querySelectorAll('[data-dest-desc]').forEach(inp => {
+        inp.onchange = e => { siteState.destinations.destinations[parseInt(e.target.dataset.destDesc)].description = e.target.value; };
+      });
+      list.querySelectorAll('[data-del-dest]').forEach(btn => {
+        btn.onclick = e => {
+          siteState.destinations.destinations.splice(parseInt(e.target.dataset.delDest), 1);
+          populateDestinationsPage();
+        };
+      });
+    }
+
+    document.getElementById('btn-add-dest').addEventListener('click', () => {
+      if (!siteState.destinations.destinations) siteState.destinations.destinations = [];
+      siteState.destinations.destinations.push({
         id: "dest-" + Date.now(),
-        name: "New Destination",
-        highlight: "Sight Highlight",
-        duration: "30 Mins",
+        name: "New Tour Destination",
+        highlight: "Scenic Sightseeing",
+        duration: "Full Day",
         icon: "🌴",
         imageUrl: "https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?auto=format&fit=crop&w=600&q=80",
-        description: "Day trip description."
+        description: "Tour description and highlights."
       });
-      renderDestinations();
-    }
+      populateDestinationsPage();
+    });
 
-    function renderActivities() {
-      const container = document.getElementById('activities-list');
-      container.innerHTML = siteData.activities.map((act, idx) => `
-        <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="font-bold text-xs sm:text-sm text-gray-900">${act.title}</h4>
-            <span class="text-xs font-bold text-surf-600">From $${act.price_from} USD</span>
-          </div>
-          <div class="flex flex-col sm:flex-row gap-3">
-            <img alt="${act.title}" src="${(act.images && act.images[0]) || 'images/hero.webp'}" class="w-full sm:w-24 h-28 sm:h-20 object-cover rounded-xl border flex-shrink-0" />
-            <div class="flex-1 space-y-2">
-              <div class="grid grid-cols-2 gap-2">
-                <div>
-                  <label class="block text-[10px] uppercase font-bold text-gray-500">Price (USD)</label>
-                  <input type="number" value="${act.price_from}" onchange="siteData.activities[${idx}].price_from = parseFloat(this.value)" class="w-full p-2 bg-white border rounded-xl text-xs font-bold" />
-                </div>
-                <div>
-                  <label class="block text-[10px] uppercase font-bold text-gray-500">Duration</label>
-                  <input type="text" value="${act.duration}" onchange="siteData.activities[${idx}].duration = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
-                </div>
+    // Populate Activities
+    function populateActivitiesPage() {
+      const list = document.getElementById('activities-list');
+      if (!list) return;
+      const acts = siteState.activities.activities || [];
+      list.innerHTML = acts.map((a, i) => `
+        <div class="p-4 bg-gray-50 border rounded-2xl flex flex-col sm:flex-row items-start gap-4">
+          <img src="${a.imageUrl}" alt="${a.title}" class="w-full sm:w-28 h-24 object-cover rounded-xl border flex-shrink-0" />
+          <div class="flex-1 w-full space-y-2">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+              <input type="text" value="${a.title}" data-act-title="${i}" placeholder="Title" class="w-full p-2 bg-white border rounded-xl text-xs font-bold sm:col-span-2" />
+              <div class="flex items-center gap-1 bg-white border rounded-xl px-2">
+                <span class="text-xs font-bold text-gray-500">From $</span>
+                <input type="number" value="${a.price_from}" data-act-price="${i}" class="w-full p-2 bg-transparent text-xs font-bold" />
               </div>
-              <label class="inline-block px-3 py-1 bg-purple-50 hover:bg-purple-100 text-purple-700 border border-purple-200 rounded-lg text-[11px] font-bold cursor-pointer">
-                <span>📁 Upload Photo from Phone</span>
-                <input type="file" accept="image/*" class="hidden" onchange="uploadActivityPhoto(event, ${idx})" />
-              </label>
             </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+              <input type="text" value="${a.tagline}" data-act-tag="${i}" placeholder="Tagline" class="w-full p-2 bg-white border rounded-xl text-xs" />
+              <input type="text" value="${a.duration}" data-act-dur="${i}" placeholder="Duration" class="w-full p-2 bg-white border rounded-xl text-xs" />
+            </div>
+            <textarea rows="2" data-act-desc="${i}" placeholder="Description" class="w-full p-2 bg-white border rounded-xl text-xs">${a.description}</textarea>
           </div>
-          <div>
-            <label class="block text-[10px] uppercase font-bold text-gray-500">Description</label>
-            <input type="text" value="${act.description}" onchange="siteData.activities[${idx}].description = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" />
-          </div>
+          <button type="button" data-del-act="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete</button>
         </div>
       `).join('');
+
+      list.querySelectorAll('[data-act-title]').forEach(inp => {
+        inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actTitle)].title = e.target.value; };
+      });
+      list.querySelectorAll('[data-act-price]').forEach(inp => {
+        inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actPrice)].price_from = parseFloat(e.target.value) || 0; };
+      });
+      list.querySelectorAll('[data-act-tag]').forEach(inp => {
+        inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actTag)].tagline = e.target.value; };
+      });
+      list.querySelectorAll('[data-act-dur]').forEach(inp => {
+        inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actDur)].duration = e.target.value; };
+      });
+      list.querySelectorAll('[data-act-desc]').forEach(inp => {
+        inp.onchange = e => { siteState.activities.activities[parseInt(e.target.dataset.actDesc)].description = e.target.value; };
+      });
+      list.querySelectorAll('[data-del-act]').forEach(btn => {
+        btn.onclick = e => {
+          siteState.activities.activities.splice(parseInt(e.target.dataset.delAct), 1);
+          populateActivitiesPage();
+        };
+      });
     }
 
-    function addActivityItem() {
-      siteData.activities.push({
+    document.getElementById('btn-add-act').addEventListener('click', () => {
+      if (!siteState.activities.activities) siteState.activities.activities = [];
+      siteState.activities.activities.push({
         id: "act-" + Date.now(),
         category: "ocean",
         title: "New Ocean Activity",
-        tagline: "Exciting coastal experience",
+        tagline: "Tropical experience in Hikkaduwa",
         price_from: 25,
         duration: "1.5 Hours",
-        images: ["https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"],
-        description: "Activity description."
+        description: "Activity description.",
+        imageUrl: "https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=800&q=80"
       });
-      renderActivities();
-    }
+      populateActivitiesPage();
+    });
 
-    function renderSurfLessons() {
-      const container = document.getElementById('surf-lessons-list');
-      const lessons = [
-        { name: "Beginner Surf Lesson", duration: "1.5 Hours", price: 25, desc: "Beach safety, paddling fundamentals, pop-up technique & standing in waist-deep water." },
-        { name: "Private 1-on-1 Coaching", duration: "1.5 Hours", price: 35, desc: "Dedicated personal coach, line-up positioning, wave selection & rapid progression." },
-        { name: "Couple & Semi-Private", duration: "1.5 Hours", price: 45, desc: "Fun shared lesson for couples or 2 friends with private instructor." },
-        { name: "Kids & Family Surfing", duration: "1.5 Hours", price: 30, desc: "Patient 1-on-1 shallow water coaching designed specifically for children." },
-        { name: "Intermediate Lineup Session", duration: "2.0 Hours", price: 40, desc: "Paddling past the break, unbroken green waves, trimming, turning and video analysis." },
-        { name: "Surfboard Rental", duration: "Full Day", price: 10, desc: "High quality soft-tops, funboards, and performance shortboards with leash." }
-      ];
-
-      container.innerHTML = lessons.map((l, idx) => `
-        <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
-          <div class="flex-1">
-            <h4 class="font-bold text-xs sm:text-sm text-gray-900">${l.name}</h4>
-            <p class="text-[11px] text-gray-500">${l.desc}</p>
+    // Populate FAQ
+    function populateFaqPage() {
+      const list = document.getElementById('faq-list');
+      if (!list) return;
+      const faqs = siteState.faq.faqs || [];
+      list.innerHTML = faqs.map((f, i) => `
+        <div class="p-3.5 bg-gray-50 border rounded-2xl space-y-2">
+          <div class="grid grid-cols-1 sm:grid-cols-4 gap-2">
+            <input type="text" value="${f.question}" data-faq-q="${i}" placeholder="Question" class="w-full p-2 bg-white border rounded-xl text-xs font-bold sm:col-span-3" />
+            <input type="text" value="${f.category || 'General'}" data-faq-cat="${i}" placeholder="Category" class="w-full p-2 bg-white border rounded-xl text-xs text-surf-700 font-semibold" />
           </div>
-          <div class="flex items-center gap-3">
-            <span class="text-xs text-gray-500">${l.duration}</span>
-            <div class="flex items-center gap-1 font-bold text-xs text-surf-700 bg-white border px-2.5 py-1.5 rounded-xl">
-              <span>$</span>
-              <input type="number" value="${l.price}" class="w-12 bg-transparent font-bold" />
-            </div>
+          <textarea rows="2" data-faq-a="${i}" placeholder="Answer" class="w-full p-2 bg-white border rounded-xl text-xs">${f.answer}</textarea>
+          <div class="flex justify-end">
+            <button type="button" data-del-faq="${i}" class="text-xs text-red-600 font-bold hover:underline">Delete</button>
           </div>
         </div>
       `).join('');
-    }
 
-    function renderGallery() {
-      const container = document.getElementById('gallery-items-list');
-      if (!container) return;
-      if (!siteData.gallery) siteData.gallery = DEFAULT_SITE_DATA.gallery || [];
-      container.innerHTML = siteData.gallery.map((g, idx) => `
-        <div class="p-3 bg-gray-50 border rounded-2xl space-y-2">
-          <img alt="${g.title}" src="${g.imageUrl}" class="w-full h-36 object-cover rounded-xl border" />
-          <input type="text" value="${g.title}" onchange="siteData.gallery[${idx}].title = this.value" placeholder="Photo Title" class="w-full p-1.5 bg-white border rounded-xl font-bold text-xs" />
-          <input type="text" value="${g.caption}" onchange="siteData.gallery[${idx}].caption = this.value" placeholder="Caption" class="w-full p-1.5 bg-white border rounded-xl text-xs text-gray-600" />
-          <div class="flex items-center justify-between pt-1">
-            <span class="text-[10px] font-bold text-gray-400 uppercase">${g.category || 'Surfing'}</span>
-            <button type="button" onclick="siteData.gallery.splice(${idx}, 1); renderGallery();" class="text-xs text-red-600 font-bold hover:underline cursor-pointer">Delete</button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function renderReviews() {
-      const container = document.getElementById('reviews-list');
-      container.innerHTML = siteData.reviews.map((rev, idx) => `
-        <div class="p-3 sm:p-4 bg-gray-50 border rounded-2xl space-y-2">
-          <div class="flex items-center justify-between gap-2">
-            <input type="text" value="${rev.authorName}" onchange="siteData.reviews[${idx}].authorName = this.value" class="font-bold text-xs p-2 bg-white border rounded-xl flex-1" />
-            <input type="text" value="${rev.authorLocation}" onchange="siteData.reviews[${idx}].authorLocation = this.value" class="text-xs p-2 bg-white border rounded-xl w-32" />
-          </div>
-          <textarea onchange="siteData.reviews[${idx}].text = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${rev.text}</textarea>
-        </div>
-      `).join('');
-    }
-
-    function addReviewItem() {
-      siteData.reviews.push({
-        id: "rev-" + Date.now(),
-        authorName: "Guest Name",
-        authorLocation: "City, Country",
-        authorPhoto: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
-        rating: 5,
-        text: "Amazing experience learning to surf in Hikkaduwa!",
-        googleVerified: false
+      list.querySelectorAll('[data-faq-q]').forEach(inp => {
+        inp.onchange = e => { siteState.faq.faqs[parseInt(e.target.dataset.faqQ)].question = e.target.value; };
       });
-      renderReviews();
-    }
-
-    function renderFaqs() {
-      const container = document.getElementById('faqs-list');
-      container.innerHTML = siteData.faqs.map((faq, idx) => `
-        <div class="p-3 bg-gray-50 border rounded-2xl space-y-2">
-          <input type="text" value="${faq.question}" onchange="siteData.faqs[${idx}].question = this.value" class="w-full p-2 bg-white border rounded-xl font-bold text-xs" />
-          <textarea onchange="siteData.faqs[${idx}].answer = this.value" class="w-full p-2 bg-white border rounded-xl text-xs" rows="2">${faq.answer}</textarea>
-        </div>
-      `).join('');
-    }
-
-    function addFaqItem() {
-      siteData.faqs.push({
-        question: "New Question?",
-        answer: "Answer to question."
+      list.querySelectorAll('[data-faq-cat]').forEach(inp => {
+        inp.onchange = e => { siteState.faq.faqs[parseInt(e.target.dataset.faqCat)].category = e.target.value; };
       });
-      renderFaqs();
+      list.querySelectorAll('[data-faq-a]').forEach(inp => {
+        inp.onchange = e => { siteState.faq.faqs[parseInt(e.target.dataset.faqA)].answer = e.target.value; };
+      });
+      list.querySelectorAll('[data-del-faq]').forEach(btn => {
+        btn.onclick = e => {
+          siteState.faq.faqs.splice(parseInt(e.target.dataset.delFaq), 1);
+          populateFaqPage();
+        };
+      });
     }
 
-    function saveAllSettings() {
-      siteData.settings.businessName = document.getElementById('set-name').value;
-      siteData.settings.tagline = document.getElementById('set-tagline').value;
-      siteData.settings.whatsappNumber = document.getElementById('set-whatsapp').value;
-      siteData.settings.phoneNumber = document.getElementById('set-phone').value;
-      siteData.settings.email = document.getElementById('set-email').value;
-      siteData.settings.address = document.getElementById('set-address').value;
-      siteData.settings.googleMapsUrl = document.getElementById('set-maps-url').value;
-      siteData.settings.instagramUrl = document.getElementById('set-instagram').value;
-      siteData.settings.autoSwapInterval = parseInt(document.getElementById('set-hero-interval').value) || 4500;
+    document.getElementById('btn-add-faq').addEventListener('click', () => {
+      if (!siteState.faq.faqs) siteState.faq.faqs = [];
+      siteState.faq.faqs.push({
+        category: "Surfing",
+        question: "New FAQ Question?",
+        answer: "Detailed answer for visitors."
+      });
+      populateFaqPage();
+    });
 
-      if (!siteData.settings.liveSurfReport) siteData.settings.liveSurfReport = {};
-      siteData.settings.liveSurfReport.waves = document.getElementById('set-surf-waves').value;
-      siteData.settings.liveSurfReport.waterTemp = document.getElementById('set-surf-water').value;
-      siteData.settings.liveSurfReport.condition = document.getElementById('set-surf-condition').value;
-      siteData.settings.liveSurfReport.lastUpdated = document.getElementById('set-surf-updated').value;
-
-      saveActiveSiteData(siteData);
-      alert("✅ All changes saved successfully! Live website is updated instantly in your browser.");
+    // Populate About
+    function populateAboutPage() {
+      const ab = siteState.about;
+      document.getElementById('about-story').value = ab.story || '';
+      document.getElementById('about-tagline').value = ab.tagline || '';
     }
 
-    function downloadDataJson() {
-      const jsonStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(siteData, null, 2));
-      const downloadAnchor = document.createElement('a');
-      downloadAnchor.setAttribute("href", jsonStr);
-      downloadAnchor.setAttribute("download", "data.json");
-      document.body.appendChild(downloadAnchor);
-      downloadAnchor.click();
-      downloadAnchor.remove();
+    // Populate Contact
+    function populateContactPage() {
+      const c = siteState.contact;
+      document.getElementById('contact-hours').value = c.openingHours || '';
+      document.getElementById('contact-email').value = c.email || '';
+      document.getElementById('contact-phone').value = c.phone || '';
+      document.getElementById('contact-whatsapp').value = c.whatsapp || '';
+      document.getElementById('contact-address').value = c.address || '';
+      document.getElementById('contact-directions').value = c.directionsNote || '';
     }
 
-    async function pushToFirestore() {
-      try {
-        if (window.firebaseSync && window.firebaseSync.isConfigured) {
-          await window.firebaseSync.syncLocalToCloud();
-          alert("☁️ Successfully pushed all data to Firestore!");
-        } else {
-          alert("⚠️ Firebase Firestore is in Demo/Offline mode. Please check firebase config.");
-        }
-      } catch (err) {
-        alert("Error syncing to Firestore: " + err.message);
-      }
+    // Save Handlers (Direct to Firestore)
+    async function saveTabGeneral() {
+      showToast("Saving General Settings to Firestore...");
+      siteState.settings.liveSurfReport = {
+        waves: document.getElementById('gen-surf-waves').value,
+        waterTemp: document.getElementById('gen-surf-water').value,
+        condition: document.getElementById('gen-surf-condition').value,
+        lastUpdated: document.getElementById('gen-surf-updated').value,
+        isLive: true
+      };
+      siteState.settings.businessName = document.getElementById('gen-name').value;
+      siteState.settings.tagline = document.getElementById('gen-tagline').value;
+      siteState.settings.whatsappNumber = document.getElementById('gen-whatsapp').value;
+      siteState.settings.phoneNumber = document.getElementById('gen-phone').value;
+      siteState.settings.email = document.getElementById('gen-email').value;
+      siteState.settings.instagramUrl = document.getElementById('gen-instagram').value;
+      siteState.settings.address = document.getElementById('gen-address').value;
+      siteState.settings.googleMapsUrl = document.getElementById('gen-maps-url').value;
+
+      await saveSettings(siteState.settings);
+      showToast("✅ General settings saved to Firestore!");
     }
+    document.getElementById('btn-save-general').addEventListener('click', saveTabGeneral);
 
-    // ===================================================================
-    // ADMIN AUTHENTICATION ENGINE (Salted SHA-256 Cryptography)
-    // ===================================================================
-    const AUTH_SALT = "_hikka_salt_80240";
-    const DEFAULT_USER = "admin";
-    const DEFAULT_HASH = "f1e9eb070acecf0800485d1202173e96147e25c9687198aac35ca5b487c95e0b";
+    async function saveTabIndex() {
+      showToast("Saving Homepage data to Firestore...");
+      siteState.index.heroHeadline = document.getElementById('idx-headline').value;
+      siteState.index.heroSubheadline = document.getElementById('idx-subheadline').value;
+      siteState.index.heroDescription = document.getElementById('idx-description').value;
 
-    async function computeSha256(text) {
-      const msgBuffer = new TextEncoder().encode(text + AUTH_SALT);
-      const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-      const hashArray = Array.from(new Uint8Array(hashBuffer));
-      return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+      await savePageData('index', siteState.index);
+      showToast("✅ Homepage updated live in Firestore!");
     }
+    document.getElementById('btn-save-index').addEventListener('click', saveTabIndex);
 
-    function getAdminCredentials() {
-      try {
-        const stored = localStorage.getItem('hikka_admin_creds');
-        if (stored) return JSON.parse(stored);
-      } catch(e) {}
-      return { username: DEFAULT_USER, passwordHash: DEFAULT_HASH };
+    async function saveTabSurfLessons() {
+      showToast("Saving Surf Lessons (#rates, #spots, #quiver, #guidelines)...");
+      if (!siteState.surflessons.quiver) siteState.surflessons.quiver = {};
+      siteState.surflessons.quiver.introTitle = document.getElementById('quiver-title').value;
+      siteState.surflessons.quiver.boardCount = document.getElementById('quiver-board-count').value;
+      siteState.surflessons.quiver.rentalPricePerDay = parseFloat(document.getElementById('quiver-rental-price').value) || 10;
+
+      await savePageData('surf-lessons', siteState.surflessons);
+      showToast("✅ Surf Lessons updated live in Firestore!");
     }
+    document.getElementById('btn-save-surflessons').addEventListener('click', saveTabSurfLessons);
 
-    function isAuthenticated() {
-      return sessionStorage.getItem('hikka_admin_auth') === 'valid' ||
-             localStorage.getItem('hikka_admin_auth_persistent') === 'valid';
+    async function saveTabDestinations() {
+      showToast("Saving Destinations to Firestore...");
+      await savePageData('destinations', siteState.destinations);
+      showToast("✅ Destinations updated live in Firestore!");
     }
+    document.getElementById('btn-save-destinations').addEventListener('click', saveTabDestinations);
 
-    function revealAdminDashboard() {
-      const loginScreen = document.getElementById('admin-login-screen');
-      const mainWrapper = document.getElementById('admin-main-wrapper');
-      if (loginScreen) loginScreen.classList.add('hidden');
-      if (mainWrapper) mainWrapper.classList.remove('hidden');
-      loadSettings();
+    async function saveTabActivities() {
+      showToast("Saving Activities to Firestore...");
+      await savePageData('activities', siteState.activities);
+      showToast("✅ Activities updated live in Firestore!");
     }
+    document.getElementById('btn-save-activities').addEventListener('click', saveTabActivities);
 
-    function showLoginScreen() {
-      const loginScreen = document.getElementById('admin-login-screen');
-      const mainWrapper = document.getElementById('admin-main-wrapper');
-      if (loginScreen) loginScreen.classList.remove('hidden');
-      if (mainWrapper) mainWrapper.classList.add('hidden');
-      const pwdInp = document.getElementById('login-password');
-      if (pwdInp) pwdInp.value = '';
+    async function saveTabFaq() {
+      showToast("Saving FAQs to Firestore...");
+      await savePageData('faq', siteState.faq);
+      showToast("✅ FAQ updated live in Firestore!");
     }
+    document.getElementById('btn-save-faq').addEventListener('click', saveTabFaq);
 
-    async function handleAdminLogin(event) {
-      event.preventDefault();
-      const userInp = document.getElementById('login-username').value.trim();
-      const passInp = document.getElementById('login-password').value;
-      const remember = document.getElementById('login-remember').checked;
-      const errorMsg = document.getElementById('login-error-msg');
-      const submitBtn = document.getElementById('btn-login-submit');
-
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = `<span>Checking credentials...</span>`;
-
-      const creds = getAdminCredentials();
-      const inputHash = await computeSha256(passInp);
-
-      if (userInp.toLowerCase() === creds.username.toLowerCase() && inputHash === creds.passwordHash) {
-        errorMsg.classList.add('hidden');
-        sessionStorage.setItem('hikka_admin_auth', 'valid');
-        if (remember) {
-          localStorage.setItem('hikka_admin_auth_persistent', 'valid');
-        } else {
-          localStorage.removeItem('hikka_admin_auth_persistent');
-        }
-        revealAdminDashboard();
-      } else {
-        errorMsg.classList.remove('hidden');
-        document.getElementById('login-error-text').textContent = "Incorrect username or password. Please try again.";
-        const pwdInp = document.getElementById('login-password');
-        if (pwdInp) {
-          pwdInp.value = '';
-          pwdInp.focus();
-        }
-      }
-
-      submitBtn.disabled = false;
-      submitBtn.innerHTML = `<span>Sign In to Dashboard</span> →`;
+    async function saveTabAbout() {
+      showToast("Saving About Us to Firestore...");
+      siteState.about.story = document.getElementById('about-story').value;
+      siteState.about.tagline = document.getElementById('about-tagline').value;
+      await savePageData('about', siteState.about);
+      showToast("✅ About Us updated live in Firestore!");
     }
+    document.getElementById('btn-save-about').addEventListener('click', saveTabAbout);
 
-    function handleAdminLogout() {
-      if (confirm("Are you sure you want to sign out of the Admin Portal?")) {
-        sessionStorage.removeItem('hikka_admin_auth');
-        localStorage.removeItem('hikka_admin_auth_persistent');
-        showLoginScreen();
-      }
+    async function saveTabContact() {
+      showToast("Saving Contact Info to Firestore...");
+      siteState.contact.openingHours = document.getElementById('contact-hours').value;
+      siteState.contact.email = document.getElementById('contact-email').value;
+      siteState.contact.phone = document.getElementById('contact-phone').value;
+      siteState.contact.whatsapp = document.getElementById('contact-whatsapp').value;
+      siteState.contact.address = document.getElementById('contact-address').value;
+      siteState.contact.directionsNote = document.getElementById('contact-directions').value;
+      await savePageData('contact', siteState.contact);
+      showToast("✅ Contact info updated live in Firestore!");
     }
+    document.getElementById('btn-save-contact').addEventListener('click', saveTabContact);
 
-    function togglePasswordVisibility() {
-      const pwdInput = document.getElementById('login-password');
-      const eyeIcon = document.getElementById('pwd-eye-icon');
-      if (pwdInput.type === 'password') {
-        pwdInput.type = 'text';
-        eyeIcon.textContent = '🔒';
-      } else {
-        pwdInput.type = 'password';
-        eyeIcon.textContent = '👁️';
-      }
-    }
-
-    async function updateAdminCredentials() {
-      const currentPwd = document.getElementById('change-current-pwd').value;
-      const newUsername = document.getElementById('change-new-username').value.trim();
-      const newPwd = document.getElementById('change-new-pwd').value;
-      const confirmPwd = document.getElementById('change-confirm-pwd').value;
-
-      if (!currentPwd || !newUsername || !newPwd) {
-        alert("Please fill in all credential fields.");
-        return;
-      }
-
-      if (newPwd !== confirmPwd) {
-        alert("New password and confirm password do not match.");
-        return;
-      }
-
-      if (newPwd.length < 6) {
-        alert("New password must be at least 6 characters long.");
-        return;
-      }
-
-      const creds = getAdminCredentials();
-      const currentHash = await computeSha256(currentPwd);
-
-      if (currentHash !== creds.passwordHash) {
-        alert("Current password is incorrect.");
-        return;
-      }
-
-      const newHash = await computeSha256(newPwd);
-      localStorage.setItem('hikka_admin_creds', JSON.stringify({
-        username: newUsername,
-        passwordHash: newHash
-      }));
-
-      alert(`✅ Credentials updated successfully!\nNew Username: ${newUsername}\nPlease remember your new password.`);
-      document.getElementById('change-current-pwd').value = '';
-      document.getElementById('change-new-pwd').value = '';
-      document.getElementById('change-confirm-pwd').value = '';
-    }
-
-    document.addEventListener('DOMContentLoaded', () => {
-      if (isAuthenticated()) {
-        revealAdminDashboard();
-      } else {
-        showLoginScreen();
+    // Header "Save Changes" Button
+    saveCurrentTabBtn.addEventListener('click', async () => {
+      switch (currentTab) {
+        case 'general': await saveTabGeneral(); break;
+        case 'index': await saveTabIndex(); break;
+        case 'surflessons': await saveTabSurfLessons(); break;
+        case 'destinations': await saveTabDestinations(); break;
+        case 'activities': await saveTabActivities(); break;
+        case 'faq': await saveTabFaq(); break;
+        case 'about': await saveTabAbout(); break;
+        case 'contact': await saveTabContact(); break;
+        default:
+          await saveTabGeneral();
+          await saveTabSurfLessons();
+          break;
       }
     });
+
+    // Seeder Trigger
+    async function handleSeedData() {
+      if (confirm("🌱 Do you want to initialize all 7 pages with rich default content into your Firestore Database?")) {
+        try {
+          showToast("Writing seed data to Firestore...");
+          await seedInitialFirestoreData();
+          await loadAllFirestoreData();
+          alert("🎉 Initial Firestore Database setup completed! All 7 pages and settings are now populated.");
+        } catch (err) {
+          alert("Seeder Error: " + err.message);
+        }
+      }
+    }
+
+    document.getElementById('btn-seed-overview').addEventListener('click', handleSeedData);
+    document.getElementById('btn-seed-cloud').addEventListener('click', handleSeedData);
+
   </script>
 </body>
 </html>

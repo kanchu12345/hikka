@@ -117,8 +117,8 @@
           <span>Today's Surf Update</span>
         </span>
         <span class="text-gray-300">•</span>
-        <span class="text-gray-300">🌊 Waves: <strong class="text-white">2–4 ft Clean</strong></span>
-        <span class="hidden sm:inline text-gray-300">🌡️ Water: <strong class="text-white">28°C (No Wetsuit)</strong></span>
+        <span class="text-gray-300">🌊 Waves: <strong id="live-surf-waves" class="text-white">2–4 ft Clean</strong></span>
+        <span class="hidden sm:inline text-gray-300">🌡️ Water: <strong id="live-surf-water" class="text-white">28°C (No Wetsuit)</strong></span>
       </div>
 
       <!-- Social Media & Currency Switcher -->
@@ -445,7 +445,7 @@
         <div class="space-y-4 text-sm text-gray-700">
           <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-2xl">
             <span class="text-xs font-bold uppercase text-emerald-800 tracking-wider block mb-1">Fastest Contact (WhatsApp)</span>
-            <div class="text-lg font-bold text-emerald-900">+94 77 123 4567</div>
+            <div id="contact-whatsapp-display" class="text-lg font-bold text-emerald-900">+94 77 123 4567</div>
             <button onclick="openDirectWhatsApp()" class="mt-2 py-2 px-4 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs cursor-pointer">
               Open WhatsApp Chat →
             </button>
@@ -453,18 +453,18 @@
 
           <div class="p-4 bg-slate-50 border border-gray-200 rounded-2xl">
             <span class="text-xs font-bold uppercase text-gray-500 tracking-wider block mb-1">Direct Phone Call</span>
-            <div class="text-base font-bold text-gray-900">+94 77 123 4567</div>
+            <div id="contact-phone-display" class="text-base font-bold text-gray-900">+94 77 123 4567</div>
           </div>
 
           <div class="p-4 bg-slate-50 border border-gray-200 rounded-2xl">
             <span class="text-xs font-bold uppercase text-gray-500 tracking-wider block mb-1">Email</span>
-            <div class="text-base font-bold text-gray-900">info@hikkasurfschool.com</div>
+            <div id="contact-email-display" class="text-base font-bold text-gray-900">info@hikkasurfschool.com</div>
           </div>
 
           <div class="p-4 bg-slate-50 border border-gray-200 rounded-2xl">
             <span class="text-xs font-bold uppercase text-gray-500 tracking-wider block mb-1">Beach Meeting Point</span>
-            <div class="text-sm font-medium text-gray-800">Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka</div>
-            <div class="text-xs text-gray-500 mt-1">Open 7 days a week: 6:30 AM – 6:30 PM</div>
+            <div id="contact-address-display" class="text-sm font-medium text-gray-800">Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka</div>
+            <div id="contact-hours-display" class="text-xs text-gray-500 mt-1">Open 7 days a week: 6:30 AM – 6:30 PM</div>
           </div>
 
           <!-- Social Media Profiles Card -->
@@ -486,7 +486,7 @@
 
       <!-- Map Embed -->
       <div class="bg-white p-3 rounded-3xl shadow-sm border border-gray-200 h-[480px]">
-        <iframe src="https://maps.google.com/maps?q=6.132555056990897,80.10058769999999&hl=en&z=18&output=embed" width="100%" height="100%" style="border:0; border-radius:1.25rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hikka Surf School Google Map Location"></iframe>
+        <iframe id="contact-map-iframe" src="https://maps.google.com/maps?q=6.132555056990897,80.10058769999999&hl=en&z=18&output=embed" width="100%" height="100%" style="border:0; border-radius:1.25rem;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Hikka Surf School Google Map Location"></iframe>
       </div>
 
     </div>
@@ -747,9 +747,10 @@ ${message}`);
     </div>
   </div>
 
-<script src="js/data.js?v=2.2"></script>
+  <script src="js/data.js?v=2.2"></script>
   <script src="js/firebase-client.js"></script>
   <script src="js/main.js?v=2.5"></script>
+  <script type="module" src="js/hydrate-contact.js"></script>
   <!-- PERSISTENT STICKY MOBILE CONVERSION BAR -->
   <div id="sticky-mobile-bar" class="fixed bottom-0 left-0 right-0 z-40 bg-ocean-950/95 backdrop-blur-md border-t border-ocean-800 p-2.5 flex items-center justify-between gap-2 lg:hidden shadow-2xl pb-safe">
     <button onclick="openDirectWhatsApp()" class="flex-1 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md">
