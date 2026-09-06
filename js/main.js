@@ -47,14 +47,69 @@ function initApp() {
   // 4. Activity Card Mini Sliders Auto-Swap
   initCardSliders();
 
-  // 5. Mobile Menu Toggle
+  // 5. Mobile Menu Controller (Toggle, Body Scroll Lock, Outside Tap & Close Icon)
   const mobileMenuBtn = document.getElementById('mobile-menu-btn');
   const mobileMenu = document.getElementById('mobile-menu');
+
+  function openMobileMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.remove('hidden');
+    document.body.classList.add('mobile-menu-open');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+      mobileMenuBtn.setAttribute('aria-label', 'Close navigation menu');
+      mobileMenuBtn.innerHTML = `<svg class="w-6 h-6 text-sand-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12"></path></svg>`;
+    }
+  }
+
+  function closeMobileMenu() {
+    if (!mobileMenu) return;
+    mobileMenu.classList.add('hidden');
+    document.body.classList.remove('mobile-menu-open');
+    if (mobileMenuBtn) {
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+      mobileMenuBtn.setAttribute('aria-label', 'Open navigation menu');
+      mobileMenuBtn.innerHTML = `<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>`;
+    }
+  }
+
+  window.openMobileMenu = openMobileMenu;
+  window.closeMobileMenu = closeMobileMenu;
+
   if (mobileMenuBtn && mobileMenu) {
     mobileMenuBtn.onclick = (e) => {
       e.stopPropagation();
-      mobileMenu.classList.toggle('hidden');
+      const isOpen = !mobileMenu.classList.contains('hidden');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        openMobileMenu();
+      }
     };
+
+    // Close when tapping outside the menu and header
+    document.addEventListener('click', (e) => {
+      if (!mobileMenu.classList.contains('hidden')) {
+        const header = document.getElementById('main-navbar');
+        if (header && !header.contains(e.target)) {
+          closeMobileMenu();
+        }
+      }
+    });
+
+    // Close when tapping on any link inside the mobile menu
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        closeMobileMenu();
+      });
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !mobileMenu.classList.contains('hidden')) {
+        closeMobileMenu();
+      }
+    });
   }
 
   // 6. Sticky Glass Navbar on Scroll (Persistent High-Contrast Coastal Navy)

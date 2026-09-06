@@ -333,18 +333,48 @@
     <!-- Thin divider line under header -->
     <div class="w-full border-b border-white/20 mt-3"></div>
 
-    <!-- Mobile Slide Drawer -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950 text-white border-b border-ocean-800 shadow-2xl px-5 py-6 space-y-3">
-      <a href="index.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Home</a>
-      <a href="surf-lessons.html" class="block px-3 py-2 rounded-xl font-bold text-sand-300">🏄 Surf Lessons</a>
-      <a href="destinations.html" class="block px-3 py-2 rounded-xl font-bold text-cyan-300">🌴 Destinations (Southern Province)</a>
-      <a href="activities.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">🌴 Activities & Tours</a>
-      <a href="surf-lessons.html#rates" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">Rates & Pricing</a>
-      <a href="faq.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">FAQ</a>
-      <a href="gallery.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📷 Gallery</a>
-      <a href="reviews.html" class="block px-3 py-2 rounded-xl font-semibold text-amber-300">★ Google Reviews</a>
-      <a href="about.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">About Us</a>
-      <a href="contact.html" class="block px-3 py-2 rounded-xl font-semibold text-gray-200">📍 Location & Contact</a>
+        <!-- Mobile Slide Drawer -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-ocean-950/98 backdrop-blur-xl text-white border-b border-ocean-800 shadow-2xl px-4 py-3 space-y-1 max-h-[calc(100svh-4.5rem)] overflow-y-auto overscroll-contain pb-24">
+      <a href="index.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">🏠</span>
+        <span>Home</span>
+      </a>
+      <a href="surf-lessons.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">🏄</span>
+        <span>Surf Lessons</span>
+      </a>
+      <a href="destinations.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">🌴</span>
+        <span>Destinations</span>
+      </a>
+      <a href="activities.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">🤿</span>
+        <span>Activities & Tours</span>
+      </a>
+      <a href="surf-lessons.html#rates" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">💳</span>
+        <span>Rates & Pricing</span>
+      </a>
+      <a href="faq.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">❓</span>
+        <span>FAQ</span>
+      </a>
+      <a href="gallery.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-bold text-cyan-300 bg-white/10 transition-colors">
+        <span class="text-base">📷</span>
+        <span>Photo Gallery</span>
+      </a>
+      <a href="reviews.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">⭐</span>
+        <span>Google Reviews</span>
+      </a>
+      <a href="about.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">📖</span>
+        <span>About Us</span>
+      </a>
+      <a href="contact.html" class="flex items-center gap-2.5 px-3 py-1.5 rounded-xl text-xs sm:text-sm font-semibold text-gray-200 hover:text-white hover:bg-white/5 transition-colors">
+        <span class="text-base">📍</span>
+        <span>Location & Contact</span>
+      </a>
       
       <!-- Mobile Social Channels -->
       <div class="pt-2 flex items-center gap-2">
@@ -357,9 +387,10 @@
           <span>Facebook</span>
         </a>
       </div>
-
-      <div class="pt-3 border-t border-white/10">
-        <button onclick="openBookingModal()" class="w-full py-3 bg-emerald-600 text-white font-bold rounded-xl text-sm flex items-center justify-center gap-2 shadow-md">
+      
+      <div class="pt-2 border-t border-white/10">
+        <button onclick="openBookingModal()" class="w-full py-2.5 bg-emerald-600 hover:bg-emerald-500 active:scale-98 text-white font-black rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer">
+          <span>💬</span>
           <span>BOOK NOW ON WHATSAPP</span>
         </button>
       </div>
