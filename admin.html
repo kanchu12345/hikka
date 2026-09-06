@@ -908,7 +908,7 @@
           const file = e.target.files[0];
           if (!file) return;
           const prog = list.querySelector(`[data-upload-slide-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
           try {
             const downloadUrl = await uploadImageFile(file, 'hero', pct => {
               if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
@@ -917,8 +917,13 @@
             showToast('✅ Slide image uploaded to Firebase Storage!');
             renderIndexSlides();
           } catch(err) {
-            alert('Upload error: ' + err.message);
-            if (prog) prog.classList.add('hidden');
+            console.error('Slide upload error:', err);
+            if (prog) {
+              prog.classList.remove('hidden');
+              prog.className = 'text-[11px] font-bold text-red-600 mt-1';
+              prog.textContent = `❌ ${err.message}`;
+            }
+            showToast(`❌ Upload failed: ${err.message}`);
           }
         };
       });
@@ -1191,7 +1196,7 @@
           const file = e.target.files[0];
           if (!file) return;
           const prog = list.querySelector(`[data-upload-dest-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
           try {
             const downloadUrl = await uploadImageFile(file, 'destinations', pct => {
               if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
@@ -1200,8 +1205,13 @@
             showToast('✅ Destination image uploaded to Firebase Storage!');
             populateDestinationsPage();
           } catch(err) {
-            alert('Upload error: ' + err.message);
-            if (prog) prog.classList.add('hidden');
+            console.error('Destination upload error:', err);
+            if (prog) {
+              prog.classList.remove('hidden');
+              prog.className = 'text-[11px] font-bold text-red-600 mt-1';
+              prog.textContent = `❌ ${err.message}`;
+            }
+            showToast(`❌ Upload failed: ${err.message}`);
           }
         };
       });
@@ -1288,7 +1298,7 @@
           const file = e.target.files[0];
           if (!file) return;
           const prog = list.querySelector(`[data-upload-act-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
           try {
             const downloadUrl = await uploadImageFile(file, 'activities', pct => {
               if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
@@ -1297,8 +1307,13 @@
             showToast('✅ Activity image uploaded to Firebase Storage!');
             populateActivitiesPage();
           } catch(err) {
-            alert('Upload error: ' + err.message);
-            if (prog) prog.classList.add('hidden');
+            console.error('Activity upload error:', err);
+            if (prog) {
+              prog.classList.remove('hidden');
+              prog.className = 'text-[11px] font-bold text-red-600 mt-1';
+              prog.textContent = `❌ ${err.message}`;
+            }
+            showToast(`❌ Upload failed: ${err.message}`);
           }
         };
       });
@@ -1477,7 +1492,7 @@
           const file = e.target.files[0];
           if (!file) return;
           const prog = list.querySelector(`[data-upload-coach-progress="${idx}"]`);
-          if (prog) { prog.classList.remove('hidden'); prog.textContent = '⏳ Uploading to Cloud Storage...'; }
+          if (prog) { prog.classList.remove('hidden'); prog.className = 'text-[11px] font-bold text-surf-600 mt-1'; prog.textContent = '⏳ Uploading to Cloud Storage...'; }
           try {
             const downloadUrl = await uploadImageFile(file, 'coaches', pct => {
               if (prog) prog.textContent = `⏳ Uploading... ${pct}%`;
@@ -1486,8 +1501,13 @@
             showToast('✅ Coach photo uploaded to Firebase Storage!');
             renderAboutCoaches();
           } catch(err) {
-            alert('Upload error: ' + err.message);
-            if (prog) prog.classList.add('hidden');
+            console.error('Coach upload error:', err);
+            if (prog) {
+              prog.classList.remove('hidden');
+              prog.className = 'text-[11px] font-bold text-red-600 mt-1';
+              prog.textContent = `❌ ${err.message}`;
+            }
+            showToast(`❌ Upload failed: ${err.message}`);
           }
         };
       });
