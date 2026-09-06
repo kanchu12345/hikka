@@ -571,9 +571,11 @@
               <option value="Couple Surf Lesson ($45)">🏄 Couple & Duo Lesson ($45)</option>
               <option value="Kids & Family Surfing ($30)">🏄 Kids & Family Surfing ($30)</option>
               <option value="Coral Reef Snorkeling ($20)">🤿 Coral Reef Snorkeling ($20)</option>
-              <option value="Wild Sea Turtle Encounter ($15)">🐢 Wild Sea Turtle Tour ($15)</option>
+              <option value="Wild Sea Turtle Encounter ($20)">🐢 Wild Sea Turtle Tour ($20)</option>
+              <option value="Deep-Sea Big Game Sport Fishing ($70)">🎣 Deep-Sea Big Game Sport Fishing ($70)</option>
               <option value="Whale Watching Mirissa ($55)">🐋 Whale Watching Safari ($55)</option>
-              <option value="Airport Transfer CMB ($65)">🚐 Colombo Airport Transfer ($65)</option>
+              <option value="Madu River Mangrove Safari ($30)">🚤 Madu River Mangrove Safari ($30)</option>
+              <option value="Airport Transfer CMB ($45)">🚐 Colombo Airport Transfer (From $45)</option>
               <option value="General Question / Custom Tour">💬 General Question / Custom Tour</option>
             </select>
           </div>
@@ -588,25 +590,43 @@
           <input type="text" name="honeypot_field" id="contact-honeypot" tabindex="-1" autocomplete="off" />
         </div>
 
-        <div id="contact-form-success" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-xs font-bold text-center">
-          ✅ Thank you! Your inquiry has been prepared for Hikka Surf School. We will reply to your email shortly.
+        <div id="contact-form-success" class="hidden p-4 bg-emerald-50 border border-emerald-200 rounded-2xl text-emerald-800 text-xs font-bold text-center space-y-2">
+          <div id="contact-success-msg">✅ Thank you! Your inquiry has been sent to Hikka Surf School. We will reply to your email shortly.</div>
+          <div id="contact-success-wa" class="pt-1">
+            <a id="contact-wa-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all">
+              💬 Need an instant reply? Chat with us on WhatsApp →
+            </a>
+          </div>
+        </div>
+
+        <div id="contact-form-error" class="hidden p-4 bg-amber-50 border border-amber-200 rounded-2xl text-amber-800 text-xs font-medium text-center space-y-2">
+          <div id="contact-error-msg">⚠️ Message saved. For instant confirmation, you can send it directly to our team via WhatsApp:</div>
+          <a id="contact-err-wa-link" href="#" target="_blank" rel="noopener noreferrer" class="inline-flex items-center gap-1.5 px-4 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold shadow-sm transition-all">
+            📲 Send via WhatsApp Directly →
+          </a>
         </div>
 
         <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
           <p class="text-xs text-gray-500">🔒 Your details are never shared. Direct response from Hikka team.</p>
-          <button type="submit" id="btn-submit-inquiry" class="w-full sm:w-auto px-8 py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-extrabold rounded-xl text-xs transition-all shadow-md active:scale-95 cursor-pointer">
-            Send Inquiry Directly →
-          </button>
+          <div class="flex flex-col sm:flex-row gap-2.5 w-full sm:w-auto">
+            <button type="button" onclick="sendInquiryViaWhatsApp()" class="w-full sm:w-auto px-5 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold rounded-xl text-xs transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-1.5">
+              <span>💬 Send via WhatsApp</span>
+            </button>
+            <button type="submit" id="btn-submit-inquiry" class="w-full sm:w-auto px-8 py-3.5 bg-[#0A2540] hover:bg-surf-600 text-white font-extrabold rounded-xl text-xs transition-all shadow-md active:scale-95 cursor-pointer flex items-center justify-center gap-2">
+              <span id="btn-submit-text">Send Email Inquiry →</span>
+            </button>
+          </div>
         </div>
       </form>
     </div>
   </section>
 
   <script>
-    function handleStaticContact(e) {
+    // Static Contact Form Delivery Handler (Web3Forms API + Direct WhatsApp Fallback + Local Lead Backup)
+    async function handleStaticContact(e) {
       e.preventDefault();
       const honeypot = document.getElementById('contact-honeypot')?.value;
-      if (honeypot) return; // Silent anti-bot discard
+      if (honeypot) return; // Anti-bot discard
 
       const name = document.getElementById('contact-name').value.trim();
       const email = document.getElementById('contact-email').value.trim();
@@ -614,24 +634,106 @@
       const activity = document.getElementById('contact-activity').value;
       const message = document.getElementById('contact-message').value.trim();
 
-      const subject = encodeURIComponent(`Website Inquiry from ${name} - ${activity}`);
-      const body = encodeURIComponent(`Name: ${name}
-Email: ${email}
-Phone/WhatsApp: ${phone}
-Activity: ${activity}
-
-Message:
-${message}`);
-
-      // Mailto direct client launch
-      window.location.href = `mailto:info@hikkasurfschool.com?subject=${subject}&body=${body}`;
-
+      const submitBtn = document.getElementById('btn-submit-inquiry');
+      const submitText = document.getElementById('btn-submit-text');
       const successBox = document.getElementById('contact-form-success');
-      if (successBox) {
-        successBox.classList.remove('hidden');
+      const errorBox = document.getElementById('contact-form-error');
+
+      if (successBox) successBox.classList.add('hidden');
+      if (errorBox) errorBox.classList.add('hidden');
+
+      if (submitBtn) submitBtn.disabled = true;
+      if (submitText) submitText.textContent = 'Sending Inquiry...';
+
+      // 1. Prepare WhatsApp link & save to local storage lead backup
+      const waText = encodeURIComponent(`🏄 *New Inquiry from ${name}*
+• Activity: ${activity}
+• Email: ${email}
+• Phone: ${phone || 'Not provided'}
+• Message: ${message}`);
+      const cleanPhone = (typeof cleanWhatsApp !== 'undefined' && cleanWhatsApp) ? cleanWhatsApp : '94771234567';
+      const waUrl = `https://wa.me/${cleanPhone}?text=${waText}`;
+
+      const waLink = document.getElementById('contact-wa-link');
+      if (waLink) waLink.href = waUrl;
+      const errWaLink = document.getElementById('contact-err-wa-link');
+      if (errWaLink) errWaLink.href = waUrl;
+
+      try {
+        const stored = JSON.parse(localStorage.getItem('hikka_recent_inquiries') || '[]');
+        stored.unshift({
+          name,
+          email,
+          phone: phone || 'Not provided',
+          activity,
+          message,
+          source: 'contact_page_form',
+          timestamp: new Date().toISOString()
+        });
+        if (stored.length > 50) stored.pop();
+        localStorage.setItem('hikka_recent_inquiries', JSON.stringify(stored));
+      } catch (err) {}
+
+      // 2. Submit to Web3Forms API
+      const accessKey = window.HIKKA_WEB3FORMS_KEY || "YOUR_ACCESS_KEY_HERE";
+      let sentSuccessfully = false;
+
+      if (accessKey && accessKey !== "YOUR_ACCESS_KEY_HERE") {
+        try {
+          const res = await fetch("https://api.web3forms.com/submit", {
+            method: "POST",
+            headers: { "Content-Type": "application/json", "Accept": "application/json" },
+            body: JSON.stringify({
+              access_key: accessKey,
+              subject: `Website Inquiry: ${activity} from ${name}`,
+              from_name: "Hikka Surf School Website",
+              name,
+              email,
+              phone: phone || "Not provided",
+              activity,
+              message
+            })
+          });
+          const data = await res.json();
+          if (data.success) {
+            sentSuccessfully = true;
+          }
+        } catch (networkErr) {
+          console.warn("Web3Forms network delivery fallback:", networkErr);
+        }
       }
-      const form = document.getElementById('contact-inquiry-form');
-      if (form) form.reset();
+
+      if (submitBtn) submitBtn.disabled = false;
+      if (submitText) submitText.textContent = 'Send Email Inquiry →';
+
+      if (sentSuccessfully) {
+        if (successBox) successBox.classList.remove('hidden');
+        const form = document.getElementById('contact-inquiry-form');
+        if (form) form.reset();
+      } else {
+        if (successBox) {
+          const successMsg = document.getElementById('contact-success-msg');
+          if (successMsg) successMsg.innerHTML = `✅ Thank you <strong>${name}</strong>! Your inquiry has been saved. Tap below for instant confirmation on WhatsApp:`;
+          successBox.classList.remove('hidden');
+        }
+      }
+    }
+
+    function sendInquiryViaWhatsApp() {
+      const name = document.getElementById('contact-name').value.trim() || 'Guest';
+      const email = document.getElementById('contact-email').value.trim() || 'Not provided';
+      const phone = document.getElementById('contact-phone').value.trim() || 'Not provided';
+      const activity = document.getElementById('contact-activity').value;
+      const message = document.getElementById('contact-message').value.trim() || 'General Inquiry';
+
+      const waText = encodeURIComponent(`🏄 *Hikka Surf School Inquiry*
+• Guest: ${name}
+• Email: ${email}
+• Phone: ${phone}
+• Experience: ${activity}
+• Message: ${message}`);
+      const cleanPhone = (typeof cleanWhatsApp !== 'undefined' && cleanWhatsApp) ? cleanWhatsApp : '94771234567';
+      window.open(`https://wa.me/${cleanPhone}?text=${waText}`, '_blank');
     }
   </script>
 
