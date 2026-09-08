@@ -636,7 +636,7 @@
             <div class="flex items-center justify-between border-b pb-4">
               <div>
                 <h3 class="text-lg font-bold font-serif-heading text-gray-900">🏄 Certified Coaches & Ocean Guides</h3>
-                <p class="text-xs text-gray-500">Edit instructor bios, badges, credentials, and profile photos with Firebase Storage upload.</p>
+                <p class="text-xs text-gray-500">Edit instructor bios, badges, credentials, and profile photos with direct image upload.</p>
               </div>
               <button type="button" id="btn-add-coach" class="px-3 py-1.5 bg-[#0A2540] hover:bg-surf-700 text-white rounded-xl text-xs font-bold cursor-pointer">
                 + Add Coach
@@ -782,7 +782,7 @@
       savePageData,
       uploadImageFile,
       DEFAULT_IMGBB_KEY
-    } from "./js/firebase-init.js";
+    } from "./js/firebase-init.js?v=3.0";
     import { seedInitialFirestoreData, DEFAULT_SEED_DATA } from "./js/seed-data.js";
 
     // Application Global State
@@ -1111,11 +1111,11 @@
           if (prog) {
             prog.classList.remove('hidden');
             prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
-            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
           }
           try {
             const downloadUrl = await uploadImageFile(file, 'hero', pct => {
-              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading image... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
             });
             siteState.index.heroImages[idx].url = downloadUrl;
             renderIndexSlides();
@@ -1123,10 +1123,10 @@
             if (newProg) {
               newProg.classList.remove('hidden');
               newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
-              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              newProg.textContent = '✅ Done! Image uploaded.';
               setTimeout(() => newProg.classList.add('hidden'), 4000);
             }
-            showToast('✅ Slide image uploaded to ImgBB!');
+            showToast('✅ Slide image uploaded!');
           } catch(err) {
             console.error('Slide upload error:', err);
             if (prog) {
@@ -1411,11 +1411,11 @@
           if (prog) {
             prog.classList.remove('hidden');
             prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
-            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
           }
           try {
             const downloadUrl = await uploadImageFile(file, 'destinations', pct => {
-              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading image... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
             });
             siteState.destinations.destinations[idx].imageUrl = downloadUrl;
             populateDestinationsPage();
@@ -1423,10 +1423,10 @@
             if (newProg) {
               newProg.classList.remove('hidden');
               newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
-              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              newProg.textContent = '✅ Done! Image uploaded.';
               setTimeout(() => newProg.classList.add('hidden'), 4000);
             }
-            showToast('✅ Destination image uploaded to ImgBB!');
+            showToast('✅ Destination image uploaded!');
           } catch(err) {
             console.error('Destination upload error:', err);
             if (prog) {
@@ -1525,11 +1525,11 @@
           if (prog) {
             prog.classList.remove('hidden');
             prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
-            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
           }
           try {
             const downloadUrl = await uploadImageFile(file, 'activities', pct => {
-              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading image... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
             });
             siteState.activities.activities[idx].imageUrl = downloadUrl;
             populateActivitiesPage();
@@ -1537,10 +1537,10 @@
             if (newProg) {
               newProg.classList.remove('hidden');
               newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
-              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              newProg.textContent = '✅ Done! Image uploaded.';
               setTimeout(() => newProg.classList.add('hidden'), 4000);
             }
-            showToast('✅ Activity image uploaded to ImgBB!');
+            showToast('✅ Activity image uploaded!');
           } catch(err) {
             console.error('Activity upload error:', err);
             if (prog) {
@@ -1720,7 +1720,7 @@
         };
       });
 
-      // Firebase Storage Upload
+      // Image Upload
       list.querySelectorAll('[data-upload-coach]').forEach(inp => {
         inp.onchange = async (e) => {
           const idx = parseInt(e.target.dataset.uploadCoach);
@@ -1731,11 +1731,11 @@
           if (prog) {
             prog.classList.remove('hidden');
             prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
-            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
           }
           try {
             const downloadUrl = await uploadImageFile(file, 'coaches', pct => {
-              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading image... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
             });
             siteState.about.coaches[idx].imageUrl = downloadUrl;
             renderAboutCoaches();
@@ -1743,10 +1743,10 @@
             if (newProg) {
               newProg.classList.remove('hidden');
               newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
-              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              newProg.textContent = '✅ Done! Image uploaded.';
               setTimeout(() => newProg.classList.add('hidden'), 4000);
             }
-            showToast('✅ Coach photo uploaded to ImgBB!');
+            showToast('✅ Coach photo uploaded!');
           } catch(err) {
             console.error('Coach upload error:', err);
             if (prog) {
@@ -1893,11 +1893,11 @@
           if (prog) {
             prog.classList.remove('hidden');
             prog.className = 'text-[11px] font-bold text-surf-600 mt-1 flex items-center gap-1.5';
-            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+            prog.innerHTML = '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
           }
           try {
             const downloadUrl = await uploadImageFile(file, 'gallery', pct => {
-              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading to ImgBB...</span>';
+              if (prog) prog.innerHTML = pct ? `<span class="inline-block animate-spin">⏳</span> <span>Uploading image... ${pct}%</span>` : '<span class="inline-block animate-spin">⏳</span> <span>Uploading image...</span>';
             });
             siteState.gallery.items[idx].imageUrl = downloadUrl;
             renderGalleryItems();
@@ -1905,10 +1905,10 @@
             if (newProg) {
               newProg.classList.remove('hidden');
               newProg.className = 'text-[11px] font-bold text-emerald-600 mt-1';
-              newProg.textContent = '✅ Done! Uploaded to ImgBB.';
+              newProg.textContent = '✅ Done! Image uploaded.';
               setTimeout(() => newProg.classList.add('hidden'), 4000);
             }
-            showToast('✅ Gallery photo uploaded to ImgBB!');
+            showToast('✅ Gallery photo uploaded!');
           } catch(err) {
             console.error('Gallery upload error:', err);
             if (prog) {
