@@ -12,7 +12,8 @@ import {
   signInWithEmailAndPassword, 
   signOut, 
   onAuthStateChanged,
-  sendPasswordResetEmail
+  sendPasswordResetEmail,
+  updatePassword
 } from "https://www.gstatic.com/firebasejs/12.18.0/firebase-auth.js";
 
 export const firebaseConfig = {
@@ -43,7 +44,12 @@ export async function resetAdminPassword(email) {
   return await sendPasswordResetEmail(auth, email);
 }
 
-export { sendPasswordResetEmail };
+export async function changeAdminPassword(newPassword) {
+  if (!auth.currentUser) throw new Error("No user is currently signed in. Please sign in again.");
+  return await updatePassword(auth.currentUser, newPassword);
+}
+
+export { sendPasswordResetEmail, updatePassword };
 
 export function onAuthChange(callback) {
   return onAuthStateChanged(auth, callback);
