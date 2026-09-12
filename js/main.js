@@ -33,7 +33,7 @@ function initApp() {
   document.documentElement.classList.add('js-ready');
   const siteData = typeof getActiveSiteData === 'function' ? getActiveSiteData() : (window.DEFAULT_SITE_DATA || {});
   const settings = siteData.settings || {};
-  const cleanWhatsApp = (settings.whatsappNumber || '+94771234567').replace(/[^0-9]/g, '');
+  const cleanWhatsApp = (settings.whatsappNumber || '+94781739128').replace(/[^0-9]/g, '');
 
   // 1. Hero Auto-Swapping Slideshow
   initHeroSlideshow(settings);
@@ -225,7 +225,7 @@ function initBookingModal(cleanWhatsApp) {
   window.openBookingModal = function(activityTitle = 'Beginner Surf Lesson') {
     const modal = document.getElementById('booking-modal');
     if (!modal) {
-      const cleanPhone = cleanWhatsApp || '94771234567';
+      const cleanPhone = cleanWhatsApp || '94781739128';
       window.open(`https://wa.me/${cleanPhone}?text=Hi%20Hikka%20Surf%20School!%20I%20would%20like%20to%20book%20${encodeURIComponent(activityTitle)}`, '_blank');
       return;
     }
@@ -251,7 +251,7 @@ function initBookingModal(cleanWhatsApp) {
   };
 
   window.inquireTour = function(tourName = 'Southern Province Tour') {
-    const cleanPhone = cleanWhatsApp || '94771234567';
+    const cleanPhone = cleanWhatsApp || '94781739128';
     const text = `Hi Hikka Surf School,
 I would like to book the ${tourName}.
 Preferred date:
@@ -336,7 +336,7 @@ Pickup location:`;
         "Please confirm our spot!"
       ].filter(Boolean);
 
-      const cleanPhone = cleanWhatsApp || '94771234567';
+      const cleanPhone = cleanWhatsApp || '94781739128';
       window.open(`https://wa.me/${cleanPhone}?text=${encodeURIComponent(msgLines.join('\n'))}`, '_blank');
       closeBookingModal();
     };

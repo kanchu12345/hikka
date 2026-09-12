@@ -7,8 +7,8 @@ export const DEFAULT_SEED_DATA = {
     businessName: "Hikka Surf School",
     brandHeart: "❤️",
     tagline: "Surf • Snorkel • Explore Hikkaduwa & Sri Lanka",
-    whatsappNumber: "+94771234567",
-    phoneNumber: "+94 77 123 4567",
+    whatsappNumber: "+94781739128",
+    phoneNumber: "+94 78 173 9128",
     email: "info@hikkasurfschool.com",
     address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
     googleMapsUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
@@ -61,7 +61,7 @@ export const DEFAULT_SEED_DATA = {
         duration: "1.5 Hours in Water",
         popular: true,
         features: [
-          "100% Standing Guarantee or free practice",
+          "Beginner-friendly coaching with step-by-step guidance",
           "Soft-top foam board & leash included",
           "UV rash guard & zinc sunblock provided",
           "Max 1:4 instructor to student ratio",
@@ -294,7 +294,7 @@ export const DEFAULT_SEED_DATA = {
         tagline: "Main Core Service • Narigama Beach",
         price_from: 25,
         duration: "1.5 Hours",
-        description: "Learn to surf on sandy-bottom waves with certified local instructors. 100% standing guarantee on first wave.",
+        description: "Learn to surf on sandy-bottom waves with certified local instructors. Beginner-friendly coaching with step-by-step guidance.",
         imageUrl: "https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=800&q=80"
       },
       {
@@ -355,7 +355,7 @@ export const DEFAULT_SEED_DATA = {
       {
         category: "Surfing",
         question: "Do I need previous surfing experience?",
-        answer: "No. Beginners are welcome! Over 80% of our guests have never touched a surfboard before. We guide you step-by-step from beach theory to riding gentle waves."
+        answer: "No. Beginners are welcome! Many of our guests are complete beginners trying surfing for the first time. We guide you step-by-step from beach theory to riding gentle waves."
       },
       {
         category: "Equipment",
@@ -434,8 +434,8 @@ export const DEFAULT_SEED_DATA = {
 
   page_contact: {
     address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
-    phone: "+94 77 123 4567",
-    whatsapp: "+94771234567",
+    phone: "+94 78 173 9128",
+    whatsapp: "+94781739128",
     email: "info@hikkasurfschool.com",
     openingHours: "06:00 AM – 07:00 PM (Monday – Sunday, 7 Days a Week)",
     mapIframeUrl: "https://maps.google.com/maps?q=6.132555056990897,80.10058769999999&hl=en&z=18&output=embed",

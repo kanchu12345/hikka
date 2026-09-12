@@ -9,8 +9,8 @@ const DEFAULT_SITE_DATA = {
     heroHeadline: "Hikkaduwa Hikka\nSurf School",
     heroSubheadline: "Surf • Snorkel • Explore Hikkaduwa & Sri Lanka",
     heroDescription: "Discover Hikkaduwa with local instructors and guides. Enjoy surf lessons, snorkeling, turtle experiences, fishing, boat tours, day trips and more.",
-    whatsappNumber: "+94771234567",
-    phoneNumber: "+94 77 123 4567",
+    whatsappNumber: "+94781739128",
+    phoneNumber: "+94 78 173 9128",
     email: "info@hikkasurfschool.com",
     address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
     googleMapsUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
@@ -105,7 +105,7 @@ const DEFAULT_SITE_DATA = {
         "Intermediate Coaching",
         "Surfboard Rental"
       ],
-      description: "Learn to surf on sandy-bottom waves with patient local instructors. 100% stand up guarantee.",
+      description: "Learn to surf on sandy-bottom waves with patient local instructors. Step-by-step beginner guidance.",
       pageUrl: "surf-lessons.html",
       is_partner_activity: false,
       order: 1
@@ -289,12 +289,12 @@ const DEFAULT_SITE_DATA = {
     },
     {
       title: "Trusted by Travelers",
-      description: "Consistent 5.0 Google Reviews from guests across Europe, UK, Australia, and worldwide.",
+      description: "Read verified Google Reviews from travelers across Europe, UK, Australia, and worldwide.",
       icon: "⭐"
     },
     {
       title: "Local Connections",
-      description: "Activities arranged seamlessly with trusted, safety-verified local boat captains and licensed tourist drivers.",
+      description: "Activities arranged seamlessly with trusted, experienced local boat captains and licensed tourist drivers.",
       icon: "🤝"
     }
   ],
@@ -395,7 +395,7 @@ const DEFAULT_SITE_DATA = {
   faqs: [
     {
       question: "Do I need previous surfing experience?",
-      answer: "No. Beginners are welcome! Over 80% of our guests have never touched a surfboard before. We guide you step-by-step from beach theory to riding gentle waves."
+      answer: "No. Beginners are welcome! Many of our guests are complete beginners trying surfing for the first time. We guide you step-by-step from beach theory to riding gentle waves."
     },
     {
       question: "Do you provide surfboards and rash guards?",
