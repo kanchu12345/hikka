@@ -10,7 +10,7 @@ const DEFAULT_SITE_DATA = {
     heroSubheadline: "Surf • Snorkel • Explore Hikkaduwa & Sri Lanka",
     heroDescription: "Discover Hikkaduwa with local instructors and guides. Enjoy surf lessons, snorkeling, turtle experiences, fishing, boat tours, day trips and more.",
     whatsappNumber: "+94781739128",
-    phoneNumber: "+94 78 173 9128",
+    phoneNumber: "+94781739128",
     email: "info@hikkasurfschool.com",
     address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
     googleMapsUrl: "https://maps.app.goo.gl/coczrnnnajTi581G9",
