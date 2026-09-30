@@ -48,13 +48,13 @@ function initializeDatabase(): SiteDatabase {
       heroHeadline: '❤️ Hikkaduwa Hikka Surf School',
       heroSubheadline: 'Surf • Snorkel • Explore Hikkaduwa & Sri Lanka',
       heroDescription: 'Discover Hikkaduwa with local instructors and guides.',
-      whatsappNumber: '+94771234567',
-      phoneNumber: '+94 77 123 4567',
+      whatsappNumber: '+94781739128',
+      phoneNumber: '+94 78 173 9128',
       email: 'info@hikkasurfschool.com',
-      address: 'Galle Road, Narigama Beach, Hikkaduwa 80240, Sri Lanka',
+      address: 'Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka',
       googleMapsUrl: 'https://share.google/DA2DitetGntyt4jTo',
       googleMapsEmbedIframe: 'https://maps.google.com/maps?q=6.1322297,80.1005877&hl=en&z=16&output=embed',
-      coordinates: { lat: 6.136423, lng: 80.098485 },
+      coordinates: { lat: 6.1322297, lng: 80.1005877 },
       tripadvisorUrl: '',
       instagramUrl: '',
       facebookUrl: '',
@@ -63,7 +63,7 @@ function initializeDatabase(): SiteDatabase {
         enabled: true,
         text: '🌊 Welcome to Hikkaduwa! Surf Season is ON!',
         linkText: 'Book on WhatsApp',
-        linkUrl: 'https://wa.me/94771234567'
+        linkUrl: 'https://wa.me/94781739128'
       },
       heroMedia: {
         type: 'image',

@@ -565,7 +565,7 @@ export default function AdminDashboardPage() {
                     <input
                       type="text"
                       value={data.settings.whatsappNumber}
-                      placeholder="+94771234567"
+                      placeholder="+94781739128"
                       onChange={(e) =>
                         setData({
                           ...data,

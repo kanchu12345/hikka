@@ -8,7 +8,7 @@ export const DEFAULT_SEED_DATA = {
     brandHeart: "❤️",
     tagline: "Surf • Snorkel • Explore Hikkaduwa & Sri Lanka",
     whatsappNumber: "+94781739128",
-    phoneNumber: "+94781739128",
+    phoneNumber: "+94 78 173 9128",
     email: "info@hikkasurfschool.com",
     address: "Turtle Beach, Galle Road, Hikkaduwa (Near Hikka Tranz by Cinnamon), Sri Lanka",
     googleMapsUrl: "https://share.google/DA2DitetGntyt4jTo",
