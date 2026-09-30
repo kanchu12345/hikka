@@ -143,7 +143,7 @@ export default function ContactPage() {
             <div className="lg:col-span-7 space-y-6">
               <div className="bg-white p-3 rounded-3xl shadow-md border border-gray-200 h-[400px]">
                 <iframe
-                  src={settings.googleMapsEmbedIframe || "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15871.277864387532!2d80.098485!3d6.136423!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae177e776ffc1ab%3A0x28974a9ee1f3910c!2sHikkaduwa%20Beach!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk"}
+                  src={settings.googleMapsEmbedIframe || "https://maps.google.com/maps?q=6.1322297,80.1005877&hl=en&z=16&output=embed"}
                   width="100%"
                   height="100%"
                   style={{ border: 0, borderRadius: '1.25rem' }}
