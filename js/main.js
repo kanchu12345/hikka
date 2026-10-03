@@ -19,7 +19,26 @@ const LANG_MAP = {
 
 let currentCurrency = 'USD';
 
+// Dynamic Header & Topbar Height Synchronization
+function syncHeaderHeights() {
+  const siteTop = document.getElementById('site-top');
+  const topBar = document.querySelector('.site-top-bar') || document.querySelector('.bg-ocean-950.text-white.border-b');
+  const navbar = document.getElementById('main-navbar');
+  if (topBar) {
+    document.documentElement.style.setProperty('--topbar-h', `${topBar.offsetHeight}px`);
+  }
+  if (navbar) {
+    document.documentElement.style.setProperty('--navbar-h', `${navbar.offsetHeight}px`);
+  }
+  if (siteTop) {
+    document.documentElement.style.setProperty('--sitetop-h', `${siteTop.offsetHeight}px`);
+  }
+}
+window.addEventListener('resize', syncHeaderHeights, { passive: true });
+window.addEventListener('orientationchange', syncHeaderHeights, { passive: true });
+
 document.addEventListener('DOMContentLoaded', () => {
+  syncHeaderHeights();
   initApp();
 });
 

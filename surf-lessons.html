@@ -105,10 +105,11 @@
   <!-- Twitter Cards -->
 
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased selection:bg-surf-500 selection:text-white pt-28 pb-16 lg:pb-0">
-
-  <!-- Top Live Surf & Weather Conditions Bar -->
-  <div class="bg-ocean-950 text-white text-[11px] sm:text-xs py-2 px-4 border-b border-ocean-800 fixed top-0 left-0 right-0 z-50">
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-surf-500 selection:text-white  pb-16 lg:pb-0">
+  <!-- Unified Sticky Site Top: Contains Top Bar + Main Header -->
+  <div id="site-top" class="site-top sticky top-0 z-50 w-full">
+    <!-- Top Live Surf & Weather Conditions Bar -->
+    <div class="site-top-bar bg-ocean-950 text-white text-[10px] sm:text-xs py-1.5 sm:py-2 px-3 sm:px-4 border-b border-ocean-800">
     <div class="max-w-7xl mx-auto flex items-center justify-between flex-wrap gap-2">
       <div class="flex items-center gap-3">
         <span class="flex items-center gap-1 text-emerald-400 font-bold">
@@ -145,7 +146,7 @@
   </div>
 
   <!-- Header Navigation -->
-  <header id="main-navbar" class="fixed top-8 left-0 right-0 z-40 transition-all duration-300 bg-ocean-950/95 backdrop-blur-md py-3 text-white shadow-xl">
+  <header id="main-navbar" class="w-full transition-all duration-300 bg-ocean-950/95 backdrop-blur-md py-2.5 sm:py-3 text-white shadow-xl relative">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
       
       <!-- Brand Logo -->
@@ -455,9 +456,10 @@
       <div id="mobile-menu-spacer" class="h-20 lg:hidden w-full pointer-events-none" aria-hidden="true"></div>
     </div>
   </header>
+  </div> <!-- /#site-top -->
 
   <!-- LUXURY HOMEPAGE-MATCHED HERO SECTION -->
-  <section class="relative -mt-28 pt-32 min-h-[75vh] sm:min-h-[80vh] flex items-center justify-center bg-ocean-950 text-white text-center overflow-hidden">
+  <section class="relative py-14 sm:py-20 min-h-[75vh] sm:min-h-[80vh] flex items-center justify-center bg-ocean-950 text-white text-center overflow-hidden">
     <div class="absolute inset-0 bg-cover bg-center scale-105 animate-pulse transition-transform duration-1000" style="background-image: url('https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=1920&q=85'); filter: brightness(0.42);"></div>
     <div class="absolute inset-0 bg-gradient-to-t from-ocean-950 via-ocean-950/40 to-transparent"></div>
 
